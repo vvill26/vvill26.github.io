@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "From cost per token to cost per task: an inference-chip engineer reads Anthropic's S-1"
-date: 2026-10-28 09:00:00 +0800
+date: 2026-10-27 12:00:00 +0800
 permalink: /2026/10/anthropic-s1-inference-chips/
 lang: en
 description: "The most important phrase in Anthropic's S-1 for chip builders isn't $16.3B of revenue. It's cost per task, and the largest hardware line in the filing is an inference chip."

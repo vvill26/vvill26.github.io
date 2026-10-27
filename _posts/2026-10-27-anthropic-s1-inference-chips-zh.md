@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "从「每 token 成本」到「每任务成本」：一个推理芯片软件人读 Anthropic S-1"
-date: 2026-10-28 09:00:00 +0800
+date: 2026-10-27 12:00:00 +0800
 permalink: /zh/2026/10/anthropic-s1-inference-chips/
 lang: zh
 description: "Anthropic S-1 里对芯片人最重要的不是 163 亿美元收入，而是「每任务成本」；而招股书里最大的一笔硬件承诺，买的是推理芯片。"
