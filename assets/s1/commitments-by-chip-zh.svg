@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" class="s" role="img" aria-labelledby="t d">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.grid{stroke:#e4e3df;stroke-width:1}
+.base{stroke:#9b9a95;stroke-width:1}.m1{fill:#2a78d6}.m2{fill:#eb6834}.m1:hover,.m2:hover{opacity:.8}
+@media (prefers-color-scheme:dark){.bg{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}
+.grid{stroke:#33332f}.base{stroke:#6d6c66}.m1{fill:#3987e5}.m2{fill:#d95926}}
+</style>
+<title id="t">S-1 披露的算力承诺，按芯片家族（十亿美元）</title>
+<desc id="d">Google TPU: $413.2B; NVIDIA GPU: $251.3B; AWS（含 Trainium）: $110.0B; AMD GPU: $20.0B</desc>
+<rect class="bg" width="720" height="440" rx="8"/>
+<text class="t1" x="56" y="32" font-size="18" font-weight="600">S-1 披露的算力承诺，按芯片家族（十亿美元）</text>
+<text class="t2" x="56" y="54" font-size="12.5">部分为「最高」金额或估计值，且与汇总承诺存在重叠</text>
+<rect class="m2" x="56" y="70" width="12" height="12" rx="2"/><text class="t2" x="74" y="80" font-size="12">TPU8i pod，2026 年 Broadcom 租约（附件 10.11）</text>
+<rect class="m1" x="56" y="90" width="12" height="12" rx="2"/><text class="t2" x="74" y="100" font-size="12">其他已披露承诺</text>
+<text class="t1" x="56" y="132" font-size="13" font-weight="600">Google TPU</text>
+<path class="m2" d="M60.0,140.0 H227.1 Q227.1,140.0 227.1,140.0 V166.0 Q227.1,166.0 227.1,166.0 H60.0 Q56.0,166.0 56.0,162.0 V144.0 Q56.0,140.0 60.0,140.0 Z"><title>TPU8i: $125.2B</title></path>
+<path class="m1" d="M229.1,140.0 H618.7 Q622.7,140.0 622.7,144.0 V162.0 Q622.7,166.0 618.7,166.0 H229.1 Q229.1,166.0 229.1,166.0 V140.0 Q229.1,140.0 229.1,140.0 Z"><title>Google TPU: $413.2B</title></path>
+<text class="t1" x="630.7" y="158" font-size="13" font-weight="600">$413B</text>
+<text class="t2" x="56" y="182" font-size="11.5">Broadcom 租约 $161.2B · Google Cloud $114.5B · 2028–31 追加 TPU $125–150B（估）</text>
+<text class="t1" x="56" y="204" font-size="13" font-weight="600">NVIDIA GPU</text>
+<path class="m1" d="M60.0,212.0 H395.4 Q399.4,212.0 399.4,216.0 V234.0 Q399.4,238.0 395.4,238.0 H60.0 Q56.0,238.0 56.0,234.0 V216.0 Q56.0,212.0 60.0,212.0 Z"><title>NVIDIA GPU: $251.3B</title></path>
+<text class="t1" x="407.4" y="230" font-size="13" font-weight="600">$251B</text>
+<text class="t2" x="56" y="254" font-size="11.5">SpaceXAI ≤$120.5B · Microsoft $44.9B · Nscale ≤$44.6B · Lambda $41.3B</text>
+<text class="t1" x="56" y="276" font-size="13" font-weight="600">AWS（含 Trainium）</text>
+<path class="m1" d="M60.0,284.0 H202.3 Q206.3,284.0 206.3,288.0 V306.0 Q206.3,310.0 202.3,310.0 H60.0 Q56.0,310.0 56.0,306.0 V288.0 Q56.0,284.0 60.0,284.0 Z"><title>AWS（含 Trainium）: $110.0B</title></path>
+<text class="t1" x="214.3" y="302" font-size="13" font-weight="600">$110B</text>
+<text class="t2" x="56" y="326" font-size="11.5">Amazon $110.0B（2026–2036）</text>
+<text class="t1" x="56" y="348" font-size="13" font-weight="600">AMD GPU</text>
+<path class="m1" d="M60.0,356.0 H79.3 Q83.3,356.0 83.3,360.0 V378.0 Q83.3,382.0 79.3,382.0 H60.0 Q56.0,382.0 56.0,378.0 V360.0 Q56.0,356.0 60.0,356.0 Z"><title>AMD GPU: $20.0B</title></path>
+<text class="t1" x="91.3" y="374" font-size="13" font-weight="600">$20B</text>
+<text class="t2" x="56" y="398" font-size="11.5">Helios / MI450 机架 >$20B（2027 起）</text>
+<text class="t2" x="56" y="428" font-size="10.5">来源：Anthropic S-1「基础设施服务安排」「基础设施设备租赁」及附件 10.11；追加 TPU 按 $137.5B 中值计。</text></svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 230" class="s" role="img" aria-labelledby="t d">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.grid{stroke:#e4e3df;stroke-width:1}
+.base{stroke:#9b9a95;stroke-width:1}.m1{fill:#2a78d6}.m2{fill:#eb6834}.m1:hover,.m2:hover{opacity:.8}
+@media (prefers-color-scheme:dark){.bg{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}
+.grid{stroke:#33332f}.base{stroke:#6d6c66}.m1{fill:#3987e5}.m2{fill:#d95926}}
+</style>
+<title id="t">2026 上半年 $8.9B 算力花在哪</title>
+<desc id="d">服务付费客户（营业成本） ≈ $2,380M; 研究 · 模型开发 · 内部 Claude 使用 · 免费用户 ≈ $6,565M</desc>
+<rect class="bg" width="720" height="230" rx="8"/>
+<text class="t1" x="56" y="32" font-size="18" font-weight="600">2026 上半年 $8.9B 算力花在哪</text>
+<text class="t2" x="56" y="54" font-size="12.5">服务付费客户只占约四分之一；其余是训练、研究、内部 Claude 使用与免费用户</text>
+<path class="m1" d="M60.0,96.0 H226.3 Q226.3,96.0 226.3,96.0 V136.0 Q226.3,136.0 226.3,136.0 H60.0 Q56.0,136.0 56.0,132.0 V100.0 Q56.0,96.0 60.0,96.0 Z"><title>服务付费客户（营业成本） ≈ $2,380M</title></path>
+<path class="m2" d="M228.3,96.0 H692.0 Q696.0,96.0 696.0,100.0 V132.0 Q696.0,136.0 692.0,136.0 H228.3 Q228.3,136.0 228.3,136.0 V96.0 Q228.3,96.0 228.3,96.0 Z"><title>研究 · 模型开发 · 内部 Claude 使用 · 免费用户 ≈ $6,565M</title></path>
+<text class="t1" x="56" y="162" font-size="14" font-weight="600">≈ $2.4B · 27%</text>
+<text class="t2" x="56" y="182" font-size="12">服务付费客户（营业成本）</text>
+<text class="t1" x="696" y="162" font-size="14" font-weight="600" text-anchor="end">≈ $6.6B · 73%</text>
+<text class="t2" x="696" y="182" font-size="12" text-anchor="end">研究 · 模型开发 · 内部 Claude 使用 · 免费用户</text>
+<text class="t2" x="56" y="216" font-size="11">来源：Anthropic S-1 财务报表附注（按职能列示）；营业成本含少量人员与分摊费用，故为上限估计。</text></svg>

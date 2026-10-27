@@ -1,0 +1,9 @@
+title: Will's Notes
+description: Notes on AI inference chips, compilers and serving · AI 推理芯片、编译器与推理系统笔记
+author: Will
+theme: minima
+url: "https://vvill26.github.io"
+markdown: kramdown
+minima:
+  social_links:
+    github: vvill26

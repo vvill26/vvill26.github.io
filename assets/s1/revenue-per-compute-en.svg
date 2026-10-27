@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" class="s" role="img" aria-labelledby="t d">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.grid{stroke:#e4e3df;stroke-width:1}
+.base{stroke:#9b9a95;stroke-width:1}.m1{fill:#2a78d6}.m2{fill:#eb6834}.m1:hover,.m2:hover{opacity:.8}
+@media (prefers-color-scheme:dark){.bg{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}
+.grid{stroke:#33332f}.base{stroke:#6d6c66}.m1{fill:#3987e5}.m2{fill:#d95926}}
+</style>
+<title id="t">Revenue per $1 of compute</title>
+<desc id="d">Q1'25: $0.40; Q2'25: $0.57; Q3'25: $0.68; Q4'25: $0.69; Q1'26: $1.40; Q2'26: $2.08</desc>
+<rect class="bg" width="720" height="420" rx="8"/>
+<text class="t1" x="56" y="32" font-size="18" font-weight="600">Revenue per $1 of compute</text>
+<text class="t2" x="56" y="54" font-size="12.5">Quarterly revenue ÷ compute &amp; infrastructure expense (training, research, serving, internal use)</text>
+<line class="base" x1="56" x2="696" y1="356.0" y2="356.0"/>
+<text class="t2" x="48" y="360.0" font-size="12" text-anchor="end">$0.0</text>
+<line class="grid" x1="56" x2="696" y1="300.4" y2="300.4"/>
+<text class="t2" x="48" y="304.4" font-size="12" text-anchor="end">$0.5</text>
+<line class="grid" x1="56" x2="696" y1="244.8" y2="244.8"/>
+<text class="t2" x="48" y="248.8" font-size="12" text-anchor="end">$1.0</text>
+<line class="grid" x1="56" x2="696" y1="189.2" y2="189.2"/>
+<text class="t2" x="48" y="193.2" font-size="12" text-anchor="end">$1.5</text>
+<line class="grid" x1="56" x2="696" y1="133.6" y2="133.6"/>
+<text class="t2" x="48" y="137.6" font-size="12" text-anchor="end">$2.0</text>
+<line class="grid" x1="56" x2="696" y1="78.0" y2="78.0"/>
+<text class="t2" x="48" y="82.0" font-size="12" text-anchor="end">$2.5</text>
+<line x1="56" x2="696" y1="244.8" y2="244.8" stroke="#9b9a95" stroke-dasharray="4 4"/>
+<text class="t2" x="62" y="238.8" font-size="11">Revenue = compute spend</text>
+<path class="m1" d="M82.7,356.0 V315.7 Q82.7,311.7 86.7,311.7 H132.0 Q136.0,311.7 136.0,315.7 V356.0 Z"><title>Q1'25: revenue $376M, compute $944M → $0.40</title></path>
+<text class="t2" x="109.3" y="376" font-size="12" text-anchor="middle">Q1'25</text>
+<text class="t1" x="109.3" y="303.7" font-size="14" font-weight="600" text-anchor="middle">$0.40</text>
+<path class="m1" d="M189.3,356.0 V297.0 Q189.3,293.0 193.3,293.0 H238.7 Q242.7,293.0 242.7,297.0 V356.0 Z"><title>Q2'25: revenue $787M, compute $1,390M → $0.57</title></path>
+<text class="t2" x="216.0" y="376" font-size="12" text-anchor="middle">Q2'25</text>
+<path class="m1" d="M296.0,356.0 V284.9 Q296.0,280.9 300.0,280.9 H345.3 Q349.3,280.9 349.3,284.9 V356.0 Z"><title>Q3'25: revenue $1,382M, compute $2,047M → $0.68</title></path>
+<text class="t2" x="322.7" y="376" font-size="12" text-anchor="middle">Q3'25</text>
+<path class="m1" d="M402.7,356.0 V283.0 Q402.7,279.0 406.7,279.0 H452.0 Q456.0,279.0 456.0,283.0 V356.0 Z"><title>Q4'25: revenue $2,040M, compute $2,945M → $0.69</title></path>
+<text class="t2" x="429.3" y="376" font-size="12" text-anchor="middle">Q4'25</text>
+<path class="m1" d="M509.3,356.0 V204.7 Q509.3,200.7 513.3,200.7 H558.7 Q562.7,200.7 562.7,204.7 V356.0 Z"><title>Q1'26: revenue $4,731M, compute $3,387M → $1.40</title></path>
+<text class="t2" x="536.0" y="376" font-size="12" text-anchor="middle">Q1'26</text>
+<path class="m1" d="M616.0,356.0 V128.8 Q616.0,124.8 620.0,124.8 H665.3 Q669.3,124.8 669.3,128.8 V356.0 Z"><title>Q2'26: revenue $11,555M, compute $5,558M → $2.08</title></path>
+<text class="t2" x="642.7" y="376" font-size="12" text-anchor="middle">Q2'26</text>
+<text class="t1" x="642.7" y="116.8" font-size="14" font-weight="600" text-anchor="middle">$2.08</text>
+<text class="t2" x="56" y="408" font-size="11">Source: Anthropic S-1 (Oct 26, 2026), quarterly results. Anthropic cites $2.08 for Q2’26.</text></svg>
