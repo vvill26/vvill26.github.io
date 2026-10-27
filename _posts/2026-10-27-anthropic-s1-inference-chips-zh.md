@@ -110,7 +110,3 @@ S-1 指向同一个方向。Claude 分四个档位（Mythos/Fable、Opus、Sonne
 3. **瞄准执行层**：子 agent、小模型和 System 1 调用需要快速、便宜、可预测的推理，专用推理芯片天然适合这一层。
 
 不管是不是 transformer，**路由器决定谁赢**。能留在池子里的芯片，是编排层容易调度、新模型发布当周就能跑起来的芯片。
-
----
-
-*本文基于公开资料，不构成投资建议。来源：Anthropic S-1 及附件（[SEC EDGAR](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm)，2026-10-26）；TPU8i 参数见 [DCD](https://datacenterdynamics.com/en/news/google-unveils-eighth-generation-tpus-two-dedicated-training-and-inference-chips) 与 [Interesting Engineering](https://interestingengineering.com/ai-robotics/google-tpu-8t-8i-ai-chips-launch) 对 Google 发布的报道；Jev 见 [TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev) 与 [TechCrunch](https://techcrunch.com/2026/10/16/jev-is-vercels-fastest-adopted-ai-model-ever/)。图表为作者根据 S-1 数据绘制。*

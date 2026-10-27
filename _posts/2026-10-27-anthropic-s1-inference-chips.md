@@ -110,7 +110,3 @@ So a chip shouldn't bet on one model. It should:
 3. **Target the execution tier.** Sub-agents, small models and System 1 calls need fast, cheap, predictable inference. Purpose-built inference chips are a natural fit for this tier.
 
 Transformer or not, **the router picks the winner.** The chips that stay in the pool are the ones an orchestration layer can schedule easily and that run a new model the week it ships.
-
----
-
-*Based on public sources; not investment advice. Sources: Anthropic S-1 and exhibits ([SEC EDGAR](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm), Oct 26, 2026); TPU8i specs from Google's announcement as reported by [DCD](https://datacenterdynamics.com/en/news/google-unveils-eighth-generation-tpus-two-dedicated-training-and-inference-chips) and [Interesting Engineering](https://interestingengineering.com/ai-robotics/google-tpu-8t-8i-ai-chips-launch); Jev from [TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev) and [TechCrunch](https://techcrunch.com/2026/10/16/jev-is-vercels-fastest-adopted-ai-model-ever/). Charts are my own, built from S-1 data.*
