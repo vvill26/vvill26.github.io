@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "人是大脑，AI 是双手：从 Anthropic 的 Rust 重写看 AI 芯片编译器的研发方式"
-date: 2026-10-29 12:00:00 +0800
+date: 2026-10-29 09:00:00 +0800
 permalink: /zh/2026/10/humans-brain-ai-hands/
 lang: zh
 description: "一个没有 Rust 工程师的团队，借助 AI 把生产级 API 整体重写成 Rust。对 AI 芯片软件栈的启示不在于速度，而在于瓶颈从「写代码」转移到了「证明代码是对的」。"

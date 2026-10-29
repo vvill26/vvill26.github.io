@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Humans as the brain, AI as the hands: what Anthropic's Rust port means for AI chip compilers"
-date: 2026-10-29 12:00:00 +0800
+date: 2026-10-29 09:00:00 +0800
 permalink: /2026/10/humans-brain-ai-hands/
 lang: en
 description: "A team with no Rust engineers ported a production API to Rust with AI writing most of the code. The lesson for AI chip software isn't speed. It's that the bottleneck moves from writing code to proving it right."
