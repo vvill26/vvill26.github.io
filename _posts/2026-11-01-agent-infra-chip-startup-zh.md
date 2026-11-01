@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "芯片初创公司如何搭建 agent 基础设施：从 DeepSeek superagent 和 Claude Managed Agents 说起"
+date: 2026-11-01 09:20:00 +0800
 permalink: /zh/2026/11/agent-infra-chip-startup/
 lang: zh
 series: "AI 时代的芯片软件（3/3）"
 description: "DeepSeek 的 dsh-superagent 原型和 Anthropic 的 Claude Managed Agents 解决的是同一问题的不同层次。从一家没有历史包袱、芯片还没回来的推理芯片初创公司的角度，看看能借鉴什么，以及这套基础设施要花多少钱。"
 ---
 
-{% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" de="/de/2026/11/agent-infra-chip-startup/" %}
+{% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" %}
 
 *系列第三篇，共三篇。[第一篇](/zh/2026/11/you-cant-avoid-the-hard-part/)讲的是选择正面硬啃。[第二篇](/zh/2026/10/humans-brain-ai-hands/)提出，人和 agent 赖以工作的基础设施，应该和芯片、编译器享有同样的优先级。这一篇讨论：一家没有遗留系统、第一次流片回来之前也没有芯片的小型推理芯片初创公司，该如何建设这套基础设施，又要花多少钱。*
 

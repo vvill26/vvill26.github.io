@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Building agent infrastructure at a chip startup: lessons from DeepSeek's superagent and Claude Managed Agents"
+date: 2026-11-01 09:20:00 +0800
 permalink: /2026/11/agent-infra-chip-startup/
 lang: en
 series: "Chip software in the AI era (3/3)"
 description: "DeepSeek's dsh-superagent prototype and Anthropic's Claude Managed Agents address different layers of the same problem. A practical reading for a small AI inference chip startup with no legacy and no silicon yet, including what the infrastructure costs."
 ---
 
-{% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" de="/de/2026/11/agent-infra-chip-startup/" %}
+{% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" %}
 
 *Part 3 of 3. [Part 1](/2026/11/you-cant-avoid-the-hard-part/) was about choosing the hard path. [Part 2](/2026/10/humans-brain-ai-hands/) argued that the infrastructure people and agents work in deserves the same priority as the chip and the compiler. This post asks how a small inference chip startup can build that infrastructure, and what it costs, when it has no legacy and no silicon until the first tapeout comes back.*
 
