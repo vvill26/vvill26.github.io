@@ -7,7 +7,7 @@ series: "Chip software in the AI era (2/3)"
 description: "A team with no Rust engineers ported a production API to Rust with AI writing most of the code. For an AI chip company the lesson is twofold: the bottleneck moves from writing code to proving it correct, and the infrastructure agents work in becomes part of the product."
 ---
 
-{% include lang-switch.html en="/2026/10/humans-brain-ai-hands/" zh="/zh/2026/10/humans-brain-ai-hands/" %}
+{% include lang-switch.html en="/2026/10/humans-brain-ai-hands/" zh="/zh/2026/10/humans-brain-ai-hands/" de="/de/2026/10/humans-brain-ai-hands/" %}
 
 *Part 2 of 3. [Part 1](/2026/11/you-cant-avoid-the-hard-part/) told two stories about choosing the hard path over the safe one. This post looks at a third, more recent big swing, and at what it implies for building compilers, runtimes and the infrastructure around them.*
 

@@ -7,7 +7,7 @@ series: "AI 时代的芯片软件（2/3）"
 description: "一个没有 Rust 工程师的团队，借助 AI 把生产级 API 整体重写成 Rust。对 AI 芯片公司的启示有两层：瓶颈从「写代码」转移到「证明代码正确」，而人和 agent 赖以工作的基础设施本身就是产品的一部分。"
 ---
 
-{% include lang-switch.html en="/2026/10/humans-brain-ai-hands/" zh="/zh/2026/10/humans-brain-ai-hands/" %}
+{% include lang-switch.html en="/2026/10/humans-brain-ai-hands/" zh="/zh/2026/10/humans-brain-ai-hands/" de="/de/2026/10/humans-brain-ai-hands/" %}
 
 *系列第二篇，共三篇。[第一篇](/zh/2026/11/you-cant-avoid-the-hard-part/)讲了两个舍弃稳妥路线、正面硬啃的故事。这一篇看第三个、也是最近的一个「大动作」，以及它对编译器、运行时和周边基础设施的研发意味着什么。*
 

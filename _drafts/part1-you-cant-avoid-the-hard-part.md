@@ -7,7 +7,7 @@ series: "Chip software in the AI era (1/3)"
 description: "Two moments when an engineering leader had to choose between the safe path and the hard one, and why AI is changing which hard parts a team can afford to take on."
 ---
 
-{% include lang-switch.html en="/2026/11/you-cant-avoid-the-hard-part/" zh="/zh/2026/11/you-cant-avoid-the-hard-part/" %}
+{% include lang-switch.html en="/2026/11/you-cant-avoid-the-hard-part/" zh="/zh/2026/11/you-cant-avoid-the-hard-part/" de="/de/2026/11/you-cant-avoid-the-hard-part/" %}
 
 *Part 1 of 3 in a short series on how AI is changing the way chip software gets built.*
 

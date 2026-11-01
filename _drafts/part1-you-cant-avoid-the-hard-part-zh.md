@@ -7,7 +7,7 @@ series: "AI 时代的芯片软件（1/3）"
 description: "一位工程负责人两次站在「稳妥路线」和「正面硬啃」之间的时刻，以及 AI 如何改变一个团队能负担得起的硬骨头。"
 ---
 
-{% include lang-switch.html en="/2026/11/you-cant-avoid-the-hard-part/" zh="/zh/2026/11/you-cant-avoid-the-hard-part/" %}
+{% include lang-switch.html en="/2026/11/you-cant-avoid-the-hard-part/" zh="/zh/2026/11/you-cant-avoid-the-hard-part/" de="/de/2026/11/you-cant-avoid-the-hard-part/" %}
 
 *「AI 时代的芯片软件」系列第一篇，共三篇。*
 
