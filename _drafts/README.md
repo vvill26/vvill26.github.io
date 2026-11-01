@@ -7,9 +7,9 @@ Files in `_drafts/` aren't published by GitHub Pages. To publish one, move it in
 
 | # | English | Chinese | Status |
 |---|---|---|---|
-| 1 | `part1-you-cant-avoid-the-hard-part.md` | `part1-you-cant-avoid-the-hard-part-zh.md` | First draft, ~390 words |
-| 2 | `part2-humans-brain-ai-hands.md` | `part2-humans-brain-ai-hands-zh.md` | Revised draft; would replace the live post at the same URL |
-| 3 | `part3-agent-infra-chip-startup.md` | `part3-agent-infra-chip-startup-zh.md` | First draft |
+| 1 | `part1-you-cant-avoid-the-hard-part.md` | `part1-you-cant-avoid-the-hard-part-zh.md` | Second draft: story-led preamble, ~500 words |
+| 2 | `part2-humans-brain-ai-hands.md` | `part2-humans-brain-ai-hands-zh.md` | Third draft (series edit); would replace the live post at the same URL |
+| 3 | `part3-agent-infra-chip-startup.md` | `part3-agent-infra-chip-startup-zh.md` | Second draft: adds the cost section |
 
 Figures:
 - `assets/brain-hands/port-loop-{en,zh}.svg` (Part 2, already live)

@@ -1,22 +1,26 @@
 ---
 layout: post
-title: "You can't avoid the hard part: a preamble on big swings in the AI era"
+title: "You can't avoid the hard part"
 permalink: /2026/11/you-cant-avoid-the-hard-part/
 lang: en
 series: "Chip software in the AI era (1/3)"
-description: "When a project's hard part can't be avoided, the safe incremental path only delays failure. AI is changing which hard parts are affordable to take on."
+description: "Two moments when an engineering leader had to choose between the safe path and the hard one, and why AI is changing which hard parts a team can afford to take on."
 ---
 
 {% include lang-switch.html en="/2026/11/you-cant-avoid-the-hard-part/" zh="/zh/2026/11/you-cant-avoid-the-hard-part/" %}
 
-*Part 1 of 3 in a short series on how AI changes the way chip software is built.*
+*Part 1 of 3 in a short series on how AI is changing the way chip software gets built.*
 
-Most engineering teams have been here. A project has an obvious hard part, and the plan of record quietly routes around it: add a layer, keep the old system alive, sync the two, migrate piece by piece. Every step feels responsible. The hard part is still there at the end.
+Picture a small group of engineers at an offsite. The project in front of them has stalled before. Stripe wants one user to be one account across all of its products: the same business might pay a subscription, accept card payments and receive payouts, with one balance covering all of it. The existing data model can't express that. Customers, merchants and recipients live in separate objects, and almost every payments and billing API in the company is written against those objects.
 
-Katelyn Lesse, who leads platform engineering at Anthropic, wrote about this pattern in July in ["You can't avoid the hard part"](https://www.katelynlesse.com/blog/you-cant-avoid-the-hard-part). She proposes one question: **can we avoid the hard part and still succeed?** If the honest answer is no, the safe path doesn't remove the risk. It only postpones the failure. A second test helps decide whether to take the big swing: assume the risky move works, then check whether the rest of the plan holds up. If it does, take it.
+Katelyn Lesse, who now leads platform engineering at Anthropic, was working on Stripe Connect at the time. She tells the story in her July post, ["You can't avoid the hard part"](https://www.katelynlesse.com/blog/you-cant-avoid-the-hard-part).
 
-She gives two examples. At Stripe, a new unified account model needed nearly all of the company's business logic to understand it. The plan of record was to sync old and new models in both directions, and it would have been brittle and wouldn't scale. The team instead replaced every read and write call site with a single interface, work long dismissed as too expensive, using centralized codemods. It took multiple engineering years, and she believes the new accounts couldn't have shipped without it. At Anthropic, the first version of Claude Managed Agents ran everything in one container. It was slow to start, fragile, and kept credentials next to generated code. Close to launch, the team delayed and rebuilt it as a real distributed system.
+The plan of record was the responsible one: build the new account model alongside the old ones and keep them in sync in both directions, so existing code wouldn't have to change. On a slide, it looked safe. In practice, a business acting as both merchant and customer would need three models holding copies of the same name and email, kept consistent forever. The sync would be brittle, and it wouldn't scale.
 
-She is also clear about what a big swing needs: a few people who are energized by the problem and given real ownership, and a leader who accepts the risk and shields the team if it fails.
+The group kept coming back to an idea that had already been rejected once. Call it encapsulation: put a single interface in front of every read and write in the codebase, so all code talks to the new model only. It had been dismissed because the estimate was measured in engineering years. So they tried a different test. Assume the impossible part works. Does the rest of the plan hold? It did. The decision followed: a few engineers who were energized by the problem took ownership, the work stayed centralized and was driven by codemods, and Lesse accepted that it might become the longest pole in the whole program. The work ran to multiple engineering years, with plenty of setbacks. She believes the new accounts would never have shipped without it.
 
-Her closing point is the reason for this series. AI is changing which problems are hard. A multi-year codemod or a full rewrite in an unfamiliar language may now be affordable. But AI also leaves teams with the parts that are genuinely hard. For an AI chip company, the next two posts look at what that means: which rewrites are now within reach, and what has to be true before you attempt them.
+The second moment came years later, at Anthropic. Her team had built the first version of Claude Managed Agents the simple way: each session started a container with Claude Code inside, and everything lived in that container. Early customers saw slow starts, sessions that died with their container, and generated code running right next to credentials. The team patched each symptom separately and spent long stretches debugging sessions stuck somewhere between the harness, the event stream and the container. Eventually they saw one root cause: the single-container design itself. The fix was a real distributed system. Public beta was close. They asked the same question, could they launch on the old design and still succeed, answered no, and delayed the launch to rebuild.
+
+Lesse's summary is blunt: when the hard part is unavoidable, "the safe path is just delaying failure."
+
+Her closing point is where this series starts. AI is changing which problems count as hard. A multi-year codemod or a full rewrite in an unfamiliar language may now be within reach. [Part 2](/2026/10/humans-brain-ai-hands/) looks at one rewrite of exactly that kind, and what it means for compilers and tooling at an AI chip company. [Part 3](/2026/11/agent-infra-chip-startup/) turns to what a small chip startup has to build, and pay for, to work this way.

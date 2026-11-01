@@ -4,87 +4,100 @@ title: "Building agent infrastructure at a chip startup: lessons from DeepSeek's
 permalink: /2026/11/agent-infra-chip-startup/
 lang: en
 series: "Chip software in the AI era (3/3)"
-description: "DeepSeek's dsh-superagent prototype and Anthropic's Claude Managed Agents solve different layers of the same problem. A practical reading for a small AI inference chip startup with no legacy and no silicon yet."
+description: "DeepSeek's dsh-superagent prototype and Anthropic's Claude Managed Agents address different layers of the same problem. A practical reading for a small AI inference chip startup with no legacy and no silicon yet, including what the infrastructure costs."
 ---
 
 {% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" %}
 
-*Part 3 of 3. [Part 2](/2026/10/humans-brain-ai-hands/) argued that the infrastructure engineers and agents work in is as important as the chip and the compiler. This post looks at how to build it, from the angle of a small inference chip startup: no history, no legacy, and no chips until the first tapeout comes back.*
+*Part 3 of 3. [Part 1](/2026/11/you-cant-avoid-the-hard-part/) was about choosing the hard path. [Part 2](/2026/10/humans-brain-ai-hands/) argued that the infrastructure people and agents work in deserves the same priority as the chip and the compiler. This post asks how a small inference chip startup can build that infrastructure, and what it costs, when it has no history, no legacy and no silicon until the first tapeout comes back.*
 
-Two recent public designs make a useful pair. DeepSeek published [dsh-superagent](https://github.com/deepseek-ai/dsh-superagent-prototype), a proactive coding agent for a team's repository, built on its open-source agent runtime DeepSeek Harness. Anthropic described the architecture of [Claude Managed Agents](https://www.anthropic.com/research/managed-agents), its hosted service for long-running agents. They look like competitors. They are closer to two layers of the same stack.
+Two recent public designs make a useful pair. DeepSeek published [dsh-superagent](https://github.com/deepseek-ai/dsh-superagent-prototype), a proactive coding agent for a team's repository, built on its open-source agent runtime, DeepSeek Harness. Anthropic described the architecture of [Claude Managed Agents](https://www.anthropic.com/research/managed-agents), its hosted service for long-running agents. They are easy to read as competitors. They are better read as two layers of the same stack.
 
 ## At a glance
 
 <div class="glance" markdown="1">
 
-**DeepSeek's prototype answers "what work should the agent do, for whom, and when should it bother a person?" Managed Agents answers "how does that work run reliably and safely?" A startup needs both layers.**
+**DeepSeek's prototype addresses what work an agent should take on, for whom, and when it should involve a person. Managed Agents addresses how that work runs reliably and safely. A startup needs both layers.**
 
-- **Borrow from DeepSeek:** work items with explicit authorization, an observe-before-acting mode, and a strict budget for human attention.
-- **Borrow from Anthropic:** an append-only session log, one interface for every tool and environment, disposable sandboxes, and credentials kept out of reach of generated code.
-- **For a pre-silicon startup:** put simulators, FPGA prototypes and reference GPUs behind that one interface now, so when the first silicon returns it is just one more tool for agents and evals that already exist.
+- **From DeepSeek:** work items with explicit authorization, an observe-before-acting mode, and a strict budget for human attention.
+- **From Anthropic:** an append-only session log, one interface for every tool and environment, disposable sandboxes, and credentials kept out of reach of generated code.
+- **For a pre-silicon startup:** put simulators, FPGA prototypes and reference GPUs behind that interface now, and budget the infrastructure as a first-class line. For a 30-person software team, a reasonable estimate is $1–2 million a year before emulation and licences.
 
 </div>
 
 ## Two designs, two layers
 
-**DeepSeek's dsh-superagent** is a bundle for DeepSeek Harness that watches one GitHub repository and, optionally, Feishu chats. Its README is candid: a research prototype, not an official product, grown out of the team's daily work with much of the engineering done by coding agents. Its core principle is to **take as little human attention as possible and give as much value as possible**. The domain model makes that concrete:
+DeepSeek's dsh-superagent is a bundle for DeepSeek Harness that watches one GitHub repository and, optionally, Feishu chats. The README is candid about what it is: a research prototype rather than an official product, grown out of the team's daily work, with much of the engineering done by coding agents. Its organizing principle is to *take as little human attention as possible and give as much value as possible*, and the domain model is built around that principle.
 
-- A message becomes a **Ticket** only after an evaluation step accepts it under a versioned **Policy**: who may ask, through which channel, and which written rules allow proactive work. The acceptance is recorded as a **Mandate** that states the scope and why the work is allowed.
-- Proactive work starts in an **observe** mode that only records what the agent would have done; a team switches to auto after reviewing those decisions.
-- Each Ticket gets its own executor session and working directory, typically a git worktree, and replies in the conversation where the request was made.
-- Concurrency is limited by worker slots, with one slot kept free so a person's message is never blocked by new work.
-- Outgoing actions are stored before they are performed, so a restart resumes cleanly. State lives in a single SQLite file.
+A message becomes a *ticket* only after an evaluation step accepts it under a versioned *policy*, which defines who may ask, through which channel, and which written rules allow the agent to act on its own initiative. The acceptance is recorded as a *mandate* that states the scope of the work and why it is allowed. Proactive work starts in an *observe* mode that only records what the agent would have done; a team moves to automatic mode after reviewing those records. Each ticket runs in its own session and working directory, typically a git worktree, and replies in the conversation where the request was made. Concurrency is limited by worker slots, with one slot always reserved so that a person's message is never queued behind new work. Outgoing actions are stored before they are performed, so a restart resumes cleanly, and all state lives in a single SQLite file.
 
-The docs are equally candid about isolation: workers run with full access as the operator's OS user, and the account wrappers set defaults rather than a security boundary. The docs recommend a dedicated OS account.
+The documentation is equally candid about isolation. Workers run with full access as the operator's operating-system user, and the account wrappers set defaults rather than a security boundary. The docs recommend a dedicated OS account.
 
-**Claude Managed Agents** is built around three parts that can each fail or be replaced on their own: the **session** (an append-only log of everything that happened), the **harness** (the loop that calls the model and routes tool calls) and the **sandbox** (where code runs). The harness calls any environment through one interface, `execute(name, input) → string`, and can be restarted from the log with `wake(sessionId)`. Containers are treated as cattle, not pets. Git tokens are wired in when a sandbox is set up, and other credentials stay in a vault behind a proxy, so the harness and the generated code never see them. Anthropic reports that time to first token dropped about 60% at the median and over 90% at p95 after this split. It also notes that harness assumptions go stale as models improve, which is why it fixes the interfaces rather than any particular harness.
+Claude Managed Agents is built around three components that can each fail or be replaced independently. The *session* is an append-only log of everything that happened. The *harness* is the loop that calls the model and routes its tool calls. The *sandbox* is where code runs. The harness reaches any environment through one interface, `execute(name, input) → string`, and a crashed harness is restarted from the log with `wake(sessionId)`. Containers are treated as cattle rather than pets. Git tokens are wired in when a sandbox is provisioned, and other credentials stay in a vault behind a proxy, so neither the harness nor the generated code ever holds them. Anthropic reports that after this decoupling, median time to first token fell by about 60% and p95 by more than 90%. It also observes that assumptions built into a harness go stale as models improve, which is why it fixed the interfaces rather than any particular harness. This is the rebuilt system whose single-container first version Part 1 described.
 
 | | dsh-superagent (DeepSeek) | Claude Managed Agents (Anthropic) |
 |---|---|---|
 | Layer | Team workflow: intake, authorization, human attention | Runtime: durable sessions, execution, isolation |
-| Unit of work | Ticket with a Mandate under a versioned Policy | Session with an append-only event log |
-| Triggers | GitHub and Feishu events, explicit requests and written rules | API calls from the developer's application |
-| Execution | One session and directory per Ticket on one machine | Stateless harnesses; sandboxes provisioned on demand |
+| Unit of work | Ticket with a mandate under a versioned policy | Session with an append-only event log |
+| Triggers | GitHub and Feishu events; explicit requests and written rules | API calls from the developer's application |
+| Execution | One session and directory per ticket, on one machine | Stateless harnesses; sandboxes provisioned on demand |
 | Isolation | Operator's OS user, full access; dedicated account advised | Sandboxes; credentials in a vault behind a proxy |
-| Recovery | Stored work and recovery notes after restart | New harness resumes from the session log |
+| Recovery | Stored work and recovery notes after a restart | A new harness resumes from the session log |
 | Status | MIT-licensed research prototype | Commercial hosted service |
 
 ## What a chip startup should take from each
 
-A startup has one advantage here: nothing to migrate. The same choices are much harder to make once each team has built its own habits. Seven practical points:
+A startup has one structural advantage here: there is nothing to migrate. The choices below are much harder to make once each team has settled into its own tools and habits, which is the siloed state Part 2 warned about.
 
-**1. Adopt the interfaces, not a product.** Write down your own versions of the session log, `execute`, `provision` and `wake` on day one, even if a hosted harness implements them for now. Anthropic's lesson is that harnesses go stale; interfaces last. If you switch models, harnesses or vendors later, your tools, evals and logs survive.
+**Adopt the interfaces, not a product.** Define your own session log, `execute`, `provision` and `wake` on the first day, even if a hosted harness implements them for now. Anthropic's experience is that harnesses go stale while interfaces last. If the company later changes models, harnesses or vendors, its tools, evals and logs survive the change.
 
-**2. Make the front door explicit.** Copy DeepSeek's intake discipline. Work starts from a request in the channels the team already uses, GitHub plus Feishu or Slack, from people on an allowed list, and becomes a ticket with a recorded scope. Proactive work, such as "fix every nightly regression in the kernel library", starts in observe mode. Give the agent an attention budget: one acknowledgement, silence while working, then a result or one concrete question.
+**Make the front door explicit.** DeepSeek's intake discipline transfers directly. Work starts from a request in channels the team already uses, such as GitHub and Feishu or Slack, from people on an allowed list, and becomes a ticket with a recorded scope. Proactive work, such as fixing every nightly regression in the kernel library, starts in observe mode. The agent also gets an attention budget: one acknowledgement, silence while working, then a result or a single concrete question.
 
-**3. Put the hands in place before the silicon.** Before tapeout, a chip startup still has plenty of hands: the compiler itself, a functional simulator, a cycle-accurate model, reference GPU machines, FPGA prototypes and shared emulation time. Expose each through the same `execute` interface, and give scarce ones such as emulation a queue. A deterministic, compiler-scheduled design adds a bonus: the cycle-accurate model gives agents an exact score to optimize against.
+**Assemble the hands before the silicon.** Before tapeout, a chip startup already has many environments an agent can act in: the compiler itself, a functional simulator, a cycle-accurate model, reference GPU machines, FPGA prototypes and shared emulation time. Each should sit behind the same `execute` interface, and the scarce ones, emulation above all, need a queue. A deterministic, compiler-scheduled design adds a further benefit: the cycle-accurate model gives agents an exact objective to optimize against, as Part 2 described.
 
-**4. Design for the day silicon returns.** Bring-up is when time matters most. If agents, evals and logs already run against simulators through one interface, a bring-up board is just one more hand. The same regression suites run on day one, and the gap between "model says" and "silicon says" becomes a diff, not an investigation.
+**Design for the day silicon returns.** Bring-up is when time matters most. If agents, evals and logs already run against simulators through one interface, a bring-up board is simply one more hand. The same regression suites run on the first day, and the gap between what the model predicts and what the silicon does becomes a diff rather than an investigation.
 
-**5. Isolate from the first day, not after an incident.** The superagent prototype's full-access model is fine for a research tool. It is not fine next to chip RTL, foundry data under NDA, tool licences or customer models. Use one disposable sandbox or VM per ticket, a proxy that injects credentials, an egress allowlist, and a clear rule about which data agents may ever see. Check which models and hosting regions your company can use before choosing a hosted option. Anthropic has said Managed Agents can also use sandboxes on a customer's own infrastructure.
+**Isolate from the first day, not after the first incident.** The prototype's full-access model is reasonable for a research tool. It is not reasonable next to RTL, foundry data under NDA, tool licences or customer models. The baseline is one disposable sandbox or VM per ticket, a proxy that injects credentials, an egress allowlist, and an explicit rule about which data agents may ever see. Before choosing a hosted option, confirm which models and hosting regions the company can use; Anthropic has said Managed Agents can also use sandboxes on a customer's own infrastructure.
 
-**6. Treat the session log as the integration memory.** For a pod-scale product, the most valuable record is how a failure crossed component boundaries. One log across compiler, runtime, driver and serving agents lets a person or another agent pick up where the last one stopped, and turns integration bugs into tickets with evidence attached.
+**Treat the session log as the integration memory.** For a pod-scale product, the most valuable record is how a failure crossed component boundaries. One log across the compiler, runtime, driver and serving agents lets a person or another agent continue where the last one stopped, and turns integration defects into tickets with evidence attached.
 
-**7. Plan capacity and ownership.** Compiling and simulating are CPU-heavy, emulation and tool licences are finite, and model tokens cost money. Budget them like test equipment. Copy the reserved slot for humans, so people are never queued behind agents. And give the infrastructure an owner: one or two engineers who run it as a product, from the start.
+**Assign an owner.** One or two engineers should run the infrastructure as a product from the start, with the same standing as the compiler or runtime leads.
 
 ![A starting architecture for a chip startup's agent infrastructure](/assets/agent-infra/startup-stack-en.svg)
 
+## What it costs
+
+None of this is free, and the costs look different from anything in a traditional chip budget. To make them concrete, consider a software team of 30 engineers in the pre-silicon phase, working with interactive coding agents and running a modest fleet of background agents. The figures below use public list prices from October 2026 and are meant as an order of magnitude, not a quote.
+
+| Item | Assumption | Per month |
+|---|---|---|
+| Interactive coding agents | 30 engineers at $250–$1,000 each | $7.5k–$30k |
+| Background agents | 20 agents, 22 working days, $30–$100 per agent-day | $13k–$44k |
+| CPU for sandboxes, builds and simulation | 40 sandboxes of 32 vCPUs running continuously, about 920k vCPU-hours at $0.02–$0.045 | $18k–$41k |
+| Reference GPUs | Two 8-GPU H100 nodes, about 11.5k GPU-hours at $3–$4 | $35k–$46k |
+| Storage, logs and networking | About 10% of the above | $7k–$16k |
+| **Total** | | **about $80k–$180k** |
+
+That is roughly $1–2 million a year, or $2,700–$5,900 per engineer per month. The inputs come from public figures. Anthropic's published guidance for Claude Code puts the average enterprise cost at [$150–$250 per developer per month](https://www.morphllm.com/claude-code-api-cost), while heavy API users at large companies have reported [$500–$2,000](https://www.cloudzero.com/blog/codex-vs-claude-code/). An H100 rented on demand had a [median price of about $4.20 per GPU-hour](https://uvik.net/blog/gpu-price-index/) across providers in early October, with specialist clouds lower and rental prices rising through 2026. Compute-optimized cloud CPUs list at about $0.045 per vCPU-hour on demand, and roughly half that with multi-year commitments.
+
+Three things are not in the table. FPGA prototyping and emulation systems are sold on quotation rather than list price, and they are often the largest single item. EDA licences follow their own contracts. And the one or two engineers who own the platform are a headcount cost, not a cloud bill.
+
+The point is less the exact total than the shape of the spending. A traditional chip company budgets around headcount, EDA licences, IP, masks and the lab, and treats compute as IT overhead. That model assumes engineering output grows with the number of engineers. With agents, output increasingly grows with compute and tokens, and the bill grows with the work being done, not with the size of the team. It is variable, it spikes at integration and bring-up, and a single runaway job can cost thousands of dollars overnight.
+
+**AI infrastructure therefore has to be a first-class line in an AI chip company's plan, with the same standing as EDA licences and tapeout.** In practice that means a named owner, a budget tied to chip milestones rather than to headcount, and unit metrics that connect spending to results: cost per merged change, per regression fixed, per simulation-hour. It also means guardrails built into the harness: per-agent and per-ticket budgets, concurrency slots in the style of DeepSeek's design, batch pricing for work that can wait, high prompt-cache hit rates, and interruptible capacity for regression runs. A company that budgets the old way will either underfund the infrastructure and lose the productivity it was meant to deliver, or discover the bill after the fact.
+
 ## Build or buy
 
-Don't write your own agent loop; it will be the first thing to go stale. Use a hosted or open-source harness where your policies allow it. Build what is specific to you and what will outlast any harness: the tool adapters for simulators, FPGA, emulation and later silicon; the eval suites and reference models; the interface contracts between components; and the policy that says who may ask the agent for what.
+Don't write your own agent loop; it will be the first component to go stale. Use a hosted or open-source harness where company policy allows it. Build what is specific to the company and will outlast any harness: the tool adapters for simulators, FPGA, emulation and later silicon; the eval suites and reference models; the interface contracts between components; and the policy that defines who may ask an agent to do what.
 
-## A phased plan tied to the chip schedule
+## A plan tied to the chip schedule
 
-- **Before RTL freeze:** shared repository conventions and CI, the session log and `execute` interface, intake with observe mode, compiler and simulator as the first hands, the first eval suites.
-- **Before tapeout returns:** pod-level system models, FPGA and emulation behind a queue, cross-component tickets and interface contracts, sandboxes and the credential proxy in place.
-- **First silicon back:** bring-up boards as hands, the same regressions on real hardware, tighter access control around the lab, a kill switch for anything that touches hardware.
+Before RTL freeze, the priorities are shared repository conventions and CI, the session log and `execute` interface, intake with observe mode, the compiler and simulators as the first hands, and the first eval suites. Before the first tapeout returns, they are pod-level system models, FPGA and emulation behind a queue, cross-component tickets and interface contracts, and sandboxes with a credential proxy. When first silicon arrives, bring-up boards become hands, the same regressions run on real hardware, access to the lab tightens, and anything that touches hardware gets a kill switch.
 
 ## Caveats
 
-- This reading is based on the published documentation and code. DeepSeek's prototype explicitly differs from its internal version, and Anthropic's post describes a service, not a recipe.
-- Hosted services trade control for speed; stable interfaces limit lock-in but don't remove it.
-- None of this replaces engineering judgment about what agents should not touch.
+This reading is based on published documentation and code. DeepSeek states that its prototype differs from its internal version, and Anthropic's post describes a service, not a recipe. Hosted services trade control for speed; stable interfaces limit lock-in but don't remove it. The cost model is illustrative, and prices change month to month. None of it replaces engineering judgment about what agents should never touch.
 
 ## Closing thought
 
-For a chip startup, the first silicon is the deadline everything is planned around. The agent infrastructure deserves the same planning: by the time the first chips come back, the agents, evals and logs that will bring them up should already be running. Taken together, the two designs show what that looks like: one decides what work deserves a person's attention, the other makes sure the work runs safely when nobody is watching.
+Part 1 ended on a question: can you avoid the hard part and still succeed? For a chip startup, the agent infrastructure is one of those hard parts. It is tempting to postpone it until after tapeout, when there is silicon to work with and perhaps more money. But the infrastructure is what makes integration and bring-up fast, and by then it is too late to build it calmly. Taken together, the two designs show what to build: one decides which work deserves a person's attention, and the other makes sure that work runs safely when no one is watching. The budget section shows what it takes to pay for it.
