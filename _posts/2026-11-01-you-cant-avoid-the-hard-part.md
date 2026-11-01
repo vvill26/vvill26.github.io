@@ -26,10 +26,6 @@ The group kept coming back to an idea that had already been rejected once. Call 
 
 The second moment came years later, at Anthropic. Her team had built the first version of Claude Managed Agents the simple way: each session started a container with Claude Code inside, and everything lived in that container. Early customers saw slow starts, sessions that died with their container, and generated code running right next to credentials. The team patched each symptom separately and spent long stretches debugging sessions stuck somewhere between the harness, the event stream and the container. Eventually they saw one root cause: the single-container design itself. The fix was a real distributed system. Public beta was close. They asked the same question, could they launch on the old design and still succeed, answered no, and delayed the launch to rebuild.
 
-![Before dawn, there is only one way up](/assets/series/huashan-dawn.svg)
-
-*Before dawn, there is only one way up.*
-
 Lesse's summary is blunt: when the hard part is unavoidable, "the safe path is just delaying failure."
 
 Her closing point is where this series starts. AI is changing which problems count as hard. A multi-year codemod or a full rewrite in an unfamiliar language may now be within reach. [Part 2](/2026/10/humans-brain-ai-hands/) looks at one such shift in how engineering gets done, and what it means for compilers and tooling at an AI chip company. [Part 3](/2026/11/agent-infra-chip-startup/) is a thought exercise: what a small chip startup might need to build, and pay for, to work this way. It is not a description of something already running. It is something we want to do, with a long road ahead, and discussing it openly is the first step.

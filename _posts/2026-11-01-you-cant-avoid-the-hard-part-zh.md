@@ -62,10 +62,6 @@ Katelyn Lesse 当时在 Stripe Connect 团队，现在是 Anthropic 的平台工
 
 ## 华山只有一条路
 
-![天亮之前，只有一条路](/assets/series/huashan-dawn.svg)
-
-*天亮之前，只有一条路。*
-
 Lesse 的结论很直接：如果最难的部分绕不开，"the safe path is just delaying failure"。稳妥路线只是把失败往后推。
 
 华山自古一条路，想看日出，就得摸黑往上爬，凌晨赶到山顶。在山脚转来转去，找不到一条更好走的路。
