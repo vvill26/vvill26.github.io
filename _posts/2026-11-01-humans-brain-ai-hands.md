@@ -76,11 +76,11 @@ A shared, orchestrated harness makes those boundaries visible. A *shared session
 
 ![From siloed AI tools to a shared harness](/assets/brain-hands/silos-vs-harness-en.svg)
 
-This is not a side project for a platform team to take on later. It determines how quickly the whole product comes together, and it is far cheaper to build before integration starts than during it. [Part 3](/2026/11/agent-infra-chip-startup/) looks at how a small chip startup can build it, using two recent public designs as reference points, and what it costs.
+This is not a side project for a platform team to take on later. It determines how quickly the whole product comes together, and it is far cheaper to build before integration starts than during it. [Part 3](/2026/11/agent-infra-chip-startup/) is a thought exercise, using two recent public designs as reference points: how a small chip startup might build this, and roughly what it would cost. It is not something already running. It is something we want to do, with a long road ahead, and discussing it is the first step.
 
 ## Caveats
 
-The numbers are self-reported, without a published method or baseline, and Rust outperforming Python on CPU is expected regardless of how the code was written. When AI writes both the code and its tests, the two can share the same misunderstanding, so the reference should stay independent: written by people, derived from the specification, or taken from a separate implementation. Human review becomes the new queue as agents produce more code, which pushes teams toward more automated checking. And the experience described here is one company's, told by the person who leads the platform in question.
+The numbers are self-reported, without a published method or baseline, and Rust outperforming Python on CPU is expected regardless of how the code was written. When AI writes both the code and its tests, the two can share the same misunderstanding, so the reference should stay independent: written by people, derived from the specification, or taken from a separate implementation. Human review becomes the new queue as agents produce more code, which pushes teams toward more automated checking. And this is an experience report from a software company, not a chip company.
 
 ## Closing thought
 

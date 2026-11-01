@@ -10,7 +10,7 @@ description: "DeepSeek's dsh-superagent prototype and Anthropic's Claude Managed
 
 {% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" %}
 
-*Part 3 of 3. [Part 1](/2026/11/you-cant-avoid-the-hard-part/) was about choosing the hard path. [Part 2](/2026/10/humans-brain-ai-hands/) argued that the infrastructure people and agents work in deserves the same priority as the chip and the compiler. This post asks how a small inference chip startup can build that infrastructure, and what it costs, when it has no legacy and no silicon until the first tapeout comes back.*
+*Part 3 of 3. [Part 1](/2026/11/you-cant-avoid-the-hard-part/) was about choosing the hard path. [Part 2](/2026/10/humans-brain-ai-hands/) argued that the infrastructure people and agents work in deserves the same priority as the chip and the compiler. This post is a thought exercise: how a small inference chip startup with no legacy, and no silicon until the first tapeout comes back, might build that infrastructure, and roughly what it would cost. It is not a status report. It is something we want to do, with a long road ahead, and discussing it is the first step.*
 
 Two recent public designs make a useful pair. DeepSeek published [dsh-superagent](https://github.com/deepseek-ai/dsh-superagent-prototype), a proactive coding agent for a team's repository, built on its open-source agent runtime, DeepSeek Harness. Anthropic described the architecture of [Claude Managed Agents](https://www.anthropic.com/research/managed-agents), its hosted service for long-running agents. They are easy to read as competitors. They are better read as two layers of the same stack.
 
@@ -30,7 +30,11 @@ Two recent public designs make a useful pair. DeepSeek published [dsh-superagent
 
 **dsh-superagent** watches one GitHub repository and, optionally, Feishu chats. Its README calls it a research prototype rather than a product, and its organizing principle is to *take as little human attention as possible and give as much value as possible*. A message becomes a *ticket* only after an evaluation step accepts it under a versioned *policy*: who may ask, through which channel, and which written rules allow the agent to act on its own. Proactive work starts in an *observe* mode that only records what the agent would have done. Each ticket gets its own session and git worktree, concurrency is capped by worker slots with one always reserved for people, and pending actions are stored before they run so a restart resumes cleanly. The docs are equally candid about isolation: workers run with full access as the operator's OS user, and a dedicated account is recommended.
 
+![DeepSeek dsh-superagent: the team-workflow layer](/assets/agent-infra/deepseek-superagent-en.svg)
+
 **Claude Managed Agents** separates three components that can fail or be replaced independently: the *session*, an append-only log of everything that happened; the *harness*, the loop that calls the model and routes tool calls; and the *sandbox*, where code runs. The harness reaches any environment through one interface, `execute(name, input) → string`, and a crashed harness restarts from the log with `wake(sessionId)`. Credentials stay in a vault behind a proxy, so neither the harness nor generated code holds them. Anthropic reports that median time to first token fell about 60% after this split, and p95 by more than 90%. This is the rebuilt system whose single-container first version Part 1 described.
+
+![Claude Managed Agents: the runtime layer](/assets/agent-infra/managed-agents-en.svg)
 
 | | dsh-superagent (DeepSeek) | Claude Managed Agents (Anthropic) |
 |---|---|---|
@@ -58,7 +62,7 @@ A startup has one structural advantage: nothing to migrate. These choices get mu
 
 ## What it costs
 
-None of this is free, and the costs look unlike anything in a traditional chip budget. Consider a 30-engineer software team before first silicon, using interactive coding agents and a modest fleet of background agents, priced at October 2026 list rates. The figures are an order of magnitude, not a quote.
+None of this is free, and the costs look unlike anything in a traditional chip budget. Consider a 30-engineer software team before first silicon, using interactive coding agents and a modest fleet of background agents, priced at October 2026 US list rates (Claude models, US cloud GPU and CPU prices). The figures are an order of magnitude, not a quote.
 
 | Item | Assumption | Per month |
 |---|---|---|
@@ -70,6 +74,8 @@ None of this is free, and the costs look unlike anything in a traditional chip b
 | **Total** | | **about $80k–$180k** |
 
 That is roughly $1–2 million a year, or $2,700–$5,900 per engineer per month. Anthropic's guidance puts average enterprise Claude Code use at [$150–$250 per developer per month](https://www.morphllm.com/claude-code-api-cost), with heavy API users reporting [$500–$2,000](https://www.cloudzero.com/blog/codex-vs-claude-code/). On-demand H100s had a [median price of about $4.20 per GPU-hour](https://uvik.net/blog/gpu-price-index/) in early October, and rental prices rose through 2026. Not included: FPGA and emulation systems, sold on quotation and often the largest single item; EDA licences; and the engineers who run the platform.
+
+<p style="font-size:0.88em"><em>These are US numbers. If everything ran in China, with DeepSeek V4 Pro as the model (about ¥3 per million input tokens and ¥6 per million output, less on cache hits), token costs would be roughly a tenth of Claude's; H100-class GPUs rent for about ¥10–15 per card-hour; and cloud CPU is somewhat cheaper. A rough estimate is ¥200k–400k a month, or ¥2.5–5 million a year: about a third of the US figure. Access to high-end GPUs and the choice of model can move the real number considerably.</em></p>
 
 The shape of the spending matters more than the total. A traditional chip company budgets around headcount, EDA licences, IP, masks and the lab, and treats compute as IT overhead, on the assumption that output grows with the number of engineers. With agents, output grows increasingly with compute and tokens. The bill follows the work rather than the team, spikes at integration and bring-up, and a single runaway job can cost thousands of dollars overnight.
 

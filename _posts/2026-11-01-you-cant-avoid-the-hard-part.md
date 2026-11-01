@@ -12,6 +12,12 @@ description: "Two moments when an engineering leader had to choose between the s
 
 *Part 1 of 3 in a short series on how AI is changing the way chip software gets built.*
 
+Once AI writes most of an engineer's code, how should an AI chip company change the way it does R&D? This series thinks that question through in three parts.
+
+Part 1 is about an old question: when a project's hardest part can't be avoided, do you take it on directly? Part 2 looks at a recent rewrite Anthropic completed with AI, how the work was split between people and AI, and what that suggests for compilers and tooling. Part 3 is a discussion: if a chip startup wanted agents to take a real part in its engineering, what infrastructure would it need, and roughly what would it cost?
+
+![Chip software in the AI era: a three-part series](/assets/series/series-map-en.svg)
+
 Picture a small group of engineers at an offsite. The project in front of them has stalled before. Stripe, the online payments company behind the checkout of countless websites and platforms, wants one user to be one account across all of its products: the same business might pay a subscription, accept card payments and receive payouts, with one balance covering all of it. The existing data model can't express that. Customers, merchants and recipients live in separate objects, and almost every payments and billing API in the company is written against those objects.
 
 Katelyn Lesse, who now leads platform engineering at Anthropic, was working on Stripe Connect at the time. She tells the story in her July post, ["You can't avoid the hard part"](https://www.katelynlesse.com/blog/you-cant-avoid-the-hard-part).
@@ -24,4 +30,4 @@ The second moment came years later, at Anthropic. Her team had built the first v
 
 Lesse's summary is blunt: when the hard part is unavoidable, "the safe path is just delaying failure."
 
-Her closing point is where this series starts. AI is changing which problems count as hard. A multi-year codemod or a full rewrite in an unfamiliar language may now be within reach. [Part 2](/2026/10/humans-brain-ai-hands/) looks at one rewrite of exactly that kind, and what it means for compilers and tooling at an AI chip company. [Part 3](/2026/11/agent-infra-chip-startup/) turns to what a small chip startup has to build, and pay for, to work this way.
+Her closing point is where this series starts. AI is changing which problems count as hard. A multi-year codemod or a full rewrite in an unfamiliar language may now be within reach. [Part 2](/2026/10/humans-brain-ai-hands/) looks at one such shift in how engineering gets done, and what it means for compilers and tooling at an AI chip company. [Part 3](/2026/11/agent-infra-chip-startup/) is a thought exercise: what a small chip startup might need to build, and pay for, to work this way. It is not a description of something already running. It is something we want to do, with a long road ahead, and discussing it openly is the first step.

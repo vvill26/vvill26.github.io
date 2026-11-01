@@ -10,7 +10,7 @@ description: "DeepSeek 的 dsh-superagent 原型和 Anthropic 的 Claude Managed
 
 {% include lang-switch.html en="/2026/11/agent-infra-chip-startup/" zh="/zh/2026/11/agent-infra-chip-startup/" %}
 
-*系列第三篇，共三篇。[第一篇](/zh/2026/11/you-cant-avoid-the-hard-part/)讲的是该硬啃时就硬啃。[第二篇](/zh/2026/10/humans-brain-ai-hands/)说，人和 agent 干活用的基础设施，应该和芯片、编译器排在同一个优先级。这一篇讲落地：一家小型推理芯片初创公司，没有遗留系统，第一次流片回来之前手里也没有芯片，这套基础设施该怎么搭，要花多少钱。*
+*系列第三篇，共三篇。[第一篇](/zh/2026/11/you-cant-avoid-the-hard-part/)讲的是该硬啃时就硬啃。[第二篇](/zh/2026/10/humans-brain-ai-hands/)说，人和 agent 干活用的基础设施，应该和芯片、编译器排在同一个优先级。这一篇是一次设想和讨论：一家小型推理芯片初创公司，没有遗留系统，第一次流片回来之前手里也没有芯片，如果要搭这套基础设施，可以怎么搭，大概要花多少钱。它不是现状汇报。这是我们想做、但还有很长路要走的事，先讨论清楚是第一步。*
 
 最近有两个公开的设计，放在一起看很有意思。
 
@@ -40,11 +40,15 @@ description: "DeepSeek 的 dsh-superagent 原型和 Anthropic 的 Claude Managed
 
 文档对隔离问题也不回避：worker 以运维者的系统用户身份、带完整权限运行，文档建议另开一个专用账户。
 
+![DeepSeek dsh-superagent：团队工作流这一层](/assets/agent-infra/deepseek-superagent-zh.svg)
+
 **再看 Claude Managed Agents。** 它把三个部分拆开，每个部分都可以单独出故障、单独替换：会话，一份只追加、记录所有事件的日志；harness，负责调用模型、分发工具调用的那个循环；沙箱，代码真正运行的地方。
 
 Harness 访问任何环境都走同一个接口，`execute(name, input) → string`。harness 崩了，用 `wake(sessionId)` 从日志里恢复。凭据放在代理后面的 Vault 里，harness 和生成的代码都拿不到。
 
 据 Anthropic 介绍，拆开之后首 token 延迟的中位数下降了约 60%，p95 下降了 90% 以上。这就是第一篇里那个第一版塞在单个容器里、后来推倒重来的系统。
+
+![Claude Managed Agents：运行时这一层](/assets/agent-infra/managed-agents-zh.svg)
 
 | | dsh-superagent（DeepSeek） | Claude Managed Agents（Anthropic） |
 |---|---|---|
@@ -74,7 +78,7 @@ Harness 访问任何环境都走同一个接口，`execute(name, input) → stri
 
 这些都要花钱，而且花法和传统芯片预算里的哪一项都不一样。
 
-举个例子：一个流片前的 30 人软件团队，日常用交互式编程 agent，另外养一支不大的后台 agent 队伍。按 2026 年 10 月的公开标价算，大致如下。数字只代表量级，不是报价。
+举个例子：一个流片前的 30 人软件团队，日常用交互式编程 agent，另外养一支不大的后台 agent 队伍。按 2026 年 10 月美国市场的公开标价算（模型用 Claude，GPU 和 CPU 用美国云厂商价格），大致如下。数字只代表量级，不是报价。
 
 | 项目 | 假设 | 每月 |
 |---|---|---|
@@ -90,6 +94,8 @@ Harness 访问任何环境都走同一个接口，`execute(name, input) → stri
 这几个数字的来源：按 Anthropic 的指引，企业里 Claude Code 的平均使用成本约为[每人每月 150–250 美元](https://www.morphllm.com/claude-code-api-cost)，重度使用 API 的用户则有报道称每月 [500–2,000 美元](https://www.cloudzero.com/blog/codex-vs-claude-code/)。10 月初，按需租一张 H100 的[中位价约为每小时 4.20 美元](https://uvik.net/blog/gpu-price-index/)，而且 2026 年租价一直在涨。
 
 表里没算的有三项：FPGA 和硬件仿真系统，按报价卖，往往是最大的一笔；EDA 许可证；还有运营这个平台的工程师。
+
+<p style="font-size:0.88em"><em>以上是“美国口径”。如果全部放在国内：模型换成 DeepSeek V4 Pro（每百万 token 输入 3 元、输出 6 元，缓存命中更便宜），token 费用大约只有 Claude 的十分之一；国内 H100 级算力的租价约为每卡每小时 10–15 元；云 CPU 也便宜一些。粗略估算，每月 20 万–40 万元，一年 250 万–500 万元，大约是美国口径的三分之一。高端 GPU 的可获得性和模型选择，会让实际数字有不小的出入。</em></p>
 
 比总数更值得注意的，是钱怎么花出去。
 
