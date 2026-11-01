@@ -75,7 +75,7 @@ None of this is free, and the costs look unlike anything in a traditional chip b
 
 That is roughly $1–2 million a year, or $2,700–$5,900 per engineer per month. Anthropic's guidance puts average enterprise Claude Code use at [$150–$250 per developer per month](https://www.morphllm.com/claude-code-api-cost), with heavy API users reporting [$500–$2,000](https://www.cloudzero.com/blog/codex-vs-claude-code/). On-demand H100s had a [median price of about $4.20 per GPU-hour](https://uvik.net/blog/gpu-price-index/) in early October, and rental prices rose through 2026. Not included: FPGA and emulation systems, sold on quotation and often the largest single item; EDA licences; and the engineers who run the platform.
 
-<p style="font-size:0.88em"><em>These are US numbers. If everything ran in China, with DeepSeek V4 Pro as the model (about ¥3 per million input tokens and ¥6 per million output, less on cache hits), token costs would be roughly a tenth of Claude's; H100-class GPUs rent for about ¥10–15 per card-hour; and cloud CPU is somewhat cheaper. A rough estimate is ¥200k–400k a month, or ¥2.5–5 million a year: about a third of the US figure. Access to high-end GPUs and the choice of model can move the real number considerably.</em></p>
+<aside class="sidebar"><p class="sidebar-label">Sidebar · If it all ran in China</p><p>These are US numbers. If everything ran in China, with DeepSeek V4 Pro as the model (about ¥3 per million input tokens and ¥6 per million output, less on cache hits), token costs would be roughly a tenth of Claude's; H100-class GPUs rent for about ¥10–15 per card-hour; and cloud CPU is somewhat cheaper. A rough estimate is ¥200k–400k a month, or ¥2.5–5 million a year: about a third of the US figure. Access to high-end GPUs and the choice of model can move the real number considerably.</p></aside>
 
 The shape of the spending matters more than the total. A traditional chip company budgets around headcount, EDA licences, IP, masks and the lab, and treats compute as IT overhead, on the assumption that output grows with the number of engineers. With agents, output grows increasingly with compute and tokens. The bill follows the work rather than the team, spikes at integration and bring-up, and a single runaway job can cost thousands of dollars overnight.
 
@@ -92,3 +92,9 @@ This reading is based on published documentation and code; DeepSeek notes that i
 ## Closing thought
 
 Part 1 ended on a question: can you avoid the hard part and still succeed? For a chip startup, agent infrastructure is one of those hard parts. It is tempting to postpone it until there is silicon and perhaps more money. But the infrastructure is what makes integration and bring-up fast, and by then it is too late to build it calmly. One design decides which work deserves a person's attention; the other makes sure the work runs safely when no one is watching. The budget is what makes both real.
+
+## One more thing
+
+In Part 2, Anthropic could cut over with confidence because it had an old system to compare against. A brand-new chip startup has no historical data and no previous chip, so the luxury of shadow traffic, checking the new against the old, simply doesn't exist. Finding the golden tests and data that close the loop is the harder problem.
+
+**Stay tuned.**

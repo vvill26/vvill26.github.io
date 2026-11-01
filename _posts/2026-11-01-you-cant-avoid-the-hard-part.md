@@ -12,9 +12,7 @@ description: "Two moments when an engineering leader had to choose between the s
 
 *Part 1 of 3 in a short series on how AI is changing the way chip software gets built.*
 
-Once AI writes most of an engineer's code, how should an AI chip company change the way it does R&D? This series thinks that question through in three parts.
-
-Part 1 is about an old question: when a project's hardest part can't be avoided, do you take it on directly? Part 2 looks at a recent rewrite Anthropic completed with AI, how the work was split between people and AI, and what that suggests for compilers and tooling. Part 3 is a discussion: if a chip startup wanted agents to take a real part in its engineering, what infrastructure would it need, and roughly what would it cost?
+Once AI writes most of an engineer's code, how should an AI chip company change the way it does R&D? This series thinks it through in three parts: whether to take on the hardest part directly, what one AI-driven rewrite at Anthropic teaches, and what agent infrastructure a chip startup would need and what it might cost.
 
 ![Chip software in the AI era: a three-part series](/assets/series/series-map-en.svg)
 
@@ -27,6 +25,10 @@ The plan of record was the responsible one: build the new account model alongsid
 The group kept coming back to an idea that had already been rejected once. Call it encapsulation: put a single interface in front of every read and write in the codebase, so all code talks to the new model only. It had been dismissed because the estimate was measured in engineering years. So they tried a different test. Assume the impossible part works. Does the rest of the plan hold? It did. The decision followed: a few engineers who were energized by the problem took ownership, the work stayed centralized and was driven by codemods, and Lesse accepted that it might become the longest pole in the whole program. The work ran to multiple engineering years, with plenty of setbacks. She believes the new accounts would never have shipped without it.
 
 The second moment came years later, at Anthropic. Her team had built the first version of Claude Managed Agents the simple way: each session started a container with Claude Code inside, and everything lived in that container. Early customers saw slow starts, sessions that died with their container, and generated code running right next to credentials. The team patched each symptom separately and spent long stretches debugging sessions stuck somewhere between the harness, the event stream and the container. Eventually they saw one root cause: the single-container design itself. The fix was a real distributed system. Public beta was close. They asked the same question, could they launch on the old design and still succeed, answered no, and delayed the launch to rebuild.
+
+![Before dawn, there is only one way up](/assets/series/huashan-dawn.svg)
+
+*Before dawn, there is only one way up.*
 
 Lesse's summary is blunt: when the hard part is unavoidable, "the safe path is just delaying failure."
 

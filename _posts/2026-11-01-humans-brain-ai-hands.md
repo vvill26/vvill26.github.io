@@ -85,3 +85,5 @@ The numbers are self-reported, without a published method or baseline, and Rust 
 ## Closing thought
 
 AI chip compilers have always been judged on two things: running correctly and running fast. As AI takes on more of the writing, what compounds is the infrastructure that proves both, and the shared harness that lets many agents and engineers work as one team. Teams that build these first can point AI at the big rewrites, and at integration, while others are still debugging the boundaries.
+
+So where would a startup without silicon even begin? The next post, [Building agent infrastructure at a chip startup](/2026/11/agent-infra-chip-startup/), picks up that question.
