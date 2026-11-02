@@ -3,6 +3,9 @@ layout: page
 title: About
 permalink: /about/
 ---
-Will · AI inference software: compilers and serving systems (vLLM, SGLang).
-
-Will · AI 推理软件：编译器与推理系统（vLLM、SGLang）。
+<div class="term term-about">
+  <div><span class="pr">$</span> cat about.txt</div>
+  <p>Software–hardware co-design for AI. I build the software that makes new silicon useful: compilers, runtimes and LLM serving. Two decades across EDA, compilers and silicon tooling: Synopsys, a PhD at RWTH Aachen that became Silexica (co-founder, acquired by Xilinx/AMD), then Huawei/HiSilicon. Now building something new in AI inference, in stealth for the moment, and always happy to talk with people working on compilers, inference systems and AI hardware.</p>
+  <div><span class="pr">$</span> ls links/</div>
+  <p><a href="https://www.linkedin.com/in/weihuasheng/">linkedin</a> &nbsp;&nbsp; <span class="t">wechat 公众号: 算流之间</span> <span class="c"># search in WeChat</span></p>
+</div>

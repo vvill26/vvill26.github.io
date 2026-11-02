@@ -4,6 +4,7 @@ author: Will
 theme: minima
 url: "https://vvill26.github.io"
 markdown: kramdown
+linkedin_username: weihuasheng
 minima:
   social_links:
-    github: vvill26
+    linkedin: weihuasheng
