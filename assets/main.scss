@@ -88,6 +88,7 @@ body { background: #fbfaf6; }
 .term-about p { font-size: 14.5px; line-height: 1.85; margin: 10px 0 22px; }
 .term-about a { color: #0969da; text-decoration: none; border-bottom: none; }
 .term-about .t { color: #1f2328; }
+.term-qr { display: block; width: 160px; height: auto; margin: 4px 0 10px; padding: 8px; background: #ffffff; border: 1px dashed #dcd8cc; border-radius: 6px; }
 @media (max-width: 600px) { .term-ls .e { grid-template-columns: 1fr; gap: 2px; } }
 
 .site-footer { font-size: 12px; border-top: 1px solid #ededed; }
