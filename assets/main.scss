@@ -104,3 +104,8 @@ body { background: #fbfaf6; }
   a { color: #7aa5ff; }
   .sidebar { background: #24201d; color: #e6e6ea; border-left-color: #d95926; } .sidebar .sidebar-label { color: #f08a5a; }
 }
+
+/* article table of contents */
+.toc{font-family:$mono;font-size:13px;background:#f3f1ea;border-radius:6px;padding:10px 16px;margin:1.2em 0 1.6em}
+.toc p{margin:0 0 4px}.toc ol{margin:0 0 0 1.4em}.toc li{margin:1px 0}
+@media (prefers-color-scheme:dark){.toc{background:#1f252d}}
