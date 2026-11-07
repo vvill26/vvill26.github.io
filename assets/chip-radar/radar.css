@@ -45,3 +45,17 @@
 .cr-tip .cr-tk{color:#a5d6ff}.cr-tw{margin-top:4px;color:#d0d7de}
 .cr-big{max-width:640px}
 .cr-view[data-k=hetero] .cr-chip.on{background:var(--ink);color:var(--surf)}
+.cr-axis2{fill:var(--mut);font-size:10.5px}
+.cr-cd{margin-top:4px;font-size:12px;color:var(--mut)}
+.cr-card .up{color:#1a7f37}.cr-card .dn{color:#cf222e}
+.cr-v.lo{color:var(--mut);font-style:italic}
+.cr-big-year{fill:var(--ink);font-size:15px;font-weight:600}
+.cr-sw.ghost{border:2px dashed var(--mut)}
+#chip-radar[lang=zh]{font-family:ui-monospace,SFMono-Regular,Menlo,"PingFang SC","Noto Sans CJK SC",monospace}
+.cr-chip.on:not(.s1):not(.s2):not(.s3){background:var(--ink);color:var(--surf)}
+.cr-axis{font-size:14px;font-weight:600}.cr-axis2{font-size:11.5px;font-weight:400}
+.cr-big{flex:1 1 420px;max-width:600px}
+.cr-row{flex-direction:column;align-items:stretch}
+.cr-big{flex:none;width:100%;max-width:700px;margin:0 auto;display:block}
+.cr-side{flex-direction:row;flex-wrap:wrap}.cr-side>.cr-card{flex:1 1 200px}
+.cr-side{align-items:flex-start}.cr-ctl{max-width:700px;margin:0 auto;width:100%}.cr-ticks{max-width:700px;margin:4px auto 10px;width:100%}
