@@ -13,7 +13,7 @@ description: "A small game: pick a design scenario, choose six mechanisms, see w
 
 Monday morning, back in forward mode. [Last time](/2026/11/inference-chip-shapes/) I read 43 inference chips backwards: take the shipped design, guess what its team thought was scarce. This time you hold the pen. Pick one of six design scenarios, make six decisions, and see which real teams already made the same bets. The game tells you when you hit one.
 
-**How to play.** Pick a design scenario, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the scenario's budget, and whether the design passes the scenario's three checks. It is a toy model: the point is the trade-offs, not a score. **One more thing: eight real chips are hidden in the grid.** Match a real team's combination of buttons and you hit the jackpot. You don't need to: building your own chip is the point, and a hit is just a bonus.
+**How to play.** Pick a design scenario, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the scenario's budget, and whether the design passes the scenario's three checks. It is a toy model: the point is the trade-offs, not a score. **One more thing: eight real designs are hidden in the grid.** Match a real team's combination of buttons and you hit the jackpot. You don't need to: building your own chip is the point, and a hit is just a bonus.
 
 <div id="chip-game"></div>
 
@@ -25,7 +25,7 @@ Three things usually happen on the first try.
 
 ## The real bets behind the buttons
 
-Each jackpot in the game is a combination of buttons that a real team actually chose. Pick one below to see the combination, its shape, and the story behind it in five parts: the **constraint**, the **mechanism**, the obvious **alternative** that was not taken, the **cost** and who carries it, and **what would change our mind**. The last part matters most: a radar score can only be argued with, but a card can be wrong. All eight use public sources only; where the rationale is my inference and not the designers' own words, the card says so.
+Each jackpot in the game is a combination of buttons that a real team actually chose. Pick one below to see the combination, its shape, and the story behind it in five parts: **why** (what was scarce), **what they built**, the obvious alternative that was **not taken**, **who pays** for it, and **what would change our mind**. The last part matters most: a radar score can only be argued with, but a card can be wrong. All eight use public sources only; where the rationale is my inference and not the designers' own words, the card says so.
 
 <div id="chip-cards"></div>
 <script src="/assets/chip-radar/data.js"></script>

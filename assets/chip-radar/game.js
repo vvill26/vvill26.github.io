@@ -155,7 +155,7 @@ function render(){
  const cards=sigHits();
  const cardHtml=cards.length?`<p class="cg-cards">${t("Real teams made this bet:","真实团队押过同样的注：")} ${cards.map(k=>`<a href="#card-${k}" data-card="${k}">${CARDS[k].n} →</a>`).join(" ")}</p>`:"";
  const okN=n?C.checks.filter(([f])=>f(v,P)).length:0;root.querySelector(".cg-mini").innerHTML=n?`${C.icon} ${n>=3?nm(ne)+" · ":""}${t("bill","账单")} ${tot}/${C.budget} · ${t("checks","检查")} ${okN}/3`:t("Pick options below; the result shows here.","在下面选选项，结果显示在这里。");
- out.innerHTML=`<div class="cg-pay">${bars}<div class="cg-bar tot"><span>${t("total","合计")}</span><div class="cg-track"><div class="cg-fill ftot${over>0?" over":""}" style="width:${tot/mx*100}%"></div><div class="cg-budget" style="left:${C.budget/mx*100}%"></div></div><b>${tot}</b></div></div>${budget}<ul class="cg-checks"><li class="cg-goal">${C.icon} ${C.name}: ${C.goal}</li>${checks}</ul>${cardHtml}<p class="cg-found">${t("Real-world bets found","已找到的真实押注")}: <b>${FOUND.size}</b> / ${Object.keys(CARDS).length}</p>`;
+ out.innerHTML=`<div class="cg-pay">${bars}<div class="cg-bar tot"><span>${t("total","合计")}</span><div class="cg-track"><div class="cg-fill ftot${over>0?" over":""}" style="width:${tot/mx*100}%"></div><div class="cg-budget" style="left:${C.budget/mx*100}%"></div></div><b>${tot}</b></div></div>${budget}<ul class="cg-checks"><li class="cg-goal">${C.icon} ${C.name}: ${C.goal}</li>${checks}</ul>${cardHtml}<p class="cg-found">${t("Real-world bets found","已找到的真实案例")}: <b>${FOUND.size}</b> / ${Object.keys(CARDS).length}</p>`;
  out.querySelectorAll("a[data-card]").forEach(a=>a.onclick=ev=>{ev.preventDefault();openCard(a.dataset.card)});
 }
 const FOUND=new Set(),toast=root.querySelector(".cg-toast"),drawer=root.querySelector(".cg-drawer");let tt;
@@ -164,7 +164,7 @@ function hit(k){const isNew=!FOUND.has(k);FOUND.add(k);render();
  if(isNew&&FOUND.size===Object.keys(CARDS).length)toast.innerHTML+=`<br>${t("🏆 All eight real-world bets found. You have designed every chip in the deck.","🏆 八个真实押注全部找到。整副牌里的芯片，你都设计过一遍了。")}`;
  toast.classList.add("on");toast.querySelector(".cg-why").onclick=()=>openCard(k);clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),5000)}
 function openCard(k){const c=CARDS[k];const combo=Object.entries(SIG[k]).map(([r,os])=>label(r,os.includes(P[r])?P[r]:os[0])).join(" + ");toast.classList.remove("on");
- drawer.innerHTML=`<button class="cg-x" aria-label="close">✕</button><div class="cg-dk">${t("Real-world bet","真实案例")}</div><h4>${c.n}</h4><div class="cg-dbtn">${t("The combination","组合")}: ${combo}</div>
+ drawer.innerHTML=`<button class="cg-x" aria-label="close">✕</button><div class="cg-dk">${t("Real-world bet","真实案例")}</div><h4>${c.n}</h4><div class="cg-dbtn">${t("Combination: ","组合：")}${combo}</div>
  <dl><dt>${t("Why","为什么")}</dt><dd>${c.why}</dd><dt>${t("What they built","他们怎么做")}</dt><dd>${c.did}</dd><dt>${t("Not taken","没选的方案")}</dt><dd>${c.not}</dd><dt>${t("Who pays","谁来买单")}</dt><dd>${c.cost}</dd></dl>
  <a class="cg-full" href="#card-${k}">${t("Full card with sources ↓","完整卡片和出处 ↓")}</a>`;
  drawer.classList.add("on");drawer.setAttribute("aria-hidden","false");
