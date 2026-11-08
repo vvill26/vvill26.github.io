@@ -34,7 +34,7 @@ const CONSTRAINTS=[
    [v=>v.runtime>=3,t("Runtime that swaps models fast (Runtime ≥ 3)","运行时能快速换模型（运行时 ≥ 3）")],
    [(v,p)=>p.A==="tiers"||p.A==="hbm",t("Capacity to keep many models nearby","有足够容量把很多模型放在近处")],
    [(v,p)=>p.A!=="hard",t("Programmable, not one model per tape-out","可编程，不是一次流片一个模型")]]},
- {id:"frozen",icon:"🧊",name:t("Frozen model","一个模型，冻结"),goal:t("One model that will not change for years, at the lowest cost per token","一个多年不变的模型，追求最低每 token 成本"),budget:12,
+ {id:"frozen",icon:"🧊",name:t("Frozen model","冻结模型"),goal:t("One model that will not change for years, at the lowest cost per token","一个多年不变的模型，追求最低每 token 成本"),budget:12,
   checks:[
    [v=>v.tco>=4,t("Cost per token over flexibility (Datacenter ≥ 4)","每 token 成本优先于灵活性（数据中心 ≥ 4）")],
    [v=>v.memory>=4,t("Few bytes moved per token (Memory ≥ 4)","每个 token 搬运的字节少（存储 ≥ 4）")],
@@ -112,8 +112,8 @@ const PAY=[t("hardware","硬件"),t("compiler","编译器"),t("serving","服务"
 
 /* ---------- state ---------- */
 let C=CONSTRAINTS[0]; const P={};
-function vec(){const v={};AX.forEach(a=>v[a]=0.5);const caps={};
- ROWS.forEach(r=>{const o=r.opts.find(x=>x.id===P[r.id]);if(!o)return;
+function vec(PP){PP=PP||P;const v={};AX.forEach(a=>v[a]=0.5);const caps={};
+ ROWS.forEach(r=>{const o=r.opts.find(x=>x.id===PP[r.id]);if(!o)return;
   for(const a in o.set)v[a]=Math.max(v[a],o.set[a]);for(const a in (o.cap||{}))caps[a]=Math.min(caps[a]??5,o.cap[a])});
  for(const a in caps)v[a]=Math.min(v[a],caps[a]);return v}
 function cost(){const c=[0,0,0];ROWS.forEach(r=>{const o=r.opts.find(x=>x.id===P[r.id]);if(o)o.cost.forEach((x,i)=>c[i]+=x)});return c}
@@ -150,7 +150,7 @@ function render(){
  const c=cost(),tot=c[0]+c[1]+c[2],mx=Math.max(C.budget*1.25,tot);
  const bars=c.map((x,i)=>`<div class="cg-bar"><span>${PAY[i]}</span><div class="cg-track"><div class="cg-fill f${i}" style="width:${x/mx*100}%"></div></div><b>${x}</b></div>`).join("");
  const over=tot-C.budget;
- const budget=n===0?"":over>=5?`<p class="cg-warn">${t(`Over budget by ${over}. Everyone got what they asked for. This is how a committee chip is born.`,`超出预算 ${over} 点。每个人的要求都满足了——十项全满分的芯片就是这么开会开出来的。`)}</p>`:over>0?`<p class="cg-warn">${t(`Over budget by ${over}. Something has to give: which row would you change?`,`超出预算 ${over} 点。总得放弃点什么：你会改哪一行？`)}</p>`:`<p class="cg-ok">${t(`Within budget (${tot} of ${C.budget}).`,`预算之内（${tot} / ${C.budget}）。`)}</p>`;
+ const budget=n===0?"":over>=5?`<p class="cg-warn">${t(`Over budget by ${over}. Everyone got what they asked for. This is how a committee chip is born.`,`超出预算 ${over} 点。每个人的要求都满足了，十项全满分的芯片就是这么开会开出来的。`)}</p>`:over>0?`<p class="cg-warn">${t(`Over budget by ${over}. Something has to give: which row would you change?`,`超出预算 ${over} 点。总得放弃点什么：你会改哪一行？`)}</p>`:`<p class="cg-ok">${t(`Within budget (${tot} of ${C.budget}).`,`预算之内（${tot} / ${C.budget}）。`)}</p>`;
  const checks=C.checks.map(([f,l])=>{const ok=n>0&&f(v,P);return `<li class="${n===0?"":ok?"y":"n"}">${n===0?"○":ok?"✓":"✗"} ${l}</li>`}).join("");
  const cards=sigHits();
  const cardHtml=cards.length?`<p class="cg-cards">${t("Real teams made this bet:","真实团队押过同样的注：")} ${cards.map(k=>`<a href="#card-${k}" data-card="${k}">${CARDS[k].n} →</a>`).join(" ")}</p>`:"";
@@ -168,10 +168,27 @@ function openCard(k){const c=CARDS[k];const combo=Object.entries(SIG[k]).map(([r
  <dl><dt>${t("Why","为什么")}</dt><dd>${c.why}</dd><dt>${t("What they built","他们怎么做")}</dt><dd>${c.did}</dd><dt>${t("Not taken","没选的方案")}</dt><dd>${c.not}</dd><dt>${t("Who pays","谁来买单")}</dt><dd>${c.cost}</dd></dl>
  <a class="cg-full" href="#card-${k}">${t("Full card with sources ↓","完整卡片和出处 ↓")}</a>`;
  drawer.classList.add("on");drawer.setAttribute("aria-hidden","false");
- drawer.querySelector(".cg-x").onclick=closeCard;drawer.querySelector(".cg-full").onclick=closeCard}
+ drawer.querySelector(".cg-x").onclick=closeCard;drawer.querySelector(".cg-full").onclick=ev=>{ev.preventDefault();closeCard();showCard(k,true)}}
 function closeCard(){drawer.classList.remove("on");drawer.setAttribute("aria-hidden","true")}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCard()});
 render();
+
+/* ---------- answer sheet: the eight real-world bets ---------- */
+const CC=(window.CHIP_CARDS||{})[LANG]||{},sheet=document.getElementById("chip-cards");let showCard=()=>{};
+if(sheet&&Object.keys(CC).length){
+ const keys=Object.keys(SIG).filter(k=>CC[k]);
+ sheet.setAttribute("lang",LANG);
+ sheet.innerHTML=`<div class="cc-top"><label for="cc-sel">${t("Real-world bet","真实案例")}</label><select id="cc-sel">${keys.map((k,i)=>`<option value="${k}">${i+1}. ${CC[k].title}</option>`).join("")}</select></div><div class="cc-body"></div>`;
+ const sel=sheet.querySelector("#cc-sel"),body=sheet.querySelector(".cc-body");
+ showCard=(k,scroll)=>{sel.value=k;const c=CC[k],PP={};Object.entries(SIG[k]).forEach(([r,os])=>PP[r]=os[0]);const v=vec(PP);
+  body.innerHTML=`<div class="cc-row"><div class="cc-left"><svg class="cc-svg" viewBox="-172 -60 664 520"></svg><div class="cc-combo"><b>${t("Combination","组合")}</b>${Object.entries(SIG[k]).map(([r,os])=>`<span class="cc-chip">${os.map(o=>label(r,o)).join(t(" or "," 或 "))}</span>`).join("")}</div>
+  <button class="cc-try">${t("Load this combination into the game ↑","把这组按钮放进游戏 ↑")}</button></div>
+  <div class="cc-right"><dl>${c.bullets.map(([l,h])=>`<dt>${l}</dt><dd>${h}</dd>`).join("")}</dl><p class="cc-src">${t("Sources: ","出处：")}${c.src}</p></div></div>`;
+  const svg=body.querySelector(".cc-svg");frame(svg,160,195,150,true);const yp=pts(a=>v[a],160,195,150);el("polygon",{class:"cg-you",points:yp.join(" ")},svg);yp.forEach(q=>el("circle",{class:"cg-dot",cx:q[0],cy:q[1],r:4},svg));
+  body.querySelector(".cc-try").onclick=()=>{ROWS.forEach(r=>delete P[r.id]);Object.assign(P,PP);render();root.scrollIntoView({behavior:"smooth"})};
+  if(scroll)sheet.scrollIntoView({behavior:"smooth"})};
+ sel.onchange=()=>showCard(sel.value);showCard(keys[0]);
+}
 
 /* ---------- blind test ---------- */
 const bt=document.getElementById("chip-blind"); if(!bt)return; bt.setAttribute("lang",LANG);

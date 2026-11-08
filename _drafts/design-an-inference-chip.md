@@ -25,123 +25,12 @@ Three things usually happen on the first try.
 
 ## The real bets behind the buttons
 
-Each jackpot in the game is a combination of buttons that a real team actually chose. When the game tells you that you hit a real-world bet, this is the full story. Each card records one decision in five fields: the **constraint**, the **mechanism**, the obvious **alternative** that was not taken, the **cost** and who carries it, and **what would change our mind**. The last field matters most: a radar score can only be argued with, but a card can be wrong.
+Each jackpot in the game is a combination of buttons that a real team actually chose. Pick one below to see the combination, its shape, and the story behind it in five parts: the **constraint**, the **mechanism**, the obvious **alternative** that was not taken, the **cost** and who carries it, and **what would change our mind**. The last part matters most: a radar score can only be argued with, but a card can be wrong. All eight use public sources only; where the rationale is my inference and not the designers' own words, the card says so.
 
-All eight use public sources only. Where the rationale is my inference and not the designers' own words, the card says so. Each card starts with its winning combination.
-
-<a id="card-groq"></a>
-### 1. Groq LPU: the compiler comes first
-
-*Combination: Big on-chip SRAM + Compiler: static scheduling + Rack scale + Air-cooled*
-
-- **Constraint.** Jonathan Ross helped design and implement Google's TPU, and says even he could not port its software easily. So Groq started with the compiler: by Ross's account, about six months of compiler work before chip design began.
-- **Mechanism.** No caches, no arbiters, no dynamic scheduling. The compiler schedules compute, memory and even the chip-to-chip links to the cycle. Each first-generation chip has 230 MB of SRAM and no DRAM, and Groq's racks are air-cooled.
-- **Alternative not taken.** Caches and hardware scheduling, as on a GPU.
-- **Cost.** A big model needs hundreds of chips, and all the complexity sits in the compiler. The hardware is simple; the software team pays.
-- **What would change our mind.** It is starting to move. Under NVIDIA, the Groq 3 LPX rack keeps the static schedule but adds up to 12 TB of DDR5 per rack next to the SRAM. If later generations give up the static schedule too, the original bet was about one moment, not a principle.
-
-Sources: [Ross on the Modern CTO podcast](https://moderncto.io/302-jonathan-ross-ceo-founder-at-groq/); [Abts et al., ISCA 2022](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf); [NVIDIA on Groq 3 LPX](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform)
-
-<a id="card-sn40l"></a>
-### 2. SambaNova SN40L: a third memory tier
-
-*Combination: SRAM + HBM + DDR tiers + Compiler: static scheduling + Spatial dataflow fabric + No disaggregation*
-
-- **Constraint.** *Composition of Experts*: many small models, where the output of one picks the next. On conventional hardware, switching models means reloading weights, and keeping all of them resident is expensive.
-- **Mechanism.** Three tiers attached to the chip: 520 MiB of on-chip SRAM, 64 GiB of HBM, up to 1.5 TiB of DDR. Models move from DDR to HBM at over 1 TB/s per node.
-- **Alternative not taken.** Keep every expert in HBM across many GPUs.
-- **Cost.** DDR controllers and pins on a chip that is already large, and software that decides which model lives in which tier. The paper reports up to 19 times smaller machine footprint and 15 to 31 times faster model switching against DGX systems, by its own measurement.
-- **What would change our mind.** If many-model serving stays rare, the DDR tier is cost without use. One data point so far: SambaNova SN50 kept the three tiers.
-
-Source: [Prabhakar et al., 2024](https://arxiv.org/abs/2405.07518)
-
-<a id="card-v4"></a>
-### 3. Google TPU v4: optical circuit switches
-
-*Combination: HBM stacks + Compiler: static scheduling + Optical-switched pod (OCS) + Systolic matrix units*
-
-- **Constraint.** Google wanted four times as many chips as TPU v3, 4,096 in one system. At that size a fixed torus is rarely all healthy: the paper puts host unavailability at 0.1 to 1 percent of the time.
-- **Mechanism.** A 3D torus wired through optical circuit switches. The paper describes the switch as a plugboard that skips failed units and reshapes slices.
-- **Alternative not taken.** A fixed electrical torus, or a packet-switched fabric such as InfiniBand.
-- **Cost.** Optics and switches stay under 5 percent of system cost and 3 percent of power. Slices must be reconfigured per job, so scheduling software carries the work.
-- **What would change our mind.** Nothing yet. The paper says scale and reliability came first, and faster LLM training from flexible topologies came later. Google's Ironwood still uses the switches at 9,216 chips. If a future pod dropped them at the same scale, availability was not the binding constraint.
-
-Sources: [Jouppi et al., ISCA 2023](https://arxiv.org/abs/2304.01433); [Ironwood at Hot Chips 2025](https://www.servethehome.com/googles-ironwood-tpu-swings-for-reasoning-model-leadership-at-hot-chips-2025/)
-
-<a id="card-wse"></a>
-### 4. Cerebras WSE-3: one wafer, one chip
-
-*Combination: Big on-chip SRAM + A whole wafer + Liquid-cooled*
-
-- **Constraint.** In Cerebras's own words, connecting hundreds of small chips with wires and cables is what slows AI systems down. Keep everything on one piece of silicon instead.
-- **Mechanism.** The whole wafer is the chip: about 900,000 cores with spares, so manufacturing defects are routed around, and 44 GB of SRAM at 21 PB/s, with no HBM.
-- **Alternative not taken.** Many reticle-sized chips with HBM, connected by a network.
-- **Cost.** Yield, power delivery and liquid cooling all need custom engineering. 44 GB limits model size, so large models span several wafers; the CS-4 rack puts three wafers together. Physical design and packaging pay.
-- **What would change our mind.** It is already shifting. Cerebras's roadmap says CS-6 will stack DRAM on the wafer to add capacity while keeping data local. The bandwidth bet stays; the SRAM-only rule does not.
-
-Sources: [Cerebras: the wafer-scale advantage](https://cerebras.net/chip/); [Cerebras CS-4](https://cerebras.ai/product-system/); [Cerebras at Hot Chips 2026](https://cerebras.ai/blog/ultrafast-frontier-inference-cerebras-deep-dive-at-hot-chips-2026)
-
-<a id="card-sn50"></a>
-### 5. SambaNova SN50: P/D disaggregation
-
-*Combination: SRAM + HBM + DDR tiers + Spatial dataflow fabric + P/D disaggregation + Air-cooled*
-
-- **Constraint.** Agentic workloads where per-user decode speed sets the experience, while prefill is compute-heavy and bursty.
-- **Mechanism.** GPUs do prefill, SN50 does decode, and the KV cache moves between them once per request. SambaNova's July 2026 demo paired 4 H200s for prefill with 16 SN50s for decode.
-- **Alternative not taken.** One chip type for both phases.
-- **Cost.** A KV transfer per request over the network, two software stacks, and an operations team that runs both. The serving layer pays.
-- **What would change our mind.** Independent tests now exist: Artificial Analysis measured 763 tokens/s of decode at a 10,000-token context, and SemiAnalysis about 800 at its fastest setting. SambaNova reports over 450 at long contexts. If that number keeps falling as context grows, the KV handoff is eating the gain. SN50 is announced, with shipping planned for the second half of 2026.
-
-Sources: [SambaNova SN50 introduction](https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference); [SambaNova demo](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world); [The Register on the Artificial Analysis test](https://www.theregister.com/a/5268721); [SambaNova on the SemiAnalysis test](https://sambanova.ai/blog/semianalysis-benchmarks-sambarack-sn50-with-fast-inference-on-minimax-m2.7)
-
-<a id="card-lpx"></a>
-### 6. NVIDIA Rubin + LPX: the handoff
-
-*Combination: HBM stacks + Hybrid: async tile pipelines + Rack scale + SIMT cores + AFD, speculative decoding or P/D disaggregation*
-
-- **Constraint.** Long-context, highly interactive decode, where HBM bandwidth per user limits tokens per second on the GPU.
-- **Mechanism.** Groq 3 LPX racks next to Vera Rubin racks. Each LP30 chip carries 500 MB of SRAM. NVIDIA describes three ways to split the work: P/D disaggregation, with prefill on the GPU and decode on LPX; attention/FFN disaggregation (AFD), with attention on the GPU, which keeps the KV cache, and FFN or MoE experts on LPX; and speculative decoding, with a small draft model on LPX that the GPU verifies.
-- **Alternative not taken.** Make the GPU itself SRAM-heavy, giving up capacity and generality.
-- **Cost.** AFD moves activations at every full-attention layer, on the per-token critical path. The serving system and the network pay.
-- **What would change our mind.** Measured end-to-end results. LPX on its own is measured; NVIDIA's joint result for a 2-trillion-parameter model is a projection.
-
-Sources: [NVIDIA: inside Groq 3 LPX](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform); [NVIDIA: LPX at long context](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
-
-<a id="card-v4i"></a>
-### 7. Google TPU v4i: air cooling as a design rule
-
-*Combination: HBM stacks + Compiler: static scheduling + One chip or card + Systolic matrix units + Air-cooled*
-
-- **Constraint.** An inference chip deployable in every Google datacenter, judged on performance per total cost of ownership, not per purchase price.
-- **Mechanism.** One TensorCore on a die under 400 mm², 175 W, air-cooled. 128 MB of on-chip CMEM keeps weights close. Multi-tenancy with model switches under 100 µs.
-- **Alternative not taken.** Reuse the training chip for serving.
-- **Cost.** Less peak compute per chip and only two ICI links, so large models do not fit on one chip. The compiler manages the extra on-chip memory.
-- **What would change our mind.** This card has a live tension: Ironwood, Google's inference TPU five years later, is liquid-cooled. Either the air-cooling rule was about the 2020 fleet and not about inference, or the constraint changed when models grew. The second reading fits the data better, but it is a reading.
-
-Source: [Jouppi et al., ISCA 2021](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)
-
-<a id="card-m5"></a>
-### 8. Apple M5: two engines for AI
-
-*Combination: One chip or card + SIMT cores + Battery*
-
-- **Constraint.** On-device AI at laptop and phone power: always-on system features and bursty language-model work on the same chip, within the same memory.
-- **Mechanism.** Two places to run AI. A 16-core Neural Engine stays the energy-efficient path. New in M5, each of the ten GPU cores gets its own Neural Accelerator, and Apple's own M5 language-model study runs there through MLX and Metal 4, not on the Neural Engine.
-- **Alternative not taken.** Grow the Neural Engine to cover large language models.
-- **Cost.** Two programming paths, Core ML and Metal or MLX, sharing 153 GB/s of unified memory. Apple's numbers show the limit: time to first token 3.3 to 4 times faster than M4, decode only 1.2 to 1.3 times, roughly the memory-bandwidth gain. The framework layer pays.
-- **What would change our mind.** Apple has not said why it split the work; the constraint above is my inference. If a later generation moves language models onto the Neural Engine, the split was a transition, not a design rule.
-
-Sources: [Apple Newsroom, M5](https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/); [Apple ML Research, LLMs on the M5 GPU](https://machinelearning.apple.com/research/exploring-llms-mlx-m5)
-
-## Read the shape, guess the team
-
-The last post claimed that a chip shows where its designers came from. Here is a small test of that claim. Four chips, names hidden. Which background built each one?
-
-<div id="chip-blind"></div>
+<div id="chip-cards"></div>
 <script src="/assets/chip-radar/data.js"></script>
+<script src="/assets/chip-radar/cards.js"></script>
 <script src="/assets/chip-radar/game.js"></script>
-
-With four options and four chips, random guessing gets one right on average. If readers do much better, the shape carries information about the team. If not, the workload explains the shape and the background is a story told afterwards. Tell me your score.
 
 ## Caveats
 
