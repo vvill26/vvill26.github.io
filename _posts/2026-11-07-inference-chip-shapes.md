@@ -13,7 +13,7 @@ description: "Every inference chip is a bet placed by people with a particular b
 
 Friday night, Spotify playing Ed Sheeran's biggest hit, and I was reading a post about how an AI chip betrays the background of the people who designed it. "Shape of You" became "the shape of chips", and the weekend study was on.
 
-It is a different kind of work from my weekdays. Monday to Friday I design forward: start from the model and the serving goals, then decide what the hardware and the software stack should be. This study runs the other way. It takes the chips that exist and asks, backwards, what their designers thought was scarce and which mechanism they chose because of it. An empirical study, then, in the plain sense: take what is there and reason about the rationale behind it.
+It is a different kind of work from my weekdays. Monday to Friday we design forward: start from the model and the serving goals, and co-design the chip and the software stack together. This study runs the other way. It takes the chips that shipped and asks what their designers were thinking during their own forward process: what they thought was scarce, and which mechanism they chose because of it. An empirical study, then, in the plain sense: take what is there and reason about the rationale behind it.
 
 Every inference chip is a bet placed by people with a particular background, and the bet leaves a shape. Below are 43 chips from 2015 to 2026, each scored 0–5 on ten design axes from public papers, Hot Chips talks and vendor documentation, plus five systems that pair a GPU with a different accelerator. Start by playing with it; the long read follows.
 
