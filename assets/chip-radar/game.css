@@ -52,3 +52,17 @@
 .cg-bh{font-weight:600;text-align:center}
 .cg-reveal{font-size:12px;color:var(--mut);line-height:1.4}.cg-reveal b{color:var(--ink)}
 .cg-bscore{font-weight:600;margin-top:8px}
+.cg-found{font-size:12px;color:var(--mut);margin:6px 0 0}.cg-found b{color:var(--ink)}
+.cg-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--ink);color:var(--surf);padding:10px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:min(92vw,520px);font-size:13px;line-height:1.45;z-index:50;transition:transform .3s ease;pointer-events:none}
+.cg-toast.on{transform:translate(-50%,0);pointer-events:auto}
+.cg-toast b{margin-right:4px}
+#chip-game .cg-why{background:var(--surf);color:var(--ink)!important;border:0;border-radius:12px;padding:2px 10px;margin-left:6px;font-weight:600}
+.cg-drawer{position:fixed;top:0;right:0;height:100%;width:min(360px,92vw);background:var(--surf);border-left:1px solid var(--grid);box-shadow:-8px 0 30px rgba(0,0,0,.18);padding:18px 18px 24px;overflow-y:auto;z-index:60;transform:translateX(105%);transition:transform .3s ease;box-sizing:border-box;font-size:13px;line-height:1.5}
+.cg-drawer.on{transform:none}
+.cg-drawer h4{margin:2px 0 6px;font-size:17px}
+.cg-dk{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.cg-dbtn{display:inline-block;background:var(--card);border-radius:12px;padding:2px 9px;font-size:12px;margin-bottom:8px}
+.cg-drawer dl{margin:6px 0 12px}.cg-drawer dt{font-weight:600;margin-top:9px}.cg-drawer dd{margin:2px 0 0;color:var(--ink)}
+#chip-game .cg-x{position:absolute;top:10px;right:12px;background:none;border:0;font-size:16px;color:var(--mut)!important}
+.cg-full{font-weight:600}
+@media (max-width:700px){.cg-drawer{top:auto;bottom:0;height:auto;max-height:75vh;width:100%;border-left:0;border-top:1px solid var(--grid);border-radius:14px 14px 0 0;transform:translateY(105%)}.cg-drawer.on{transform:none}.cg-toast{bottom:64px}}
