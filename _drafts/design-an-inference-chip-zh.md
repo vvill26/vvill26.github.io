@@ -14,7 +14,7 @@ description: "一个小游戏：选一个设计场景，做六个设计决定，
 
 周一早上，切回正向模式。[上一篇](/zh/2026/11/inference-chip-shapes/)我把 43 颗推理芯片倒着读了一遍：拿出货的设计，猜团队当初认为什么最稀缺。这一篇换你来设计。从六个设计场景里选一个，做六个决定，看看哪些真实团队已经押过同样的注。押中的时候，游戏会告诉你。
 
-**玩法。** 先选一个设计场景，再在六行里每行选一个选项。右侧面板随点随变：你的芯片在上一篇十个维度上的形状；虚线是 43 颗真实芯片里离你最近的那颗；代价落在谁身上（硬件、编译器还是推理服务），和这个场景的预算比一比；以及能不能通过这个场景的三项检查。这只是个玩具模型，重点是取舍，不是分数。**还有一件事：格子里藏着八颗真实芯片。** 按钮组合和某个真实团队一致，就算中了大奖。差一个按钮的时候，面板会提醒你。
+**玩法。** 先选一个设计场景，再在六行里每行选一个选项。右侧面板随点随变：你的芯片在上一篇十个维度上的形状；虚线是 43 颗真实芯片里离你最近的那颗；代价落在谁身上（硬件、编译器还是推理服务），和这个场景的预算比一比；以及能不能通过这个场景的三项检查。这只是个玩具模型，重点是取舍，不是分数。**还有一件事：格子里藏着八颗真实芯片。** 按钮组合和某个真实团队一致，就算中了大奖。不过不必刻意去找：设计你自己的芯片才是重点，押中只是彩蛋。
 
 <div id="chip-game"></div>
 
@@ -52,12 +52,12 @@ description: "一个小游戏：选一个设计场景，做六个设计决定，
 - **机制。** 芯片直接挂三层存储：520 MiB 片上 SRAM、64 GiB HBM、最多 1.5 TiB DDR。每个节点从 DDR 往 HBM 搬模型的速度超过 1 TB/s。
 - **没选的方案。** 把所有专家都放进多块 GPU 的 HBM。
 - **代价。** 本来就很大的芯片上还要放 DDR 控制器和引脚，软件还得决定哪个模型放哪一层。论文自己测得：和 DGX 相比，机器规模最多缩小 19 倍，模型切换快 15 到 31 倍。
-- **什么会推翻它。** 如果多模型服务一直是小众需求，DDR 这一层就是白花的成本。目前只有一个数据点：SN50 保留了三层结构。
+- **什么会推翻它。** 如果多模型服务一直是小众需求，DDR 这一层就是白花的成本。目前只有一个数据点：SambaNova SN50 保留了三层结构。
 
 出处：[Prabhakar 等，2024](https://arxiv.org/abs/2405.07518)
 
 <a id="card-v4"></a>
-### 3. TPU v4：光交换机
+### 3. 谷歌 TPU v4：光交换机
 
 *组合：HBM 堆栈 + 编译器静态调度 + 光交换（OCS）可重构 Pod + 脉动阵列矩阵单元*
 
@@ -65,7 +65,7 @@ description: "一个小游戏：选一个设计场景，做六个设计决定，
 - **机制。** 用光路交换机连起 3D torus。论文把它比作配线板：跳过坏掉的单元，按任务重新切分。
 - **没选的方案。** 固定的电互连 torus，或者 InfiniBand 这类分组交换网络。
 - **代价。** 光器件和交换机占系统成本不到 5%、功耗不到 3%。每个任务都要重新配置切片，这份工作落在调度软件身上。
-- **什么会推翻它。** 目前没有。论文说最初的动机是规模和可靠性，拓扑灵活带来的大模型训练加速是后来才发现的好处。到了 9,216 颗芯片的 Ironwood，光交换机还在。如果将来同样规模的机群把它拿掉，就说明可用性并不是那个卡脖子的约束。
+- **什么会推翻它。** 目前没有。论文说最初的动机是规模和可靠性，拓扑灵活带来的大模型训练加速是后来才发现的好处。到了 9,216 颗芯片的谷歌 Ironwood，光交换机还在。如果将来同样规模的机群把它拿掉，就说明可用性并不是那个卡脖子的约束。
 
 出处：[Jouppi 等，ISCA 2023](https://arxiv.org/abs/2304.01433)；[Ironwood，Hot Chips 2025](https://www.servethehome.com/googles-ironwood-tpu-swings-for-reasoning-model-leadership-at-hot-chips-2025/)
 
@@ -96,7 +96,7 @@ description: "一个小游戏：选一个设计场景，做六个设计决定，
 出处：[SambaNova SN50 发布](https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference)；[SambaNova 演示](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world)；[The Register：Artificial Analysis 测试](https://www.theregister.com/a/5268721)；[SambaNova：SemiAnalysis 测试](https://sambanova.ai/blog/semianalysis-benchmarks-sambarack-sn50-with-fast-inference-on-minimax-m2.7)
 
 <a id="card-lpx"></a>
-### 6. Rubin + LPX：交接
+### 6. 英伟达 Rubin + LPX：交接
 
 *组合：HBM 堆栈 + 混合：异步 tile 流水线 + 机柜级 + SIMT 核心 + AFD 分离、投机解码或 PD 分离*
 
@@ -109,7 +109,7 @@ description: "一个小游戏：选一个设计场景，做六个设计决定，
 出处：[英伟达：Groq 3 LPX 详解](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform)；[英伟达：LPX 的长上下文表现](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
 
 <a id="card-v4i"></a>
-### 7. TPU v4i：把风冷写进设计规则
+### 7. 谷歌 TPU v4i：把风冷写进设计规则
 
 *组合：HBM 堆栈 + 编译器静态调度 + 一颗芯片或一张卡 + 脉动阵列矩阵单元 + 风冷*
 
@@ -122,7 +122,7 @@ description: "一个小游戏：选一个设计场景，做六个设计决定，
 出处：[Jouppi 等，ISCA 2021](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)
 
 <a id="card-m5"></a>
-### 8. Apple M5：两套 AI 引擎
+### 8. 苹果 M5：两套 AI 引擎
 
 *组合：一颗芯片或一张卡 + SIMT 核心 + 电池*
 

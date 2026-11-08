@@ -13,7 +13,7 @@ description: "A small game: pick a design scenario, choose six mechanisms, see w
 
 Monday morning, back in forward mode. [Last time](/2026/11/inference-chip-shapes/) I read 43 inference chips backwards: take the shipped design, guess what its team thought was scarce. This time you hold the pen. Pick one of six design scenarios, make six decisions, and see which real teams already made the same bets. The game tells you when you hit one.
 
-**How to play.** Pick a design scenario, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the scenario's budget, and whether the design passes the scenario's three checks. It is a toy model: the point is the trade-offs, not a score. **One more thing: eight real chips are hidden in the grid.** Match a real team's combination of buttons and you hit the jackpot. When you are one button away, the panel tells you.
+**How to play.** Pick a design scenario, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the scenario's budget, and whether the design passes the scenario's three checks. It is a toy model: the point is the trade-offs, not a score. **One more thing: eight real chips are hidden in the grid.** Match a real team's combination of buttons and you hit the jackpot. You don't need to: building your own chip is the point, and a hit is just a bonus.
 
 <div id="chip-game"></div>
 
@@ -51,12 +51,12 @@ Sources: [Ross on the Modern CTO podcast](https://moderncto.io/302-jonathan-ross
 - **Mechanism.** Three tiers attached to the chip: 520 MiB of on-chip SRAM, 64 GiB of HBM, up to 1.5 TiB of DDR. Models move from DDR to HBM at over 1 TB/s per node.
 - **Alternative not taken.** Keep every expert in HBM across many GPUs.
 - **Cost.** DDR controllers and pins on a chip that is already large, and software that decides which model lives in which tier. The paper reports up to 19 times smaller machine footprint and 15 to 31 times faster model switching against DGX systems, by its own measurement.
-- **What would change our mind.** If many-model serving stays rare, the DDR tier is cost without use. One data point so far: SN50 kept the three tiers.
+- **What would change our mind.** If many-model serving stays rare, the DDR tier is cost without use. One data point so far: SambaNova SN50 kept the three tiers.
 
 Source: [Prabhakar et al., 2024](https://arxiv.org/abs/2405.07518)
 
 <a id="card-v4"></a>
-### 3. TPU v4: optical circuit switches
+### 3. Google TPU v4: optical circuit switches
 
 *Combination: HBM stacks + Compiler: static scheduling + Optical-switched pod (OCS) + Systolic matrix units*
 
@@ -64,7 +64,7 @@ Source: [Prabhakar et al., 2024](https://arxiv.org/abs/2405.07518)
 - **Mechanism.** A 3D torus wired through optical circuit switches. The paper describes the switch as a plugboard that skips failed units and reshapes slices.
 - **Alternative not taken.** A fixed electrical torus, or a packet-switched fabric such as InfiniBand.
 - **Cost.** Optics and switches stay under 5 percent of system cost and 3 percent of power. Slices must be reconfigured per job, so scheduling software carries the work.
-- **What would change our mind.** Nothing yet. The paper says scale and reliability came first, and faster LLM training from flexible topologies came later. Ironwood still uses the switches at 9,216 chips. If a future pod dropped them at the same scale, availability was not the binding constraint.
+- **What would change our mind.** Nothing yet. The paper says scale and reliability came first, and faster LLM training from flexible topologies came later. Google's Ironwood still uses the switches at 9,216 chips. If a future pod dropped them at the same scale, availability was not the binding constraint.
 
 Sources: [Jouppi et al., ISCA 2023](https://arxiv.org/abs/2304.01433); [Ironwood at Hot Chips 2025](https://www.servethehome.com/googles-ironwood-tpu-swings-for-reasoning-model-leadership-at-hot-chips-2025/)
 
@@ -95,7 +95,7 @@ Sources: [Cerebras: the wafer-scale advantage](https://cerebras.net/chip/); [Cer
 Sources: [SambaNova SN50 introduction](https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference); [SambaNova demo](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world); [The Register on the Artificial Analysis test](https://www.theregister.com/a/5268721); [SambaNova on the SemiAnalysis test](https://sambanova.ai/blog/semianalysis-benchmarks-sambarack-sn50-with-fast-inference-on-minimax-m2.7)
 
 <a id="card-lpx"></a>
-### 6. Rubin + LPX: the handoff
+### 6. NVIDIA Rubin + LPX: the handoff
 
 *Combination: HBM stacks + Hybrid: async tile pipelines + Rack scale + SIMT cores + AFD, speculative decoding or P/D disaggregation*
 
@@ -108,7 +108,7 @@ Sources: [SambaNova SN50 introduction](https://sambanova.ai/blog/introducing-the
 Sources: [NVIDIA: inside Groq 3 LPX](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform); [NVIDIA: LPX at long context](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
 
 <a id="card-v4i"></a>
-### 7. TPU v4i: air cooling as a design rule
+### 7. Google TPU v4i: air cooling as a design rule
 
 *Combination: HBM stacks + Compiler: static scheduling + One chip or card + Systolic matrix units + Air-cooled*
 

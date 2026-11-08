@@ -4,7 +4,7 @@
 (function(){
 const D=window.CHIPS, LANG=window.CHIPS_LANG||"en", ZH=LANG==="zh";
 const I=D.i18n[LANG]||D.i18n.en, AX=D.axes, ORDER=D.order, NS="http://www.w3.org/2000/svg";
-const nm=e=>(I.names&&I.names[e.id])||e.name;
+const nm=e=>{const n=(I.names&&I.names[e.id])||e.name;return ZH||n.includes(e.vendorLabel)?n:e.vendorLabel+" "+n};
 const t=(en,zh)=>ZH?zh:en;
 
 /* ---------- design scenarios ---------- */
@@ -81,7 +81,6 @@ const SIG={groq:{A:["sram"],B:["static"],C:["rack"],F:["air"]},
  v4i:{A:["hbm"],B:["static"],C:["card"],D:["systolic"],F:["air"]},
  m5:{C:["card"],D:["simt"],F:["batt"]}};
 const sigHits=()=>Object.keys(SIG).filter(k=>Object.entries(SIG[k]).every(([r,os])=>os.includes(P[r])));
-const sigWarm=()=>Object.keys(SIG).filter(k=>!FOUND.has(k)&&Object.entries(SIG[k]).filter(([r,os])=>!os.includes(P[r])).length===1);
 const label=(r,o)=>{const row=ROWS.find(x=>x.id===r);return row.opts.find(x=>x.id===o).l};
 const CARDS={
  groq:{n:"Groq LPU",why:t("Porting software to the TPU was hard, so the founders wrote the compiler first and built hardware it could schedule to the cycle.","给 TPU 移植软件很难，所以创始团队先写编译器，再造一颗能让编译器精确到每个周期去调度的硬件。"),
@@ -93,19 +92,19 @@ const CARDS={
  sn40l:{n:"SambaNova SN40L",why:t("Composition of Experts: many small models, and switching between them was slow.","专家组合：很多小模型，模型之间切换太慢。"),
   did:t("A spatial dataflow chip with three memory tiers: 520 MiB SRAM, 64 GiB HBM, up to 1.5 TiB DDR.","空间数据流芯片，配三层存储：520 MiB SRAM、64 GiB HBM、最多 1.5 TiB DDR。"),
   not:t("Keep every expert in HBM across many GPUs.","把所有专家都放进多块 GPU 的 HBM。"),cost:t("DDR pins on a big chip, and software that decides which model lives where.","大芯片上还要放 DDR 引脚，软件还得决定哪个模型放哪层。")},
- v4:{n:"Google TPU v4",why:t("At 4,096 chips, a fixed torus is rarely all healthy.","到了 4,096 颗芯片，固定 torus 很难全员健康。"),
+ v4:{n:t("Google TPU v4","谷歌 TPU v4"),why:t("At 4,096 chips, a fixed torus is rarely all healthy.","到了 4,096 颗芯片，固定 torus 很难全员健康。"),
   did:t("Optical circuit switches that skip failed units and reshape slices.","用光路交换机跳过坏单元、重新切分。"),
   not:t("A fixed electrical torus, or InfiniBand.","固定的电互连 torus，或者 InfiniBand。"),cost:t("Under 5% of system cost; the scheduler reconfigures slices per job.","不到系统成本的 5%；调度器要按任务重配切片。")},
- v4i:{n:"Google TPU v4i",why:t("Deploy in every datacenter; judge by total cost of ownership, not purchase price.","要能部署进每个数据中心；按总拥有成本算账，不按采购价。"),
+ v4i:{n:t("Google TPU v4i","谷歌 TPU v4i"),why:t("Deploy in every datacenter; judge by total cost of ownership, not purchase price.","要能部署进每个数据中心；按总拥有成本算账，不按采购价。"),
   did:t("One core, under 400 mm², 175 W, air-cooled, 128 MB on-chip CMEM.","单核，面积不到 400 mm²，175 W，风冷，128 MB 片上 CMEM。"),
   not:t("Reuse the training chip for serving.","直接拿训练芯片来做推理。"),cost:t("Less peak compute; only two chip-to-chip links. Ironwood later went liquid-cooled.","峰值算力更低，只有两条芯片间链路。后来的 Ironwood 改成了液冷。")},
  sn50:{n:"SambaNova SN50",why:t("Agent decode speed matters per user; prefill is compute-heavy and bursty.","Agent 的解码速度按用户算；预填充计算量大、来得猛。"),
   did:t("PD disaggregation: GPUs prefill, SN50 decodes; the KV cache moves once per request.","PD 分离：GPU 做预填充，SN50 做解码；每个请求传一次 KV cache。"),
   not:t("One chip type for both phases.","一种芯片包办两个阶段。"),cost:t("A KV transfer per request and two software stacks; the serving layer pays.","每个请求一次 KV 传输，外加两套软件栈；服务层买单。")},
- lpx:{n:"NVIDIA Rubin + LPX",why:t("Per-user HBM bandwidth limits interactive decode on the GPU.","GPU 上，每个用户分到的 HBM 带宽限制了交互式解码。"),
+ lpx:{n:t("NVIDIA Rubin + LPX","英伟达 Rubin + LPX"),why:t("Per-user HBM bandwidth limits interactive decode on the GPU.","GPU 上，每个用户分到的 HBM 带宽限制了交互式解码。"),
   did:t("Groq 3 LPX racks beside Rubin: PD disaggregation, AFD, or speculative decoding.","Groq 3 LPX 机柜放在 Rubin 旁边：PD 分离、AFD 分离或投机解码。"),
   not:t("Make the GPU itself SRAM-heavy.","让 GPU 自己塞满 SRAM。"),cost:t("AFD moves activations every layer, on the critical path; the joint 2T-model result is a projection.","AFD 每层都要传激活，就在关键路径上；2 万亿参数的联合结果还是预测值。")},
- m5:{n:"Apple M5",why:t("Always-on features and bursty LLM work share one chip and one memory. (Apple has not said why; this is my reading.)","常驻功能和突发的大模型任务共用一颗芯片、一块内存。（Apple 没解释原因，这是我的解读。）"),
+ m5:{n:t("Apple M5","苹果 M5"),why:t("Always-on features and bursty LLM work share one chip and one memory. (Apple has not said why; this is my reading.)","常驻功能和突发的大模型任务共用一颗芯片、一块内存。（Apple 没解释原因，这是我的解读。）"),
   did:t("A Neural Engine for efficiency plus a Neural Accelerator in each GPU core for LLMs.","神经网络引擎负责省电，每个 GPU 核心里的 Neural Accelerator 负责大模型。"),
   not:t("Grow the Neural Engine to cover LLMs.","把神经网络引擎做大，让它也能跑大模型。"),cost:t("Two programming paths; decode still limited by 153 GB/s of shared memory.","两条编程路径；解码仍受限于 153 GB/s 的共享内存。")}
 };
@@ -153,10 +152,10 @@ function render(){
  const over=tot-C.budget;
  const budget=n===0?"":over>=5?`<p class="cg-warn">${t(`Over budget by ${over}. Everyone got what they asked for. This is how a committee chip is born.`,`超出预算 ${over} 点。每个人的要求都满足了——十项全满分的芯片就是这么开会开出来的。`)}</p>`:over>0?`<p class="cg-warn">${t(`Over budget by ${over}. Something has to give: which row would you change?`,`超出预算 ${over} 点。总得放弃点什么：你会改哪一行？`)}</p>`:`<p class="cg-ok">${t(`Within budget (${tot} of ${C.budget}).`,`预算之内（${tot} / ${C.budget}）。`)}</p>`;
  const checks=C.checks.map(([f,l])=>{const ok=n>0&&f(v,P);return `<li class="${n===0?"":ok?"y":"n"}">${n===0?"○":ok?"✓":"✗"} ${l}</li>`}).join("");
- const cards=sigHits(),warm=sigWarm();
+ const cards=sigHits();
  const cardHtml=cards.length?`<p class="cg-cards">${t("Real teams made this bet:","真实团队押过同样的注：")} ${cards.map(k=>`<a href="#card-${k}" data-card="${k}">${CARDS[k].n} →</a>`).join(" ")}</p>`:"";
  const okN=n?C.checks.filter(([f])=>f(v,P)).length:0;root.querySelector(".cg-mini").innerHTML=n?`${C.icon} ${n>=3?nm(ne)+" · ":""}${t("bill","账单")} ${tot}/${C.budget} · ${t("checks","检查")} ${okN}/3`:t("Pick options below; the result shows here.","在下面选选项，结果显示在这里。");
- out.innerHTML=`<div class="cg-pay">${bars}<div class="cg-bar tot"><span>${t("total","合计")}</span><div class="cg-track"><div class="cg-fill ftot${over>0?" over":""}" style="width:${tot/mx*100}%"></div><div class="cg-budget" style="left:${C.budget/mx*100}%"></div></div><b>${tot}</b></div></div>${budget}<ul class="cg-checks"><li class="cg-goal">${C.icon} ${C.name}: ${C.goal}</li>${checks}</ul>${cardHtml}${warm.length&&n>=2?`<p class="cg-warm">${t("🔥 One button away from a hidden real-world bet.","🔥 再改一个按钮，就能押中一个隐藏的真实案例。")}</p>`:""}<p class="cg-found">${t("Real-world bets found","已找到的真实押注")}: <b>${FOUND.size}</b> / ${Object.keys(CARDS).length}</p>`;
+ out.innerHTML=`<div class="cg-pay">${bars}<div class="cg-bar tot"><span>${t("total","合计")}</span><div class="cg-track"><div class="cg-fill ftot${over>0?" over":""}" style="width:${tot/mx*100}%"></div><div class="cg-budget" style="left:${C.budget/mx*100}%"></div></div><b>${tot}</b></div></div>${budget}<ul class="cg-checks"><li class="cg-goal">${C.icon} ${C.name}: ${C.goal}</li>${checks}</ul>${cardHtml}<p class="cg-found">${t("Real-world bets found","已找到的真实押注")}: <b>${FOUND.size}</b> / ${Object.keys(CARDS).length}</p>`;
  out.querySelectorAll("a[data-card]").forEach(a=>a.onclick=ev=>{ev.preventDefault();openCard(a.dataset.card)});
 }
 const FOUND=new Set(),toast=root.querySelector(".cg-toast"),drawer=root.querySelector(".cg-drawer");let tt;
