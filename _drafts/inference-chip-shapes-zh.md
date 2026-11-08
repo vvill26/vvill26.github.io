@@ -12,6 +12,10 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 <link rel="stylesheet" href="/assets/chip-radar/radar.css">
 <script>window.CHIPS_LANG = "zh";</script>
 
+周五晚上，Spotify 放着 Ed Sheeran 那首 Shape of You，我在读一篇讲「从芯片能看出设计团队出身」的文章。歌名变成了「芯片的形状」，周末研究就这么开始了。
+
+这和我周一到周五做的事正好相反。工作日是正向设计：从模型和服务目标出发，决定硬件和软件栈该长什么样。这个周末是反过来：拿现成的芯片，倒推设计者当初认为什么最稀缺、为此选了什么机制。说白了是一次经验研究：把摆在那里的东西拿来，推敲背后的道理。
+
 魔镜魔镜告诉我，谁是世界上最好的推理芯片？
 
 魔镜没有回答。它只是把每颗芯片照了一遍：照出 TPU 背后那群从不把调度交还给硬件的编译器工程师，照出 Groq 把仲裁器全部拿掉的执念，照出 Cerebras 干脆把整片晶圆做成一颗芯片的胆量，也照出英伟达这几年一边守住 CUDA、一边把网络、存储和推理服务一样样收进来的耐心。
@@ -88,7 +92,7 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 | | 年份 | 变了什么 | 运行时 | 网络 | 存储 | 算法 | 数据中心 |
 |---|---|---|---|---|---|---|---|
 | [V100](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf) | 2017 | 第一代 Tensor Core；NVLink 2 | 2 | 2 | 1 | 1.5 | 1 |
-| [A100](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf) | 2020 | TF32、2:4 稀疏；MIG 一卡切七 | 3 | 2.5 | 1.5 | 2 | 1.5 |
+| [A100](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf) | 2020 | TF32、2:4 稀疏；MIG 一卡切七 | 3 | 2.5 | 1.5 | 2 | 1.5 |
 | H100 | 2022 | FP8 Transformer Engine | 3.5 | 3 | 1.75 | 3 | 1.75 |
 | B200 | 2024 | 双 die；NVL72 机柜 | 3.5 | 4 | 2.25 | 3.25 | 3.25 |
 | [B300](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/) | 2025 | 288 GB HBM3e；attention softmax 加速 2 倍 | 3.5 | 4 | 2.75 | 3.75 | 3.5 |
@@ -98,7 +102,7 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 
 ## 4. Google TPU：从 v2 起，编译器就再没放手 {#tpu}
 
-TPU 是我们能找到的最好的自然实验：同一家公司，同一套软件栈，十年十一颗芯片。
+TPU 是我们能找到的最好的自然实验：同一家公司，同一套软件栈，十年十一颗芯片。Google 自己 2026 年的[五代回顾](https://arxiv.org/abs/2606.15870)（IEEE Micro）从内部印证了这一点：从 v2 到 Ironwood，双核微架构、脉动矩阵单元和编译器控制的存储一直没变，系统规模却扩大了 36 倍。
 
 ![Google TPU 十一代演进的雷达动图](/assets/chip-radar/tpu-zh.gif)
 
@@ -218,6 +222,8 @@ Meta、AWS、微软自己有负载，自己付电费。它们最高的维度都�
 
 ## 12. 方法、独立审计与局限 {#method}
 
+**关于刻度。** 分数是 0–5，半分一档；两轮平均会产生 0.25 的步长，表里照实显示。我们考虑过改成 0–10，最后没有改。更细的刻度不会带来更多信息：锚点（0、1、3、5）是公开资料能定义清楚的仅有几个点，两位独立评分者在 450 格里已有 130 格相差半分。0–10 会让数字看起来比证据更精确，评分者之间的一致性大概率还会下降。那些 0.25 是平均的产物，不是测量结果。
+
 **方法。** 资料只用公开来源：论文（ISCA、HPCA、OSDI、arXiv）、Hot Chips 报告、厂商架构文档、业绩会和财报文件，以及靠谱的技术媒体。用同一套评分标准做了两轮独立打分，一轮按芯片，一轮按维度。每个分数都附一句理由、一个出处和一个置信度；最终分数取两轮平均，置信度取较低者。最初 450 个分数里有 317 个完全一样，没有任何一个相差超过 1 分。两轮用的是同一批研究笔记，所以这说明的是一致性，不是彼此独立地得到了真相。
 
 **两轮纠错。** 第二轮研究用一手资料替换了较弱的来源，改了 16 个分数。之后一位同事做了独立审计：从原始文件重算了全部数字，并对关键断言查了一手资料。审计找到了真实的错误，这一版都已改正：
@@ -239,17 +245,19 @@ Meta、AWS、微软自己有负载，自己付电费。它们最高的维度都�
 - **谱系是线索，不是原因。** 大团队里什么背景都有，供货方也不等于架构师。
 - **状态截至 2026 年 11 月 7 日。** AMD 收购 Taalas 待交割；英伟达和 Groq 之间是授权加人员招聘；LPX 机柜已量产；MTIA 400 正走向部署。
 
-**怎样让它不只是一个好故事。** 审计提出了两项值得做的盲测。第一，知道团队背景，能否比只知道负载、市场和年代更准地预测架构？第二，看匿名的架构，能否比瞎猜更准地认出团队背景？即使两项都成立，那也只是预测，不是因果；如果都不成立，这张地图作为设计评审和访谈设计者的工具，仍然有用。
+**怎样让它不只是一个好故事。** 审计提了两件事。一是六张「设计卡」：每张一页、可以被反驳，只讲一颗芯片的一个决策，写清约束是什么、选了什么机制、放弃了哪条路、付出了什么代价、什么证据会迫使我们改口（比如 TPU v4 的光交换、v4i 的风冷约束、SN40L 的第三级存储、SN50 的阶段拆分、苹果 M5 的两种执行引擎、Rubin + LPX 的交接）。二是两项盲测。第一，知道团队背景，能否比只知道负载、市场和年代更准地预测架构？第二，看匿名的架构，能否比瞎猜更准地认出团队背景？即使两项都成立，那也只是预测，不是因果；如果都不成立，这张地图作为设计评审和访谈设计者的工具，仍然有用。
 
 所有分数、理由和出处都在「数据表」和[数据文件](/assets/chip-radar/data.js)里，欢迎指正。
+
+周末结束了，该切回正向设计。做过一遍反向研究的好处是：正向的那些问题，现在有了更好的名字。
 
 ## 13. 参考来源 {#sources}
 
 完整来源列表见[英文版](/2026/11/inference-chip-shapes/#sources)，每个分数对应的来源都在数据文件里。主要来源：
 
 - [NeuralTalk：从架构师的出身看芯片设计](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)；[硅谷淘金热：Patterson、Dally、Jouppi 在计算机历史博物馆的对谈](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)
-- 英伟达：[V100 白皮书](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf)；[A100 白皮书](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf)；[Blackwell Ultra 详解](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)；[Rubin 平台详解](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/)
-- TPU：[v1（ISCA 2017）](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf)；[三代 TPU 的十条经验（ISCA 2021）](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)；[TPU v4（ISCA 2023）](https://arxiv.org/abs/2304.01433)；[TPU 8t / 8i 技术详解](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)；[博通 2026 财年三季度业绩会要点](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)
+- 英伟达：[V100 白皮书](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf)；[A100 白皮书](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf)；[Blackwell Ultra 详解](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)；[Rubin 平台详解](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/)
+- TPU：[从 TPU v2 到 Ironwood 的五代回顾（IEEE Micro 2026）](https://arxiv.org/abs/2606.15870)；[v1（ISCA 2017）](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf)；[三代 TPU 的十条经验（ISCA 2021）](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)；[TPU v4（ISCA 2023）](https://arxiv.org/abs/2304.01433)；[TPU 8t / 8i 技术详解](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)；[博通 2026 财年三季度业绩会要点](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)
 - Groq 与英伟达：[Groq ISCA 2022 论文](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf)；[英伟达 2026 财年 10-K（Groq 授权）](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm)；[LPX 规格](https://www.nvidia.com/en-us/data-center/lpx/)；[LPX 与 Vera Rubin 的三种协作模式](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
 - [Cerebras SDK 文档](https://sdk.cerebras.ai/computing-with-cerebras)；[Cerebras 推理与内存墙](https://www.cerebras.ai/blog/introducing-cerebras-inference-ai-at-instant-speed)；[SambaNova SN40L 论文](https://arxiv.org/abs/2405.07518)；[Taalas HC1](https://taalas.com/the-path-to-ubiquitous-ai/)；[AMD 收购 Taalas](https://ir.amd.com/news-events/press-releases/detail/1296)；[Etched 技术说明](https://www.etched.com/progress/frontier-inference-clusters)
 - 异构与同构：[AWS 与 Cerebras](https://press.aboutamazon.com/aws/2026/3/aws-and-cerebras-collaboration-aims-to-set-a-new-standard-for-ai-inference-speed-and-performance-in-the-cloud)；[SambaNova SN50 + H200 演示](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world)；[Gimlet 在 Corsair 上做投机解码](https://gimletlabs.ai/blog/low-latency-spec-decode-corsair)；[DistServe（OSDI 2024）](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin)；[OpenAI Jalapeño 首批结果](https://openai.com/index/jalapeno-first-results/)

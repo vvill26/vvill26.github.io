@@ -11,7 +11,9 @@ description: "Every inference chip is a bet placed by people with a particular b
 
 <link rel="stylesheet" href="/assets/chip-radar/radar.css">
 
-Ed Sheeran's biggest hit is "Shape of You". This post is about the shape of AI chips.
+Friday night, Spotify playing Ed Sheeran's biggest hit, and I was reading a post about how an AI chip betrays the background of the people who designed it. "Shape of You" became "the shape of chips", and the weekend study was on.
+
+It is a different kind of work from my weekdays. Monday to Friday I design forward: start from the model and the serving goals, then decide what the hardware and the software stack should be. This study runs the other way. It takes the chips that exist and asks, backwards, what their designers thought was scarce and which mechanism they chose because of it. An empirical study, then, in the plain sense: take what is there and reason about the rationale behind it.
 
 Every inference chip is a bet placed by people with a particular background, and the bet leaves a shape. Below are 43 chips from 2015 to 2026, each scored 0–5 on ten design axes from public papers, Hot Chips talks and vendor documentation, plus five systems that pair a GPU with a different accelerator. Start by playing with it; the long read follows.
 
@@ -85,7 +87,7 @@ NVIDIA is still the reference point, so it comes first. The GPU shape is the mir
 | | Year | What changed | Runtime | Network | Memory | Algorithm | Datacenter |
 |---|---|---|---|---|---|---|---|
 | [V100](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf) | 2017 | first Tensor Cores; NVLink 2 | 2 | 2 | 1 | 1.5 | 1 |
-| [A100](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf) | 2020 | TF32, 2:4 sparsity; MIG splits one GPU into 7 | 3 | 2.5 | 1.5 | 2 | 1.5 |
+| [A100](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf) | 2020 | TF32, 2:4 sparsity; MIG splits one GPU into 7 | 3 | 2.5 | 1.5 | 2 | 1.5 |
 | H100 | 2022 | FP8 Transformer Engine | 3.5 | 3 | 1.75 | 3 | 1.75 |
 | B200 | 2024 | two dies; NVL72 racks | 3.5 | 4 | 2.25 | 3.25 | 3.25 |
 | [B300](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/) | 2025 | 288 GB HBM3e; 2x attention softmax | 3.5 | 4 | 2.75 | 3.75 | 3.5 |
@@ -95,7 +97,7 @@ Read down the columns and the story is steady accretion. A100's MIG was the firs
 
 ## 4. Google TPU: the compiler takes over at v2 and never leaves {#tpu}
 
-The TPU line is the closest thing we have to a natural experiment: one company, one software stack, eleven chips over ten years.
+The TPU line is the closest thing we have to a natural experiment: one company, one software stack, eleven chips over ten years. Google's own [five-generation retrospective](https://arxiv.org/abs/2606.15870) (IEEE Micro, 2026) makes the same point from the inside: the two-core microarchitecture with systolic matrix units and compiler-controlled memory stayed stable from v2 to Ironwood while the system scaled 36× in node count.
 
 ![Animated radar of eleven Google TPU generations](/assets/chip-radar/tpu-en.gif)
 
@@ -215,6 +217,8 @@ For people working on the software stack (compilers, vLLM, SGLang), three conclu
 
 ## 12. Method, an independent audit, and caveats {#method}
 
+**On the scale.** Scores are 0–5 in half-point steps, and averaging two passes produces quarter points, which the table shows as they are. We considered moving to 0–10 and decided against it. A finer scale would not add information: the anchors (0, 1, 3, 5) are the only points we can define from public evidence, and two independent scorers already disagree by half a point on 130 of 450 cells. A 0–10 scale would make the numbers look more precise than the evidence allows, and would likely lower agreement between scorers. The quarter points are averaging artefacts, not measurements.
+
 **Method.** All research used public sources: papers (ISCA, HPCA, OSDI, arXiv), Hot Chips talks, vendor architecture documents, earnings calls and filings, and reputable technical press. Two independent scoring passes used the same rubric, one chip by chip and one axis by axis. Every score carries a one-line reason, a source and a confidence level. The final score is the mean of the two passes, with the lower confidence. Of 450 original scores, 317 matched exactly and none differed by more than one point. Both passes worked from the same research notes, so this measures consistency, not independent truth.
 
 **Two rounds of correction.** A second research round replaced weak sources with primary ones and changed 16 scores. Then a colleague ran an independent audit. It recomputed every number from the raw files and checked key claims against primary sources. It found real errors, all fixed here:
@@ -236,9 +240,11 @@ It also showed that the combined heterogeneous-system scores could not be compon
 - **Lineage is a lead, not a cause.** Large teams have many backgrounds, and a supplier is not the architect.
 - **Status as of 7 November 2026.** AMD's Taalas deal is pending. NVIDIA's arrangement with Groq is a license plus hiring. LPX racks are in production; MTIA 400 is heading to deployment.
 
-**What would make this more than a good story.** The audit proposes two blind tests worth doing. First, does knowing a team's background predict its architecture better than knowing only the workload, market and year? Second, can a reader identify a team's background from an anonymized architecture better than chance? Even if both work, that is prediction, not proof of cause. If neither works, the map is still useful for design reviews and for interviewing designers.
+**What would make this more than a good story.** The audit proposes two things. First, six "design cards": short, falsifiable one-pagers, each about one chip and one decision, stating the constraint, the mechanism chosen, the alternative that was rejected, the cost paid, and what evidence would change the verdict (for example: TPU v4's optical switches; v4i's air-cooling constraint; SN40L's third memory tier; SN50's phase split; Apple M5's two execution engines; Rubin + LPX's handoff). Second, two blind tests. First, does knowing a team's background predict its architecture better than knowing only the workload, market and year? Second, can a reader identify a team's background from an anonymized architecture better than chance? Even if both work, that is prediction, not proof of cause. If neither works, the map is still useful for design reviews and for interviewing designers.
 
 Every score, reason and source is in the *Table* tab and the [data file](/assets/chip-radar/data.js). Corrections are welcome.
+
+The weekend is over, and I am switching back to forward design. The nice thing about having done the reverse study is that the forward questions now have better names.
 
 ## 13. Sources {#sources}
 
@@ -250,12 +256,12 @@ The lens and the method:
 Google TPU:
 - [Jouppi et al., TPU v1 (ISCA 2017), ISCA@50 retrospective copy](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf) and [ISCA 2017 slides](https://pages.cs.wisc.edu/~markhill/restricted/isca17_tpu_slides.pdf)
 - [Ten Lessons From Three Generations Shaped Google's TPUv4i (ISCA 2021)](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)
-- [TPU v4 (ISCA 2023)](https://arxiv.org/abs/2304.01433); [TPU v2/v3 at Hot Chips 2020](https://www.hc32.hotchips.org/assets/program/conference/day2/HotChips2020_ML_Training_Google_Norrie_Patil.v01.pdf); [Ironwood at Hot Chips 2025](https://hc2025.hotchips.org/assets/program/conference/day2/61_Google_Ironwood-Final.pdf)
+- [TPU v4 (ISCA 2023)](https://arxiv.org/abs/2304.01433); [Google's training supercomputers from TPU v2 to Ironwood (IEEE Micro 2026)](https://arxiv.org/abs/2606.15870); [TPU v2/v3 at Hot Chips 2020](https://www.hc32.hotchips.org/assets/program/conference/day2/HotChips2020_ML_Training_Google_Norrie_Patil.v01.pdf); [Ironwood at Hot Chips 2025](https://hc2025.hotchips.org/assets/program/conference/day2/61_Google_Ironwood-Final.pdf)
 - [TPU 8t and 8i technical deep dive (Google Cloud)](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive); [Broadcom Q3 FY2026 call highlights (8i shipments)](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)
 - Google Cloud docs: [v5e](https://docs.cloud.google.com/tpu/docs/v5e), [v5p](https://docs.cloud.google.com/tpu/docs/v5p), [v6e](https://docs.cloud.google.com/tpu/docs/v6e), [TPU7x](https://docs.cloud.google.com/tpu/docs/tpu7x)
 
 NVIDIA GPUs:
-- [Volta V100 whitepaper](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf); [Ampere A100 whitepaper](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf); [Inside Blackwell Ultra](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)
+- [Volta V100 whitepaper](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf); [Ampere A100 whitepaper](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf); [Inside Blackwell Ultra](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)
 
 Groq and NVIDIA:
 - [NVIDIA FY2026 10-K, Note 2 (Groq license)](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm); [NVIDIA LPX specifications](https://www.nvidia.com/en-us/data-center/lpx/); [How Groq 3 LPX works alongside Vera Rubin: three collaboration modes](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
