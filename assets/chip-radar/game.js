@@ -9,26 +9,36 @@ const t=(en,zh)=>ZH?zh:en;
 
 /* ---------- design scenarios ---------- */
 const CONSTRAINTS=[
- {id:"agent",icon:"⚡",name:t("Agent decode","智能体解码"),goal:t("1,000 tokens/s for one user, on a big model","大模型上，单用户每秒 1,000 token"),budget:19,
+ {id:"agent",icon:"⚡",name:t("Fast agent","交互式 Agent"),goal:t("A coding agent at 1,000 tokens/s for one user, on a big model","大模型上的编程 Agent，单用户每秒 1,000 token"),budget:19,
   checks:[
    [v=>v.memory>=4,t("Weights close to compute (Memory ≥ 4)","权重离计算足够近（存储 ≥ 4）")],
    [(v,p)=>v.network>=3.5||p.A==="hard",t("Model spread over many chips, or hardwired into one","模型摊到多颗芯片上，或者直接固化进一颗")],
    [(v,p)=>p.E!=="one"||v.compiler>=4,t("Predictable per-token latency (static scheduling or disaggregation)","每个 token 的延迟可预测（静态调度或分离部署）")]]},
- {id:"fleet",icon:"🏭",name:t("Fleet MoE","机群 MoE"),goal:t("Serve a 1T-parameter MoE at the lowest $/token","以最低每 token 成本服务万亿参数 MoE"),budget:17,
+ {id:"api",icon:"🏭",name:t("Cloud API","大规模云 API"),goal:t("Millions of users, big batches, the lowest $/token","上百万用户、大批量，追求最低每 token 成本"),budget:17,
   checks:[
-   [v=>v.network>=4.5,t("Pod-scale network for experts (Network ≥ 4.5)","整柜级网络承载专家（网络 ≥ 4.5）")],
    [v=>v.tco>=4,t("Designed for fleet cost (Datacenter ≥ 4)","按机群成本设计（数据中心 ≥ 4）")],
+   [v=>v.network>=4,t("Big scale-up domain for large batches and MoE experts (Network ≥ 4)","大 Scale-up 域，装得下大批量和 MoE 专家（网络 ≥ 4）")],
    [(v,p)=>p.A!=="hard",t("Weights can change when the model does","模型换代时权重能跟着换")]]},
- {id:"edge",icon:"🔋",name:t("Laptop / phone","笔记本 / 手机"),goal:t("Private, always-on assistant at a few watts","几瓦功耗、本地私密、随时在线的助手"),budget:12,
+ {id:"long",icon:"📚",name:t("Long context","超长上下文"),goal:t("1M-token prompts, many users at once: the KV cache is the problem","百万 token 提示、多用户并发：难点是 KV cache"),budget:19,
+  checks:[
+   [(v,p)=>p.A==="hbm"||p.A==="tiers",t("Capacity for the KV cache (HBM or memory tiers)","KV cache 放得下（HBM 或多层存储）")],
+   [v=>v.runtime>=3.5,t("Runtime that places and moves KV (Runtime ≥ 3.5)","运行时能调度和搬运 KV（运行时 ≥ 3.5）")],
+   [(v,p)=>p.E==="pd"||p.E==="afd",t("Long prefill kept away from decode (PD or AFD)","长预填充不拖累解码（PD 或 AFD 分离）")]]},
+ {id:"edge",icon:"🔋",name:t("On-device","端侧"),goal:t("A private, always-on assistant on a laptop or phone, at a few watts","笔记本或手机上几瓦功耗、本地私密、随时在线的助手"),budget:12,
   checks:[
    [(v,p)=>p.F==="batt",t("Battery power budget","电池供电预算")],
    [v=>v.network<=1,t("No pod: one chip, shared memory","没有机柜：一颗芯片，共享内存")],
    [v=>v.compiler>=3||v.algorithm>=3,t("Fixed, efficient graphs (Compiler or Algorithm ≥ 3)","图固定、执行高效（编译器或算法 ≥ 3）")]]},
- {id:"many",icon:"🔀",name:t("Many fine-tunes","大量微调模型"),goal:t("Switch between 100 fine-tuned models in milliseconds","在 100 个微调模型之间毫秒级切换"),budget:19,
+ {id:"many",icon:"🔀",name:t("Many models","多模型"),goal:t("An enterprise platform with 100 fine-tuned models, switching in milliseconds","企业平台托管 100 个微调模型，毫秒级切换"),budget:19,
   checks:[
    [v=>v.runtime>=3,t("Runtime that swaps models fast (Runtime ≥ 3)","运行时能快速换模型（运行时 ≥ 3）")],
    [(v,p)=>p.A==="tiers"||p.A==="hbm",t("Capacity to keep many models nearby","有足够容量把很多模型放在近处")],
-   [(v,p)=>p.A!=="hard",t("Programmable, not one model per tape-out","可编程，不是一次流片一个模型")]]}
+   [(v,p)=>p.A!=="hard",t("Programmable, not one model per tape-out","可编程，不是一次流片一个模型")]]},
+ {id:"frozen",icon:"🧊",name:t("Frozen model","一个模型，冻结"),goal:t("One model that will not change for years, at the lowest cost per token","一个多年不变的模型，追求最低每 token 成本"),budget:12,
+  checks:[
+   [v=>v.tco>=4,t("Cost per token over flexibility (Datacenter ≥ 4)","每 token 成本优先于灵活性（数据中心 ≥ 4）")],
+   [v=>v.memory>=4,t("Few bytes moved per token (Memory ≥ 4)","每个 token 搬运的字节少（存储 ≥ 4）")],
+   [v=>v.network<=3.5,t("No pod needed to hold the model (Network ≤ 3.5)","不需要整个机群才放得下（网络 ≤ 3.5）")]]}
 ];
 
 /* ---------- mechanisms ---------- set: axis levels (max-combined); cap: axis ceilings; cost: [hardware, compiler, serving] */
