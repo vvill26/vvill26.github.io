@@ -235,7 +235,7 @@ It also showed that the combined heterogeneous-system scores could not be compon
 
 Every score, reason and source is in the *Table* tab and the [data file](/assets/chip-radar/data.js). Corrections are welcome.
 
-The weekend is over, and I am switching back to forward design. The nice thing about having done the reverse study is that the forward questions now have better names.
+The weekend is over, and I am switching back to forward design. Having done the reverse study, I take back a sharper checklist for the forward one: what is scarce, which mechanism answers it, and who pays.
 
 ## 13. Sources {#sources}
 
