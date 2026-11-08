@@ -221,14 +221,7 @@ For people working on the software stack (compilers, vLLM, SGLang), three conclu
 
 **Method.** All research used public sources: papers (ISCA, HPCA, OSDI, arXiv), Hot Chips talks, vendor architecture documents, earnings calls and filings, and reputable technical press. Two independent scoring passes used the same rubric, one chip by chip and one axis by axis. Every score carries a one-line reason, a source and a confidence level. The final score is the mean of the two passes, with the lower confidence. Of 450 original scores, 317 matched exactly and none differed by more than one point. Both passes worked from the same research notes, so this measures consistency, not independent truth.
 
-**Two rounds of correction.** A second research round replaced weak sources with primary ones and changed 16 scores. Then a colleague ran an independent audit. It recomputed every number from the raw files and checked key claims against primary sources. It found real errors, all fixed here:
-
-- The TPU 8t/8i supplier mapping was reversed.
-- Groq's status was wrongly given as "acquired".
-- The claim that a whole model fits on one Cerebras wafer was wrong.
-- AWS's two scale-out topologies were conflated.
-- An Apple GPU experiment had been used as evidence about the Neural Engine.
-- The SambaNova demo's GPU was misidentified.
+**Two rounds of correction.** A second research round replaced weak sources with primary ones and changed 16 scores. Then a colleague ran an independent audit. It recomputed every number from the raw files and checked key claims against primary sources. It found several real errors, all fixed in this version.
 
 It also showed that the combined heterogeneous-system scores could not be component weightings, which is why section 8 now describes mechanisms instead. Its strongest suggestion, which we adopt, is the framing in section 1: ask what was scarce, which mechanism was chosen, and who pays.
 
@@ -239,8 +232,6 @@ It also showed that the combined heterogeneous-system scores could not be compon
 - **Scores measure design emphasis, not quality or speed.** Groq's CPU 0 and Taalas's Network 0.5 are deliberate choices, not failings.
 - **Lineage is a lead, not a cause.** Large teams have many backgrounds, and a supplier is not the architect.
 - **Status as of 7 November 2026.** AMD's Taalas deal is pending. NVIDIA's arrangement with Groq is a license plus hiring. LPX racks are in production; MTIA 400 is heading to deployment.
-
-**What would make this more than a good story.** The audit proposes two things. First, six "design cards": short, falsifiable one-pagers, each about one chip and one decision, stating the constraint, the mechanism chosen, the alternative that was rejected, the cost paid, and what evidence would change the verdict (for example: TPU v4's optical switches; v4i's air-cooling constraint; SN40L's third memory tier; SN50's phase split; Apple M5's two execution engines; Rubin + LPX's handoff). Second, two blind tests. First, does knowing a team's background predict its architecture better than knowing only the workload, market and year? Second, can a reader identify a team's background from an anonymized architecture better than chance? Even if both work, that is prediction, not proof of cause. If neither works, the map is still useful for design reviews and for interviewing designers.
 
 Every score, reason and source is in the *Table* tab and the [data file](/assets/chip-radar/data.js). Corrections are welcome.
 
