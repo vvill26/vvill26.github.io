@@ -14,7 +14,7 @@ const CONSTRAINTS=[
    [v=>v.memory>=4,t("Weights close to compute (Memory ≥ 4)","权重离计算足够近（存储 ≥ 4）")],
    [(v,p)=>v.network>=3.5||p.A==="hard",t("Model spread over many chips, or hardwired into one","模型摊到多颗芯片上，或者直接固化进一颗")],
    [(v,p)=>p.E!=="one"||v.compiler>=4,t("Predictable per-token latency (static scheduling or disaggregation)","每个 token 的延迟可预测（静态调度或分离部署）")]]},
- {id:"api",icon:"🏭",name:t("Cloud API","大规模云 API"),goal:t("Millions of users, big batches, the lowest $/token","上百万用户、大批量，追求最低每 token 成本"),budget:17,
+ {id:"api",icon:"🏭",name:t("Max throughput","高吞吐服务"),goal:t("Millions of users, big batches, the lowest $/token","上百万用户、大批量，追求最低每 token 成本"),budget:17,
   checks:[
    [v=>v.tco>=4,t("Designed for fleet cost (Datacenter ≥ 4)","按机群成本设计（数据中心 ≥ 4）")],
    [v=>v.network>=4,t("Big scale-up domain for large batches and MoE experts (Network ≥ 4)","大 Scale-up 域，装得下大批量和 MoE 专家（网络 ≥ 4）")],
