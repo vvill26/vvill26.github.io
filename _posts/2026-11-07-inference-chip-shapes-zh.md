@@ -12,7 +12,7 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 <link rel="stylesheet" href="/assets/chip-radar/radar.css">
 <script>window.CHIPS_LANG = "zh";</script>
 
-周五晚上，Spotify 放着 Ed Sheeran 那首 Shape of You，我在读一篇讲「从芯片能看出设计团队出身」的文章。歌名变成了「芯片的形状」，周末研究就这么开始了。
+周五晚上，Spotify 放着 Ed Sheeran 那首 Shape of You，我在读 Latyas 在知乎上的[一篇文章](https://zhuanlan.zhihu.com/p/2069799334619649351)，讲「从芯片能看出设计团队出身」。歌名变成了「芯片的形状」，周末研究就这么开始了。
 
 这和我周一到周五做的事正好相反。工作日我们做正向设计：从模型和服务目标出发，把芯片和软件栈放在一起协同设计。这个周末倒过来，拿已经出货的芯片，推敲它们的设计者在自己的正向设计里想了什么：认为什么最稀缺，为此选了什么机制。说白了，是一次经验研究。
 
@@ -48,7 +48,7 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 
 ## 1. 芯片的形状，取决于设计者认为什么最稀缺 {#idea}
 
-前阵子 NeuralTalk 有篇[文章](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)讲了一个很朴素的观察：看一颗 AI 芯片，往往能猜出团队是什么出身。做 GPU 出身的，会做线程和大寄存器堆。做编译器出身的，会把硬件仲裁拿掉，让编译器看清每一个周期。做后端物理设计的，盯着连线下手。做数据中心的，从电费开始算。
+Latyas 的[这篇文章](https://zhuanlan.zhihu.com/p/2069799334619649351)（NeuralTalk 公众号也[转载](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)了）讲了一个很朴素的观察：看一颗 AI 芯片，往往能猜出团队是什么出身。做 GPU 出身的，会做线程和大寄存器堆。做编译器出身的，会把硬件仲裁拿掉，让编译器看清每一个周期。做后端物理设计的，盯着连线下手。做数据中心的，从电费开始算。
 
 把这个观察变成问题，就能拿去问任何一颗芯片：**设计者认为什么资源最稀缺？为此选了哪种机制？代价交给了谁：硬件、编译器，还是服务系统？** 规格表告诉你算力和带宽，但不会告诉你设计者认为最难的是哪个问题。
 
@@ -249,13 +249,13 @@ Meta、AWS、微软自己有负载，自己付电费。它们最高的维度都�
 
 所有分数、理由和出处都在「数据表」和[数据文件](/assets/chip-radar/data.js)里，欢迎指正。
 
-周末结束了，该切回正向设计。反向走过一遍，正向的那些问题现在有了更好的名字。
+周末结束了，该切回正向设计。反向走过一遍，带回去的是一张更清楚的清单：什么最稀缺，用什么机制应对，代价由谁来付。
 
 ## 13. 参考来源 {#sources}
 
 完整来源列表见[英文版](/2026/11/inference-chip-shapes/#sources)，每个分数对应的来源都在数据文件里。主要来源：
 
-- [NeuralTalk：从架构师的出身看芯片设计](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)；[硅谷淘金热：Patterson、Dally、Jouppi 在计算机历史博物馆的对谈](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)
+- Latyas：[VLSI、GPU、编译器、算法出身的人，分别会怎么设计 LLM 推理芯片？](https://zhuanlan.zhihu.com/p/2069799334619649351)（知乎；NeuralTalk [转载](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)）；[硅谷淘金热：Patterson、Dally、Jouppi 在计算机历史博物馆的对谈](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)
 - 英伟达：[V100 白皮书](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf)；[A100 白皮书](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf)；[Blackwell Ultra 详解](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)；[Rubin 平台详解](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/)
 - TPU：[从 TPU v2 到 Ironwood 的五代回顾（IEEE Micro 2026）](https://arxiv.org/abs/2606.15870)；[v1（ISCA 2017）](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf)；[三代 TPU 的十条经验（ISCA 2021）](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)；[TPU v4（ISCA 2023）](https://arxiv.org/abs/2304.01433)；[TPU 8t / 8i 技术详解](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)；[博通 2026 财年三季度业绩会要点](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)
 - Groq 与英伟达：[Groq ISCA 2022 论文](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf)；[英伟达 2026 财年 10-K（Groq 授权）](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm)；[LPX 规格](https://www.nvidia.com/en-us/data-center/lpx/)；[LPX 与 Vera Rubin 的三种协作模式](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
