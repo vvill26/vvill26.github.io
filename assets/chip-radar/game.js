@@ -12,8 +12,8 @@ const CONSTRAINTS=[
  {id:"agent",icon:"⚡",name:t("Agent decode","智能体解码"),goal:t("1,000 tokens/s for one user, on a big model","大模型上，单用户每秒 1,000 token"),budget:19,
   checks:[
    [v=>v.memory>=4,t("Weights close to compute (Memory ≥ 4)","权重离计算足够近（存储 ≥ 4）")],
-   [(v,p)=>v.network>=3.5||p.A==="hard",t("Model spread over many chips, or burned into one","模型摊到多颗芯片上，或者直接固化进一颗")],
-   [(v,p)=>p.E!=="one"||v.compiler>=4,t("Predictable per-token latency (static schedule or a split)","每个 token 的延迟可预测（静态调度或拆分）")]]},
+   [(v,p)=>v.network>=3.5||p.A==="hard",t("Model spread over many chips, or hardwired into one","模型摊到多颗芯片上，或者直接固化进一颗")],
+   [(v,p)=>p.E!=="one"||v.compiler>=4,t("Predictable per-token latency (static scheduling or disaggregation)","每个 token 的延迟可预测（静态调度或分离部署）")]]},
  {id:"fleet",icon:"🏭",name:t("Fleet MoE","机群 MoE"),goal:t("Serve a 1T-parameter MoE at the lowest $/token","以最低每 token 成本服务万亿参数 MoE"),budget:17,
   checks:[
    [v=>v.network>=4.5,t("Pod-scale network for experts (Network ≥ 4.5)","整柜级网络承载专家（网络 ≥ 4.5）")],
@@ -37,25 +37,25 @@ const ROWS=[
   {id:"hbm",l:t("HBM stacks","HBM 堆栈"),set:{memory:2.5},cost:[1,0,1]},
   {id:"sram",l:t("Big on-chip SRAM","大容量片上 SRAM"),set:{memory:5,vlsi:3,network:3.5},cost:[2,2,1]},
   {id:"tiers",l:t("SRAM + HBM + DDR tiers","SRAM + HBM + DDR 三层"),set:{memory:4.5,runtime:3},cost:[2,1,2],card:"sn40l"},
-  {id:"hard",l:t("Burned into the silicon","直接固化进硅片"),set:{algorithm:5,vlsi:3.5,memory:4},cost:[3,0,0]}]},
+  {id:"hard",l:t("Hardwired into silicon","模型固化进硅片"),set:{algorithm:5,vlsi:3.5,memory:4},cost:[3,0,0]}]},
  {id:"B",q:t("Who schedules the work?","谁来调度？"),opts:[
-  {id:"hw",l:t("Hardware: threads and warps","硬件：线程和 warp"),set:{gpu:4.5,cpu:2,runtime:3.5},cost:[2,1,1]},
-  {id:"static",l:t("Compiler, fully static","编译器，全静态"),set:{compiler:5},cap:{cpu:0.5},cost:[0,3,1]},
-  {id:"async",l:t("Both: async tiles","两者兼有：异步 tile"),set:{gpu:4,compiler:2.5,runtime:3.5},cost:[2,2,1]}]},
- {id:"C",q:t("How far does one machine reach?","一台「机器」有多大？"),opts:[
+  {id:"hw",l:t("Hardware: threads and warps","硬件调度：线程和 warp"),set:{gpu:4.5,cpu:2,runtime:3.5},cost:[2,1,1]},
+  {id:"static",l:t("Compiler: static scheduling","编译器静态调度"),set:{compiler:5},cap:{cpu:0.5},cost:[0,3,1]},
+  {id:"async",l:t("Hybrid: async tile pipelines","混合：异步 tile 流水线"),set:{gpu:4,compiler:2.5,runtime:3.5},cost:[2,2,1]}]},
+ {id:"C",q:t("How big is one machine (scale-up domain)?","一台「机器」有多大（Scale-up 域）？"),opts:[
   {id:"card",l:t("One chip or card","一颗芯片或一张卡"),set:{network:1},cost:[0,0,0]},
-  {id:"rack",l:t("Rack scale-up (copper)","整柜扩展（铜缆）"),set:{network:4.5,tco:3.5},cost:[2,1,1]},
-  {id:"ocs",l:t("Reconfigurable optical pod","可重构光交换机群"),set:{network:5,tco:4.5,runtime:2},cost:[2,1,1],card:"v4"}]},
+  {id:"rack",l:t("Rack scale (copper)","机柜级（铜缆）"),set:{network:4.5,tco:3.5},cost:[2,1,1]},
+  {id:"ocs",l:t("Optical-switched pod (OCS)","光交换（OCS）可重构 Pod"),set:{network:5,tco:4.5,runtime:2},cost:[2,1,1],card:"v4"}]},
  {id:"D",q:t("How is compute laid out?","计算怎么排布？"),opts:[
   {id:"simt",l:t("SIMT cores","SIMT 核心"),set:{gpu:5,cpu:1.5},cost:[1,0,0]},
   {id:"systolic",l:t("Systolic matrix units","脉动阵列矩阵单元"),set:{compiler:4,vlsi:2.5,cgra:1.5},cost:[1,1,0]},
-  {id:"spatial",l:t("Spatial dataflow fabric","空间数据流结构"),set:{cgra:5,compiler:4},cost:[1,3,0]},
+  {id:"spatial",l:t("Spatial dataflow fabric","空间数据流架构"),set:{cgra:5,compiler:4},cost:[1,3,0]},
   {id:"wafer",l:t("A whole wafer","整片晶圆"),set:{vlsi:5,cgra:4,memory:4.5},cost:[3,2,0]}]},
- {id:"E",q:t("Split the serving work?","推理服务要不要拆？"),opts:[
-  {id:"one",l:t("One chip type does it all","一种芯片包办"),set:{},cost:[0,0,1]},
-  {id:"pd",l:t("Prefill here, decode there","预填充和解码分开"),set:{runtime:4},cost:[0,1,2],card:"sn50"},
-  {id:"afd",l:t("Attention here, FFN there","注意力和 FFN 分开"),set:{runtime:4.5,network:4.5},cost:[0,1,3],card:"lpx"},
-  {id:"draft",l:t("Draft fast, verify big","快芯片起草，大芯片验证"),set:{runtime:4,algorithm:2.5},cost:[0,1,2],card:"lpx"}]},
+ {id:"E",q:t("Disaggregate serving?","推理服务要不要分离？"),opts:[
+  {id:"one",l:t("No: one chip type does it all","不分离：一种芯片包办"),set:{},cost:[0,0,1]},
+  {id:"pd",l:t("P/D disaggregation (prefill / decode)","PD 分离（预填充 / 解码）"),set:{runtime:4},cost:[0,1,2],card:"sn50"},
+  {id:"afd",l:t("AFD (attention / FFN disaggregation)","AFD 分离（注意力 / FFN）"),set:{runtime:4.5,network:4.5},cost:[0,1,3],card:"lpx"},
+  {id:"draft",l:t("Speculative decoding: draft fast, verify big","投机解码：快芯片起草，大芯片验证"),set:{runtime:4,algorithm:2.5},cost:[0,1,2],card:"lpx"}]},
  {id:"F",q:t("Power and cooling?","功耗和散热？"),opts:[
   {id:"air",l:t("Air-cooled, under 200 W","风冷，200 W 以内"),set:{tco:5},cost:[1,0,0],card:"v4i"},
   {id:"liquid",l:t("Liquid-cooled, 1 kW+","液冷，1 kW 以上"),set:{tco:3},cost:[0,0,1]},

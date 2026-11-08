@@ -20,7 +20,7 @@ Monday morning, back in forward mode. [Last time](/2026/11/inference-chip-shapes
 Three things usually happen on the first try.
 
 1. **You go over budget.** Pick the strongest option in every row and the bill lands everywhere at once. That is the committee chip from the last post: every axis at 5, nobody willing to pay.
-2. **Cost moves instead of disappearing.** A fully static schedule makes the hardware cheap and the compiler expensive. Splitting prefill from decode makes each chip simpler and the serving layer harder. The total rarely drops much; who pays changes.
+2. **Cost moves instead of disappearing.** A fully static schedule makes the hardware cheap and the compiler expensive. P/D disaggregation, prefill on one chip type and decode on another, makes each chip simpler and the serving layer harder. The total rarely drops much; who pays changes.
 3. **Different constraints reward opposite choices.** The design that passes *Agent decode* fails *Laptop / phone*, and the one that passes *Many fine-tunes* fails both. That is the backward study, run forward: the shapes differ because the scarce thing differs.
 
 ## Six design cards
@@ -63,7 +63,7 @@ Source: [Jouppi et al., ISCA 2021](https://conferences.computer.org/iscapub/pdfs
 Source: [Prabhakar et al., 2024](https://arxiv.org/abs/2405.07518)
 
 <a id="card-sn50"></a>
-### 4. SambaNova SN50: prefill here, decode there
+### 4. SambaNova SN50: P/D disaggregation
 
 - **Constraint.** Agentic workloads where per-user decode speed sets the experience, while prefill is compute-heavy and bursty.
 - **Mechanism.** GPUs do prefill, SN50 does decode, and the KV cache moves between them once per request. SambaNova's July 2026 demo paired 4 H200s for prefill with 16 SN50s for decode.
@@ -79,7 +79,7 @@ Sources: [SambaNova SN50 introduction](https://sambanova.ai/blog/introducing-the
 - **Constraint.** On-device AI at laptop and phone power: always-on system features and bursty language-model work on the same chip, within the same memory.
 - **Mechanism.** Two places to run AI. A 16-core Neural Engine stays the energy-efficient path. New in M5, each of the ten GPU cores gets its own Neural Accelerator, and Apple's own M5 language-model study runs there through MLX and Metal 4, not on the Neural Engine.
 - **Alternative not taken.** Grow the Neural Engine to cover large language models.
-- **Cost.** Two programming paths, Core ML and Metal or MLX, sharing 153 GB/s of unified memory. Apple's numbers show the limit: prompt processing 3.3 to 4 times faster than M4, decode only 1.2 to 1.3 times, roughly the memory-bandwidth gain. The framework layer pays.
+- **Cost.** Two programming paths, Core ML and Metal or MLX, sharing 153 GB/s of unified memory. Apple's numbers show the limit: time to first token 3.3 to 4 times faster than M4, decode only 1.2 to 1.3 times, roughly the memory-bandwidth gain. The framework layer pays.
 - **What would change our mind.** Apple has not said why it split the work; the constraint above is my inference. If a later generation moves language models onto the Neural Engine, the split was a transition, not a design rule.
 
 Sources: [Apple Newsroom, M5](https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/); [Apple ML Research, LLMs on the M5 GPU](https://machinelearning.apple.com/research/exploring-llms-mlx-m5)
@@ -88,9 +88,9 @@ Sources: [Apple Newsroom, M5](https://www.apple.com/newsroom/2025/10/apple-unlea
 ### 6. Rubin + LPX: the handoff
 
 - **Constraint.** Long-context, highly interactive decode, where HBM bandwidth per user limits tokens per second on the GPU.
-- **Mechanism.** Groq 3 LPX racks next to Vera Rubin racks. Each LP30 chip carries 500 MB of SRAM. NVIDIA describes three ways to cut the work: prefill on the GPU and decode on LPX; attention on the GPU, which keeps the KV cache, and FFN or MoE experts on LPX; or a small draft model on LPX that the GPU verifies.
+- **Mechanism.** Groq 3 LPX racks next to Vera Rubin racks. Each LP30 chip carries 500 MB of SRAM. NVIDIA describes three ways to split the work: P/D disaggregation, with prefill on the GPU and decode on LPX; attention/FFN disaggregation (AFD), with attention on the GPU, which keeps the KV cache, and FFN or MoE experts on LPX; and speculative decoding, with a small draft model on LPX that the GPU verifies.
 - **Alternative not taken.** Make the GPU itself SRAM-heavy, giving up capacity and generality.
-- **Cost.** The attention/FFN cut moves activations at every full-attention layer, on the per-token critical path. The serving system and the network pay.
+- **Cost.** AFD moves activations at every full-attention layer, on the per-token critical path. The serving system and the network pay.
 - **What would change our mind.** Measured end-to-end results. LPX on its own is measured; NVIDIA's joint result for a 2-trillion-parameter model is a projection.
 
 Sources: [NVIDIA: inside Groq 3 LPX](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform); [NVIDIA: LPX at long context](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)

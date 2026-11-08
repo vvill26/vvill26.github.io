@@ -21,7 +21,7 @@ description: "一个小游戏：选一张约束卡，做六个设计决定，看
 第一次玩，通常会遇到三件事。
 
 1. **超预算。** 每一行都挑最强的选项，账单就同时落到所有人头上。这就是上一篇说的「开会开出来的芯片」：十项全满分，没人愿意买单。
-2. **代价只会转移，不会消失。** 全静态调度让硬件便宜、编译器变贵；把预填充和解码拆开，每颗芯片都简单了，服务层却更难了。总账很少明显变小，变的是谁来付。
+2. **代价只会转移，不会消失。** 全静态调度让硬件便宜、编译器变贵；做 PD 分离（预填充和解码放在不同芯片上），每颗芯片都简单了，服务层却更难了。总账很少明显变小，变的是谁来付。
 3. **不同的约束奖励相反的选择。** 能通过「智能体解码」的设计，过不了「笔记本 / 手机」；能通过「大量微调模型」的设计，两个都过不了。这就是把反向研究正着走一遍：形状不同，是因为稀缺的东西不同。
 
 ## 六张设计卡
@@ -64,10 +64,10 @@ description: "一个小游戏：选一张约束卡，做六个设计决定，看
 出处：[Prabhakar 等，2024](https://arxiv.org/abs/2405.07518)
 
 <a id="card-sn50"></a>
-### 4. SambaNova SN50：预填充和解码分开
+### 4. SambaNova SN50：PD 分离
 
 - **约束。** 智能体负载里，单用户的解码速度决定体验，而预填充计算量大、来得猛。
-- **机制。** GPU 做预填充，SN50 做解码，每个请求把 KV cache 传一次。SambaNova 2026 年 7 月的演示用 4 块 H200 做预填充、16 颗 SN50 做解码。
+- **机制。** GPU 做预填充，SN50 做解码，每个请求在两者之间传一次 KV cache。SambaNova 2026 年 7 月的演示用 4 块 H200 做预填充、16 颗 SN50 做解码。
 - **没选的方案。** 一种芯片包办两个阶段。
 - **代价。** 每个请求都要过一次网络传 KV，两套软件栈，运维团队要同时管两种机器。买单的是服务层。
 - **什么会推翻它。** 独立的长上下文实测。SambaNova 自己报告的结果在短上下文和长上下文之间就有差别，两边之间的链路也没有公开。SN50 目前是已发布状态，计划 2026 年下半年出货。
@@ -80,7 +80,7 @@ description: "一个小游戏：选一张约束卡，做六个设计决定，看
 - **约束。** 在笔记本和手机的功耗下做本地 AI：常驻的系统功能和突发的大模型任务，挤在同一颗芯片、同一块内存里。
 - **机制。** 有两处可以跑 AI。16 核神经网络引擎（Neural Engine）继续走省电路线。M5 新加的是：10 个 GPU 核心每个都配了一个 Neural Accelerator。Apple 自己的 M5 大模型研究就跑在这里，用的是 MLX 和 Metal 4，没有用神经网络引擎。
 - **没选的方案。** 把神经网络引擎做大，让它也能跑大模型。
-- **代价。** 两条编程路径，Core ML 和 Metal / MLX，共用 153 GB/s 的统一内存。Apple 的数据也显示了上限：提示处理比 M4 快 3.3 到 4 倍，解码只快 1.2 到 1.3 倍，差不多就是内存带宽的提升幅度。买单的是框架层。
+- **代价。** 两条编程路径，Core ML 和 Metal / MLX，共用 153 GB/s 的统一内存。Apple 的数据也显示了上限：首 token 时间（TTFT）比 M4 快 3.3 到 4 倍，解码只快 1.2 到 1.3 倍，差不多就是内存带宽的提升幅度。买单的是框架层。
 - **什么会推翻它。** Apple 没有解释为什么这样分工，上面的约束是我的推断。如果后续某一代把大模型挪到神经网络引擎上，这次分工就只是过渡，不是设计规则。
 
 出处：[Apple Newsroom：M5](https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/)；[Apple 机器学习研究：M5 GPU 上的大模型](https://machinelearning.apple.com/research/exploring-llms-mlx-m5)
@@ -89,9 +89,9 @@ description: "一个小游戏：选一张约束卡，做六个设计决定，看
 ### 6. Rubin + LPX：交接
 
 - **约束。** 长上下文、强交互的解码，在 GPU 上，每个用户能分到的 HBM 带宽限制了每秒 token 数。
-- **机制。** Groq 3 LPX 机柜放在 Vera Rubin 机柜旁边，每颗 LP30 带 500 MB SRAM。英伟达给了三种切法：GPU 做预填充、LPX 做解码；GPU 保留 KV cache 跑注意力，LPX 跑 FFN 或 MoE 专家；或者 LPX 用小模型起草、GPU 验证。
+- **机制。** Groq 3 LPX 机柜放在 Vera Rubin 机柜旁边，每颗 LP30 带 500 MB SRAM。英伟达给了三种分工：PD 分离，GPU 做预填充、LPX 做解码；AFD 分离（注意力 / FFN 分离），GPU 保留 KV cache 跑注意力，LPX 跑 FFN 或 MoE 专家；投机解码，LPX 用小模型起草、GPU 验证。
 - **没选的方案。** 让 GPU 自己塞满 SRAM，代价是容量和通用性。
-- **代价。** 注意力 / FFN 这种切法，每个全注意力层都要传一次中间激活，就在每个 token 的关键路径上。买单的是服务系统和网络。
+- **代价。** AFD 分离意味着每个全注意力层都要传一次中间激活，就在每个 token 的关键路径上。买单的是服务系统和网络。
 - **什么会推翻它。** 端到端的实测结果。LPX 单独的速度是实测的，英伟达给出的 2 万亿参数模型联合结果还是预测值。
 
 出处：[英伟达：Groq 3 LPX 详解](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform)；[英伟达：LPX 的长上下文表现](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
