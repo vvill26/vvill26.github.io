@@ -7,7 +7,7 @@ const I=D.i18n[LANG]||D.i18n.en, AX=D.axes, ORDER=D.order, NS="http://www.w3.org
 const nm=e=>(I.names&&I.names[e.id])||e.name;
 const t=(en,zh)=>ZH?zh:en;
 
-/* ---------- constraint cards ---------- */
+/* ---------- design scenarios ---------- */
 const CONSTRAINTS=[
  {id:"agent",icon:"⚡",name:t("Agent decode","智能体解码"),goal:t("1,000 tokens/s for one user, on a big model","大模型上，单用户每秒 1,000 token"),budget:19,
   checks:[
@@ -82,7 +82,7 @@ function frame(svg,cx,cy,R,labels){for(let k=1;k<=5;k++)el("polygon",{class:"cg-
   const tx=el("text",{x,y,"text-anchor":an,class:"cg-ax"},svg);el("tspan",{x,class:"cg-ax1"},tx).textContent=I.axes[a][0];el("tspan",{x,dy:19,class:"cg-ax2"},tx).textContent=I.axes[a][1]})}
 
 const root=document.getElementById("chip-game"); if(!root)return; root.setAttribute("lang",LANG);
-root.innerHTML=`<div class="cg-top"><span class="cg-step">${t("1 · Constraint","1 · 约束")}</span><div class="cg-cons"></div></div>
+root.innerHTML=`<div class="cg-top"><span class="cg-step">${t("1 · Design scenario","1 · 设计场景")}</span><div class="cg-cons"></div></div>
 <div class="cg-row"><div class="cg-left"><div class="cg-step">${t("2 · One mechanism per row","2 · 每行选一个机制")}</div><div class="cg-rows"></div></div>
 <div class="cg-right"><div class="cg-step">${t("3 · Shape, bill and fit","3 · 形状、账单、合格与否")}</div><svg class="cg-svg" viewBox="-172 -60 664 520" role="img" aria-label="${t("Your chip's shape","你的芯片形状")}"></svg>
 <div class="cg-legend"><span><i class="cg-sw you"></i>${t("your chip","你的芯片")}</span><span><i class="cg-sw near"></i><b class="cg-nn">–</b></span></div><div class="cg-out"></div></div></div><div class="cg-mini"></div>`;

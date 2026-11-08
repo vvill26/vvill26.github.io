@@ -4,16 +4,16 @@ title: "Your turn: design an inference chip, then meet the real ones"
 date: 2026-11-15 09:00:00 +0800
 permalink: /2026/11/design-an-inference-chip/
 lang: en
-description: "A small game: pick a constraint, choose six mechanisms, see who pays and which real chip your design resembles. Then six design cards from public sources, and a blind test."
+description: "A small game: pick a design scenario, choose six mechanisms, see who pays and which real chip your design resembles. Then six design cards from public sources, and a blind test."
 ---
 
 {% include lang-switch.html en="/2026/11/design-an-inference-chip/" zh="/zh/2026/11/design-an-inference-chip/" %}
 
 <link rel="stylesheet" href="/assets/chip-radar/game.css">
 
-Monday morning, back in forward mode. [Last time](/2026/11/inference-chip-shapes/) I read 43 inference chips backwards: take the shipped design, guess what its team thought was scarce. This time you hold the pen. Pick a constraint, make six decisions, and see which real team already made the same bet.
+Monday morning, back in forward mode. [Last time](/2026/11/inference-chip-shapes/) I read 43 inference chips backwards: take the shipped design, guess what its team thought was scarce. This time you hold the pen. Pick a design scenario, make six decisions, and see which real team already made the same bet.
 
-**How to play.** Pick a constraint card, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the card's budget, and whether the design passes the card's three checks. It is a toy model: the point is the trade-offs, not a score.
+**How to play.** Pick a design scenario, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the scenario's budget, and whether the design passes the scenario's three checks. It is a toy model: the point is the trade-offs, not a score.
 
 <div id="chip-game"></div>
 
@@ -21,7 +21,7 @@ Three things usually happen on the first try.
 
 1. **You go over budget.** Pick the strongest option in every row and the bill lands everywhere at once. That is the committee chip from the last post: every axis at 5, nobody willing to pay.
 2. **Cost moves instead of disappearing.** A fully static schedule makes the hardware cheap and the compiler expensive. P/D disaggregation, prefill on one chip type and decode on another, makes each chip simpler and the serving layer harder. The total rarely drops much; who pays changes.
-3. **Different constraints reward opposite choices.** The design that passes *Agent decode* fails *Laptop / phone*, and the one that passes *Many fine-tunes* fails both. That is the backward study, run forward: the shapes differ because the scarce thing differs.
+3. **Different scenarios reward opposite choices.** The design that passes *Agent decode* fails *Laptop / phone*, and the one that passes *Many fine-tunes* fails both. That is the backward study, run forward: the shapes differ because the scarce thing differs.
 
 ## Six design cards
 
