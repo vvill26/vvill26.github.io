@@ -11,7 +11,7 @@ description: "Every inference chip is a bet placed by people with a particular b
 
 <link rel="stylesheet" href="/assets/chip-radar/radar.css">
 
-Friday night, Spotify playing Ed Sheeran's biggest hit, and I was reading [a post by Latyas on Zhihu](https://zhuanlan.zhihu.com/p/2069799334619649351) about how an AI chip betrays the background of the people who designed it. "Shape of You" became "the shape of chips", and the weekend study was on.
+Friday night, Spotify playing Ed Sheeran's biggest hit, and I was reading a post about how an AI chip betrays the background of the people who designed it. "Shape of You" became "the shape of chips", and the weekend study was on.
 
 It is a different kind of work from my weekdays. Monday to Friday we design forward: start from the model and the serving goals, and co-design the chip and the software stack together. This study runs the other way. It takes the chips that shipped and asks what their designers were thinking during their own forward process: what they thought was scarce, and which mechanism they chose because of it. An empirical study, then, in the plain sense: take what is there and reason about the rationale behind it.
 
@@ -43,7 +43,7 @@ Every inference chip is a bet placed by people with a particular background, and
 
 ## 1. A chip is shaped by what its designers thought was scarce {#idea}
 
-That [post by Latyas](https://zhuanlan.zhihu.com/p/2069799334619649351) (also republished by [NeuralTalk on WeChat](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)) made a simple observation: you can often tell an AI chip team's background from the chip. GPU people build threads and big register files. Compiler people remove hardware arbitration so the compiler can see every cycle. Physical-design people attack the wires. Datacenter people start from the electricity bill.
+A recent [NeuralTalk article](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ) made a simple observation: you can often tell an AI chip team's background from the chip. GPU people build threads and big register files. Compiler people remove hardware arbitration so the compiler can see every cycle. Physical-design people attack the wires. Datacenter people start from the electricity bill.
 
 The more useful version of that idea is a question you can ask of any chip: **what did the designers think would be scarce, which mechanism did they pick because of it, and who pays the cost: the hardware, the compiler, or the serving system?** A spec sheet gives you TFLOPS and bandwidth. It does not tell you which problem the designers thought was the hard one.
 
@@ -244,13 +244,13 @@ It also showed that the combined heterogeneous-system scores could not be compon
 
 Every score, reason and source is in the *Table* tab and the [data file](/assets/chip-radar/data.js). Corrections are welcome.
 
-The weekend is over, and I am switching back to forward design. Having done the reverse study, I take back a sharper checklist for the forward one: what is scarce, which mechanism answers it, and who pays.
+The weekend is over, and I am switching back to forward design. The nice thing about having done the reverse study is that the forward questions now have better names.
 
 ## 13. Sources {#sources}
 
 The lens and the method:
 - [The Silicon Gold Rush: Patterson, Dally and Jouppi at the Computer History Museum](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)
-- Latyas, [How would VLSI, GPU, compiler and algorithm people each design an LLM inference chip?](https://zhuanlan.zhihu.com/p/2069799334619649351) (Zhihu; republished by [NeuralTalk](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ))
+- [NeuralTalk on WeChat: reading chip design through the architect's background](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)
 - [Ankerst et al., similarity clustering of dimensions (1998)](https://bib.dbvis.de/uploadedFiles/180.pdf); [Miller et al., axis order in star glyphs (2019)](https://arxiv.org/abs/1908.00576)
 
 Google TPU:
