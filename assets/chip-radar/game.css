@@ -1,6 +1,6 @@
-#chip-game,#chip-blind{--you:#2a78d6;--near:#6e7781;--ink:#24292f;--mut:#6e7781;--grid:#d8d4c8;--surf:#fbfaf6;--card:#f3f1ea;--y:#1a7f37;--n:#cf222e;--f0:#2a78d6;--f1:#eb6834;--f2:#1baf7a;
+#chip-game,#chip-blind{--you:#2a78d6;--near:#6e7781;--ink:#24292f;--mut:#6e7781;--grid:#d8d4c8;--surf:#fbfaf6;--card:#f3f1ea;--y:#1a7f37;--n:#cf222e;--w:#9a6700;--f0:#2a78d6;--f1:#eb6834;--f2:#1baf7a;
  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--ink);margin:1.5em 0}
-@media (prefers-color-scheme:dark){#chip-game,#chip-blind{--you:#3d8ae0;--near:#8b949e;--ink:#e6edf3;--mut:#8b949e;--grid:#30363d;--surf:#161b22;--card:#1f252d;--y:#3fb950;--n:#f85149;--f0:#3d8ae0;--f1:#e8652e;--f2:#1fa874}}
+@media (prefers-color-scheme:dark){#chip-game,#chip-blind{--you:#3d8ae0;--near:#8b949e;--ink:#e6edf3;--mut:#8b949e;--grid:#30363d;--surf:#161b22;--card:#1f252d;--y:#3fb950;--n:#f85149;--w:#d29922;--f0:#3d8ae0;--f1:#e8652e;--f2:#1fa874}}
 #chip-game[lang=zh],#chip-blind[lang=zh]{font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",ui-monospace,monospace}
 #chip-game button,#chip-blind button{font:inherit;cursor:pointer;color:var(--ink)}
 .cg-step{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:4px 0 5px}
@@ -38,13 +38,13 @@
 .cg-fill{height:100%;border-radius:5px;transition:width .25s}
 .cg-fill.f0{background:var(--f0)}.cg-fill.f1{background:var(--f1)}.cg-fill.f2{background:var(--f2)}
 .cg-bar.tot{margin-top:6px}.cg-bar.tot .cg-track{height:12px}
-.cg-fill.ftot{background:var(--mut)}.cg-fill.ftot.over{background:var(--n)}
+.cg-fill.ftot{background:var(--mut)}.cg-fill.ftot.over{background:var(--w)}
 .cg-budget{position:absolute;top:-4px;width:0;height:20px;border-left:2px solid var(--ink)}
 .cg-budget::after{content:"budget";white-space:nowrap;position:absolute;left:4px;top:-12px;font-size:10px;color:var(--mut)}
 #chip-game[lang=zh] .cg-budget::after{content:"预算"}
-.cg-warn{color:var(--n);margin:5px 0;font-size:12px;line-height:1.4}.cg-ok{color:var(--y);margin:5px 0;font-size:12px}
+.cg-warn{color:var(--w);margin:5px 0;font-size:12px;line-height:1.4}.cg-ok{color:var(--y);margin:5px 0;font-size:12px}
 .cg-checks{list-style:none;padding:0;margin:4px 0;font-size:12px;line-height:1.4}.cg-checks li{margin:2px 0;color:var(--mut)}
-.cg-checks li.y{color:var(--y)}.cg-checks li.n{color:var(--n)}.cg-checks .cg-goal{color:var(--ink);font-weight:600}
+.cg-checks li.y{color:var(--y)}.cg-checks li.w{color:var(--w)}.cg-checks .cg-goal{color:var(--ink);font-weight:600}
 .cg-cards{font-size:12px;margin:4px 0 0}.cg-cards a{margin-right:10px;white-space:nowrap}
 .cg-bts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
 .cg-bt{background:var(--card);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px}
@@ -87,3 +87,5 @@
 #chip-cards .cc-try{font:inherit;font-size:12px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--grid);border-radius:14px;padding:3px 10px;margin-top:4px}
 .cc-right dl{margin:0;line-height:1.55}.cc-right dt{font-weight:600;margin-top:8px}.cc-right dt:first-child{margin-top:0}.cc-right dd{margin:2px 0 0}
 .cc-src{font-size:12px;color:var(--mut);margin-top:10px;line-height:1.5}
+
+.cg-fit{font-size:11.5px;color:var(--mut);margin:2px 0 4px;line-height:1.4}
