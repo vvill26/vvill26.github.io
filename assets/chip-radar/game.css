@@ -66,3 +66,6 @@
 #chip-game .cg-x{position:absolute;top:10px;right:12px;background:none;border:0;font-size:16px;color:var(--mut)!important}
 .cg-full{font-weight:600}
 @media (max-width:700px){.cg-drawer{top:auto;bottom:0;height:auto;max-height:75vh;width:100%;border-left:0;border-top:1px solid var(--grid);border-radius:14px 14px 0 0;transform:translateY(105%)}.cg-drawer.on{transform:none}.cg-toast{bottom:64px}}
+
+.cg-warm{font-size:12px;color:var(--f1);margin:4px 0 0;font-weight:600}
+.cg-dbtn{line-height:1.45}
