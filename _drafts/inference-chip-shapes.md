@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "The shape of an inference chip: 40 chips, 10 axes, one radar"
+title: "The shape of an inference chip: 43 chips, 10 axes, one radar"
 date: 2026-11-07 09:00:00 +0800
 permalink: /2026/11/inference-chip-shapes/
 lang: en
-description: "Every inference chip is a bet placed by people with a particular background. An interactive radar of 40 chips and five GPU-plus-accelerator systems, scored on ten design axes from public sources, and what the shapes say."
+description: "Every inference chip is a bet placed by people with a particular background. An interactive radar of 43 inference chips scored on ten design axes from public sources, five GPU-plus-accelerator systems, and what the shapes say."
 ---
 
 {% include lang-switch.html en="/2026/11/inference-chip-shapes/" zh="/zh/2026/11/inference-chip-shapes/" %}
@@ -13,7 +13,7 @@ description: "Every inference chip is a bet placed by people with a particular b
 
 Ed Sheeran's biggest hit is "Shape of You". This post is about the shape of AI chips.
 
-Every inference chip is a bet placed by people with a particular background, and the bet leaves a shape. Below are 40 chips from 2015 to 2026, plus five systems that pair a GPU with a different accelerator, each scored 0–5 on ten design axes from public papers, Hot Chips talks and vendor documentation. Start by playing with it; the long read follows.
+Every inference chip is a bet placed by people with a particular background, and the bet leaves a shape. Below are 43 chips from 2015 to 2026, each scored 0–5 on ten design axes from public papers, Hot Chips talks and vendor documentation, plus five systems that pair a GPU with a different accelerator. Start by playing with it; the long read follows.
 
 <div id="chip-radar"></div>
 <script src="/assets/chip-radar/data.js"></script>
@@ -24,37 +24,40 @@ Every inference chip is a bet placed by people with a particular background, and
 <nav class="toc" markdown="1">
 **Contents**
 
-1. [A chip is shaped by who designed it](#idea)
+1. [A chip is shaped by what its designers thought was scarce](#idea)
 2. [The ten axes, and why they sit where they sit](#axes)
-3. [Google TPU: the compiler takes over at v2 and never leaves](#tpu)
-4. [NVIDIA: the generalist keeps growing](#gpus)
-5. [The challengers, and who built them](#challengers)
-6. [Hyperscalers' own chips: designed from the bill](#hyperscalers)
-7. [Heterogeneous systems: when one shape is not enough](#hetero)
-8. [Cloud, edge and PC: same axes, different priorities](#deploy)
-9. [Eight families, and what each one fears](#families)
-10. [What this means for compilers and runtimes](#software)
-11. [Method and caveats](#method)
-12. [Sources](#sources)
+3. [NVIDIA: the generalist keeps growing](#nvidia)
+4. [Google TPU: the compiler takes over at v2 and never leaves](#tpu)
+5. [The other GPUs: AMD and Huawei Ascend](#othergpus)
+6. [The challengers, and who built them](#challengers)
+7. [Hyperscalers' own chips: designed from the bill](#hyperscalers)
+8. [Heterogeneous systems: where you cut matters more than the chips](#hetero)
+9. [Cloud, edge and PC: one robust difference](#deploy)
+10. [Eight families, and what each one fears](#families)
+11. [What this means for compilers and runtimes](#software)
+12. [Method, an independent audit, and caveats](#method)
+13. [Sources](#sources)
 </nav>
 
-## 1. A chip is shaped by who designed it {#idea}
+## 1. A chip is shaped by what its designers thought was scarce {#idea}
 
 A recent [NeuralTalk article](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ) made a simple observation: you can often tell an AI chip team's background from the chip. GPU people build threads and big register files. Compiler people remove hardware arbitration so the compiler can see every cycle. Physical-design people attack the wires. Datacenter people start from the electricity bill.
 
-This lens explains *why* chips differ, not only *how*. A spec sheet gives TFLOPS and bandwidth; it does not say which problem the designers thought was the hard one. So this study does two things. It scores each chip on ten backgrounds (the article's nine, plus CGRA / FPGA spatial dataflow, which is clearly its own school). And it traces who actually built each chip, because the lineages turn out to explain a lot:
+The more useful version of that idea is a question you can ask of any chip: **what did the designers think would be scarce, which mechanism did they pick because of it, and who pays the cost: the hardware, the compiler, or the serving system?** A spec sheet gives you TFLOPS and bandwidth. It does not tell you which problem the designers thought was the hard one.
 
-- **Groq** was founded by Jonathan Ross, who started Google's TPU as a 20% project, with [8 of the first 10 TPU engineers](https://www.electronicdesign.com/technologies/embedded-revolution/article/21805495/groq-secretive-startup-rooted-in-google-hires-top-xilinx-executive). Ross has said that TPU work [began as FPGA acceleration](https://moderncto.io/302-jonathan-ross-ceo-founder-at-groq/), and Groq [built its compiler for six months before designing the silicon](https://www.electronicdesign.com/technologies/embedded-revolution/article/21161146/electronic-design-ai-chip-startup-led-by-exgoogle-engineer-raises-300-million).
-- **Cerebras** was founded by the five people behind [SeaMicro](https://research.contrary.com/report/cerebras), a dense-microserver company. Their wafer-scale chip is a system builder's answer: avoid the network by not having one.
-- **SambaNova** comes from Stanford's [Kunle Olukotun](https://profiles.stanford.edu/kunle-olukotun) (the Niagara multicore and the Plasticine CGRA) and Chris Ré, with a former Sun/Oracle SPARC chief as CEO. Its chip is a CGRA.
-- **AWS's Trainium** comes from [Annapurna Labs](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips), an Israeli networking-chip startup that built the Nitro offload card before any AI chip. Its chief architect describes designing the full system first and working backwards.
-- **Huawei's** Da Vinci core won an [internal debate](https://eu.36kr.com/en/p/3934504849325442) against a design meant to look like NVIDIA's; Liao Heng's 3D cube won, and the compiler was called the project's holy grail.
+This also explains a debate at a [Computer History Museum panel](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/) earlier this year. David Patterson suggested AI accelerators show "convergent evolution": big matrix units, high memory bandwidth, fast interconnect. Bill Dally of NVIDIA disagreed that they are all alike, pointing to number formats, sparsity and networking. Norm Jouppi of Google added that the TPU was designed as a supercomputer from the start. Both are right, and the radar shows how: every chip has the same broad ingredients, but the shapes differ in where each team put its bet.
 
-Pick any chip in the radar: the *Built by* line under its card tells you where the team came from.
+Team history can leave a trace, but the best evidence is a decision someone described, not a résumé:
+
+- **A decision, in the designer's own words.** Jonathan Ross started Google's TPU as a 20% project and left with [8 of its first 10 engineers](https://www.electronicdesign.com/technologies/embedded-revolution/article/21805495/groq-secretive-startup-rooted-in-google-hires-top-xilinx-executive) to found Groq. He has said that even having designed the TPU, he found [porting software to it hard](https://moderncto.io/302-jonathan-ross-ceo-founder-at-groq/), so Groq wrote the compiler first and designed hardware around it. That ordering shows up in the chip.
+- **A counterexample.** TPU v4's optical circuit switches later turned out to help large-model training. But the [TPU v4 paper](https://arxiv.org/abs/2304.01433) says they were first introduced for scale and reliability. Reading today's winning workload back into the original motive would get the story wrong.
+- **Lineages as leads, not proof.** Cerebras was founded by the [SeaMicro](https://research.contrary.com/report/cerebras) microserver team. SambaNova comes from [Kunle Olukotun's](https://profiles.stanford.edu/kunle-olukotun) Niagara and Plasticine work. AWS's Trainium comes from [Annapurna Labs](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips), which built the Nitro offload system first; its chief architect describes designing the full system first and working backwards. Huawei's Da Vinci core won an [internal debate](https://eu.36kr.com/en/p/3934504849325442) against a design meant to look like NVIDIA's. These are good questions to ask the designers. They do not prove that a background caused a choice.
+
+Pick any chip in the radar: the *Built by* line on its card says where the team came from.
 
 ## 2. The ten axes, and why they sit where they sit {#axes}
 
-Each axis runs 0–5. The question is always the same: *how strongly does this background shape the chip's defining design decisions?* The anchors are fixed, so a 3 means the same thing on every axis.
+Each axis runs 0–5. The question is always the same: *how strongly does this background's instinct shape the chip's defining design decisions?* The anchors are fixed, so a 3 means the same thing on every axis. A score is the author's coding of **design emphasis**, not a measurement of performance, bandwidth or bytes moved.
 
 | Axis · instinct | 0 means | 5 means |
 |---|---|---|
@@ -67,145 +70,180 @@ Each axis runs 0–5. The question is always the same: *how strongly does this b
 | **Runtime · dynamic serving** | the host drives everything | designed as a serving machine (KV paging, request scheduling, prefill/decode) |
 | **CPU · general control** | no control cores, no caches | a CPU with a matrix unit attached |
 | **Algorithm · model in silicon** | generic datapath | the model itself is in silicon |
-| **Datacenter · fleet TCO** | peak FLOPS first | designed from the owner's fleet economics outward |
+| **Datacenter · fleet TCO** | peak FLOPS first | designed from the owner's fleet economics outward (for edge chips: energy per token, which is a different quantity) |
 
-**Why this order.** In a radar chart, neighbours shape what you see. The visualization literature ([Ankerst et al. 1998](https://bib.dbvis.de/uploadedFiles/180.pdf); [Miller et al. 2019](https://arxiv.org/abs/1908.00576)) suggests placing related dimensions next to each other. Readers mostly group star shapes by the direction their spikes point. So we measured how the axes correlate across all 40 chips and tested every possible circular order (181,440 of them). The chosen order keeps the strongest pairs side by side: Memory–Physical (r = 0.76), Physical–CGRA, CGRA–Compiler, Compiler–Datacenter, and the CPU/GPU/Runtime cluster. It puts the strongest opposites across from each other: GPU sits directly opposite Compiler (r = −0.74). The result reads like a map. The right half is the static, spatial, physical side. The lower left is the flexible, dynamic side. GPUs point down; TPUs and model-in-silicon chips point up.
+**Why this order.** In a radar chart, which axes sit next to each other changes the shapes you see. The visualization literature ([Ankerst et al. 1998](https://bib.dbvis.de/uploadedFiles/180.pdf); [Miller et al. 2019](https://arxiv.org/abs/1908.00576)) suggests placing related dimensions next to each other, because readers group star shapes mostly by where their spikes point. We tested every circular order (181,440 of them) against our own scores. The chosen order keeps strongly related axes together: Memory–Physical, Physical–CGRA, CGRA–Compiler, Compiler–Datacenter, and the CPU/GPU/Runtime cluster. GPU sits opposite Compiler. The result reads like a map: the right half is the static, spatial, physical side, and the lower left is the flexible, dynamic side. GPUs point down; TPUs and model-in-silicon chips point up.
 
-## 3. Google TPU: the compiler takes over at v2 and never leaves {#tpu}
+Treat this as a layout choice, not a discovery. The GPU–Compiler correlation is −0.79 when every chip counts once, but only −0.54 when each vendor counts once, because the sample has eleven TPUs and six NVIDIA GPUs. And the axes were defined by us, so part of any correlation comes from how the questions were asked.
 
-The TPU line is the closest thing we have to a natural experiment: one company, one software stack, eleven chips over ten years. Open *Series → TPU* in the radar, or watch:
+## 3. NVIDIA: the generalist keeps growing {#nvidia}
+
+NVIDIA is still the reference point, so it comes first. The GPU shape is the mirror image of the TPU and Groq shapes: GPU 4.5–5, Compiler 1.5–2, CGRA near zero. The hardware hides latency with threads and occupancy, so the compiler does not have to know every cycle. That is why a GPU runs everything.
+
+![Animated radar of six NVIDIA generations from V100 to Rubin](/assets/chip-radar/nvidia-en.gif)
+
+| | Year | What changed | Runtime | Network | Memory | Algorithm | Datacenter |
+|---|---|---|---|---|---|---|---|
+| [V100](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf) | 2017 | first Tensor Cores; NVLink 2 | 2 | 2 | 1 | 1.5 | 1 |
+| [A100](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf) | 2020 | TF32, 2:4 sparsity; MIG splits one GPU into 7 | 3 | 2.5 | 1.5 | 2 | 1.5 |
+| H100 | 2022 | FP8 Transformer Engine | 3.5 | 3 | 1.75 | 3 | 1.75 |
+| B200 | 2024 | two dies; NVL72 racks | 3.5 | 4 | 2.25 | 3.25 | 3.25 |
+| [B300](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/) | 2025 | 288 GB HBM3e; 2x attention softmax | 3.5 | 4 | 2.75 | 3.75 | 3.5 |
+| [Rubin](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/) | 2026 | six co-designed chips; KV-cache tiers; Dynamo | 4.5 | 4.5 | 3.25 | 3.5 | 4 |
+
+Read down the columns and the story is steady accretion. A100's MIG was the first real serving feature. NVLink grew from an 8-GPU mesh to a 72-GPU rack. Memory grew from 16 GB to 288 GB per GPU, plus rack-level KV-cache storage. The number formats and the attention hardware moved towards the transformer. Meanwhile the GPU score itself dips slightly, from 5 to 4.5, because Blackwell moves matrix work into asynchronous tile engines that sit partly outside the classic SIMT model. The generalist absorbs the other schools one axis at a time, which is Dally's "the product is the whole system" in chart form.
+
+## 4. Google TPU: the compiler takes over at v2 and never leaves {#tpu}
+
+The TPU line is the closest thing we have to a natural experiment: one company, one software stack, eleven chips over ten years.
 
 ![Animated radar of eleven Google TPU generations](/assets/chip-radar/tpu-en.gif)
 
-**v1 was a coprocessor, not yet a compiler machine.** The 2015 TPU sat on PCIe, and the host sent it [about a dozen CISC instructions](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf); the matrix unit stalled in hardware when its data was not ready. Its strongest axis was not the compiler (3.5) but cost: the stated goal was cutting the [TCO of inference by 10x](https://pages.cs.wisc.edu/~markhill/restricted/isca17_tpu_slides.pdf) (Datacenter 4.5).
+| Gen | Year | Role | Compute and control | Memory | Scale-out |
+|---|---|---|---|---|---|
+| [v1](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf) | 2015 | inference | 256×256 int8 systolic array; CISC instructions sent by the host | 8 GiB DDR3, 28 MiB on chip | PCIe card |
+| [v2](https://www.hc32.hotchips.org/assets/program/conference/day2/HotChips2020_ML_Training_Google_Norrie_Patil.v01.pdf) | 2017 | training | bf16 MXUs; VLIW scheduled by XLA; early SparseCore | 16 GiB HBM | 2D torus, 256 chips |
+| v3 | 2018 | training | twice the MXUs per core; liquid cooled | 32 GiB HBM | 1,024 chips |
+| [v4](https://arxiv.org/abs/2304.01433) | 2020 | training | SparseCore for embeddings | 32 GiB HBM | 3D torus, 4,096 chips, optical circuit switches |
+| [v4i](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf) | 2020 | inference | one core, air cooled | 8 GiB HBM + 128 MiB on-chip CMEM | small |
+| [v5e](https://docs.cloud.google.com/tpu/docs/v5e) | 2023 | cost-efficient | priced per dollar | 16 GB HBM | 256 chips |
+| [v5p](https://docs.cloud.google.com/tpu/docs/v5p) | 2023 | training | flagship | 95 GB HBM | 8,960 chips |
+| [v6e](https://docs.cloud.google.com/tpu/docs/v6e) | 2024 | cost-efficient | larger MXUs | 32 GB HBM | 256 chips |
+| [v7 Ironwood](https://docs.cloud.google.com/tpu/docs/tpu7x) | 2025 (GA Mar 2026) | inference-led, also training | FP8 | 192 GiB HBM | 9,216 chips |
+| [8t](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive) | 2026 | training | SparseCore + LLM decoder engine | 216 GB HBM, 128 MB SRAM | 3D torus |
+| [8i](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive) | 2026 | serving, post-training | Collectives Acceleration Engine | 288 GB HBM, 384 MB SRAM | Boardfly, up to 1,152 chips |
 
-**From v2 on, the compiler owns the chip.** TPU v2 moved to wide VLIW bundles and software-managed memory scheduled by the XLA compiler, and every TPU since scores 4.5 on Compiler. It stops short of 5 only because HBM transfers run asynchronously and software waits on sync flags. Google's own ["Ten Lessons"](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf) paper says compiler compatibility matters more than binary compatibility for VLIW accelerators.
+**v1 was a coprocessor, not yet a compiler machine.** The host sent it about a dozen CISC instructions over PCIe, and the matrix unit stalled in hardware when its data was not ready (Compiler 3.5). Its goal was explicit: cut the [TCO of inference by 10x](https://pages.cs.wisc.edu/~markhill/restricted/isca17_tpu_slides.pdf) while meeting a 7 ms p99 latency limit. Latency mattered from the very first TPU.
 
-**The network grows from nothing to the pod.** v1: Network 0. v2: a torus, 3. v4: optical circuit switching, 5. Every flagship since stays at 5, through Ironwood's 9,216-chip pods.
+**From v2 on, the compiler owns the chip.** VLIW bundles and software-managed memory, scheduled by XLA: every TPU since scores 4.5 on Compiler. Google's own ["Ten Lessons"](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf) paper says compiler compatibility matters more than binary compatibility for VLIW accelerators.
 
-**A quiet second branch: cost.** TPU v4i, v5e and v6e are TCO-first designs: air-cooled, smaller pods, less HBM. They score 4.5–5 on Datacenter and only 1–3 on Network.
+**The network grows from nothing to the pod.** Network goes 0 → 3 → 5 at v4, and stays at 5 through Ironwood's 9,216-chip pods. Jouppi's "a supercomputer from the start" is visible in the chart, with the caveat above: the optical switches came in for scale and reliability first.
 
-**2026: the split is official.** The eighth generation is two chips, [described in Google's deep dive](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive). TPU 8t is a training machine. TPU 8i is the first latency-first inference TPU: three times the on-chip SRAM (384 MB) to keep KV cache on silicon, a Collectives Acceleration Engine for decode reductions, and a lower-diameter "Boardfly" network. Its Memory (4) and Runtime (3.5) are the highest of any TPU. Reports name [Broadcom and MediaTek](https://nand-research.com/google-cloud-8th-generation-tpu-family-splits-training-and-inference/) as design partners for 8t and 8i respectively.
+**A quiet second branch: cost.** v4i, v5e and v6e are TCO-first designs: air cooling, smaller pods, less HBM. They score 4.5–5 on Datacenter and only 1–3 on Network.
 
-## 4. NVIDIA: the generalist keeps growing {#gpus}
+**2026: an inference branch of its own.** TPU 8i adds three times the on-chip SRAM, a Collectives Acceleration Engine for decode reductions and a lower-diameter network. Its Memory (4) and Runtime (3.5) are the highest of any TPU. What is new is not that Google cares about latency, which v1 already did, but a separate chip built for generative serving and post-training. On suppliers: Broadcom said on its [September earnings call](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights) that it began production shipments of 8i, and described 8t as the MediaTek version. A supplier is not necessarily the architecture owner; Google designs the TPU.
 
-The GPU shape is the mirror image of the TPU and Groq shapes: GPU 4.5–5, Compiler 1.5–2, CGRA near zero. The hardware hides latency with threads and occupancy, so the compiler does not have to know every cycle. That is why the GPU runs everything.
+## 5. The other GPUs: AMD and Huawei Ascend {#othergpus}
 
-![Animated radar of NVIDIA H100, B200 and Rubin](/assets/chip-radar/nvidia-en.gif)
+**AMD** follows NVIDIA's path from a different starting point. MI300X led with chiplets and 3D stacking, and memory capacity per dollar (Physical 3.75, the highest among GPUs). [MI455X and the Helios rack](https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin) add the most HBM per GPU and Ethernet-based scale-up. AMD's other inference bets point the same way: it agreed to acquire Taalas ([section 6](#challengers)) and has paired Instinct GPUs with Cerebras wafers ([section 8](#hetero)).
 
-| | Runtime | Network | Memory | Datacenter |
-|---|---|---|---|---|
-| H100 (2022) | 3.5 | 3 | 1.75 | 1.75 |
-| B200 (2024) | 3.5 | 4 | 2.25 | 3.25 |
-| Rubin (2026) | 4.5 | 4.5 | 3.25 | 4 |
+**Huawei's Ascend** is shaped by supply constraints. The 910C scores 1 on Datacenter but 4.75 on Network: when individual chips are weaker, Huawei compensates with very large optical supernodes. The [Ascend 950](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech) keeps that network, adds a SIMT path next to the Da Vinci cube (GPU 3), and splits prefill and decode into separate variants. The architecture's origin story fits the theme: the 3D cube [won an internal argument](https://eu.36kr.com/en/p/3934504849325442) against a more NVIDIA-like design, and the compiler was treated as the project's holy grail.
 
-[Rubin](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/) is less a chip than a rack-scale serving platform: six co-designed chips, HBM4, tiered KV-cache storage and the Dynamo serving software. Its GPU score dips slightly (5 to 4.5) because Blackwell and Rubin move matrix work into asynchronous tile engines that sit partly outside the classic SIMT model. The generalist absorbs the other schools one axis at a time.
+## 6. The challengers, and who built them {#challengers}
 
-AMD follows the same path from a different start: MI300X led with chiplets and memory capacity per dollar (Physical 3.75), and [MI455X/Helios](https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin) adds the most HBM per GPU and Ethernet scale-up. Huawei's Ascend is shaped by supply constraints: the 910C scores 1 on Datacenter but 4.75 on Network, compensating for weaker chips with very large optical supernodes, and the [Ascend 950](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech) adds a SIMT path and separate prefill and decode variants.
+The startups have the most extreme shapes, because each bet on a single idea, usually the founders' own specialty.
 
-## 5. The challengers, and who built them {#challengers}
+**Groq: the compiler people.** Compiler 5, Memory 5, CPU 0. The [ISCA 2022 paper](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf) describes no caches, no arbiters and no interlocks on the normal execution path; even chip-to-chip links are part of the static schedule. The cost shows on Runtime (0.75): little dynamic work happens in hardware, so the host takes it on. In December 2025 NVIDIA took a [non-exclusive license and hired Groq's leaders](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm); Groq continues to run its inference cloud as an NVIDIA Cloud Partner. The [Groq 3 LP30](https://www.nvidia.com/en-us/data-center/lpx/) keeps the SRAM-first chip (500 MB per chip), while the LPX rack adds a 12 TB DDR5 capacity tier. Chip working memory, rack capacity and serving schedule are three different layers, and the radar scores the chip.
 
-The startups have the most extreme shapes, because each one bet on a single idea, usually the founders' own specialty.
+**Cerebras: the system builders.** Physical 5, Memory 5. A whole wafer, rich in SRAM, reduces how much has to cross a network. It does not remove the network: a 70B model at 16 bits [needs at least four CS-3 systems](https://www.cerebras.ai/blog/introducing-cerebras-inference-ai-at-instant-speed), and the 2026 CS-4 rack holds three wafers. The [SDK](https://sdk.cerebras.ai/computing-with-cerebras) shows each core's hardware starting a task when its data arrives, so the compiler fixes placement and routes rather than cycles (Compiler 3.25).
 
-**Groq: the compiler people.** Compiler 5, Memory 5, CPU 0. The [ISCA 2022 paper](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf) describes a chip with no caches, no arbiters and no interlocks; even chip-to-chip links are in the static schedule. Weights live in SRAM spread across many chips. The cost shows on Runtime (0.75): nothing dynamic happens in hardware, so the host handles all of it. A team that started from the compiler built a chip the compiler can fully see. In December 2025 NVIDIA licensed the architecture and hired Groq's leaders. The [Groq 3 LP30](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform) keeps the shape, but its job changes ([section 7](#hetero)).
+**SambaNova: the CGRA people.** CGRA 5. The [SN40L paper](https://arxiv.org/abs/2405.07518) maps whole graph regions onto a reconfigurable dataflow fabric with three memory tiers (SRAM, HBM, DDR), and ties that third tier to keeping many models resident: up to 19× smaller machine footprint for many-model serving. The lineage is real (Plasticine was commercialized, first as SN10), but it was adapted, not transplanted: the original fully static interconnect became packet-switched.
 
-**Cerebras: the system builders.** Physical 5, Memory 5. Keep the whole model on one SRAM-rich wafer and the network problem goes away, so WSE-2 scores only 2.25 on Network. The [SDK documentation](https://sdk.cerebras.ai/computing-with-cerebras) shows each core's hardware starting a task when its data arrives, so the compiler fixes placement and routes rather than cycles (Compiler 3.25). With WSE-3 and [rack-scale systems](https://www.servethehome.com/cerebras-talks-going-rack-scale-with-their-wses-at-hot-chips-2026/), the wafer increasingly serves as a decode engine next to someone else's prefill.
+**Tenstorrent: the CPU people.** The highest CPU score among datacenter chips (3.5): over 750 small RISC-V cores driving the compute tiles, Ethernet everywhere. Founder Ljubisa Bajic was an [ATI/AMD/NVIDIA architect](https://www.anandtech.com/show/16709), and CPU designer Jim Keller became CEO.
 
-**SambaNova: the CGRA people.** CGRA 5. The [SN40L paper](https://arxiv.org/abs/2405.07518) maps whole graph regions onto a reconfigurable dataflow fabric backed by three memory tiers (SRAM, HBM, DDR) and frames its result as up to 19× smaller machine footprint for many-model serving. This is the Plasticine research line, commercialized. The [SN50](https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference) keeps the shape and targets decode.
+**Taalas: the same founder, the opposite bet.** After Tenstorrent, Bajic co-founded Taalas. Its [HC1](https://taalas.com/the-path-to-ubiquitous-ai/) hardwires one model (Llama 3.1 8B, with 3- and 6-bit quantization that costs some quality): the only Algorithm 5 in the study, with Network 0.5. AMD [agreed to acquire Taalas](https://ir.amd.com/news-events/press-releases/detail/1296) in August 2026; the deal was still pending at AMD's November filing.
 
-**Tenstorrent: the CPU people.** The highest CPU score among datacenter chips (3.5): over 750 small RISC-V cores driving the compute tiles, 16 Linux-capable cores, Ethernet everywhere. Founder Ljubisa Bajic was an [ATI/AMD/NVIDIA architect](https://www.anandtech.com/show/16709), and CPU designer Jim Keller became CEO. The accelerator is a many-core computer.
+**Etched and d-Matrix.** Etched's Sohu runs only transformers (Algorithm 4.5). Etched has published a [first-party note on its mechanisms](https://www.etched.com/progress/frontier-inference-clusters) (low-voltage compute blocks, splittable arrays, mixed HBM/SRAM) and [delivered its first rack](https://www.etched.com/progress/from-zero-to-one) in August 2026, but not a full microarchitecture or programming model, so its shape stays lower confidence. d-Matrix computes inside SRAM (Memory 5); its founders came from [Inphi's datacenter interconnect business](https://engineering.purdue.edu/Engr/AboutUs/News/Events/tech-summit/2025/sudeep-bhoja).
 
-**Taalas: the same founder, the opposite bet.** After Tenstorrent, Bajic co-founded Taalas, whose [HC1](https://www.cnx-software.com/2026/02/22/taalas-hc1-hardwired-llama-3-1-8b-ai-accelerator-delivers-up-to-17000-tokens-s/) fixes one model's weights at manufacture: the only Algorithm 5 in the study, with Network 0.5. AMD [agreed to acquire Taalas](https://ir.amd.com/news-events/press-releases/detail/1296) in August 2026, pending approvals, and described the technology as a complement to its Instinct GPUs.
-
-**Etched and d-Matrix.** Etched's Sohu runs only transformers (Algorithm 4.5). Its CEO came from ML compilers (OctoML, Xnor.ai), and the chip has the thinnest public technical disclosure of any here, so its shape is low confidence. d-Matrix computes inside SRAM (Memory 5). Its founders came from [Inphi's datacenter interconnect business](https://engineering.purdue.edu/Engr/AboutUs/News/Events/tech-summit/2025/sudeep-bhoja), so a team of data-movement specialists built a chip around not moving data.
-
-## 6. Hyperscalers' own chips: designed from the bill {#hyperscalers}
+## 7. Hyperscalers' own chips: designed from the bill {#hyperscalers}
 
 Meta, AWS and Microsoft own the workloads and pay the power bill. Their highest axis is Datacenter: Maia 200 and MTIA 2i score 5, Trainium3 4.5.
 
-- **AWS Inferentia2 and Trainium3** look like the TPU's cousin: Compiler 4, separate engines synchronized by the compiler, software-managed memory, switched UltraServers. The team that built Nitro, a networking-and-offload card, builds accelerators system-first.
-- **Microsoft Maia 200** comes out of [Azure Hardware Systems and Infrastructure](https://runasradio.com/Shows/Show/940), which owns silicon, systems and datacenter together. Its [architecture deep dive](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312) reads like a TCO model with a chip attached: software-managed SRAM, FP4 and on-die Ethernet scale-up.
-- **Meta MTIA** has a surprisingly high CPU score (3): RISC-V control cores and caches, because its first job was recommendation ranking. Meta [bought Rivos](https://www.hpcwire.com/?p=184116), the RISC-V startup that had helped design MTIA, in 2025. The MTIA 300/400 roadmap moves to chiplets, HBM and 72-chip racks; the 400 is still in lab testing.
+- **AWS Inferentia2 and Trainium3** look like cousins of the TPU: Compiler 4, separate engines synchronized by the compiler, software-managed memory. Scale-out differs by chip. [Inf2](https://aws.amazon.com/ec2/instance-types/inf2/) links up to 12 chips with NeuronLink, while [Trn3 UltraServers](https://aws.amazon.com/ec2/instance-types/trn3/) connect up to 144 chips through NeuronSwitch.
+- **Microsoft Maia 200** comes out of [Azure Hardware Systems and Infrastructure](https://runasradio.com/Shows/Show/940), which owns silicon, systems and datacenter together. Its [architecture deep dive](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312) reads like a TCO model with a chip attached.
+- **Meta MTIA** has a surprisingly high CPU score (3): RISC-V control cores and caches, because its first job was recommendation ranking. Meta [bought Rivos](https://www.hpcwire.com/?p=184116), the RISC-V startup that had helped design MTIA, in 2025. Per [Meta](https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/), MTIA 400 has finished lab testing and is heading to deployment.
 
-## 7. Heterogeneous systems: when one shape is not enough {#hetero}
+## 8. Heterogeneous systems: where you cut matters more than the chips {#hetero}
 
-The biggest change in 2026 is not a new chip shape but systems that combine two shapes in one request. Open the *Heterogeneous* tab: filled shapes are the components, the dashed outline is the system as deployed.
+The biggest change in 2026 is systems that combine two chip shapes in one request. The obvious way to chart them would be a combined system shape. We did that in an earlier draft and removed it. An audit found that on 9 of 50 cells, the system score fell outside the range of its two components, so no weighting of the components could produce it. Integration may create new capability, but then the capability should be written down rather than averaged. Open the *Heterogeneous* tab: the radar shows the two components, and the table says who computes, what moves, how often, and how solid the evidence is.
 
-| System | Component A | Component B | How the work splits |
+The clearest case is NVIDIA's own. For Vera Rubin plus Groq 3 LPX, NVIDIA describes [three different ways to split the work](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/) on the same two rack types:
+
+| Where you cut | Who computes | What moves, how often | What to check |
 |---|---|---|---|
-| NVIDIA Vera Rubin NVL72 + Groq 3 LPX | Rubin GPUs | Groq 3 LPUs | GPUs: prefill, attention, KV cache. LPUs: decode FFN/MoE layers, handed off every token |
-| AWS Trainium + Cerebras CS-3 | Trainium | Cerebras wafer | prefill on Trainium, decode on the wafer, KV cache moved over EFA |
-| SambaNova SN50 + GPU | B200-class GPUs | SN50 | GPUs prefill only; the dataflow chip decodes |
-| d-Matrix Corsair + GPU (Gimlet) | GPUs | Corsair cards | a scheduler sends memory-bound parts to the in-SRAM-compute cards over Ethernet |
-| Cerebras + AMD Instinct (planned) | Instinct GPUs | Cerebras wafer | wafer decode beside HBM-rich GPUs; announced, not shipping |
+| Prefill / decode | GPU prefill, LPX decode | KV cache, once per turn | does moving a long prompt's KV eat the gain? |
+| Attention / FFN | GPU keeps KV and runs attention; LPX runs FFN/MoE | activations, at every full-attention layer | small, frequent transfers on the per-token critical path |
+| Draft / verify | LPX drafts with a small model, GPU verifies | draft tokens and verdicts; each side keeps its own KV | acceptance rate and verify batching |
 
-Three things stand out:
+The three cuts have three different bottlenecks, so one score cannot describe "the system". Evidence also differs: LPX-alone speed (3,431 output tokens/s median on Gemma 4 31B at 100K context) is measured, while the joint 2T-model result is a projection.
 
-- **The combined shape is large, and that is the point.** Vera Rubin plus LPX scores 5 on Runtime, Network and Memory at once. HBM holds the KV cache, and SRAM streams the weights. No single chip here does both.
-- **The compiler score drops.** The system scores 3.25 on Compiler, between the LPU's 5 and the GPU's 2, because half of it is scheduled statically and half dynamically. Someone has to manage the boundary.
-- **Runtime becomes the hardest axis.** Every shipping or announced system scores 4 or higher; the planned AMD pairing is 3.5 only because its serving software is not public yet. The hard part is no longer inside either chip. It is deciding which phase, layer or token goes where, and moving KV cache or activations fast enough. NVIDIA's [LPX design](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform) splits attention from FFN within each token. [Cerebras](https://www.cerebras.ai/blog/disaggregated-inference) splits prefill from decode. These are two levels of the same idea.
+The other four pairings all cut at prefill/decode or draft/verify, and their status varies. AWS Trainium + Cerebras is announced, with Bedrock service expected in Q1 2027. SambaNova's July demo paired [4 H200s for prefill with 16 SN50s for decode](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world). d-Matrix + GPU via Gimlet runs [speculative decoding](https://gimletlabs.ai/blog/low-latency-spec-decode-corsair) with a 1.6B draft model on Corsair and a 120B target on GPUs. Cerebras + AMD Instinct is expected in production in Q4 2026.
 
-This changes how to read the challengers. A chip that looks too narrow alone, such as an all-SRAM decoder or a wafer with no network, becomes very useful once a GPU handles everything it is bad at. AMD's stated reason for buying Taalas, complementing its GPUs, follows the same logic.
+Two contrasts keep this honest. Splitting phases does not require two kinds of chips: [DistServe](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin) splits prefill and decode across pools of identical GPUs. And OpenAI's [Jalapeño](https://openai.com/index/jalapeno-first-results/), built with Broadcom, takes the opposite route: one accelerator handles both phases and keeps the KV cache local (its first results are vendor-reported). The fair comparison for any heterogeneous system is a homogeneous split at the same quality, latency and power, with transfer and queueing costs counted.
 
-## 8. Cloud, edge and PC: same axes, different priorities {#deploy}
+## 9. Cloud, edge and PC: one robust difference {#deploy}
 
-The *Cloud vs edge* tab averages the shapes by deployment.
+The *Cloud vs edge* tab averages the shapes by deployment. Averages of ordinal scores can mislead, so the result worth keeping is stated as counts:
 
-| Scenario | Chips | Highest | Lowest |
+| Group | Chips | Memory ≥ 3 | Memory ≥ 4 |
 |---|---|---|---|
-| Cloud, inference-first | 14 | Memory 3.9, Datacenter 3.9, Compiler 3.8 | GPU 0.8, CPU 0.9 |
-| Cloud, training + inference | 20 | Network 3.7, Datacenter 3.4, Compiler 3.3 | CGRA 1.9 |
-| Edge, PC and phone | 6 | Datacenter 4.2, Compiler 3.7 | Network 0, GPU 0.8 |
+| Cloud, inference-first | 14 | 12 / 14 | 8 / 14 |
+| Cloud, everything else | 23 | 7 / 23 | 3 / 23 |
+| Edge, PC and phone | 6 | 0 / 6 | 0 / 6 |
 
-On the edge, "Datacenter" is read as energy and cost per token, since there is no fleet. Three observations:
+At every score threshold that occurs in the data, the inference-first group has the higher or an equal share. So the difference does not depend on treating the 0–5 steps as evenly spaced. What it says: **in this sample and this coding, cloud inference chips put the most design emphasis on memory.** What it does not say: that they move more bytes per token, or that every scorer would agree. Taking only the first scoring pass, one threshold reverses.
 
-- **Outside training-capable cloud chips, the GPU axis is almost empty.** Inference-first chips average under 1. If you design only for inference, SIMT generality is the first thing to go.
-- **Memory separates cloud inference chips:** 3.9 on average, against 2.7 for training-capable chips and 2.1 for edge. In the datacenter, decode is bound by bytes per token.
-- **On the edge, the network disappears and the compiler stays.** Each laptop and phone NPU also carries its lineage. AMD's XDNA 2 is the [Xilinx AI Engine](https://www.amd.com/en/technologies/xdna.html), an FPGA-world CGRA (4.5). Intel's NPU comes from [Movidius](https://www.anandtech.com/show/18878). Qualcomm's Hexagon is a VLIW DSP grown up (CPU 3.5). Apple's Neural Engine is closed and reachable only through Core ML. Edge vendors disclose the least, so these shapes carry the lowest confidence.
+Two more observations, held more loosely:
 
-## 9. Eight families, and what each one fears {#families}
+- **Inference-first chips mostly drop SIMT.** They average under 1 on the GPU axis, in cloud and on the edge alike.
+- **On the edge, the network disappears and the compiler stays** (Compiler 3.7 on average). The edge chips' "Datacenter" score means energy per token, which is not the same quantity as fleet TCO, so do not compare its height with the cloud chips. Each laptop and phone NPU also carries its lineage: AMD's XDNA 2 is the [Xilinx AI Engine](https://www.amd.com/en/technologies/xdna.html) (CGRA 4.5), Intel's NPU comes from [Movidius](https://www.anandtech.com/show/18878), Qualcomm's Hexagon grew out of a VLIW DSP (CPU 3.5), and Apple's Neural Engine is reachable only through Core ML. Edge vendors disclose the least, so these shapes carry the lowest confidence.
 
-The *All chips* tab groups every shape into eight families. Read each shape as the designers' answer to the question "what is the hard part?"
+## 10. Eight families, and what each one fears {#families}
 
-1. **Compiler-first, designed from the fleet** (TPU, Inferentia/Trainium, Maia). *Fear: the bill.* Compiler 4.3, Datacenter 4.3.
-2. **Deterministic, all-SRAM** (Groq). *Fear: unpredictability.* Compiler 5, Memory 5, CPU 0.
-3. **Spatial dataflow and wafer scale** (Cerebras, SambaNova). *Fear: data leaving the chip.* CGRA 4.6, Memory 4.7, Physical 4.0.
-4. **Model in silicon** (Taalas, Etched). *Fear: paying for generality.* Algorithm 4.8.
-5. **Memory-first** (d-Matrix). *Fear: the memory wall.* Memory 5.
-6. **CPU-flavoured many-core** (Tenstorrent, MTIA). *Fear: the workload you did not plan for.* CPU 3.2.
-7. **Generalist GPUs** (NVIDIA, AMD, Huawei). *Fear: losing the developer.* GPU 4.0, Network 4.0, Runtime 3.4.
-8. **On-device NPUs.** *Fear: the battery.* Network 0, energy 4.2.
+The *All chips* tab groups every shape into eight families. Read each one as a hypothesis about what its designers thought was scarce, not as a proven motive:
 
-None of these fears is wrong. They are different answers to the question of what will be scarce: compute, bandwidth, power, developer time or flexibility. Heterogeneous systems exist because the honest answer is "all of them, in different phases of the same request".
+1. **Compiler-first, designed from the fleet** (TPU, Inferentia/Trainium, Maia). *Scarce: money and power.* Compiler and Datacenter both high.
+2. **Deterministic, all-SRAM** (Groq). *Scarce: predictability.* Compiler 5, Memory 5, CPU 0.
+3. **Spatial dataflow and wafer scale** (Cerebras, SambaNova). *Scarce: off-chip bandwidth.* CGRA, Memory and Physical high.
+4. **Model in silicon** (Taalas, Etched). *Scarce: the efficiency that generality costs.* Algorithm high.
+5. **Memory-first** (d-Matrix). *Scarce: memory bandwidth.* Memory 5.
+6. **CPU-flavoured many-core** (Tenstorrent, MTIA). *Scarce: knowing tomorrow's workload.* CPU high.
+7. **Generalist GPUs** (NVIDIA, AMD, Huawei). *Scarce: developers.* GPU, Network and Runtime high.
+8. **On-device NPUs.** *Scarce: battery.* Network 0.
 
-## 10. What this means for compilers and runtimes {#software}
+None of these is wrong. They are different answers to what will be scarce: compute, bandwidth, power, developer time or flexibility. Heterogeneous systems exist partly because the honest answer is "different things, in different phases of the same request". Even then, as section 8 shows, a homogeneous split is a serious alternative.
+
+## 11. What this means for compilers and runtimes {#software}
 
 For people working on the software stack (compilers, vLLM, SGLang), three conclusions follow.
 
 **"The compiler" is a different job on each shape.** On a Groq-style chip, the compiler is the scheduler, down to the cycle and across chips. On a TPU or Trainium, it manages memory and synchronization explicitly. On a GPU, it mostly generates good kernels and leaves scheduling to hardware. On a CGRA, it places and routes. One compiler architecture can serve all four only if it is clear about which job it is doing.
 
-**The runtime is rising fastest.** It climbs across GPU generations, on TPU 8i, and on every heterogeneous system. The serving engine used to sit above the hardware. It is becoming part of the hardware design: KV-cache tiering, prefill and decode placement, and per-token handoff between chip types. vLLM and SGLang already treat prefill-decode disaggregation as a first-class feature. The next step is a scheduler that understands different chip types, not just different nodes.
+**The serving layer is moving into the hardware design.** Runtime scores rise across NVIDIA's six generations and on TPU 8i. KV-cache tiering, prefill and decode placement, and handoffs between chip types are now design inputs, not afterthoughts. vLLM and SGLang already treat prefill-decode disaggregation as a first-class feature. The next step is a scheduler that understands different chip types and different cuts (phase, layer or draft), not just different nodes.
 
 **The static-dynamic boundary is now a system-design problem.** When a deterministic chip and a dynamic chip share a token, something must translate between a cycle-exact schedule and a world of variable batch sizes and arrival times. That layer belongs neither cleanly to the compiler nor to the runtime. It may be the most interesting software problem in inference hardware right now.
 
-## 11. Method and caveats {#method}
+## 12. Method, an independent audit, and caveats {#method}
 
-**Method.** All research used public sources only: papers (ISCA, HPCA, arXiv), Hot Chips talks, vendor architecture documents and reputable technical press. Two independent scoring passes used the same rubric: one went chip by chip, the other axis by axis, ranking all chips on one axis before moving on. Every score has a one-line reason, a source and a confidence level (high for a paper or spec, medium for vendor claims or secondary analysis, low for inference). The final score is the mean of the two passes, with the lower of the two confidences. The passes agreed closely: 317 of 450 scores were identical, and none differed by more than one point. A second research round then replaced weak sources with primary ones and changed 16 scores where the primary evidence disagreed. TPU v1's Compiler score fell from 4.5 to 3.5, for example, and Cerebras's Compiler and GPU scores moved for the reasons given above.
+**Method.** All research used public sources: papers (ISCA, HPCA, OSDI, arXiv), Hot Chips talks, vendor architecture documents, earnings calls and filings, and reputable technical press. Two independent scoring passes used the same rubric, one chip by chip and one axis by axis. Every score carries a one-line reason, a source and a confidence level. The final score is the mean of the two passes, with the lower confidence. Of 450 original scores, 317 matched exactly and none differed by more than one point. Both passes worked from the same research notes, so this measures consistency, not independent truth.
+
+**Two rounds of correction.** A second research round replaced weak sources with primary ones and changed 16 scores. Then a colleague ran an independent audit. It recomputed every number from the raw files and checked key claims against primary sources. It found real errors, all fixed here:
+
+- The TPU 8t/8i supplier mapping was reversed.
+- Groq's status was wrongly given as "acquired".
+- The claim that a whole model fits on one Cerebras wafer was wrong.
+- AWS's two scale-out topologies were conflated.
+- An Apple GPU experiment had been used as evidence about the Neural Engine.
+- The SambaNova demo's GPU was misidentified.
+
+It also showed that the combined heterogeneous-system scores could not be component weightings, which is why section 8 now describes mechanisms instead. Its strongest suggestion, which we adopt, is the framing in section 1: ask what was scarce, which mechanism was chosen, and who pays.
 
 **Caveats.**
-- **These are judgements, not measurements.** The rubric makes them consistent and the reasons make them checkable, but another team would land half a point away on many cells. Hover any point to see why.
-- **The two scoring passes are correlated.** They worked independently but from the same research notes, which partly explains the agreement.
-- **Public information is uneven.** Edge NPUs, Etched, d-Matrix Raptor and Google's Tensor G5 rest on thin disclosure and are marked low confidence. Announced 2026 parts are scored from launch material, which favours strengths.
-- **Scores measure design emphasis, not quality or speed.** A low score is not a criticism: Groq's CPU 0 is deliberate, and so is Taalas's Network 0.5.
-- **Heterogeneous scores describe the deployed system,** weighted by which component does most of the work. This is the least standard part of the method.
-- **Designer lineages are simplifications.** Large teams have many backgrounds; the lines name the founders or leading organizations that public sources credit.
-- **Status as of November 2026.** AMD's Taalas deal is announced and pending approvals. NVIDIA's arrangement with Groq is a license plus hiring, and GroqCloud continues on Groq's own chips. MTIA 400 is in lab testing.
+- **These are judgements, not measurements.** The rubric makes them consistent and the reasons make them checkable, but another team would land half a point away on many cells.
+- **The axis order and the eight families are layout choices,** checked against our own coding, not discoveries about the chips.
+- **Public information is uneven.** Edge NPUs, Etched, d-Matrix Raptor and Google's Tensor G5 rest on thinner disclosure and are marked low confidence. Missing information is shown as low confidence, not as "the designers didn't do this".
+- **Scores measure design emphasis, not quality or speed.** Groq's CPU 0 and Taalas's Network 0.5 are deliberate choices, not failings.
+- **Lineage is a lead, not a cause.** Large teams have many backgrounds, and a supplier is not the architect.
+- **Status as of 7 November 2026.** AMD's Taalas deal is pending. NVIDIA's arrangement with Groq is a license plus hiring. LPX racks are in production; MTIA 400 is heading to deployment.
+
+**What would make this more than a good story.** The audit proposes two blind tests worth doing. First, does knowing a team's background predict its architecture better than knowing only the workload, market and year? Second, can a reader identify a team's background from an anonymized architecture better than chance? Even if both work, that is prediction, not proof of cause. If neither works, the map is still useful for design reviews and for interviewing designers.
 
 Every score, reason and source is in the *Table* tab and the [data file](/assets/chip-radar/data.js). Corrections are welcome.
 
-## 12. Sources {#sources}
+## 13. Sources {#sources}
 
 The lens and the method:
+- [The Silicon Gold Rush: Patterson, Dally and Jouppi at the Computer History Museum](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)
 - [NeuralTalk on WeChat: reading chip design through the architect's background](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)
 - [Ankerst et al., similarity clustering of dimensions (1998)](https://bib.dbvis.de/uploadedFiles/180.pdf); [Miller et al., axis order in star glyphs (2019)](https://arxiv.org/abs/1908.00576)
 
@@ -213,27 +251,37 @@ Google TPU:
 - [Jouppi et al., TPU v1 (ISCA 2017), ISCA@50 retrospective copy](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf) and [ISCA 2017 slides](https://pages.cs.wisc.edu/~markhill/restricted/isca17_tpu_slides.pdf)
 - [Ten Lessons From Three Generations Shaped Google's TPUv4i (ISCA 2021)](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)
 - [TPU v4 (ISCA 2023)](https://arxiv.org/abs/2304.01433); [TPU v2/v3 at Hot Chips 2020](https://www.hc32.hotchips.org/assets/program/conference/day2/HotChips2020_ML_Training_Google_Norrie_Patil.v01.pdf); [Ironwood at Hot Chips 2025](https://hc2025.hotchips.org/assets/program/conference/day2/61_Google_Ironwood-Final.pdf)
-- [TPU 8t and 8i technical deep dive (Google Cloud)](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)
+- [TPU 8t and 8i technical deep dive (Google Cloud)](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive); [Broadcom Q3 FY2026 call highlights (8i shipments)](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)
+- Google Cloud docs: [v5e](https://docs.cloud.google.com/tpu/docs/v5e), [v5p](https://docs.cloud.google.com/tpu/docs/v5p), [v6e](https://docs.cloud.google.com/tpu/docs/v6e), [TPU7x](https://docs.cloud.google.com/tpu/docs/tpu7x)
+
+NVIDIA GPUs:
+- [Volta V100 whitepaper](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf); [Ampere A100 whitepaper](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf); [Inside Blackwell Ultra](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)
 
 Groq and NVIDIA:
+- [NVIDIA FY2026 10-K, Note 2 (Groq license)](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm); [NVIDIA LPX specifications](https://www.nvidia.com/en-us/data-center/lpx/); [How Groq 3 LPX works alongside Vera Rubin: three collaboration modes](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
 - [Groq ISCA 2022 paper](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf); [Groq at Hot Chips 34](https://hc34.hotchips.org/assets/program/conference/day2/Machine%20Learning/HotChips34%20-%20Groq%20-%20Abts%20-%20final.pdf)
 - [Inside NVIDIA Groq 3 LPX](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform); [Inside the NVIDIA Rubin platform](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/)
 
 Spatial and specialized:
-- [Cerebras SDK: computing with Cerebras](https://sdk.cerebras.ai/computing-with-cerebras); [Cerebras at Hot Chips 2024](https://www.hc2024.hotchips.org/assets/program/conference/day2/72_HC2024.Cerebras.Sean.v03.final.pdf); [Cerebras on disaggregated inference](https://www.cerebras.ai/blog/disaggregated-inference)
+- [Cerebras SDK: computing with Cerebras](https://sdk.cerebras.ai/computing-with-cerebras); [Cerebras inference and the memory barrier](https://www.cerebras.ai/blog/introducing-cerebras-inference-ai-at-instant-speed); [Cerebras at Hot Chips 2024](https://www.hc2024.hotchips.org/assets/program/conference/day2/72_HC2024.Cerebras.Sean.v03.final.pdf); [Cerebras on disaggregated inference](https://www.cerebras.ai/blog/disaggregated-inference)
 - [SambaNova SN40L (arXiv)](https://arxiv.org/abs/2405.07518); [SN50 announcement](https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference)
 - [Tenstorrent interview, AnandTech](https://www.anandtech.com/show/16709); [Blackhole, The Register](https://www.theregister.com/2024/08/27/tenstorrent_ai_blackhole/)
-- [AMD to acquire Taalas](https://ir.amd.com/news-events/press-releases/detail/1296); [Taalas HC1, CNX Software](https://www.cnx-software.com/2026/02/22/taalas-hc1-hardwired-llama-3-1-8b-ai-accelerator-delivers-up-to-17000-tokens-s/)
+- [Taalas: the path to ubiquitous AI](https://taalas.com/the-path-to-ubiquitous-ai/); [AMD to acquire Taalas](https://ir.amd.com/news-events/press-releases/detail/1296); [Taalas HC1, CNX Software](https://www.cnx-software.com/2026/02/22/taalas-hc1-hardwired-llama-3-1-8b-ai-accelerator-delivers-up-to-17000-tokens-s/)
+- [Etched: frontier inference clusters](https://www.etched.com/progress/frontier-inference-clusters); [Etched: first rack](https://www.etched.com/progress/from-zero-to-one)
 - [d-Matrix Corsair at Hot Chips 2025](https://www.servethehome.com/d-matrix-presents-corsair-an-in-memory-computing-architecture-for-inference-at-hot-chips-2025/); [d-Matrix and Gimlet](https://www.datacenterknowledge.com/infrastructure/d-matrix-gimlet-labs-partner-to-boost-agentic-ai-inference-performance)
 
 Hyperscalers:
-- [MTIA (ISCA 2025)](https://aisystemcodesign.github.io/papers/MTIA-ISCA25.pdf); [Meta acquires Rivos (HPCwire)](https://www.hpcwire.com/?p=184116)
-- [Trainium/Inferentia2 architecture (AWS Neuron docs)](https://awsdocs-neuron.readthedocs-hosted.com/en/v2.32.0/_sources/nki/guides/architecture/trainium_inferentia2_arch.rst); [Inside Annapurna Labs (Amazon)](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips)
+- [MTIA (ISCA 2025)](https://aisystemcodesign.github.io/papers/MTIA-ISCA25.pdf); [Meta MTIA at scale (Meta)](https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/); [Meta acquires Rivos (HPCwire)](https://www.hpcwire.com/?p=184116)
+- [Trainium/Inferentia2 architecture (AWS Neuron docs)](https://awsdocs-neuron.readthedocs-hosted.com/en/v2.32.0/_sources/nki/guides/architecture/trainium_inferentia2_arch.rst); [Inside Annapurna Labs (Amazon)](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips); [Inf2](https://aws.amazon.com/ec2/instance-types/inf2/) and [Trn3](https://aws.amazon.com/ec2/instance-types/trn3/) instance pages
 - [Maia 200 architecture deep dive (Microsoft)](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312)
 
 GPUs and Ascend:
 - [AMD MI300 architecture (ROCm docs)](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi300.html); [MI455X and Helios (StorageReview)](https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin)
 - [Da Vinci at Hot Chips 31 (Huawei)](https://www.old.hotchips.org/hc31/HC31_1.11_Huawei.Davinci.HengLiao_v4.0.pdf); [Huawei Connect 2025 keynote](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech); [The road of Huawei's AI chips (36Kr)](https://eu.36kr.com/en/p/3934504849325442)
+
+Heterogeneous and homogeneous serving:
+- [AWS and Cerebras collaboration](https://press.aboutamazon.com/aws/2026/3/aws-and-cerebras-collaboration-aims-to-set-a-new-standard-for-ai-inference-speed-and-performance-in-the-cloud); [SambaNova SN50 + H200 demo](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world); [Gimlet: speculative decoding on Corsair](https://gimletlabs.ai/blog/low-latency-spec-decode-corsair); [AMD and Cerebras](https://ir.amd.com/news-events/press-releases/detail/1293/amd-and-cerebras-announce-industry-leading-ultra-low-latency-and-high-throughput-ai-inference-solution)
+- [DistServe (OSDI 2024)](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin); [OpenAI Jalapeño first results](https://openai.com/index/jalapeno-first-results/)
 
 Edge and PC:
 - [Apple M5 (Apple Newsroom)](https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/); [Transformers on the Neural Engine (Apple ML Research)](https://machinelearning.apple.com/research/neural-engine-transformers)
@@ -246,3 +294,5 @@ Team origins:
 - [Hailo founders (Globes)](https://en.globes.co.il/en/article-hailo-raises-100m-becomes-israels-latest-unicorn-1001375594); [Rani Borkar and Azure hardware](https://runasradio.com/Shows/Show/940)
 
 The full per-score source list is in the data file.
+
+*Thanks to a colleague for an independent audit that caught several errors in an earlier draft.*

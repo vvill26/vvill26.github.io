@@ -59,3 +59,5 @@
 .cr-big{flex:none;width:100%;max-width:700px;margin:0 auto;display:block}
 .cr-side{flex-direction:row;flex-wrap:wrap}.cr-side>.cr-card{flex:1 1 200px}
 .cr-side{align-items:flex-start}.cr-ctl{max-width:700px;margin:0 auto;width:100%}.cr-ticks{max-width:700px;margin:4px auto 10px;width:100%}
+.cr-flow td,.cr-flow th{white-space:normal;text-align:left;vertical-align:top;min-width:110px}
+.cr-flow td:first-child{font-weight:600}

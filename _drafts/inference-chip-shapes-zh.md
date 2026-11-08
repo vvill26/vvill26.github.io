@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "魔镜魔镜告诉我：40 颗推理芯片的形状"
+title: "魔镜魔镜告诉我：43 颗推理芯片的形状"
 date: 2026-11-07 09:00:00 +0800
 permalink: /zh/2026/11/inference-chip-shapes/
 lang: zh
-description: "每颗推理芯片背后，都是一群有特定出身的人下的注。用 10 个设计维度给 40 颗芯片和 5 套异构系统打分，做成一张能玩的雷达图，看看各家押的是什么、是谁押的。"
+description: "每颗推理芯片背后，都是一群有特定出身的人下的注。用 10 个设计维度给 43 颗芯片打分，再拆开 5 套异构系统，做成一张能玩的雷达图，看看各家押的是什么、是谁押的。"
 ---
 
 {% include lang-switch.html en="/2026/11/inference-chip-shapes/" zh="/zh/2026/11/inference-chip-shapes/" %}
@@ -16,7 +16,7 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 
 魔镜没有回答。它只是把每颗芯片照了一遍：照出 TPU 背后那群从不把调度交还给硬件的编译器工程师，照出 Groq 把仲裁器全部拿掉的执念，照出 Cerebras 干脆把整片晶圆做成一颗芯片的胆量，也照出英伟达这几年一边守住 CUDA、一边把网络、存储和推理服务一样样收进来的耐心。
 
-这面镜子就是下面这张雷达图：2015 到 2026 年的 40 颗推理芯片，加上 5 套「GPU + 另一种加速器」的异构系统，每颗按 10 个设计维度打 0–5 分，依据全部是公开论文、Hot Chips 报告和厂商文档。先玩，长文在后面。
+这面镜子就是下面这张雷达图：2015 到 2026 年的 43 颗推理芯片，每颗按 10 个设计维度打 0–5 分，另外还拆开了 5 套「GPU + 另一种加速器」的异构系统，依据全部是公开论文、Hot Chips 报告和厂商文档。先玩，长文在后面。
 
 <div id="chip-radar"></div>
 <script src="/assets/chip-radar/data.js"></script>
@@ -27,37 +27,40 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 <nav class="toc" markdown="1">
 **目录**
 
-1. [芯片长什么样，取决于谁设计的](#idea)
+1. [芯片的形状，取决于设计者认为什么最稀缺](#idea)
 2. [十个维度，以及它们为什么这样排](#axes)
-3. [Google TPU：从 v2 起，编译器就再没放手](#tpu)
-4. [英伟达：多面手一直在长大](#gpus)
-5. [挑战者们，和背后的人](#challengers)
-6. [云厂商自研：从电费账单出发](#hyperscalers)
-7. [异构系统：一种形状不够用了](#hetero)
-8. [云、边缘、PC：同样的坐标，不同的重心](#deploy)
-9. [八个流派，各自怕什么](#families)
-10. [对编译器和运行时意味着什么](#software)
-11. [方法与局限](#method)
-12. [参考来源](#sources)
+3. [英伟达：多面手一直在长大](#nvidia)
+4. [Google TPU：从 v2 起，编译器就再没放手](#tpu)
+5. [其他 GPU：AMD 与华为昇腾](#othergpus)
+6. [挑战者们，和背后的人](#challengers)
+7. [云厂商自研：从电费账单出发](#hyperscalers)
+8. [异构系统：切在哪里，比用哪两颗芯片更重要](#hetero)
+9. [云、边缘、PC：一条站得住的差异](#deploy)
+10. [八个流派，各自怕什么](#families)
+11. [对编译器和运行时意味着什么](#software)
+12. [方法、独立审计与局限](#method)
+13. [参考来源](#sources)
 </nav>
 
-## 1. 芯片长什么样，取决于谁设计的 {#idea}
+## 1. 芯片的形状，取决于设计者认为什么最稀缺 {#idea}
 
 前阵子 NeuralTalk 有篇[文章](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)讲了一个很朴素的观察：看一颗 AI 芯片，往往能猜出团队是什么出身。做 GPU 出身的，会做线程和大寄存器堆。做编译器出身的，会把硬件仲裁拿掉，让编译器看清每一个周期。做后端物理设计的，盯着连线下手。做数据中心的，从电费开始算。
 
-这个视角好用，因为它解释的是芯片**为什么**不一样。规格表告诉你算力和带宽，但不会告诉你设计者认为最难的是哪个问题。所以这次做了两件事：一是按十种出身给每颗芯片打分（原文九种，我加了 CGRA / FPGA 空间数据流，这一派明显自成体系）；二是去查每颗芯片到底是谁做的。查下来发现，出身真的能解释很多事：
+这个想法更有用的版本，是一个可以拿去问任何一颗芯片的问题：**设计者认为什么资源最稀缺？为此选了哪种机制？代价交给了谁：硬件、编译器，还是服务系统？** 规格表告诉你算力和带宽，但不会告诉你设计者认为最难的是哪个问题。
 
-- **Groq** 的创始人 Jonathan Ross，当年以 20% 项目的形式开启了 Google TPU，Groq 成立时带走了 [TPU 最早 10 人里的 8 位](https://www.electronicdesign.com/technologies/embedded-revolution/article/21805495/groq-secretive-startup-rooted-in-google-hires-top-xilinx-executive)。Ross 说 TPU 的起点[其实是一个 FPGA 加速项目](https://moderncto.io/302-jonathan-ross-ceo-founder-at-groq/)；而 Groq [先写了半年编译器，才开始设计芯片](https://www.electronicdesign.com/technologies/embedded-revolution/article/21161146/electronic-design-ai-chip-startup-led-by-exgoogle-engineer-raises-300-million)。
-- **Cerebras** 的五位创始人都来自高密度微服务器公司 [SeaMicro](https://research.contrary.com/report/cerebras)。晶圆级芯片是系统工程师的答案：网络难做，那就干脆不要网络。
-- **SambaNova** 出自斯坦福的 [Kunle Olukotun](https://profiles.stanford.edu/kunle-olukotun)（Niagara 多核、Plasticine CGRA）和 Chris Ré，CEO 是前 Sun/Oracle SPARC 负责人。它的芯片就是一颗 CGRA。
-- **AWS Trainium** 来自 [Annapurna Labs](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips)，一家以色列网络芯片公司，先做的是 Nitro 卸载卡，后来才做 AI 芯片。首席架构师的说法是：先把整个系统设计好，再倒推芯片。
-- **华为**的达芬奇架构，据 [36 氪的长文](https://eu.36kr.com/en/p/3934504849325442)，当年内部有过一场争论：一派想做得像英伟达，廖恒提出了 3D Cube，最后胜出，编译器被视为整个项目的「圣杯」。
+这也能解释今年计算机历史博物馆一场[对谈](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)里的分歧。David Patterson 认为 AI 加速器在「趋同演化」：大矩阵单元、高内存带宽、快速互联。英伟达的 Bill Dally 不同意它们都一样，他举的是数值格式、稀疏和网络。Google 的 Norm Jouppi 则说，TPU 从一开始就是按超级计算机来设计的。两边都对，雷达图正好把这一点画出来：大家的原料差不多，形状不同在于各自把注押在哪里。
+
+团队经历确实会留下痕迹，但最好的证据是当事人讲出来的一次选择，而不是一份履历：
+
+- **当事人讲的一次选择。** Jonathan Ross 当年以 20% 项目的形式开启了 Google TPU，后来带着 [TPU 最早 10 人里的 8 位](https://www.electronicdesign.com/technologies/embedded-revolution/article/21805495/groq-secretive-startup-rooted-in-google-hires-top-xilinx-executive)创办 Groq。他说，即使自己参与设计了 TPU，[给它移植软件还是很难](https://moderncto.io/302-jonathan-ross-ceo-founder-at-groq/)，所以 Groq 先写编译器，再按编译器的需要设计硬件。这个先后顺序，在芯片上看得出来。
+- **一个反例。** TPU v4 的光路交换后来对大模型训练很有帮助，但 [TPU v4 论文](https://arxiv.org/abs/2304.01433)写明，最初引入它是为了扩展规模和可靠性。拿今天跑得好的负载倒推当初的动机，故事就讲错了。
+- **谱系是线索，不是证明。** Cerebras 的创始人来自高密度微服务器公司 [SeaMicro](https://research.contrary.com/report/cerebras)；SambaNova 出自 [Kunle Olukotun](https://profiles.stanford.edu/kunle-olukotun) 的 Niagara 和 Plasticine；AWS Trainium 来自先做 Nitro 卸载系统的 [Annapurna Labs](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips)，首席架构师说他们先把整个系统设计好，再倒推芯片；华为达芬奇架构在内部[一场争论](https://eu.36kr.com/en/p/3934504849325442)里胜过了「做得像英伟达」的方案。这些都是值得拿去问设计者的好问题，但不能证明是出身导致了某个选择。
 
 在雷达图里点任何一颗芯片，卡片上的「设计团队」一行会告诉你它出自谁手。
 
 ## 2. 十个维度，以及它们为什么这样排 {#axes}
 
-每个维度 0 到 5 分，问的都是同一个问题：**这种出身的思路，在多大程度上决定了芯片的关键设计？** 锚点是固定的，保证每个维度上的「3 分」是同一个意思。
+每个维度 0 到 5 分，问的都是同一个问题：**这种出身的思路，在多大程度上决定了芯片的关键设计？** 锚点是固定的，保证每个维度上的「3 分」是同一个意思。分数是作者对**设计侧重**的编码，不是性能、带宽或每 token 搬运字节的实测。
 
 | 维度 · 直觉 | 0 分 | 5 分 |
 |---|---|---|
@@ -70,153 +73,188 @@ description: "每颗推理芯片背后，都是一群有特定出身的人下的
 | **运行时 · 动态服务** | 一切由 host 驱动 | 按服务系统来设计（KV 分页、请求调度、prefill/decode） |
 | **CPU · 通用控制** | 没有控制核、没有 cache | 一颗 CPU 挂了个矩阵单元 |
 | **算法 · 模型固化** | 通用数据通路 | 模型本身做进了硅片 |
-| **数据中心 · 机群 TCO** | 峰值算力优先 | 从所有者自己的机群经济账倒推出来 |
+| **数据中心 · 机群 TCO** | 峰值算力优先 | 从所有者自己的机群经济账倒推出来（端侧芯片指每 token 能耗，是另一种量） |
 
-**为什么这样排。** 雷达图里，谁和谁挨着，会直接影响你看到什么形状。可视化研究（[Ankerst 等，1998](https://bib.dbvis.de/uploadedFiles/180.pdf)；[Miller 等，2019](https://arxiv.org/abs/1908.00576)）的建议是把相关的维度放在一起，读者主要靠「尖角朝哪个方向」来给形状分组。所以我们用 40 颗芯片的分数算了维度之间的相关性，把所有 181,440 种环形排列都试了一遍。最后的顺序让关系最强的维度挨着：存储与物理设计（r = 0.76）、物理设计与 CGRA、CGRA 与编译器、编译器与数据中心，以及 CPU、GPU、运行时这一簇。最对立的放在对面：GPU 正对着编译器（r = −0.74）。结果读起来像一张地图：右半边是静态、空间、物理的一侧，左下是灵活、动态的一侧。GPU 的尖角朝下，TPU 和模型固化芯片朝上。
+**为什么这样排。** 雷达图里谁和谁挨着，会直接影响你看到的形状。可视化研究（[Ankerst 等，1998](https://bib.dbvis.de/uploadedFiles/180.pdf)；[Miller 等，2019](https://arxiv.org/abs/1908.00576)）建议把相关的维度放在一起，因为读者主要靠「尖角朝哪个方向」给形状分组。我们用自己的打分把全部 181,440 种环形排列都试了一遍。最后的顺序让关系强的维度挨着：存储与物理设计、物理设计与 CGRA、CGRA 与编译器、编译器与数据中心，以及 CPU、GPU、运行时这一簇；GPU 正对着编译器。读起来像一张地图：右半边是静态、空间、物理的一侧，左下是灵活、动态的一侧。GPU 的尖角朝下，TPU 和模型固化芯片朝上。
 
-## 3. Google TPU：从 v2 起，编译器就再没放手 {#tpu}
+请把它当成一种排版选择，而不是发现。每颗芯片各算一次时，GPU 与编译器的相关系数是 −0.79；每个厂商各算一次，就只有 −0.54，因为样本里有 11 颗 TPU、6 颗英伟达 GPU。而且维度是我们自己定义的，相关性有一部分来自提问的方式。
 
-TPU 是我们能找到的最好的自然实验：同一家公司，同一套软件栈，十年十一颗芯片。在雷达图里打开「系列演进 → TPU」，或者直接看这张动图：
+## 3. 英伟达：多面手一直在长大 {#nvidia}
+
+英伟达仍然是参照系，所以放在最前面。GPU 的形状和 TPU、Groq 正好相反：GPU 4.5 到 5 分，编译器 1.5 到 2 分，CGRA 接近 0。硬件靠线程和占用率隐藏延迟，编译器就不用知道每个周期。这正是 GPU 什么都能跑的原因。
+
+![英伟达从 V100 到 Rubin 六代芯片的雷达动图](/assets/chip-radar/nvidia-zh.gif)
+
+| | 年份 | 变了什么 | 运行时 | 网络 | 存储 | 算法 | 数据中心 |
+|---|---|---|---|---|---|---|---|
+| [V100](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf) | 2017 | 第一代 Tensor Core；NVLink 2 | 2 | 2 | 1 | 1.5 | 1 |
+| [A100](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf) | 2020 | TF32、2:4 稀疏；MIG 一卡切七 | 3 | 2.5 | 1.5 | 2 | 1.5 |
+| H100 | 2022 | FP8 Transformer Engine | 3.5 | 3 | 1.75 | 3 | 1.75 |
+| B200 | 2024 | 双 die；NVL72 机柜 | 3.5 | 4 | 2.25 | 3.25 | 3.25 |
+| [B300](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/) | 2025 | 288 GB HBM3e；attention softmax 加速 2 倍 | 3.5 | 4 | 2.75 | 3.75 | 3.5 |
+| [Rubin](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/) | 2026 | 六颗协同设计的芯片；KV cache 分层；Dynamo | 4.5 | 4.5 | 3.25 | 3.5 | 4 |
+
+顺着每一列往下看，是一条稳定的累积：A100 的 MIG 是第一个真正的推理服务特性；NVLink 从 8 卡网格长到 72 卡机柜；单卡存储从 16 GB 涨到 288 GB，机柜层面还多了 KV cache 存储；数值格式和 attention 硬件一路向 transformer 靠拢。与此同时 GPU 分本身略降（5 到 4.5），因为 Blackwell 把矩阵计算挪进了异步 tile 引擎，多少游离在经典 SIMT 模型之外。多面手正在一个维度一个维度地把其他流派吃进来，这就是 Dally 那句「产品是整个系统」画成图的样子。
+
+## 4. Google TPU：从 v2 起，编译器就再没放手 {#tpu}
+
+TPU 是我们能找到的最好的自然实验：同一家公司，同一套软件栈，十年十一颗芯片。
 
 ![Google TPU 十一代演进的雷达动图](/assets/chip-radar/tpu-zh.gif)
 
-**v1 是协处理器，还不算编译器机器。** 2015 年的 TPU 插在 PCIe 上，host 给它发[十几条 CISC 指令](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf)，数据没到位时，矩阵单元由硬件停下来等。它最强的维度不是编译器（3.5 分），而是成本：目标写得很直白，要把推理的 [TCO 降低 10 倍](https://pages.cs.wisc.edu/~markhill/restricted/isca17_tpu_slides.pdf)（数据中心 4.5 分）。
+| 代 | 年份 | 定位 | 计算与控制 | 存储 | 扩展 |
+|---|---|---|---|---|---|
+| [v1](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf) | 2015 | 推理 | 256×256 int8 脉动阵列；host 发 CISC 指令 | 8 GiB DDR3，片上 28 MiB | PCIe 卡 |
+| [v2](https://www.hc32.hotchips.org/assets/program/conference/day2/HotChips2020_ML_Training_Google_Norrie_Patil.v01.pdf) | 2017 | 训练 | bf16 MXU；VLIW 由 XLA 调度；早期 SparseCore | 16 GiB HBM | 2D torus，256 芯片 |
+| v3 | 2018 | 训练 | 每核 MXU 翻倍；液冷 | 32 GiB HBM | 1,024 芯片 |
+| [v4](https://arxiv.org/abs/2304.01433) | 2020 | 训练 | SparseCore 处理 embedding | 32 GiB HBM | 3D torus，4,096 芯片，光路交换 |
+| [v4i](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf) | 2020 | 推理 | 单核，风冷 | 8 GiB HBM + 128 MiB 片上 CMEM | 小规模 |
+| [v5e](https://docs.cloud.google.com/tpu/docs/v5e) | 2023 | 性价比 | 按每美元定价 | 16 GB HBM | 256 芯片 |
+| [v5p](https://docs.cloud.google.com/tpu/docs/v5p) | 2023 | 训练 | 旗舰 | 95 GB HBM | 8,960 芯片 |
+| [v6e](https://docs.cloud.google.com/tpu/docs/v6e) | 2024 | 性价比 | 更大的 MXU | 32 GB HBM | 256 芯片 |
+| [v7 Ironwood](https://docs.cloud.google.com/tpu/docs/tpu7x) | 2025（2026 年 3 月 GA） | 推理为主，也能训练 | FP8 | 192 GiB HBM | 9,216 芯片 |
+| [8t](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive) | 2026 | 训练 | SparseCore + LLM decoder engine | 216 GB HBM，128 MB SRAM | 3D torus |
+| [8i](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive) | 2026 | 推理服务、后训练 | 集合通信加速引擎（CAE） | 288 GB HBM，384 MB SRAM | Boardfly，最多 1,152 芯片 |
 
-**从 v2 开始，编译器接管了芯片。** TPU v2 换成宽 VLIW 指令包和软件管理的存储，全部由 XLA 编译器来排，此后每一代编译器都是 4.5 分。没给满分，只是因为 HBM 搬运是异步的，软件要靠同步标志位等待。Google 自己那篇[《三代 TPU 的十条经验》](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)里也说，对 VLIW 加速器来说，编译器兼容比二进制兼容更重要。
+**v1 是协处理器，还不算编译器机器。** host 通过 PCIe 给它发十几条 CISC 指令，数据没到位时矩阵单元由硬件停下来等（编译器 3.5 分）。目标写得很直白：把推理的 [TCO 降低 10 倍](https://pages.cs.wisc.edu/~markhill/restricted/isca17_tpu_slides.pdf)，同时满足 7 ms 的 p99 延迟限制。从第一代 TPU 起，延迟就很重要。
 
-**网络从无到有，一路长成整个 pod。** v1 网络 0 分。v2 有了 torus，3 分。v4 加上光路交换，5 分。此后的旗舰款一直是 5 分，一直到 Ironwood 的 9,216 芯片 pod。
+**从 v2 开始，编译器接管了芯片。** VLIW 指令包和软件管理的存储，全部由 XLA 来排，此后每一代编译器都是 4.5 分。Google 自己那篇[《三代 TPU 的十条经验》](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)也说，对 VLIW 加速器来说，编译器兼容比二进制兼容更重要。
 
-**不太被注意的第二条线：成本。** TPU v4i、v5e、v6e 是 TCO 优先的设计：风冷、pod 更小、HBM 更少。数据中心 4.5 到 5 分，网络只有 1 到 3 分。
+**网络从无到有，一路长成整个 pod。** 网络分 0 → 3 → v4 的 5 分，一直保持到 Ironwood 的 9,216 芯片 pod。Jouppi 说的「从一开始就是超级计算机」在图上看得见，但要记住上面那个限定：光路交换最初是为了规模和可靠性。
 
-**2026 年，分岔摆上了台面。** 第八代是两颗芯片，[Google 的技术详解](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)写得很清楚。TPU 8t 专做训练。TPU 8i 是第一颗延迟优先的推理 TPU：片上 SRAM 翻了三倍（384 MB），把 KV cache 尽量留在芯片上；新增集合通信加速引擎，专门加速 decode 时的归约与同步；网络换成直径更小的 Boardfly。它的存储（4 分）和运行时（3.5 分）是所有 TPU 里最高的。另据报道，8t 和 8i 的设计合作方分别是[博通和联发科](https://nand-research.com/google-cloud-8th-generation-tpu-family-splits-training-and-inference/)。
+**不太被注意的第二条线：成本。** v4i、v5e、v6e 是 TCO 优先的设计：风冷、pod 更小、HBM 更少。数据中心 4.5 到 5 分，网络只有 1 到 3 分。
 
-## 4. 英伟达：多面手一直在长大 {#gpus}
+**2026 年：推理有了自己的分支。** TPU 8i 片上 SRAM 翻了三倍，新增集合通信加速引擎专门加速 decode 时的归约，网络直径更小。它的存储（4 分）和运行时（3.5 分）是所有 TPU 里最高的。新意不在于 Google 开始重视延迟（v1 就重视），而在于为生成式推理和后训练单独做了一颗芯片。关于供货：博通在 [9 月的业绩会](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)上说已开始量产出货 8i，并把 8t 称作联发科的版本。供货方不一定是架构决策者，TPU 是 Google 设计的。
 
-GPU 的形状和 TPU、Groq 正好相反：GPU 4.5 到 5 分，编译器 1.5 到 2 分，CGRA 接近 0。硬件靠线程和占用率隐藏延迟，编译器就不用知道每个周期。这正是 GPU 什么都能跑的原因。
+## 5. 其他 GPU：AMD 与华为昇腾 {#othergpus}
 
-![英伟达 H100、B200、Rubin 的雷达动图](/assets/chip-radar/nvidia-zh.gif)
+**AMD** 走的是英伟达那条路，起点不同。MI300X 主打 chiplet、3D 堆叠和每美元的显存容量（物理设计 3.75 分，GPU 里最高）。[MI455X 和 Helios 机柜](https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin)加上了单卡最大的 HBM 和基于以太网的 scale-up。AMD 在推理上的其他押注方向一致：宣布收购 Taalas（见[第 6 节](#challengers)），并把 Instinct GPU 与 Cerebras 晶圆搭配（见[第 8 节](#hetero)）。
 
-| | 运行时 | 网络 | 存储 | 数据中心 |
-|---|---|---|---|---|
-| H100（2022） | 3.5 | 3 | 1.75 | 1.75 |
-| B200（2024） | 3.5 | 4 | 2.25 | 3.25 |
-| Rubin（2026） | 4.5 | 4.5 | 3.25 | 4 |
+**华为昇腾**的形状是被供应限制塑造出来的。910C 数据中心只有 1 分，网络却有 4.75 分：单颗芯片弱一些，就用超大规模的光互联超节点来补。[昇腾 950](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech) 保留了这个网络，在达芬奇 Cube 旁边加了 SIMT 编程路径（GPU 3 分），并把 prefill 和 decode 拆成了不同型号。架构的来历也合主题：3D Cube [在内部争论中胜过](https://eu.36kr.com/en/p/3934504849325442)了更像英伟达的方案，编译器被视为整个项目的「圣杯」。
 
-[Rubin](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/) 已经不太像一颗芯片，更像一个机柜级的推理服务平台：六颗协同设计的芯片、HBM4、分层的 KV cache 存储、Dynamo 推理服务软件。它的 GPU 分反而略降（5 到 4.5），因为 Blackwell 和 Rubin 把矩阵计算挪进了异步的 tile 引擎，多少游离在经典 SIMT 模型之外。多面手正在一个维度一个维度地把其他流派吃进来。
-
-AMD 走的是同一条路，起点不同：MI300X 主打 chiplet 和每美元的显存容量（物理设计 3.75 分），[MI455X/Helios](https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin) 加上了单卡最大的 HBM 和以太网 scale-up。华为昇腾的形状是被供应限制塑造出来的：910C 数据中心只有 1 分，网络却有 4.75 分，单颗芯片弱一些，就用超大规模的光互联超节点来补；[昇腾 950](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech) 又加了 SIMT 编程路径，并且把 prefill 和 decode 拆成了不同型号。
-
-## 5. 挑战者们，和背后的人 {#challengers}
+## 6. 挑战者们，和背后的人 {#challengers}
 
 创业公司的形状最极端，因为每家都把注押在一个想法上，而这个想法往往就是创始人的老本行。
 
-**Groq：编译器派。** 编译器 5 分，存储 5 分，CPU 0 分。[ISCA 2022 论文](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf)描述的芯片没有 cache、没有仲裁器、没有互锁，连芯片之间的链路都在静态调度里。权重放在 SRAM，分散在很多颗芯片上。代价体现在运行时（0.75 分）：硬件不做任何动态的事，所有动态的事都归 host 管。一个从编译器起家的团队，做出了一颗编译器能完全看透的芯片。2025 年 12 月，英伟达授权了这套架构，并招走了 Groq 的核心团队。[Groq 3 LP30](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform) 形状没变，变的是它的角色（见[第 7 节](#hetero)）。
+**Groq：编译器派。** 编译器 5 分，存储 5 分，CPU 0 分。[ISCA 2022 论文](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf)描述的芯片在正常执行路径上没有 cache、没有仲裁器、没有互锁，连芯片之间的链路都在静态调度里。代价体现在运行时（0.75 分）：硬件里几乎不做动态的事，由 host 来承担。2025 年 12 月，英伟达拿到了 [Groq 技术的非独家授权，并招走了核心团队](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm)；Groq 作为英伟达云合作伙伴继续运营推理云。[Groq 3 LP30](https://www.nvidia.com/en-us/data-center/lpx/) 保留了 SRAM 优先的芯片（每颗 500 MB），而 LPX 机柜另加了 12 TB DDR5 容量层。芯片工作存储、机柜容量层、服务调度是三层不同的东西，雷达图打的是芯片。
 
-**Cerebras：系统派。** 物理设计 5 分，存储 5 分。整个模型放在一整片富含 SRAM 的晶圆上，网络问题自然就没了，所以 WSE-2 网络只有 2.25 分。[SDK 文档](https://sdk.cerebras.ai/computing-with-cerebras)显示，每个核的硬件在数据到达时自动启动任务，编译器负责布局和路由，但不排周期（编译器 3.25 分）。到了 WSE-3 和[机柜级系统](https://www.servethehome.com/cerebras-talks-going-rack-scale-with-their-wses-at-hot-chips-2026/)，晶圆越来越多地被当成 decode 引擎，和别家的 prefill 搭配使用。
+**Cerebras：系统派。** 物理设计 5 分，存储 5 分。一整片富含 SRAM 的晶圆，减少了必须跨网络传输的数据，但网络并没有消失：16 位的 70B 模型[至少要 4 台 CS-3](https://www.cerebras.ai/blog/introducing-cerebras-inference-ai-at-instant-speed)，2026 年的 CS-4 机柜里有三片晶圆。[SDK 文档](https://sdk.cerebras.ai/computing-with-cerebras)显示，每个核的硬件在数据到达时自动启动任务，编译器负责布局和路由，但不排周期（编译器 3.25 分）。
 
-**SambaNova：CGRA 派。** CGRA 5 分。[SN40L 论文](https://arxiv.org/abs/2405.07518)把整段计算图铺在可重构数据流阵列上，背后是三级存储（SRAM、HBM、DDR），论文给出的核心结果是：同时服务大量模型时，机器规模最多可缩小 19 倍。这是 Plasticine 那条研究线的商业化。[SN50](https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference) 保留了这个形状，主打 decode。
+**SambaNova：CGRA 派。** CGRA 5 分。[SN40L 论文](https://arxiv.org/abs/2405.07518)把整段计算图铺在可重构数据流阵列上，配三级存储（SRAM、HBM、DDR），并把第三级存储和「让很多模型同时常驻」联系起来：同时服务大量模型时，机器规模最多可缩小 19 倍。谱系是真的（Plasticine 先商业化成了 SN10），但这是改造而不是照搬：原本全静态的互联变成了分组交换。
 
-**Tenstorrent：CPU 派。** 数据中心芯片里 CPU 分最高（3.5 分）：750 多个小 RISC-V 核驱动计算单元，另有 16 个能跑 Linux 的核，每颗芯片都带以太网。创始人 Ljubisa Bajic 是 [ATI/AMD/英伟达出身的架构师](https://www.anandtech.com/show/16709)，CPU 老将 Jim Keller 后来出任 CEO。加速器被做成了一台众核计算机。
+**Tenstorrent：CPU 派。** 数据中心芯片里 CPU 分最高（3.5 分）：750 多个小 RISC-V 核驱动计算单元，处处是以太网。创始人 Ljubisa Bajic 是 [ATI/AMD/英伟达出身的架构师](https://www.anandtech.com/show/16709)，CPU 老将 Jim Keller 后来出任 CEO。
 
-**Taalas：同一个创始人，相反的押注。** 离开 Tenstorrent 后，Bajic 联合创办了 Taalas。它的 [HC1](https://www.cnx-software.com/2026/02/22/taalas-hc1-hardwired-llama-3-1-8b-ai-accelerator-delivers-up-to-17000-tokens-s/) 在制造时就把一个模型的权重定死了：全文唯一的算法 5 分，网络只有 0.5 分。AMD 在 2026 年 8 月[宣布收购 Taalas](https://ir.amd.com/news-events/press-releases/detail/1296)，尚待审批，说这项技术是对 Instinct GPU 的补充。
+**Taalas：同一个创始人，相反的押注。** 离开 Tenstorrent 后，Bajic 联合创办了 Taalas。它的 [HC1](https://taalas.com/the-path-to-ubiquitous-ai/) 把一个模型硬连线进芯片（Llama 3.1 8B，用 3/6 位量化，有一定质量损失）：全文唯一的算法 5 分，网络只有 0.5 分。AMD 在 2026 年 8 月[宣布收购 Taalas](https://ir.amd.com/news-events/press-releases/detail/1296)，到 AMD 11 月的财报文件里仍待交割。
 
-**Etched 和 d-Matrix。** Etched Sohu 只跑 transformer（算法 4.5 分），CEO 是 ML 编译器出身（OctoML、Xnor.ai），这颗芯片是全文公开技术细节最少的一颗，形状的置信度偏低。d-Matrix 在 SRAM 里做计算（存储 5 分），两位创始人来自 [Inphi 的数据中心互联业务](https://engineering.purdue.edu/Engr/AboutUs/News/Events/tech-summit/2025/sudeep-bhoja)：一群搬数据的专家，做了一颗尽量不搬数据的芯片。
+**Etched 和 d-Matrix。** Etched Sohu 只跑 transformer（算法 4.5 分）。Etched 发过[一手的机制说明](https://www.etched.com/progress/frontier-inference-clusters)（低电压计算块、可拆分阵列、HBM/SRAM 混合），并在 2026 年 8 月[交付了首个机柜](https://www.etched.com/progress/from-zero-to-one)，但没有公开完整的微架构和编程模型，所以形状的置信度仍偏低。d-Matrix 在 SRAM 里做计算（存储 5 分），创始人来自 [Inphi 的数据中心互联业务](https://engineering.purdue.edu/Engr/AboutUs/News/Events/tech-summit/2025/sudeep-bhoja)。
 
-## 6. 云厂商自研：从电费账单出发 {#hyperscalers}
+## 7. 云厂商自研：从电费账单出发 {#hyperscalers}
 
 Meta、AWS、微软自己有负载，自己付电费。它们最高的维度都是数据中心：Maia 200 和 MTIA 2i 都是 5 分，Trainium3 是 4.5 分。
 
-- **AWS Inferentia2 和 Trainium3** 像是 TPU 的表亲：编译器 4 分，多个独立引擎由编译器同步，存储由软件管理，扩展靠交换式的 UltraServer。做过 Nitro 网络卸载卡的团队，做加速器也是系统先行。
-- **微软 Maia 200** 出自 [Azure 硬件系统与基础设施部门](https://runasradio.com/Shows/Show/940)，芯片、系统和数据中心在一个团队里。那篇[架构详解](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312)读起来像一个 TCO 模型，顺带附了一颗芯片：软件管理的 SRAM、FP4、片上集成以太网 scale-up。
-- **Meta MTIA** 的 CPU 分出乎意料地高（3 分）：带 RISC-V 控制核和 cache，因为它最早是给推荐排序做的。2025 年 Meta [收购了 Rivos](https://www.hpcwire.com/?p=184116)，这家 RISC-V 公司此前就参与了 MTIA 的设计。MTIA 300/400 转向 chiplet、HBM 和 72 芯片机柜，其中 400 还在实验室测试。
+- **AWS Inferentia2 和 Trainium3** 像是 TPU 的表亲：编译器 4 分，多个独立引擎由编译器同步，存储由软件管理。两者的扩展方式不同：[Inf2](https://aws.amazon.com/ec2/instance-types/inf2/) 用 NeuronLink 最多连 12 颗，[Trn3 UltraServer](https://aws.amazon.com/ec2/instance-types/trn3/) 通过 NeuronSwitch 最多连 144 颗。
+- **微软 Maia 200** 出自 [Azure 硬件系统与基础设施部门](https://runasradio.com/Shows/Show/940)，芯片、系统和数据中心在一个团队里。那篇[架构详解](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312)读起来像一个 TCO 模型，顺带附了一颗芯片。
+- **Meta MTIA** 的 CPU 分出乎意料地高（3 分）：带 RISC-V 控制核和 cache，因为它最早是给推荐排序做的。2025 年 Meta [收购了 Rivos](https://www.hpcwire.com/?p=184116)，这家 RISC-V 公司此前就参与了 MTIA 的设计。据 [Meta](https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/)，MTIA 400 已结束实验室测试，正在走向部署。
 
-## 7. 异构系统：一种形状不够用了 {#hetero}
+## 8. 异构系统：切在哪里，比用哪两颗芯片更重要 {#hetero}
 
-2026 年最大的变化不是某种新的芯片形状，而是在一个请求里同时用两种形状。打开雷达图的「异构系统」：实心的是各个组件，虚线是部署后的整个系统。
+2026 年最大的变化，是在一个请求里同时用两种形状的芯片。最直观的画法是给整个系统画一个合成形状。我们在早一版里这么做过，后来删掉了：审计发现，50 个系统分数里有 9 个落在两个组件的分数区间之外，任何加权都得不出来。系统整合也许会产生新能力，但那就应该把这个能力写出来，而不是取个平均。打开「异构系统」：雷达图只画两个组件，表格写清谁来算、传什么、多久一次、证据有多硬。
 
-| 系统 | 组件一 | 组件二 | 怎么分工 |
+最清楚的例子来自英伟达自己。对 Vera Rubin + Groq 3 LPX，英伟达描述了同样两类机柜上的[三种分工方式](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)：
+
+| 切在哪里 | 谁来算 | 传什么、多久一次 | 该查的代价 |
 |---|---|---|---|
-| 英伟达 Vera Rubin NVL72 + Groq 3 LPX | Rubin GPU | Groq 3 LPU | GPU 管 prefill、attention 和 KV cache；LPU 跑 decode 的 FFN/MoE 层，每个 token 交接一次 |
-| AWS Trainium + Cerebras CS-3 | Trainium | Cerebras 晶圆 | Trainium 做 prefill，晶圆做 decode，KV cache 走 EFA |
-| SambaNova SN50 + GPU | B200 级 GPU | SN50 | GPU 只做 prefill，数据流芯片做 decode |
-| d-Matrix Corsair + GPU（经 Gimlet） | GPU | Corsair 卡 | 调度器通过以太网，把受内存限制的部分派给存内计算卡 |
-| Cerebras + AMD Instinct（计划中） | Instinct GPU | Cerebras 晶圆 | 晶圆 decode，旁边是 HBM 充足的 GPU；已宣布，未出货 |
+| Prefill / decode | GPU 做 prefill，LPX 做 decode | KV cache，每轮对话一次 | 长提示词的 KV 传输会不会吃掉收益？ |
+| Attention / FFN | GPU 留 KV 并算 attention，LPX 算 FFN/MoE | 中间激活，每个全注意力层一次 | 传输小但频繁，落在逐 token 关键路径上 |
+| 草稿 / 验证 | LPX 用小模型出草稿，GPU 验证 | 草稿 token 与验证结果；两端各留自己的 KV | 接受率和验证批次 |
 
-分数里有三点很明显：
+三种切法有三种不同的瓶颈，所以一个分数描述不了「这个系统」。证据也不一样：LPX 单独的速度是实测（Gemma 4 31B、100K 上下文，输出中位数 3,431 tokens/s），而联合 2T 模型的结果是投影。
 
-- **合起来的形状很大，这正是目的。** Vera Rubin 加 LPX 在运行时、网络、存储上同时拿到 5 分。HBM 存 KV cache，SRAM 流式供给权重，没有任何一颗单芯片能两头兼顾。
-- **编译器分降下来了。** 系统的编译器分（3.25）落在 LPU 的 5 分和 GPU 的 2 分之间，一半静态调度，一半动态调度，两者的边界得有人管。
-- **运行时成了最难的维度。** 已出货或已宣布的系统，运行时都在 4 分以上（计划中的 AMD 组合是 3.5 分，只因为服务软件还没公开）。难点已经不在任何一颗芯片内部，而在于决定哪个阶段、哪一层、哪个 token 去哪里，并且足够快地把 KV cache 或激活值搬过去。英伟达的 [LPX](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform) 是在每个 token 内部拆开 attention 和 FFN；[Cerebras](https://www.cerebras.ai/blog/disaggregated-inference) 是拆开 prefill 和 decode。这是同一个思路的两个层级。
+另外四套组合都切在 prefill/decode 或草稿/验证，状态各不相同：AWS Trainium + Cerebras 已宣布，Bedrock 服务预计 2027 年一季度；SambaNova 7 月的演示用 [4 张 H200 做 prefill、16 颗 SN50 做 decode](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world)；d-Matrix + GPU 经 Gimlet 做[投机解码](https://gimletlabs.ai/blog/low-latency-spec-decode-corsair)，1.6B 草稿模型跑在 Corsair 上，120B 目标模型跑在 GPU 上；Cerebras + AMD Instinct 预计 2026 年四季度量产。
 
-这也改变了怎么看那些挑战者。一颗单独看太窄的芯片，比如全 SRAM 的 decode 芯片、或者不要网络的晶圆，一旦有 GPU 帮它兜住所有它不擅长的事，就变得非常有用。AMD 收购 Taalas 给出的理由，「补充 GPU」，也是同一个逻辑。
+还有两个对照必须放进来。拆分阶段不一定要两种芯片：[DistServe](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin) 就是把 prefill 和 decode 分到同一种 GPU 的不同池子里。OpenAI 与博通合作的 [Jalapeño](https://openai.com/index/jalapeno-first-results/) 走了相反的路：一种加速器兼顾两个阶段，尽量让 KV 留在本地（首批结果是厂商自测）。任何异构系统公平的比较对象，是同样质量、延迟和功耗下的同构分池，并且要把传输和排队开销算进去。
 
-## 8. 云、边缘、PC：同样的坐标，不同的重心 {#deploy}
+## 9. 云、边缘、PC：一条站得住的差异 {#deploy}
 
-雷达图的「云与端」把各场景的形状取了平均。
+雷达图的「云与端」把各场景的形状取了平均。对 0–5 的序数分取平均容易误导，值得保留的结论要用计数来讲：
 
-| 场景 | 芯片数 | 最高 | 最低 |
+| 分组 | 芯片数 | 存储 ≥ 3 | 存储 ≥ 4 |
 |---|---|---|---|
-| 云端，推理优先 | 14 | 存储 3.9、数据中心 3.9、编译器 3.8 | GPU 0.8、CPU 0.9 |
-| 云端，训练加推理 | 20 | 网络 3.7、数据中心 3.4、编译器 3.3 | CGRA 1.9 |
-| 边缘、PC、手机 | 6 | 数据中心 4.2、编译器 3.7 | 网络 0、GPU 0.8 |
+| 云端，推理优先 | 14 | 12 / 14 | 8 / 14 |
+| 云端，其余 | 23 | 7 / 23 | 3 / 23 |
+| 边缘、PC、手机 | 6 | 0 / 6 | 0 / 6 |
 
-端侧没有机群，这里的「数据中心」指每 token 的能耗和成本。三点观察：
+在数据里出现的每一个分数门槛上，推理优先组的达标比例都不低于另外两组，所以这个差异不依赖于把 0–5 各档当成等距。它说明的是：**在这份样本和这套编码里，云端推理芯片在存储上的设计侧重最强。** 它不说明的是：这些芯片每 token 实际搬运更多字节，或者每位评分者都会得出同样结果。只看第一轮打分，就有一个门槛会反过来。
 
-- **除了能训练的云端芯片，GPU 维度几乎是空的。** 只做推理的芯片平均不到 1 分。如果只为推理设计，SIMT 的通用性是第一个被舍弃的。
-- **存储把云端推理芯片区分开了：** 平均 3.9 分，训练芯片 2.7，端侧 2.1。在数据中心，decode 卡在每 token 搬多少字节上。
-- **到了端侧，网络消失了，编译器还在。** 笔记本和手机上的 NPU 也带着各自的出身：AMD XDNA 2 就是[赛灵思 AI Engine](https://www.amd.com/en/technologies/xdna.html)，一颗来自 FPGA 世界的 CGRA（4.5 分）；英特尔 NPU 来自 [Movidius](https://www.anandtech.com/show/18878)；高通 Hexagon 是 VLIW DSP 一路长大的（CPU 3.5 分）；苹果的神经网络引擎是封闭的，只能通过 Core ML 用。端侧厂商披露得最少，这些形状的置信度也最低。
+另外两点观察，把握要松一些：
 
-## 9. 八个流派，各自怕什么 {#families}
+- **只做推理的芯片大多舍弃了 SIMT。** 无论云端还是端侧，GPU 维度平均都不到 1 分。
+- **到了端侧，网络消失了，编译器还在**（编译器平均 3.7 分）。端侧的「数据中心」分指每 token 能耗，和机群 TCO 不是同一个量，不要拿它的高低和云端芯片比。笔记本和手机上的 NPU 也带着各自的出身：AMD XDNA 2 就是[赛灵思 AI Engine](https://www.amd.com/en/technologies/xdna.html)（CGRA 4.5 分）；英特尔 NPU 来自 [Movidius](https://www.anandtech.com/show/18878)；高通 Hexagon 是 VLIW DSP 一路长大的（CPU 3.5 分）；苹果神经网络引擎只能通过 Core ML 用。端侧厂商披露得最少，这些形状的置信度也最低。
 
-雷达图的「全部芯片」把所有形状分成八个流派。每个形状都可以当成设计者对「最难的是什么」的回答。
+## 10. 八个流派，各自怕什么 {#families}
 
-1. **编译器优先、从机群出发**（TPU、Inferentia/Trainium、Maia）。**怕账单。** 编译器 4.3，数据中心 4.3。
-2. **确定性、全 SRAM**（Groq）。**怕不可预测。** 编译器 5，存储 5，CPU 0。
-3. **空间数据流与晶圆级**（Cerebras、SambaNova）。**怕数据出芯片。** CGRA 4.6，存储 4.7，物理设计 4.0。
-4. **模型固化**（Taalas、Etched）。**怕为通用性买单。** 算法 4.8。
-5. **存储优先**（d-Matrix）。**怕内存墙。** 存储 5。
-6. **偏 CPU 的众核**（Tenstorrent、MTIA）。**怕没预料到的负载。** CPU 3.2。
-7. **通用 GPU**（英伟达、AMD、华为）。**怕失去开发者。** GPU 4.0，网络 4.0，运行时 3.4。
-8. **端侧 NPU。** **怕电池。** 网络 0，能耗 4.2。
+雷达图的「全部芯片」把所有形状分成八个流派。每一个都应该当成关于「设计者认为什么最稀缺」的假设来读，而不是已经证明的动机：
 
-这些「怕」没有哪个是错的。它们是对「什么会稀缺」的不同回答：算力、带宽、功耗、开发者的时间，还是灵活性。异构系统之所以出现，是因为老实的答案是「都稀缺，只是在同一个请求的不同阶段」。
+1. **编译器优先、从机群出发**（TPU、Inferentia/Trainium、Maia）。**稀缺的是钱和电。** 编译器和数据中心都高。
+2. **确定性、全 SRAM**（Groq）。**稀缺的是可预测性。** 编译器 5，存储 5，CPU 0。
+3. **空间数据流与晶圆级**（Cerebras、SambaNova）。**稀缺的是片外带宽。** CGRA、存储、物理设计都高。
+4. **模型固化**（Taalas、Etched）。**稀缺的是通用性吃掉的效率。** 算法高。
+5. **存储优先**（d-Matrix）。**稀缺的是内存带宽。** 存储 5。
+6. **偏 CPU 的众核**（Tenstorrent、MTIA）。**稀缺的是对明天负载的把握。** CPU 高。
+7. **通用 GPU**（英伟达、AMD、华为）。**稀缺的是开发者。** GPU、网络、运行时都高。
+8. **端侧 NPU。** **稀缺的是电池。** 网络 0。
 
-## 10. 对编译器和运行时意味着什么 {#software}
+这些判断没有哪个是错的。它们是对「什么会稀缺」的不同回答：算力、带宽、功耗、开发者的时间，还是灵活性。异构系统之所以出现，部分是因为老实的答案是「在同一个请求的不同阶段，稀缺的东西不一样」。即便如此，第 8 节也说明了，同构分池是一个必须认真对待的替代方案。
+
+## 11. 对编译器和运行时意味着什么 {#software}
 
 对做软件栈（编译器、vLLM、SGLang）的人来说，有三个结论。
 
 **「编译器」在不同形状上是不同的活。** 在 Groq 这样的芯片上，编译器就是调度器，精确到周期，跨芯片。在 TPU 或 Trainium 上，它要显式管理存储和同步。在 GPU 上，它主要负责生成好的 kernel，调度交给硬件。在 CGRA 上，它要做布局和布线。一套编译器架构要同时服务这四种，前提是它清楚自己在做的是哪一种活。
 
-**运行时是涨得最快的维度。** 它在一代代 GPU 上涨，在 TPU 8i 上涨，在每一套异构系统上都高。推理服务引擎过去是硬件之上的一层，现在正在变成硬件设计的一部分：KV cache 分层、prefill 和 decode 的放置、不同芯片之间按 token 交接。vLLM 和 SGLang 已经把 prefill-decode 解耦当成一等功能了，下一步是一个能理解不同芯片类型的调度器，而不只是不同节点。
+**服务层正在进入硬件设计。** 英伟达六代芯片的运行时分一路上涨，TPU 8i 也一样。KV cache 分层、prefill 与 decode 的放置、不同芯片之间的交接，现在是设计的输入，而不是事后再补。vLLM 和 SGLang 已经把 prefill-decode 解耦当成一等功能了，下一步是一个既理解不同芯片类型、也理解不同切法（按阶段、按层、按草稿）的调度器，而不只是理解不同节点。
 
 **静态和动态的边界，现在是一个系统设计问题。** 当一颗确定性芯片和一颗动态芯片共同处理一个 token 时，总得有人在精确到周期的调度和 batch 大小、到达时间都在变的世界之间做翻译。这一层既不完全属于编译器，也不完全属于运行时。它大概是眼下推理硬件里最有意思的软件问题。
 
-## 11. 方法与局限 {#method}
+## 12. 方法、独立审计与局限 {#method}
 
-**方法。** 资料只用公开来源：论文（ISCA、HPCA、arXiv）、Hot Chips 报告、厂商架构文档和靠谱的技术媒体。用同一套评分标准做了两轮独立打分：一轮按芯片逐颗打，一轮按维度打（同一维度先把所有芯片排一遍）。每个分数都附一句理由、一个出处和一个置信度（论文或规格为高，厂商说法或二手分析为中，推断为低）。最终分数取两轮平均，置信度取较低者。两轮结果很接近：450 个分数里有 317 个完全一样，没有任何一个相差超过 1 分。之后又做了第二轮研究，用一手资料替换掉较弱的来源，并根据一手证据改了 16 个分数，比如 TPU v1 的编译器分从 4.5 降到 3.5，Cerebras 的编译器和 GPU 分也按上文的理由做了调整。
+**方法。** 资料只用公开来源：论文（ISCA、HPCA、OSDI、arXiv）、Hot Chips 报告、厂商架构文档、业绩会和财报文件，以及靠谱的技术媒体。用同一套评分标准做了两轮独立打分，一轮按芯片，一轮按维度。每个分数都附一句理由、一个出处和一个置信度；最终分数取两轮平均，置信度取较低者。最初 450 个分数里有 317 个完全一样，没有任何一个相差超过 1 分。两轮用的是同一批研究笔记，所以这说明的是一致性，不是彼此独立地得到了真相。
+
+**两轮纠错。** 第二轮研究用一手资料替换了较弱的来源，改了 16 个分数。之后一位同事做了独立审计：从原始文件重算了全部数字，并对关键断言查了一手资料。审计找到了真实的错误，这一版都已改正：
+
+- TPU 8t/8i 的供货方写反了。
+- Groq 被误写成「已被收购」。
+- 「整个模型放在一片 Cerebras 晶圆上」的说法有误。
+- AWS 两种扩展拓扑被混为一谈。
+- 用苹果 GPU 的实验去证明神经网络引擎。
+- SambaNova 演示里的 GPU 型号写错。
+
+审计还证明了合成的异构系统分数不可能是组件的加权，所以第 8 节改成了描述机制。它最有价值的建议，也是本文采纳的，是第 1 节的问法：什么最稀缺，选了哪种机制，代价交给了谁。
 
 **局限。**
-- **这些是判断，不是测量。** 评分标准保证了一致性，理由让每个分数可以核对，但换一个团队来打，很多格子会差半分。悬停任何一个点，可以看到理由。
-- **两轮打分是相关的。** 各自独立打，但用的是同一批研究笔记，这在一定程度上解释了为什么结果这么接近。
-- **公开信息不均匀。** 端侧 NPU、Etched、d-Matrix Raptor、Google Tensor G5 披露很少，标为低置信度。2026 年刚发布的芯片根据发布材料打分，而发布材料通常偏重优点。
-- **分数衡量的是设计侧重，不是好坏或速度。** 低分不是批评：Groq 的 CPU 0 分是有意为之，Taalas 的网络 0.5 分也是。
-- **异构系统的分数描述部署后的系统，** 按哪个组件承担主要工作来加权，这是方法里最不标准的部分。
-- **设计团队的出身是简化的说法。** 大团队里什么背景都有，这里写的是公开资料里提到的创始人或主导团队。
-- **状态截至 2026 年 11 月。** AMD 收购 Taalas 已宣布、待审批；英伟达和 Groq 之间是技术授权加人员招聘，GroqCloud 仍在用 Groq 自己的芯片；MTIA 400 还在实验室测试。
+- **这些是判断，不是测量。** 评分标准保证了一致性，理由让每个分数可以核对，但换一个团队来打，很多格子会差半分。
+- **轴序和八个流派是排版选择**，用我们自己的编码检验过，不是关于芯片的发现。
+- **公开信息不均匀。** 端侧 NPU、Etched、d-Matrix Raptor、Google Tensor G5 披露较少，标为低置信度。资料缺失只表示置信度低，不表示「设计者没做这件事」。
+- **分数衡量的是设计侧重，不是好坏或速度。** Groq 的 CPU 0 分和 Taalas 的网络 0.5 分都是有意的选择，不是缺陷。
+- **谱系是线索，不是原因。** 大团队里什么背景都有，供货方也不等于架构师。
+- **状态截至 2026 年 11 月 7 日。** AMD 收购 Taalas 待交割；英伟达和 Groq 之间是授权加人员招聘；LPX 机柜已量产；MTIA 400 正走向部署。
+
+**怎样让它不只是一个好故事。** 审计提出了两项值得做的盲测。第一，知道团队背景，能否比只知道负载、市场和年代更准地预测架构？第二，看匿名的架构，能否比瞎猜更准地认出团队背景？即使两项都成立，那也只是预测，不是因果；如果都不成立，这张地图作为设计评审和访谈设计者的工具，仍然有用。
 
 所有分数、理由和出处都在「数据表」和[数据文件](/assets/chip-radar/data.js)里，欢迎指正。
 
-## 12. 参考来源 {#sources}
+## 13. 参考来源 {#sources}
 
 完整来源列表见[英文版](/2026/11/inference-chip-shapes/#sources)，每个分数对应的来源都在数据文件里。主要来源：
 
-- [NeuralTalk：从架构师的出身看芯片设计](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)
-- [Jouppi 等，TPU v1（ISCA 2017）](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf)；[三代 TPU 的十条经验（ISCA 2021）](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)
-- [TPU 8t / 8i 技术详解（Google Cloud）](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)
-- [Groq ISCA 2022 论文](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf)；[NVIDIA Groq 3 LPX 详解](https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform)；[NVIDIA Rubin 平台详解](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/)
-- [Cerebras SDK 文档](https://sdk.cerebras.ai/computing-with-cerebras)；[SambaNova SN40L 论文](https://arxiv.org/abs/2405.07518)
-- [AMD 收购 Taalas](https://ir.amd.com/news-events/press-releases/detail/1296)；[Taalas HC1（CNX Software）](https://www.cnx-software.com/2026/02/22/taalas-hc1-hardwired-llama-3-1-8b-ai-accelerator-delivers-up-to-17000-tokens-s/)
-- [达芬奇架构，Hot Chips 31（华为）](https://www.old.hotchips.org/hc31/HC31_1.11_Huawei.Davinci.HengLiao_v4.0.pdf)；[华为全联接大会 2025 主题演讲](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech)；[华为 AI 芯片之路（36 氪）](https://eu.36kr.com/en/p/3934504849325442)
-- [Maia 200 架构详解（微软）](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312)；[MTIA（ISCA 2025）](https://aisystemcodesign.github.io/papers/MTIA-ISCA25.pdf)
-- 团队出身：[Groq 与 TPU 团队（Electronic Design）](https://www.electronicdesign.com/technologies/embedded-revolution/article/21805495/groq-secretive-startup-rooted-in-google-hires-top-xilinx-executive)；[Cerebras 创始人（Contrary Research）](https://research.contrary.com/report/cerebras)；[SambaNova 创始人](https://www.design-reuse.com/news/news43740.html)；[Annapurna Labs（亚马逊）](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips)
+- [NeuralTalk：从架构师的出身看芯片设计](https://mp.weixin.qq.com/s/TFExyhdJsxa7inerxCe8IQ)；[硅谷淘金热：Patterson、Dally、Jouppi 在计算机历史博物馆的对谈](https://computerhistory.org/blog/the-silicon-gold-rush-how-ai-is-driving-development-of-new-chips/)
+- 英伟达：[V100 白皮书](https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf)；[A100 白皮书](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf)；[Blackwell Ultra 详解](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)；[Rubin 平台详解](https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/)
+- TPU：[v1（ISCA 2017）](https://sites.coecis.cornell.edu/isca50retrospective/files/2023/06/Jouppi_2017_In_Datacenter.pdf)；[三代 TPU 的十条经验（ISCA 2021）](https://conferences.computer.org/iscapub/pdfs/ISCA2021-4ghucdBnCWYB7ES2Pe4YdT/333300a001/333300a001.pdf)；[TPU v4（ISCA 2023）](https://arxiv.org/abs/2304.01433)；[TPU 8t / 8i 技术详解](https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive)；[博通 2026 财年三季度业绩会要点](https://www.nasdaq.com/articles/broadcom-q3-earnings-call-highlights)
+- Groq 与英伟达：[Groq ISCA 2022 论文](https://groq.com/wp-content/uploads/2024/02/GroqISCAPaper2022_ASoftwareDefinedTensorStreamingMultiprocessorForLargeScaleMachineLearning.pdf)；[英伟达 2026 财年 10-K（Groq 授权）](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm)；[LPX 规格](https://www.nvidia.com/en-us/data-center/lpx/)；[LPX 与 Vera Rubin 的三种协作模式](https://developer.nvidia.com/blog/how-nvidia-groq-3-lpx-unlocks-ultrafast-interactivity-at-long-context-on-nvidia-vera-rubin/)
+- [Cerebras SDK 文档](https://sdk.cerebras.ai/computing-with-cerebras)；[Cerebras 推理与内存墙](https://www.cerebras.ai/blog/introducing-cerebras-inference-ai-at-instant-speed)；[SambaNova SN40L 论文](https://arxiv.org/abs/2405.07518)；[Taalas HC1](https://taalas.com/the-path-to-ubiquitous-ai/)；[AMD 收购 Taalas](https://ir.amd.com/news-events/press-releases/detail/1296)；[Etched 技术说明](https://www.etched.com/progress/frontier-inference-clusters)
+- 异构与同构：[AWS 与 Cerebras](https://press.aboutamazon.com/aws/2026/3/aws-and-cerebras-collaboration-aims-to-set-a-new-standard-for-ai-inference-speed-and-performance-in-the-cloud)；[SambaNova SN50 + H200 演示](https://sambanova.ai/blog/sn50-runs-fastest-minimax-speeds-in-the-world)；[Gimlet 在 Corsair 上做投机解码](https://gimletlabs.ai/blog/low-latency-spec-decode-corsair)；[DistServe（OSDI 2024）](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin)；[OpenAI Jalapeño 首批结果](https://openai.com/index/jalapeno-first-results/)
+- [达芬奇架构，Hot Chips 31](https://www.old.hotchips.org/hc31/HC31_1.11_Huawei.Davinci.HengLiao_v4.0.pdf)；[华为全联接大会 2025 主题演讲](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech)；[华为 AI 芯片之路（36 氪）](https://eu.36kr.com/en/p/3934504849325442)
+- [Maia 200 架构详解](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/deep-dive-into-the-maia-200-architecture/4489312)；[Meta MTIA](https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/)；[Annapurna Labs（亚马逊）](https://www.aboutamazon.com/news/aws/take-a-look-inside-the-lab-where-aws-makes-custom-chips)
 - 可视化：[Ankerst 等，1998](https://bib.dbvis.de/uploadedFiles/180.pdf)；[Miller 等，2019](https://arxiv.org/abs/1908.00576)
+
+*感谢一位同事的独立审计，指出了早一版中的若干错误。*

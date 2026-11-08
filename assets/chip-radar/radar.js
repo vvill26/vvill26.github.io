@@ -100,7 +100,7 @@ function drawSeries(){
     if(ch.length) h("div",{class:"cr-card"},sSide).innerHTML=`<div class="cr-cm">${T("vs")} ${sh(prev)}</div>`+ch.map(([a,d])=>`<div>${AX1(a)} <b class="${d>0?"up":"dn"}">${d>0?"+":""}${d}</b></div>`).join(""); }
   card(sSide,"ghost",T("ghost")+" "+sh(first),[]);
   const from=cur||e.scores, to=e.scores; cancelAnimationFrame(anim); const t0=performance.now();
-  const step=now=>{ const t=Math.min(1,(now-t0)/500), k=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; const sc=lerp(from,to,k);
+  const step=now=>{ const t=Math.min(1,(now-t0)/380), k=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; const sc=lerp(from,to,k);
     sSvg.innerHTML=""; frame(sSvg,CX,CY,R,"long"); if(sI>0) shape(sSvg,first,CX,CY,R,"ghost",{dots:false}); shape(sSvg,{...e,scores:sc},CX,CY,R,"s1");
     el("text",{x:CX,y:CY+R+70,class:"cr-big-year","text-anchor":"middle"},sSvg).textContent=sh(e)+" · "+e.year;
     if(t<1) anim=requestAnimationFrame(step); else cur=to.slice(); };
@@ -109,7 +109,7 @@ function drawSeries(){
 function stop(){ if(timer){ clearInterval(timer); timer=null; } play.textContent="▶ "+T("play"); }
 slider.oninput=()=>{ sI=+slider.value; stop(); drawSeries(); };
 play.onclick=()=>{ if(timer){ stop(); return; } const s=curSeries(); play.textContent="❚❚ "+T("pause"); if(sI>=s.ids.length-1){ sI=0; cur=null; } drawSeries();
-  timer=setInterval(()=>{ if(sI>=curSeries().ids.length-1){ stop(); return; } sI++; drawSeries(); },1500); };
+  timer=setInterval(()=>{ if(sI>=curSeries().ids.length-1){ stop(); return; } sI++; drawSeries(); },1000); };
 
 /* ---------- grid ---------- */
 const grid=views.grid; h("div",{class:"cr-hint"},grid,T("hint_grid"));
@@ -120,15 +120,21 @@ D.archetypes.forEach(ar=>{ const sec=h("div",{class:"cr-arch"},grid); const A=(I
     h("div",{class:"cr-mn"},cell,sh(e)); h("div",{class:"cr-my"},cell,String(e.year||""));
     cell.onclick=()=>{ sel=[id]; drawCompare(); show("compare"); root.scrollIntoView({behavior:"smooth"}); }; }); });
 
-/* ---------- heterogeneous ---------- */
+/* ---------- heterogeneous (components + flow table; no combined shape) ---------- */
 const het=views.hetero; let hsel=D.hetero[0].id; h("div",{class:"cr-hint"},het,T("hint_hetero"));
 const hpick=h("div",{class:"cr-grp"},het); const hrow=h("div",{class:"cr-row"},het);
 const hsvg=el("svg",{viewBox:VB,class:"cr-big",role:"img","aria-label":T("aria_hetero")},hrow); const hside=h("div",{class:"cr-side"},hrow);
-D.hetero.forEach(s=>{ const b=h("button",{class:"cr-chip","data-id":s.id},hpick,sh(byId[s.id])); b.onclick=()=>{ hsel=s.id; drawHet(); }; });
-function drawHet(){ const s=D.hetero.find(x=>x.id===hsel); const L=(I.hetero&&I.hetero[s.id])||{roles:s.roles,note:s.note};
+const hflow=h("div",{class:"cr-tw2"},het);
+const hz=(o,k)=>LANG==="zh"&&o["zh_"+k]?o["zh_"+k]:o[k];
+D.hetero.forEach(s=>{ const b=h("button",{class:"cr-chip","data-id":s.id},hpick,hz(s,"name")); b.onclick=()=>{ hsel=s.id; drawHet(); }; });
+function drawHet(){ const s=D.hetero.find(x=>x.id===hsel);
   hpick.querySelectorAll(".cr-chip").forEach(b=>b.classList.toggle("on",b.dataset.id===hsel));
-  hsvg.innerHTML=""; frame(hsvg,CX,CY,R,"long"); s.components.forEach((c,i)=>shape(hsvg,byId[c],CX,CY,R,SLOT[i])); shape(hsvg,byId[s.id],CX,CY,R,"sys");
-  hside.innerHTML=""; s.components.forEach((c,i)=>card(hside,SLOT[i],nm(byId[c]),[["cr-co",L.roles[i]]])); card(hside,"sys",T("system"),[["cr-co",L.note],["cr-cm",T("status_"+byId[s.id].status)]]); }
+  hsvg.innerHTML=""; frame(hsvg,CX,CY,R,"long"); s.components.forEach((c,i)=>shape(hsvg,byId[c],CX,CY,R,SLOT[i]));
+  hside.innerHTML=""; s.components.forEach((c,i)=>card(hside,SLOT[i],nm(byId[c]),[["cr-cm",meta(byId[c])]]));
+  hflow.innerHTML=""; const t=h("table",{class:"cr-table cr-flow"},hflow); const hr=h("tr",{},h("thead",{},t));
+  ["h_cut","h_who","h_moves","h_cost"].forEach(k=>h("th",{},hr,T(k)));
+  const tb=h("tbody",{},t); s.modes.forEach(m=>{ const tr=h("tr",{},tb); ["cut","who","moves","cost"].forEach(k=>h("td",{},tr,hz(m,k))); });
+  const st=h("div",{class:"cr-hint"},hflow); st.innerHTML="<b>"+T("h_status")+":</b> "+hz(s,"status")+' <a href="'+s.src+'" target="_blank" rel="noopener">↗</a>'; }
 
 /* ---------- deployment ---------- */
 const dep=views.deploy; h("div",{class:"cr-hint"},dep,T("hint_deploy"));
