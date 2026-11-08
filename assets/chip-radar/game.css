@@ -37,9 +37,10 @@
 .cg-track{height:10px;background:var(--card);border-radius:5px;position:relative;overflow:visible}
 .cg-fill{height:100%;border-radius:5px;transition:width .25s}
 .cg-fill.f0{background:var(--f0)}.cg-fill.f1{background:var(--f1)}.cg-fill.f2{background:var(--f2)}
-.cg-bar.tot .cg-track{background:none;border-bottom:1px solid var(--grid);border-radius:0;height:6px}
-.cg-budget{position:absolute;top:-6px;width:0;height:16px;border-left:2px solid var(--ink)}
-.cg-budget::after{content:"budget";white-space:nowrap;position:absolute;left:4px;top:-2px;font-size:10px;color:var(--mut)}
+.cg-bar.tot{margin-top:6px}.cg-bar.tot .cg-track{height:12px}
+.cg-fill.ftot{background:var(--mut)}.cg-fill.ftot.over{background:var(--n)}
+.cg-budget{position:absolute;top:-4px;width:0;height:20px;border-left:2px solid var(--ink)}
+.cg-budget::after{content:"budget";white-space:nowrap;position:absolute;left:4px;top:-12px;font-size:10px;color:var(--mut)}
 #chip-game[lang=zh] .cg-budget::after{content:"预算"}
 .cg-warn{color:var(--n);margin:5px 0;font-size:12px;line-height:1.4}.cg-ok{color:var(--y);margin:5px 0;font-size:12px}
 .cg-checks{list-style:none;padding:0;margin:4px 0;font-size:12px;line-height:1.4}.cg-checks li{margin:2px 0;color:var(--mut)}
