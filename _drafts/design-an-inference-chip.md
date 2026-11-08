@@ -13,9 +13,9 @@ description: "A small game: pick a constraint, choose six mechanisms, see who pa
 
 Monday morning, back in forward mode. [Last time](/2026/11/inference-chip-shapes/) I read 43 inference chips backwards: take the shipped design, guess what its team thought was scarce. This time you hold the pen. Pick a constraint, make six decisions, and see which real team already made the same bet.
 
-<div id="chip-game"></div>
+**How to play.** Pick a constraint card, then one option in each of the six rows. The panel on the right updates as you click: your chip's shape on the ten axes from the last post, the nearest of the 43 real chips as a dashed outline, who pays (hardware, compiler or the serving system) against the card's budget, and whether the design passes the card's three checks. It is a toy model: the point is the trade-offs, not a score.
 
-**How it works.** Each mechanism lifts some of the ten axes from the last post; the shape is the highest level any of your choices reaches. Each mechanism also moves cost to someone: the hardware (area, power, packaging), the compiler (scheduling, memory placement) or the serving system (routing, transfers, operations). The budget is per constraint card. The dashed outline is the nearest of the 43 scored chips. Nothing here is a verdict: it is a toy model, and the point is the trade-offs, not a score.
+<div id="chip-game"></div>
 
 Three things usually happen on the first try.
 
@@ -107,7 +107,7 @@ With four options and four chips, random guessing gets one right on average. If 
 
 ## Caveats
 
-- The game is a toy. Axis levels, costs and budgets are my simplifications, chosen so that the archetypes land near their real counterparts; they are not measurements.
+- The game is a toy. Each mechanism lifts some axes, and the shape takes the highest level any choice reaches. Axis levels, costs and budgets are my simplifications, chosen so that the archetypes land near their real counterparts; they are not measurements.
 - The radar scores come from the [previous post](/2026/11/inference-chip-shapes/), with its sources and its known weaknesses.
 - No combination is scored as the best one, on purpose. Each card describes one trade-off, not a ranking.
 

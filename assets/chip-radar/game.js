@@ -78,18 +78,16 @@ function el(tag,a,p){const n=document.createElementNS(NS,tag);for(const k in a)n
 function pts(get,cx,cy,R){return ORDER.map((a,i)=>{const g=-Math.PI/2+i*2*Math.PI/10,v=Math.max(0,Math.min(5,get(a)))/5;return[cx+R*v*Math.cos(g),cy+R*v*Math.sin(g)]})}
 function frame(svg,cx,cy,R,labels){for(let k=1;k<=5;k++)el("polygon",{class:"cg-ring",points:pts(()=>k,cx,cy,R).join(" ")},svg);
  ORDER.forEach((a,i)=>{const g=-Math.PI/2+i*2*Math.PI/10,c=Math.cos(g),s=Math.sin(g);el("line",{class:"cg-ring",x1:cx,y1:cy,x2:cx+R*c,y2:cy+R*s},svg);
-  if(!labels)return;const x=cx+(R+14)*c,y=cy+(R+14)*s+(Math.abs(c)<.2?(s<0?-18:10):-4),an=Math.abs(c)<.2?"middle":c>0?"start":"end";
-  const tx=el("text",{x,y,"text-anchor":an,class:"cg-ax"},svg);el("tspan",{x,class:"cg-ax1"},tx).textContent=I.axes[a][0];el("tspan",{x,dy:16,class:"cg-ax2"},tx).textContent=I.axes[a][1]})}
+  if(!labels)return;const x=cx+(R+14)*c,y=cy+(R+14)*s+(Math.abs(c)<.2?(s<0?-22:14):-5),an=Math.abs(c)<.2?"middle":c>0?"start":"end";
+  const tx=el("text",{x,y,"text-anchor":an,class:"cg-ax"},svg);el("tspan",{x,class:"cg-ax1"},tx).textContent=I.axes[a][0];el("tspan",{x,dy:19,class:"cg-ax2"},tx).textContent=I.axes[a][1]})}
 
 const root=document.getElementById("chip-game"); if(!root)return; root.setAttribute("lang",LANG);
-root.innerHTML=`<div class="cg-step">${t("1 · Pick a constraint","1 · 选一张约束卡")}</div><div class="cg-cons"></div>
-<div class="cg-row"><div class="cg-left"><div class="cg-step">${t("2 · Pick one mechanism per row","2 · 每行选一个机制")}</div><div class="cg-rows"></div></div>
-<div class="cg-right"><svg class="cg-svg" viewBox="-135 -48 590 490" role="img" aria-label="${t("Your chip's shape","你的芯片形状")}"></svg>
-<div class="cg-legend"><span><i class="cg-sw you"></i>${t("your chip","你的芯片")}</span><span><i class="cg-sw near"></i><b class="cg-nn">–</b></span></div></div></div>
-<div class="cg-step">${t("3 · Who pays, and does it fit?","3 · 代价由谁付？合不合格？")}</div><div class="cg-out"></div>`;
-
+root.innerHTML=`<div class="cg-top"><span class="cg-step">${t("1 · Constraint","1 · 约束")}</span><div class="cg-cons"></div></div>
+<div class="cg-row"><div class="cg-left"><div class="cg-step">${t("2 · One mechanism per row","2 · 每行选一个机制")}</div><div class="cg-rows"></div></div>
+<div class="cg-right"><div class="cg-step">${t("3 · Shape, bill and fit","3 · 形状、账单、合格与否")}</div><svg class="cg-svg" viewBox="-172 -60 664 520" role="img" aria-label="${t("Your chip's shape","你的芯片形状")}"></svg>
+<div class="cg-legend"><span><i class="cg-sw you"></i>${t("your chip","你的芯片")}</span><span><i class="cg-sw near"></i><b class="cg-nn">–</b></span></div><div class="cg-out"></div></div></div><div class="cg-mini"></div>`;
 const consEl=root.querySelector(".cg-cons"),rowsEl=root.querySelector(".cg-rows"),svg=root.querySelector(".cg-svg"),out=root.querySelector(".cg-out");
-CONSTRAINTS.forEach(c=>{const b=document.createElement("button");b.className="cg-con";b.innerHTML=`<span class="cg-ci">${c.icon}</span><b>${c.name}</b><small>${c.goal}</small>`;b.onclick=()=>{C=c;render()};b.dataset.id=c.id;consEl.appendChild(b)});
+CONSTRAINTS.forEach(c=>{const b=document.createElement("button");b.className="cg-con";b.innerHTML=`${c.icon} ${c.name}`;b.title=c.goal;b.onclick=()=>{C=c;render()};b.dataset.id=c.id;consEl.appendChild(b)});
 ROWS.forEach(r=>{const d=document.createElement("div");d.className="cg-q";d.innerHTML=`<div class="cg-ql">${r.q}</div>`;const g=document.createElement("div");g.className="cg-opts";
  r.opts.forEach(o=>{const b=document.createElement("button");b.className="cg-opt";b.textContent=o.l;b.dataset.r=r.id;b.dataset.o=o.id;b.onclick=()=>{P[r.id]=P[r.id]===o.id?undefined:o.id;render()};g.appendChild(b)});
  d.appendChild(g);rowsEl.appendChild(d)});
@@ -110,6 +108,7 @@ function render(){
  const checks=C.checks.map(([f,l])=>{const ok=n>0&&f(v,P);return `<li class="${n===0?"":ok?"y":"n"}">${n===0?"○":ok?"✓":"✗"} ${l}</li>`}).join("");
  const cards=[...new Set(ROWS.map(r=>(r.opts.find(o=>o.id===P[r.id])||{}).card).filter(Boolean))];
  const cardHtml=cards.length?`<p class="cg-cards">${t("Real teams made this bet:","真实团队押过同样的注：")} ${cards.map(k=>`<a href="#card-${k}">${CARDS[k]} →</a>`).join(" ")}</p>`:"";
+ const okN=n?C.checks.filter(([f])=>f(v,P)).length:0;root.querySelector(".cg-mini").innerHTML=n?`${C.icon} ${n>=3?nm(ne)+" · ":""}${t("bill","账单")} ${tot}/${C.budget} · ${t("checks","检查")} ${okN}/3`:t("Pick options below; the result shows here.","在下面选选项，结果显示在这里。");
  out.innerHTML=`<div class="cg-pay">${bars}<div class="cg-bar tot"><span>${t("total","合计")}</span><div class="cg-track"><div class="cg-budget" style="left:${C.budget/mx*100}%"></div></div><b>${tot}</b></div></div>${budget}<ul class="cg-checks"><li class="cg-goal">${C.icon} ${C.name}: ${C.goal}</li>${checks}</ul>${cardHtml}`;
 }
 render();

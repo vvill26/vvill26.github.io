@@ -3,33 +3,36 @@
 @media (prefers-color-scheme:dark){#chip-game,#chip-blind{--you:#3d8ae0;--near:#8b949e;--ink:#e6edf3;--mut:#8b949e;--grid:#30363d;--surf:#161b22;--card:#1f252d;--y:#3fb950;--n:#f85149;--f0:#3d8ae0;--f1:#e8652e;--f2:#1fa874}}
 #chip-game[lang=zh],#chip-blind[lang=zh]{font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",ui-monospace,monospace}
 #chip-game button,#chip-blind button{font:inherit;cursor:pointer;color:var(--ink)}
-.cg-step{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 6px}
-.cg-cons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
-.cg-con{background:var(--card);border:1.5px solid transparent;border-radius:8px;padding:8px 10px;text-align:left;display:flex;flex-direction:column;gap:2px}
+.cg-step{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:4px 0 5px}
+.cg-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:8px}.cg-top .cg-step{margin:0}
+.cg-cons{display:flex;flex-wrap:wrap;gap:6px}
+.cg-con{background:var(--card);border:1.5px solid transparent;border-radius:14px;padding:3px 11px}
 .cg-con small{color:var(--mut);font-size:11.5px;line-height:1.35}
 .cg-con.on{border-color:var(--ink)}
 .cg-ci{font-size:16px}
-.cg-row{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
-.cg-left{flex:1 1 300px}.cg-right{flex:1 1 320px;max-width:520px}
-.cg-q{margin:6px 0 10px}.cg-ql{font-weight:600;margin-bottom:4px}
+.cg-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.cg-left{flex:1 1 330px}.cg-right{flex:1 1 300px;max-width:440px;position:sticky;top:8px;background:var(--surf);border:1px solid var(--grid);border-radius:10px;padding:6px 10px 8px}
+.cg-mini{display:none}
+@media (max-width:700px){.cg-right{position:static;max-width:none}.cg-mini{display:block;position:sticky;bottom:0;background:var(--ink);color:var(--surf);border-radius:8px;padding:6px 10px;font-size:12px;margin-top:8px;z-index:2}}
+.cg-q{margin:0 0 7px}.cg-ql{font-weight:600;margin-bottom:3px;font-size:12.5px}
 .cg-opts,.cg-bopts{display:flex;flex-wrap:wrap;gap:5px}
-.cg-opt{background:var(--card);border:1px solid var(--grid);border-radius:14px;padding:3px 10px}
+.cg-opt{background:var(--card);border:1px solid var(--grid);border-radius:14px;padding:2px 9px;font-size:12.5px}
 .cg-opt.on{background:var(--ink);color:var(--surf)!important;border-color:var(--ink)}
 .cg-opt.sm{font-size:12px;padding:2px 8px}
 .cg-opt.y{border-color:var(--y);box-shadow:inset 0 0 0 1px var(--y)}.cg-opt.n{border-color:var(--n);text-decoration:line-through}
 .cg-reset{background:none;border:0;color:var(--mut)!important;text-decoration:underline;padding:0;margin-top:4px}
-.cg-svg{width:100%;height:auto;display:block}
+.cg-svg{width:100%;max-width:400px;height:auto;display:block;margin:0 auto}
 .cg-ring{fill:none;stroke:var(--grid);stroke-width:1}
-.cg-ax1{fill:var(--ink);font-size:15px;font-weight:600}.cg-ax2{fill:var(--mut);font-size:12.5px}
+.cg-ax1{fill:var(--ink);font-size:19px;font-weight:600}.cg-ax2{fill:var(--mut);font-size:15px}
 .cg-you{fill:var(--you);fill-opacity:.16;stroke:var(--you);stroke-width:2.2;stroke-linejoin:round}
 .cg-near{fill:none;stroke:var(--near);stroke-dasharray:5 4;stroke-width:1.6}
 .cg-dot{fill:var(--you);stroke:var(--surf);stroke-width:1.5}
-.cg-legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--mut);font-size:12px;justify-content:center}
+.cg-legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--mut);font-size:11.5px;justify-content:center;margin-bottom:6px}
 .cg-legend b{font-weight:600;color:var(--ink)}
 .cg-sw{display:inline-block;width:14px;height:0;border-top:2.5px solid var(--you);margin-right:6px;vertical-align:middle}
 .cg-sw.near{border-top:2px dashed var(--near)}
 .cg-pay{max-width:520px}
-.cg-bar{display:grid;grid-template-columns:80px 1fr 28px;gap:8px;align-items:center;margin:3px 0}
+.cg-bar{display:grid;grid-template-columns:70px 1fr 24px;gap:6px;align-items:center;margin:2px 0;font-size:12px}
 .cg-bar span{color:var(--mut)}.cg-bar b{text-align:right}
 .cg-track{height:10px;background:var(--card);border-radius:5px;position:relative;overflow:visible}
 .cg-fill{height:100%;border-radius:5px;transition:width .25s}
@@ -38,10 +41,10 @@
 .cg-budget{position:absolute;top:-6px;width:0;height:16px;border-left:2px solid var(--ink)}
 .cg-budget::after{content:"budget";white-space:nowrap;position:absolute;left:4px;top:-2px;font-size:10px;color:var(--mut)}
 #chip-game[lang=zh] .cg-budget::after{content:"预算"}
-.cg-warn{color:var(--n);margin:8px 0}.cg-ok{color:var(--y);margin:8px 0}
-.cg-checks{list-style:none;padding:0;margin:6px 0}.cg-checks li{margin:3px 0;color:var(--mut)}
+.cg-warn{color:var(--n);margin:5px 0;font-size:12px;line-height:1.4}.cg-ok{color:var(--y);margin:5px 0;font-size:12px}
+.cg-checks{list-style:none;padding:0;margin:4px 0;font-size:12px;line-height:1.4}.cg-checks li{margin:2px 0;color:var(--mut)}
 .cg-checks li.y{color:var(--y)}.cg-checks li.n{color:var(--n)}.cg-checks .cg-goal{color:var(--ink);font-weight:600}
-.cg-cards a{margin-right:10px;white-space:nowrap}
+.cg-cards{font-size:12px;margin:4px 0 0}.cg-cards a{margin-right:10px;white-space:nowrap}
 .cg-bts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
 .cg-bt{background:var(--card);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px}
 .cg-bsvg{width:100%;max-width:160px;margin:0 auto;display:block}
