@@ -1,13 +1,16 @@
 ---
 layout: post
 title: "Your turn: design an inference chip, then meet the real ones"
-date: 2026-11-15 09:00:00 +0800
+date: 2026-11-09 09:00:00 +0800
 permalink: /2026/11/design-an-inference-chip/
 lang: en
-description: "A small game: pick a design scenario, choose six mechanisms, see who pays and which real chip your design resembles. Hit a real-world bet and the game tells you which team made it: eight design cards from public sources, and a blind test."
+description: "A small game: pick a design scenario, choose six mechanisms, and see who pays and which real chip your design resembles. Eight real designs are hidden in the grid, each with a design card from public sources."
+series: "The shape of inference chips (2/2)"
 ---
 
 {% include lang-switch.html en="/2026/11/design-an-inference-chip/" zh="/zh/2026/11/design-an-inference-chip/" %}
+
+*Part 2 of 2. [Part 1](/2026/11/inference-chip-shapes/) scored 43 inference chips on ten axes and asked what their designers thought was scarce.*
 
 <link rel="stylesheet" href="/assets/chip-radar/game.css">
 

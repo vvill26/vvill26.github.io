@@ -10,7 +10,6 @@ layout: default
   </div>
 
 {% assign en_posts = site.posts | where: "lang", "en" %}
-{% assign series_posts = en_posts | where_exp: "p", "p.series" | sort: "series" %}
   <div class="term-sec"><span class="pr">$</span> ls -t posts/</div>
   <div class="term-ls">
   {% for p in en_posts %}
@@ -18,7 +17,7 @@ layout: default
     <div class="e">
       <div class="d">{{ p.date | date: "%Y-%m-%d" }}</div>
       <div>
-        <a class="t" href="{{ p.url | relative_url }}">{% if p.series %}{% for s in series_posts %}{% if s.url == p.url %}<span class="tag">[{{ forloop.index }}/{{ series_posts.size }}]</span> {% endif %}{% endfor %}{% endif %}{{ p.title }}</a>
+        <a class="t" href="{{ p.url | relative_url }}">{% if p.series %}{% assign sp = p.series | split: "(" %}{% assign sname = sp.first | strip %}{% assign snum = sp.last | remove: ")" %}<span class="tag" title="{{ sname }}">[{{ sname }} {{ snum }}]</span> {% endif %}{{ p.title }}</a>
         {% if zh %}<a class="zt" href="{{ zh.url | relative_url }}">{{ zh.title }}</a>{% endif %}
       </div>
     </div>

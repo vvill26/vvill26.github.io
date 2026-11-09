@@ -1,13 +1,16 @@
 ---
 layout: post
 title: "魔镜，轮到我了：设计一颗推理芯片"
-date: 2026-11-15 09:00:00 +0800
+date: 2026-11-09 09:00:00 +0800
 permalink: /zh/2026/11/design-an-inference-chip/
 lang: zh
-description: "一个小游戏：选一个设计场景，做六个设计决定，看代价由谁来付、你的设计最像哪颗真实芯片。押中真实案例时，游戏会告诉你是哪个团队做过同样的选择：八张基于公开资料的设计卡，外加一个盲测。"
+description: "一个小游戏：选一个设计场景，做六个设计决定，看代价由谁来付、你的设计最像哪颗真实芯片。格子里藏着八个真实设计，每个都配一张基于公开资料的设计卡。"
+series: "推理芯片的形状（2/2）"
 ---
 
 {% include lang-switch.html en="/2026/11/design-an-inference-chip/" zh="/zh/2026/11/design-an-inference-chip/" %}
+
+*系列第二篇，共两篇。[第一篇](/zh/2026/11/inference-chip-shapes/)给 43 颗推理芯片在十个维度上打了分，推敲它们的设计者当初认为什么最稀缺。*
 
 <script>window.CHIPS_LANG="zh";</script>
 <link rel="stylesheet" href="/assets/chip-radar/game.css">

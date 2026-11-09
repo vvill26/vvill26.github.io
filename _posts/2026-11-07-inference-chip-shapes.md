@@ -5,9 +5,12 @@ date: 2026-11-07 09:00:00 +0800
 permalink: /2026/11/inference-chip-shapes/
 lang: en
 description: "Every inference chip is a bet placed by people with a particular background. An interactive radar of 43 inference chips scored on ten design axes from public sources, five GPU-plus-accelerator systems, and what the shapes say."
+series: "The shape of inference chips (1/2)"
 ---
 
 {% include lang-switch.html en="/2026/11/inference-chip-shapes/" zh="/zh/2026/11/inference-chip-shapes/" %}
+
+*Part 1 of 2. [Part 2](/2026/11/design-an-inference-chip/) turns this study into a game: design your own inference chip, then meet the real ones.*
 
 <link rel="stylesheet" href="/assets/chip-radar/radar.css">
 
