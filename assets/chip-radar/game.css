@@ -89,3 +89,10 @@
 .cc-src{font-size:12px;color:var(--mut);margin-top:10px;line-height:1.5}
 
 .cg-fit{font-size:11.5px;color:var(--mut);margin:2px 0 4px;line-height:1.4}
+/* break out of the blog's 700px column on wide screens */
+@media (min-width:760px){
+ #chip-game,#chip-cards{width:min(1080px,calc(100vw - 48px));margin-left:calc(50% - min(540px,calc(50vw - 24px)));box-sizing:border-box}
+ #chip-game .cg-row,#chip-cards .cc-row{flex-wrap:nowrap}
+ #chip-game .cg-left{flex:1 1 auto;min-width:0}
+ #chip-game .cg-right{flex:0 0 420px}
+}
