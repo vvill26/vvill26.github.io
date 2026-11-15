@@ -2,6 +2,7 @@ title: Will's Notes
 description: "LLM inference · Hardware–software co-design · Compilers · Serving systems"
 author: Will
 theme: minima
+timezone: Asia/Shanghai
 url: "https://vvill26.github.io"
 markdown: kramdown
 linkedin_username: weihuasheng
