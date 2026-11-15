@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 1072" class="s" role="img" aria-label="Datacenter engines: each one's sharpest point">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>Datacenter engines: each one's sharpest point</title>
+<rect class="bg" width="1030" height="1072" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">Datacenter engines: each one's sharpest point</text>
+<text class="t2" x="24" y="54" font-size="12.5">Dot = highest axis. For most engines it matches the bottleneck it set out to solve early on</text>
+<polygon class="ln" stroke-width=".7" points="185.0,198.8 192.8,201.3 197.6,207.9 197.6,216.1 192.8,222.7 185.0,225.2 177.2,222.7 172.4,216.1 172.4,207.9 177.2,201.3"/>
+<polygon class="ln" stroke-width=".7" points="185.0,172.4 208.3,180.0 222.7,199.8 222.7,224.2 208.3,244.0 185.0,251.6 161.7,244.0 147.3,224.2 147.3,199.8 161.7,180.0"/>
+<polygon class="ln" stroke-width=".7" points="185.0,146.0 223.8,158.6 247.8,191.6 247.8,232.4 223.8,265.4 185.0,278.0 146.2,265.4 122.2,232.4 122.2,191.6 146.2,158.6"/>
+<line class="yr" x1="185.0" y1="212" x2="185.0" y2="146.0"/>
+<line class="yr" x1="185.0" y1="212" x2="223.8" y2="158.6"/>
+<line class="yr" x1="185.0" y1="212" x2="247.8" y2="191.6"/>
+<line class="yr" x1="185.0" y1="212" x2="247.8" y2="232.4"/>
+<line class="yr" x1="185.0" y1="212" x2="223.8" y2="265.4"/>
+<line class="yr" x1="185.0" y1="212" x2="185.0" y2="278.0"/>
+<line class="yr" x1="185.0" y1="212" x2="146.2" y2="265.4"/>
+<line class="yr" x1="185.0" y1="212" x2="122.2" y2="232.4"/>
+<line class="yr" x1="185.0" y1="212" x2="122.2" y2="191.6"/>
+<line class="yr" x1="185.0" y1="212" x2="146.2" y2="158.6"/>
+<polygon points="185.0,192.2 194.7,198.7 207.0,204.9 203.8,218.1 188.9,217.3 185.0,212.0 177.2,222.7 159.9,220.2 159.9,203.8 146.2,158.6" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="185.0" y="113.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="185.0" y="124.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="229.1" y="148.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="229.1" y="159.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="256.3" y="185.8" font-size="10" font-weight="700" text-anchor="start">Breadth</text>
+<text class="t3" x="256.3" y="196.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="256.3" y="232.2" font-size="10" font-weight="700" text-anchor="start">Host path</text>
+<text class="t3" x="256.3" y="243.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="229.1" y="282.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="229.1" y="293.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="185.0" y="297.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="185.0" y="308.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="140.9" y="282.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="140.9" y="293.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="113.7" y="232.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="113.7" y="243.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="113.7" y="185.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="113.7" y="196.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="140.9" y="148.3" font-size="10" font-weight="700" text-anchor="end" style="fill:#2a78d6">Scheduler 5</text>
+<text class="t3" x="140.9" y="159.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="146.2" cy="158.6" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="185.0" y="340.0" font-size="13.5" text-anchor="middle" font-weight="700">Orca</text>
+<text class="t2" x="185.0" y="357.0" font-size="10.5" text-anchor="middle">SNU + FriendliAI</text>
+<polygon class="ln" stroke-width=".7" points="515.0,198.8 522.8,201.3 527.6,207.9 527.6,216.1 522.8,222.7 515.0,225.2 507.2,222.7 502.4,216.1 502.4,207.9 507.2,201.3"/>
+<polygon class="ln" stroke-width=".7" points="515.0,172.4 538.3,180.0 552.7,199.8 552.7,224.2 538.3,244.0 515.0,251.6 491.7,244.0 477.3,224.2 477.3,199.8 491.7,180.0"/>
+<polygon class="ln" stroke-width=".7" points="515.0,146.0 553.8,158.6 577.8,191.6 577.8,232.4 553.8,265.4 515.0,278.0 476.2,265.4 452.2,232.4 452.2,191.6 476.2,158.6"/>
+<line class="yr" x1="515.0" y1="212" x2="515.0" y2="146.0"/>
+<line class="yr" x1="515.0" y1="212" x2="553.8" y2="158.6"/>
+<line class="yr" x1="515.0" y1="212" x2="577.8" y2="191.6"/>
+<line class="yr" x1="515.0" y1="212" x2="577.8" y2="232.4"/>
+<line class="yr" x1="515.0" y1="212" x2="553.8" y2="265.4"/>
+<line class="yr" x1="515.0" y1="212" x2="515.0" y2="278.0"/>
+<line class="yr" x1="515.0" y1="212" x2="476.2" y2="265.4"/>
+<line class="yr" x1="515.0" y1="212" x2="452.2" y2="232.4"/>
+<line class="yr" x1="515.0" y1="212" x2="452.2" y2="191.6"/>
+<line class="yr" x1="515.0" y1="212" x2="476.2" y2="158.6"/>
+<polygon points="515.0,146.0 538.3,180.0 577.8,191.6 555.8,225.3 542.2,249.4 515.0,225.2 503.4,228.0 515.0,212.0 480.5,200.8 487.8,174.6" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="515.0" y="113.0" font-size="10" font-weight="700" text-anchor="middle" style="fill:#2a78d6">Memory 5</text>
+<text class="t3" x="515.0" y="124.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="559.1" y="148.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="559.1" y="159.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="586.3" y="185.8" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Breadth 5</text>
+<text class="t3" x="586.3" y="196.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="586.3" y="232.2" font-size="10" font-weight="700" text-anchor="start">Host path</text>
+<text class="t3" x="586.3" y="243.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="559.1" y="282.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="559.1" y="293.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="515.0" y="297.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="515.0" y="308.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="470.9" y="282.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="470.9" y="293.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="443.7" y="232.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="443.7" y="243.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="443.7" y="185.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="443.7" y="196.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="470.9" y="148.3" font-size="10" font-weight="700" text-anchor="end">Scheduler</text>
+<text class="t3" x="470.9" y="159.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="515.0" cy="146.0" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<circle cx="577.8" cy="191.6" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="515.0" y="340.0" font-size="13.5" text-anchor="middle" font-weight="700">vLLM</text>
+<text class="t2" x="515.0" y="357.0" font-size="10.5" text-anchor="middle">Berkeley Sky Lab → PyTorch Foundation</text>
+<polygon class="ln" stroke-width=".7" points="845.0,198.8 852.8,201.3 857.6,207.9 857.6,216.1 852.8,222.7 845.0,225.2 837.2,222.7 832.4,216.1 832.4,207.9 837.2,201.3"/>
+<polygon class="ln" stroke-width=".7" points="845.0,172.4 868.3,180.0 882.7,199.8 882.7,224.2 868.3,244.0 845.0,251.6 821.7,244.0 807.3,224.2 807.3,199.8 821.7,180.0"/>
+<polygon class="ln" stroke-width=".7" points="845.0,146.0 883.8,158.6 907.8,191.6 907.8,232.4 883.8,265.4 845.0,278.0 806.2,265.4 782.2,232.4 782.2,191.6 806.2,158.6"/>
+<line class="yr" x1="845.0" y1="212" x2="845.0" y2="146.0"/>
+<line class="yr" x1="845.0" y1="212" x2="883.8" y2="158.6"/>
+<line class="yr" x1="845.0" y1="212" x2="907.8" y2="191.6"/>
+<line class="yr" x1="845.0" y1="212" x2="907.8" y2="232.4"/>
+<line class="yr" x1="845.0" y1="212" x2="883.8" y2="265.4"/>
+<line class="yr" x1="845.0" y1="212" x2="845.0" y2="278.0"/>
+<line class="yr" x1="845.0" y1="212" x2="806.2" y2="265.4"/>
+<line class="yr" x1="845.0" y1="212" x2="782.2" y2="232.4"/>
+<line class="yr" x1="845.0" y1="212" x2="782.2" y2="191.6"/>
+<line class="yr" x1="845.0" y1="212" x2="806.2" y2="158.6"/>
+<polygon points="845.0,165.8 883.8,158.6 888.9,197.7 895.2,228.3 864.4,238.7 845.0,218.6 835.3,225.3 835.6,215.1 804.2,198.7 817.8,174.6" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="845.0" y="113.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="845.0" y="124.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="889.1" y="148.3" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Program 5</text>
+<text class="t3" x="889.1" y="159.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="916.3" y="185.8" font-size="10" font-weight="700" text-anchor="start">Breadth</text>
+<text class="t3" x="916.3" y="196.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="916.3" y="232.2" font-size="10" font-weight="700" text-anchor="start">Host path</text>
+<text class="t3" x="916.3" y="243.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="889.1" y="282.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="889.1" y="293.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="845.0" y="297.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="845.0" y="308.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="800.9" y="282.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="800.9" y="293.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="773.7" y="232.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="773.7" y="243.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="773.7" y="185.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="773.7" y="196.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="800.9" y="148.3" font-size="10" font-weight="700" text-anchor="end">Scheduler</text>
+<text class="t3" x="800.9" y="159.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="883.8" cy="158.6" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="845.0" y="340.0" font-size="13.5" text-anchor="middle" font-weight="700">SGLang</text>
+<text class="t2" x="845.0" y="357.0" font-size="10.5" text-anchor="middle">LMSYS → RadixArk</text>
+<polygon class="ln" stroke-width=".7" points="185.0,516.8 192.8,519.3 197.6,525.9 197.6,534.1 192.8,540.7 185.0,543.2 177.2,540.7 172.4,534.1 172.4,525.9 177.2,519.3"/>
+<polygon class="ln" stroke-width=".7" points="185.0,490.4 208.3,498.0 222.7,517.8 222.7,542.2 208.3,562.0 185.0,569.6 161.7,562.0 147.3,542.2 147.3,517.8 161.7,498.0"/>
+<polygon class="ln" stroke-width=".7" points="185.0,464.0 223.8,476.6 247.8,509.6 247.8,550.4 223.8,583.4 185.0,596.0 146.2,583.4 122.2,550.4 122.2,509.6 146.2,476.6"/>
+<line class="yr" x1="185.0" y1="530" x2="185.0" y2="464.0"/>
+<line class="yr" x1="185.0" y1="530" x2="223.8" y2="476.6"/>
+<line class="yr" x1="185.0" y1="530" x2="247.8" y2="509.6"/>
+<line class="yr" x1="185.0" y1="530" x2="247.8" y2="550.4"/>
+<line class="yr" x1="185.0" y1="530" x2="223.8" y2="583.4"/>
+<line class="yr" x1="185.0" y1="530" x2="185.0" y2="596.0"/>
+<line class="yr" x1="185.0" y1="530" x2="146.2" y2="583.4"/>
+<line class="yr" x1="185.0" y1="530" x2="122.2" y2="550.4"/>
+<line class="yr" x1="185.0" y1="530" x2="122.2" y2="509.6"/>
+<line class="yr" x1="185.0" y1="530" x2="146.2" y2="476.6"/>
+<polygon points="185.0,493.7 202.5,506.0 222.7,517.8 222.7,542.2 208.3,562.0 185.0,539.9 177.2,540.7 172.4,534.1 172.4,525.9 161.7,498.0" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="185.0" y="431.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="185.0" y="442.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="229.1" y="466.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="229.1" y="477.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="256.3" y="503.8" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Breadth 3</text>
+<text class="t3" x="256.3" y="514.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="256.3" y="550.2" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Host path 3</text>
+<text class="t3" x="256.3" y="561.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="229.1" y="600.7" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Portability 3</text>
+<text class="t3" x="229.1" y="611.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="185.0" y="615.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="185.0" y="626.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="140.9" y="600.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="140.9" y="611.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="113.7" y="550.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="113.7" y="561.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="113.7" y="503.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="113.7" y="514.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="140.9" y="466.3" font-size="10" font-weight="700" text-anchor="end" style="fill:#2a78d6">Scheduler 3</text>
+<text class="t3" x="140.9" y="477.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="222.7" cy="517.8" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<circle cx="222.7" cy="542.2" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<circle cx="208.3" cy="562.0" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<circle cx="161.7" cy="498.0" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="185.0" y="658.0" font-size="13.5" text-anchor="middle" font-weight="700">TGI</text>
+<text class="t2" x="185.0" y="675.0" font-size="10.5" text-anchor="middle">Hugging Face</text>
+<polygon class="ln" stroke-width=".7" points="515.0,516.8 522.8,519.3 527.6,525.9 527.6,534.1 522.8,540.7 515.0,543.2 507.2,540.7 502.4,534.1 502.4,525.9 507.2,519.3"/>
+<polygon class="ln" stroke-width=".7" points="515.0,490.4 538.3,498.0 552.7,517.8 552.7,542.2 538.3,562.0 515.0,569.6 491.7,562.0 477.3,542.2 477.3,517.8 491.7,498.0"/>
+<polygon class="ln" stroke-width=".7" points="515.0,464.0 553.8,476.6 577.8,509.6 577.8,550.4 553.8,583.4 515.0,596.0 476.2,583.4 452.2,550.4 452.2,509.6 476.2,476.6"/>
+<line class="yr" x1="515.0" y1="530" x2="515.0" y2="464.0"/>
+<line class="yr" x1="515.0" y1="530" x2="553.8" y2="476.6"/>
+<line class="yr" x1="515.0" y1="530" x2="577.8" y2="509.6"/>
+<line class="yr" x1="515.0" y1="530" x2="577.8" y2="550.4"/>
+<line class="yr" x1="515.0" y1="530" x2="553.8" y2="583.4"/>
+<line class="yr" x1="515.0" y1="530" x2="515.0" y2="596.0"/>
+<line class="yr" x1="515.0" y1="530" x2="476.2" y2="583.4"/>
+<line class="yr" x1="515.0" y1="530" x2="452.2" y2="550.4"/>
+<line class="yr" x1="515.0" y1="530" x2="452.2" y2="509.6"/>
+<line class="yr" x1="515.0" y1="530" x2="476.2" y2="476.6"/>
+<polygon points="515.0,490.4 534.4,503.3 552.7,517.8 552.7,542.2 515.0,530.0 515.0,543.2 499.5,551.4 467.9,545.3 480.5,518.8 487.8,492.6" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="515.0" y="431.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="515.0" y="442.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="559.1" y="466.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="559.1" y="477.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="586.3" y="503.8" font-size="10" font-weight="700" text-anchor="start">Breadth</text>
+<text class="t3" x="586.3" y="514.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="586.3" y="550.2" font-size="10" font-weight="700" text-anchor="start">Host path</text>
+<text class="t3" x="586.3" y="561.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="559.1" y="600.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="559.1" y="611.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="515.0" y="615.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="515.0" y="626.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="470.9" y="600.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="470.9" y="611.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="443.7" y="550.2" font-size="10" font-weight="700" text-anchor="end" style="fill:#2a78d6">Vertical 3.75</text>
+<text class="t3" x="443.7" y="561.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="443.7" y="503.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="443.7" y="514.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="470.9" y="466.3" font-size="10" font-weight="700" text-anchor="end">Scheduler</text>
+<text class="t3" x="470.9" y="477.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="467.9" cy="545.3" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="515.0" y="658.0" font-size="13.5" text-anchor="middle" font-weight="700">TensorRT-LLM</text>
+<text class="t2" x="515.0" y="675.0" font-size="10.5" text-anchor="middle">NVIDIA</text>
+<polygon class="ln" stroke-width=".7" points="845.0,516.8 852.8,519.3 857.6,525.9 857.6,534.1 852.8,540.7 845.0,543.2 837.2,540.7 832.4,534.1 832.4,525.9 837.2,519.3"/>
+<polygon class="ln" stroke-width=".7" points="845.0,490.4 868.3,498.0 882.7,517.8 882.7,542.2 868.3,562.0 845.0,569.6 821.7,562.0 807.3,542.2 807.3,517.8 821.7,498.0"/>
+<polygon class="ln" stroke-width=".7" points="845.0,464.0 883.8,476.6 907.8,509.6 907.8,550.4 883.8,583.4 845.0,596.0 806.2,583.4 782.2,550.4 782.2,509.6 806.2,476.6"/>
+<line class="yr" x1="845.0" y1="530" x2="845.0" y2="464.0"/>
+<line class="yr" x1="845.0" y1="530" x2="883.8" y2="476.6"/>
+<line class="yr" x1="845.0" y1="530" x2="907.8" y2="509.6"/>
+<line class="yr" x1="845.0" y1="530" x2="907.8" y2="550.4"/>
+<line class="yr" x1="845.0" y1="530" x2="883.8" y2="583.4"/>
+<line class="yr" x1="845.0" y1="530" x2="845.0" y2="596.0"/>
+<line class="yr" x1="845.0" y1="530" x2="806.2" y2="583.4"/>
+<line class="yr" x1="845.0" y1="530" x2="782.2" y2="550.4"/>
+<line class="yr" x1="845.0" y1="530" x2="782.2" y2="509.6"/>
+<line class="yr" x1="845.0" y1="530" x2="806.2" y2="476.6"/>
+<polygon points="845.0,490.4 862.5,506.0 879.5,518.8 888.9,544.3 860.5,551.4 845.0,543.2 837.2,540.7 832.4,534.1 816.8,520.8 819.8,495.3" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="845.0" y="431.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="845.0" y="442.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="889.1" y="466.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="889.1" y="477.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="916.3" y="503.8" font-size="10" font-weight="700" text-anchor="start">Breadth</text>
+<text class="t3" x="916.3" y="514.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="916.3" y="550.2" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Host path 3.5</text>
+<text class="t3" x="916.3" y="561.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="889.1" y="600.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="889.1" y="611.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="845.0" y="615.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="845.0" y="626.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="800.9" y="600.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="800.9" y="611.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="773.7" y="550.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="773.7" y="561.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="773.7" y="503.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="773.7" y="514.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="800.9" y="466.3" font-size="10" font-weight="700" text-anchor="end">Scheduler</text>
+<text class="t3" x="800.9" y="477.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="888.9" cy="544.3" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="845.0" y="658.0" font-size="13.5" text-anchor="middle" font-weight="700">LMDeploy</text>
+<text class="t2" x="845.0" y="675.0" font-size="10.5" text-anchor="middle">Shanghai AI Lab</text>
+<polygon class="ln" stroke-width=".7" points="185.0,834.8 192.8,837.3 197.6,843.9 197.6,852.1 192.8,858.7 185.0,861.2 177.2,858.7 172.4,852.1 172.4,843.9 177.2,837.3"/>
+<polygon class="ln" stroke-width=".7" points="185.0,808.4 208.3,816.0 222.7,835.8 222.7,860.2 208.3,880.0 185.0,887.6 161.7,880.0 147.3,860.2 147.3,835.8 161.7,816.0"/>
+<polygon class="ln" stroke-width=".7" points="185.0,782.0 223.8,794.6 247.8,827.6 247.8,868.4 223.8,901.4 185.0,914.0 146.2,901.4 122.2,868.4 122.2,827.6 146.2,794.6"/>
+<line class="yr" x1="185.0" y1="848" x2="185.0" y2="782.0"/>
+<line class="yr" x1="185.0" y1="848" x2="223.8" y2="794.6"/>
+<line class="yr" x1="185.0" y1="848" x2="247.8" y2="827.6"/>
+<line class="yr" x1="185.0" y1="848" x2="247.8" y2="868.4"/>
+<line class="yr" x1="185.0" y1="848" x2="223.8" y2="901.4"/>
+<line class="yr" x1="185.0" y1="848" x2="185.0" y2="914.0"/>
+<line class="yr" x1="185.0" y1="848" x2="146.2" y2="901.4"/>
+<line class="yr" x1="185.0" y1="848" x2="122.2" y2="868.4"/>
+<line class="yr" x1="185.0" y1="848" x2="122.2" y2="827.6"/>
+<line class="yr" x1="185.0" y1="848" x2="146.2" y2="794.6"/>
+<polygon points="185.0,811.7 204.4,821.3 200.7,842.9 238.4,865.3 196.6,864.0 185.0,848.0 169.5,869.4 181.9,849.0 163.0,840.9 154.0,805.3" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="185.0" y="749.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="185.0" y="760.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="229.1" y="784.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="229.1" y="795.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="256.3" y="821.8" font-size="10" font-weight="700" text-anchor="start">Breadth</text>
+<text class="t3" x="256.3" y="832.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="256.3" y="868.2" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Host path 4.25</text>
+<text class="t3" x="256.3" y="879.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="229.1" y="918.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="229.1" y="929.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="185.0" y="933.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="185.0" y="944.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="140.9" y="918.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="140.9" y="929.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="113.7" y="868.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="113.7" y="879.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="113.7" y="821.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="113.7" y="832.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="140.9" y="784.3" font-size="10" font-weight="700" text-anchor="end">Scheduler</text>
+<text class="t3" x="140.9" y="795.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="238.4" cy="865.3" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="185.0" y="976.0" font-size="13.5" text-anchor="middle" font-weight="700">TokenSpeed</text>
+<text class="t2" x="185.0" y="993.0" font-size="10.5" text-anchor="middle">LightSeek Foundation</text>
+<polygon class="ln" stroke-width=".7" points="515.0,834.8 522.8,837.3 527.6,843.9 527.6,852.1 522.8,858.7 515.0,861.2 507.2,858.7 502.4,852.1 502.4,843.9 507.2,837.3"/>
+<polygon class="ln" stroke-width=".7" points="515.0,808.4 538.3,816.0 552.7,835.8 552.7,860.2 538.3,880.0 515.0,887.6 491.7,880.0 477.3,860.2 477.3,835.8 491.7,816.0"/>
+<polygon class="ln" stroke-width=".7" points="515.0,782.0 553.8,794.6 577.8,827.6 577.8,868.4 553.8,901.4 515.0,914.0 476.2,901.4 452.2,868.4 452.2,827.6 476.2,794.6"/>
+<line class="yr" x1="515.0" y1="848" x2="515.0" y2="782.0"/>
+<line class="yr" x1="515.0" y1="848" x2="553.8" y2="794.6"/>
+<line class="yr" x1="515.0" y1="848" x2="577.8" y2="827.6"/>
+<line class="yr" x1="515.0" y1="848" x2="577.8" y2="868.4"/>
+<line class="yr" x1="515.0" y1="848" x2="553.8" y2="901.4"/>
+<line class="yr" x1="515.0" y1="848" x2="515.0" y2="914.0"/>
+<line class="yr" x1="515.0" y1="848" x2="476.2" y2="901.4"/>
+<line class="yr" x1="515.0" y1="848" x2="452.2" y2="868.4"/>
+<line class="yr" x1="515.0" y1="848" x2="452.2" y2="827.6"/>
+<line class="yr" x1="515.0" y1="848" x2="476.2" y2="794.6"/>
+<polygon points="515.0,838.1 522.8,837.3 549.5,836.8 555.8,861.3 534.4,874.7 515.0,861.2 505.3,861.3 489.9,856.2 502.4,843.9 501.4,829.3" fill="#2a78d6" fill-opacity=".18" stroke="#2a78d6" stroke-width="1.8" stroke-linejoin="round"/>
+<text class="t1" x="515.0" y="749.0" font-size="10" font-weight="700" text-anchor="middle">Memory</text>
+<text class="t3" x="515.0" y="760.0" font-size="8.6" text-anchor="middle">KV as virtual memory</text>
+<text class="t1" x="559.1" y="784.3" font-size="10" font-weight="700" text-anchor="start">Program</text>
+<text class="t3" x="559.1" y="795.3" font-size="8.6" text-anchor="start">reuse across calls</text>
+<text class="t1" x="586.3" y="821.8" font-size="10" font-weight="700" text-anchor="start">Breadth</text>
+<text class="t3" x="586.3" y="832.8" font-size="8.6" text-anchor="start">models and hardware</text>
+<text class="t1" x="586.3" y="868.2" font-size="10" font-weight="700" text-anchor="start" style="fill:#2a78d6">Host path 3.25</text>
+<text class="t3" x="586.3" y="879.2" font-size="8.6" text-anchor="start">CPU off the token loop</text>
+<text class="t1" x="559.1" y="918.7" font-size="10" font-weight="700" text-anchor="start">Portability</text>
+<text class="t3" x="559.1" y="929.7" font-size="8.6" text-anchor="start">many backends</text>
+<text class="t1" x="515.0" y="933.0" font-size="10" font-weight="700" text-anchor="middle">Device</text>
+<text class="t3" x="515.0" y="944.0" font-size="8.6" text-anchor="middle">footprint and energy</text>
+<text class="t1" x="470.9" y="918.7" font-size="10" font-weight="700" text-anchor="end">Compiler</text>
+<text class="t3" x="470.9" y="929.7" font-size="8.6" text-anchor="end">ahead-of-time engine</text>
+<text class="t1" x="443.7" y="868.2" font-size="10" font-weight="700" text-anchor="end">Vertical</text>
+<text class="t3" x="443.7" y="879.2" font-size="8.6" text-anchor="end">vendor owns the stack</text>
+<text class="t1" x="443.7" y="821.8" font-size="10" font-weight="700" text-anchor="end">Fleet</text>
+<text class="t3" x="443.7" y="832.8" font-size="8.6" text-anchor="end">cluster as one machine</text>
+<text class="t1" x="470.9" y="784.3" font-size="10" font-weight="700" text-anchor="end">Scheduler</text>
+<text class="t3" x="470.9" y="795.3" font-size="8.6" text-anchor="end">iteration-level batching</text>
+<circle cx="555.8" cy="861.3" r="4.5" fill="#2a78d6" stroke="#fff" stroke-width="1.5"/>
+<text class="t1" x="515.0" y="976.0" font-size="13.5" text-anchor="middle" font-weight="700">Triton</text>
+<text class="t2" x="515.0" y="993.0" font-size="10.5" text-anchor="middle">NVIDIA</text>
+<text class="t3" x="24.0" y="1060.0" font-size="10.5" text-anchor="start">Axis order as in the main radar; the small line under each axis name is the instinct it measures. The coloured axis name and dot mark the highest axis.</text>
+</svg>

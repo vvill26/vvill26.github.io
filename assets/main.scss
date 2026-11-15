@@ -109,3 +109,7 @@ body { background: #fbfaf6; }
 .toc{font-family:$mono;font-size:13px;background:#f3f1ea;border-radius:6px;padding:10px 16px;margin:1.2em 0 1.6em}
 .toc p{margin:0 0 4px}.toc ol{margin:0 0 0 1.4em}.toc li{margin:1px 0}
 @media (prefers-color-scheme:dark){.toc{background:#1f252d}}
+.term-sd { font-size: 13px; line-height: 1.6; margin: 0 0 6px; }
+.term-series { border-left: 3px solid #cf222e; padding-left: 12px; }
+.term-series .d { color: #cf222e; font-weight: 600; }
+.term-pd { font-size: 12px; margin-top: 2px; }

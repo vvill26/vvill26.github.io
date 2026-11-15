@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" class="s" role="img" aria-label="GPU + a new chip: unify the control plane, not the engine">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>GPU + a new chip: unify the control plane, not the engine</title>
+<rect class="bg" width="960" height="570" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">GPU + a new chip: unify the control plane, not the engine</text>
+<text class="t2" x="24" y="54" font-size="12.5">Right of each layer: the closest public component today</text>
+<rect class="soft" x="24.0" y="76.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="98.0" font-size="13" text-anchor="start" font-weight="600">Front door</text>
+<text class="t2" x="40.0" y="117.0" font-size="11.5" text-anchor="start">APIs, tokenizer, tool and reasoning parsers, kept off the accelerator host loop</text>
+<text class="t2" x="680.0" y="107.0" font-size="12" text-anchor="start">SMG, vLLM Rust front-end</text>
+<rect class="soft" x="24.0" y="136.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="158.0" font-size="13" text-anchor="start" font-weight="600">Classifier + capabilities</text>
+<text class="t2" x="40.0" y="177.0" font-size="11.5" text-anchor="start">Tag latency tier; refuse unsupported features before placement</text>
+<text class="t2" x="680.0" y="167.0" font-size="12" text-anchor="start">sidecar capability checks</text>
+<rect class="soft" x="24.0" y="196.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="218.0" font-size="13" text-anchor="start" font-weight="600">KV- and session-aware router</text>
+<text class="t2" x="40.0" y="237.0" font-size="11.5" text-anchor="start">Pick workers by cache overlap; keep agent sessions sticky</text>
+<text class="t2" x="680.0" y="227.0" font-size="12" text-anchor="start">Dynamo Router, llm-d EPP</text>
+<rect class="soft" x="24.0" y="256.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="278.0" font-size="13" text-anchor="start" font-weight="600">Planner + operator</text>
+<text class="t2" x="40.0" y="297.0" font-size="11.5" text-anchor="start">Schedule from the compiler manifest; paired pods fail together</text>
+<text class="t2" x="680.0" y="287.0" font-size="12" text-anchor="start">GBuild manifest + Dynamo operator</text>
+<rect class="b1" x="24.0" y="316.0" width="310.0" height="92.0" rx="7"/>
+<text class="t1" x="40.0" y="340.0" font-size="13.5" text-anchor="start" font-weight="600">GPU pool</text>
+<text class="t2" x="40.0" y="362.0" font-size="12" text-anchor="start">prefill, attention; KV stays here</text>
+<text class="t3" x="40.0" y="384.0" font-size="11.5" text-anchor="start">vLLM / SGLang worker</text>
+<rect class="b2" x="354.0" y="316.0" width="310.0" height="92.0" rx="7"/>
+<text class="t1" x="370.0" y="340.0" font-size="13.5" text-anchor="start" font-weight="600">New-chip pool (e.g. LPU)</text>
+<text class="t2" x="370.0" y="362.0" font-size="12" text-anchor="start">FFN/MoE, decode or draft model</text>
+<text class="t3" x="370.0" y="384.0" font-size="11.5" text-anchor="start">no per-request KV; memory still planned</text>
+<path class="ln" d="M334,362 L354,362" marker-end="url(#ar)"/>
+<path class="ln" d="M354,374 L334,374" marker-end="url(#ar)"/>
+<text class="t2" x="680.0" y="354.0" font-size="12" text-anchor="start">vLLM/SGLang workers;</text>
+<text class="t2" x="680.0" y="372.0" font-size="12" text-anchor="start">vendor engine via sidecar</text>
+<rect class="soft" x="24.0" y="420.0" width="640.0" height="44.0" rx="7"/>
+<text class="t1" x="40.0" y="447.0" font-size="12.5" text-anchor="start">Data plane: KV/activation format, transport and lifetime; per-layer exchange under AFD</text>
+<text class="t2" x="680.0" y="447.0" font-size="12" text-anchor="start">NIXL, Mooncake</text>
+<rect class="soft" x="24.0" y="472.0" width="640.0" height="44.0" rx="7"/>
+<text class="t1" x="40.0" y="499.0" font-size="12.5" text-anchor="start">Context memory tiers: paused agent sessions live here (SRAM cannot hold them)</text>
+<text class="t2" x="680.0" y="499.0" font-size="12" text-anchor="start">engine offload, HiCache, CMX</text>
+<text class="t3" x="24.0" y="554.0" font-size="11" text-anchor="start">Sources: Dynamo v1.6.0 notes and PRs, vLLM AFD plugin post, NVIDIA Vera Rubin blog (see Sources).</text>
+</svg>

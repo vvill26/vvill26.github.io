@@ -5,12 +5,12 @@ date: 2026-11-07 09:00:00 +0800
 permalink: /zh/2026/11/inference-chip-shapes/
 lang: zh
 description: "每颗推理芯片背后，都是一群有特定出身的人下的注。用 10 个设计维度给 43 颗芯片打分，再拆开 5 套异构系统，做成一张能玩的雷达图，看看各家押的是什么、是谁押的。"
-series: "推理芯片的形状（1/2）"
+series: "法医威尔系列（1）"
 ---
 
 {% include lang-switch.html en="/2026/11/inference-chip-shapes/" zh="/zh/2026/11/inference-chip-shapes/" %}
 
-*系列第一篇，共两篇。[第二篇](/zh/2026/11/design-an-inference-chip/)把这次研究做成了一个游戏：设计你自己的推理芯片，再看看真实团队是怎么选的。*
+*法医威尔系列第一篇。本文最初以「推理芯片的形状（1/2）」发布。文中的方法——拿已经出货的东西，倒推设计者当初认为什么最稀缺——后来成了一个独立的系列：法医威尔。[第二篇](/zh/2026/11/inference-framework-forensics/)用同样的方法分析推理框架，也交代了这个名字的来历：和我妈有关。[配套的这一篇](/zh/2026/11/design-an-inference-chip/)把这次研究做成了一个游戏：设计你自己的推理芯片，再看看真实团队是怎么选的。*
 
 <link rel="stylesheet" href="/assets/chip-radar/radar.css">
 <script>window.CHIPS_LANG = "zh";</script>

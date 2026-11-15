@@ -1,0 +1,333 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1390 1190" class="s" role="img" aria-label="Family tree of inference frameworks: people, labs, companies">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>Family tree of inference frameworks: people, labs, companies</title>
+<rect class="bg" width="1390" height="1190" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">Family tree of inference frameworks: people, labs, companies</text>
+<text class="t2" x="24" y="54" font-size="12.5">Four families, four generations: from labs and individuals, to open projects, to companies, to where they landed. Legend below.</text>
+<style>.lbl{font-size:10px}</style>
+<rect x="66" y="72" width="488" height="28" rx="6" fill="#2a78d6"/>
+<text x="310.0" y="91" font-size="13.5" font-weight="700" text-anchor="middle" fill="#fff">The Berkeley / LMSYS family</text>
+<rect x="66" y="108" width="488" height="838" rx="8" fill="#2a78d6" fill-opacity=".05"/>
+<rect x="571" y="72" width="255" height="28" rx="6" fill="#eb6834"/>
+<text x="698.5" y="91" font-size="13.5" font-weight="700" text-anchor="middle" fill="#fff">The ggml family</text>
+<rect x="571" y="108" width="255" height="838" rx="8" fill="#eb6834" fill-opacity=".05"/>
+<rect x="836" y="72" width="236" height="28" rx="6" fill="#8a63d2"/>
+<text x="954.0" y="91" font-size="13.5" font-weight="700" text-anchor="middle" fill="#fff">The compiler family</text>
+<rect x="836" y="108" width="236" height="838" rx="8" fill="#8a63d2" fill-opacity=".05"/>
+<rect x="1091" y="72" width="283" height="28" rx="6" fill="#1baf7a"/>
+<text x="1232.5" y="91" font-size="13.5" font-weight="700" text-anchor="middle" fill="#fff">NVIDIA and others</text>
+<rect x="1091" y="108" width="283" height="838" rx="8" fill="#1baf7a" fill-opacity=".05"/>
+<text class="t2" font-size="11.5" font-weight="600" text-anchor="middle" transform="translate(34 205.0) rotate(-90)">Roots: people, labs</text>
+<text class="t2" font-size="11.5" font-weight="600" text-anchor="middle" transform="translate(34 431.0) rotate(-90)">2022–24: projects</text>
+<line class="yr" x1="60" x2="1378" y1="354" y2="354"/>
+<text class="t2" font-size="11.5" font-weight="600" text-anchor="middle" transform="translate(34 657.0) rotate(-90)">2025–26: companies, spin-offs</text>
+<line class="yr" x1="60" x2="1378" y1="580" y2="580"/>
+<text class="t2" font-size="11.5" font-weight="600" text-anchor="middle" transform="translate(34 883.0) rotate(-90)">Where they landed</text>
+<line class="yr" x1="60" x2="1378" y1="806" y2="806"/>
+<path d="M187.0,252.0 C187.0,316.5 148.0,316.5 148.0,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M187.0,252.0 C187.0,316.5 460.0,316.5 460.0,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M430.0,252.0 C430.0,316.5 298.0,316.5 298.0,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M430.0,252.0 C430.0,316.5 460.0,316.5 460.0,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M148.0,478.0 C148.0,542.5 148.0,542.5 148.0,607.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M298.0,478.0 C298.0,542.5 298.0,542.5 298.0,607.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M460.0,478.0 C460.0,542.5 460.0,542.5 460.0,607.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M179.7,478.0 C179.7,655.5 148.0,655.5 148.0,833.0" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect class="bg" x="137.2" y="647.5" width="53.2" height="15" rx="7" stroke="#9b9a95" stroke-width=".8"/>
+<text class="t2" x="163.8" y="659.0" font-size="10" text-anchor="middle">hosted</text>
+<path d="M497.0,478.0 C497.0,655.5 298.0,655.5 298.0,833.0" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect class="bg" x="378.1" y="647.5" width="38.8" height="15" rx="7" stroke="#9b9a95" stroke-width=".8"/>
+<text class="t2" x="397.5" y="659.0" font-size="10" text-anchor="middle">fork</text>
+<path d="M497.0,478.0 C497.0,655.5 460.0,655.5 460.0,833.0" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect class="bg" x="451.9" y="647.5" width="53.2" height="15" rx="7" stroke="#9b9a95" stroke-width=".8"/>
+<text class="t2" x="478.5" y="659.0" font-size="10" text-anchor="middle">people</text>
+<path d="M698.6,252.0 C698.6,316.5 637.1,316.5 637.1,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path class="lnd" d="M693.5,431.0 L703.0,431.0" marker-end="url(#ar)"/>
+<path d="M637.1,478.0 C637.1,542.5 637.1,542.5 637.1,607.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M661.9,478.0 C661.9,542.5 760.7,542.5 760.7,607.0" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect class="bg" x="677.5" y="534.5" width="67.6" height="15" rx="7" stroke="#9b9a95" stroke-width=".8"/>
+<text class="t2" x="711.3" y="546.0" font-size="10" text-anchor="middle">embedded</text>
+<path d="M637.1,704.0 C637.1,768.5 698.6,768.5 698.6,833.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M898.8,252.0 C898.8,316.5 898.8,316.5 898.8,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M1014.0,252.0 C1014.0,316.5 1014.0,316.5 1014.0,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M898.8,478.0 C898.8,542.5 898.8,542.5 898.8,607.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M898.8,704.0 C898.8,768.5 957.0,768.5 957.0,833.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M1037.8,478.0 C1037.8,655.5 957.0,655.5 957.0,833.0" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect class="bg" x="963.6" y="647.5" width="67.6" height="15" rx="7" stroke="#9b9a95" stroke-width=".8"/>
+<text class="t2" x="997.4" y="659.0" font-size="10" text-anchor="middle">acquired</text>
+<path d="M1163.8,252.0 C1163.8,316.5 1163.8,316.5 1163.8,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M1302.9,252.0 C1302.9,316.5 1302.9,316.5 1302.9,381.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M1302.9,478.0 C1302.9,542.5 1302.9,542.5 1302.9,607.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M1163.8,704.0 C1163.8,768.5 1163.8,768.5 1163.8,833.0" fill="none" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M1331.5,704.0 C1331.5,768.5 1302.9,768.5 1302.9,833.0" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect class="bg" x="1283.4" y="760.5" width="67.6" height="15" rx="7" stroke="#9b9a95" stroke-width=".8"/>
+<text class="t2" x="1317.2" y="772.0" font-size="10" text-anchor="middle">plugs in</text>
+<rect class="bg" x="76.0" y="158" width="222.0" height="94" rx="3"/>
+<rect class="bg" x="76.0" y="158" width="222.0" height="94" rx="3" stroke="#2a78d6" stroke-width="1.8"/>
+<rect x="76.0" y="158" width="222.0" height="5" fill="#2a78d6"/>
+<g transform="translate(83.0,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><path d="M0,5 L7,0 L14,5z" stroke="none"/><rect x="1.5" y="6" width="2" height="6" stroke="none"/><rect x="6" y="6" width="2" height="6" stroke="none"/><rect x="10.5" y="6" width="2" height="6" stroke="none"/><rect x="0" y="12.5" width="14" height="1.6" stroke="none"/></g></g>
+<g transform="translate(273.0,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="107.0" y="180" font-size="10.5" font-weight="700" fill="#2a78d6">University · UC Berkeley</text>
+<text class="t1" x="187.0" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">Ion Stoica · Joseph Gonzalez</text>
+<text class="t2" x="187.0" y="221.0" font-size="10.2" text-anchor="middle">UC Berkeley</text>
+<text class="t2" x="187.0" y="234.0" font-size="10.2" text-anchor="middle">Sky Lab (the Spark and Ray line)</text>
+<rect class="bg" x="316.0" y="158" width="228.0" height="94" rx="3"/>
+<rect class="bg" x="316.0" y="158" width="228.0" height="94" rx="3" stroke="#2a78d6" stroke-width="1.8"/>
+<rect x="316.0" y="158" width="228.0" height="5" fill="#2a78d6"/>
+<g transform="translate(323.0,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><path d="M0,5 L7,0 L14,5z" stroke="none"/><rect x="1.5" y="6" width="2" height="6" stroke="none"/><rect x="6" y="6" width="2" height="6" stroke="none"/><rect x="10.5" y="6" width="2" height="6" stroke="none"/><rect x="0" y="12.5" width="14" height="1.6" stroke="none"/></g></g>
+<g transform="translate(519.0,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="347.0" y="180" font-size="10.5" font-weight="700" fill="#2a78d6">University · UCSD · LMSYS</text>
+<text class="t1" x="430.0" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">Hao Zhang · LMSYS</text>
+<text class="t2" x="430.0" y="221.0" font-size="10.2" text-anchor="middle">UCSD; LMSYS co-founder</text>
+<text class="t2" x="430.0" y="234.0" font-size="10.2" text-anchor="middle">LMSYS: a Berkeley-born non-profit</text>
+<rect class="bg" x="76.0" y="384" width="144.0" height="94" rx="9"/>
+<rect x="76.0" y="384" width="144.0" height="94" rx="9" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(83.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="107.0" y="406" font-size="10.5" font-weight="700" fill="#2a78d6">Open source</text>
+<text class="t1" x="148.0" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">vLLM</text>
+<text class="t2" x="148.0" y="447.0" font-size="10.2" text-anchor="middle">2023.6</text>
+<text class="t2" x="148.0" y="460.0" font-size="10.2" text-anchor="middle">Woosuk Kwon, Zhuohan Li</text>
+<rect class="bg" x="232.0" y="384" width="132.0" height="94" rx="9"/>
+<rect x="232.0" y="384" width="132.0" height="94" rx="9" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(239.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="263.0" y="406" font-size="10.5" font-weight="700" fill="#2a78d6">Open source</text>
+<text class="t1" x="298.0" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">Chatbot Arena</text>
+<text class="t2" x="298.0" y="447.0" font-size="10.2" text-anchor="middle">2023 · alongside Vicuna</text>
+<rect class="bg" x="376.0" y="384" width="168.0" height="94" rx="9"/>
+<rect x="376.0" y="384" width="168.0" height="94" rx="9" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(383.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="407.0" y="406" font-size="10.5" font-weight="700" fill="#2a78d6">Open source · LMSYS</text>
+<text class="t1" x="460.0" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">SGLang</text>
+<text class="t2" x="460.0" y="447.0" font-size="10.2" text-anchor="middle">paper Dec 2023</text>
+<text class="t2" x="460.0" y="460.0" font-size="10.2" text-anchor="middle">Lianmin Zheng, Ying Sheng</text>
+<rect class="bg" x="76.0" y="610" width="144.0" height="94" rx="1"/>
+<rect x="76.0" y="610" width="144.0" height="94" rx="1" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(83.0,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(195.0,619.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="107.0" y="632" font-size="10.5" font-weight="700" fill="#2a78d6">Company</text>
+<text class="t1" x="148.0" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">Inferact</text>
+<text class="t2" x="148.0" y="673.0" font-size="10.2" text-anchor="middle">2026 · $150M seed</text>
+<text class="t2" x="148.0" y="686.0" font-size="10.2" text-anchor="middle">Kwon, Stoica, Simon Mo et al.</text>
+<rect class="bg" x="232.0" y="610" width="132.0" height="94" rx="1"/>
+<rect x="232.0" y="610" width="132.0" height="94" rx="1" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(239.0,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(339.0,619.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="263.0" y="632" font-size="10.5" font-weight="700" fill="#2a78d6">Company</text>
+<text class="t1" x="298.0" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">LMArena → Arena</text>
+<text class="t2" x="298.0" y="673.0" font-size="10.2" text-anchor="middle">incorporated 2025</text>
+<rect class="bg" x="376.0" y="610" width="168.0" height="94" rx="1"/>
+<rect x="376.0" y="610" width="168.0" height="94" rx="1" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(383.0,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(519.0,619.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="407.0" y="632" font-size="10.5" font-weight="700" fill="#2a78d6">Company</text>
+<text class="t1" x="460.0" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">RadixArk</text>
+<text class="t2" x="460.0" y="673.0" font-size="10.2" text-anchor="middle">2026 · $100M seed</text>
+<text class="t2" x="460.0" y="686.0" font-size="10.2" text-anchor="middle">CEO Ying Sheng (ex-xAI)</text>
+<rect class="bg" x="76.0" y="836" width="144.0" height="94" rx="30"/>
+<rect x="76.0" y="836" width="144.0" height="94" rx="30" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(83.0,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><circle cx="7" cy="7" r="6" fill="none" stroke-width="1.5"/><circle cx="4" cy="7" r="1.6" stroke="none"/><circle cx="10" cy="7" r="1.6" stroke="none"/><circle cx="7" cy="3.8" r="1.6" stroke="none"/></g></g>
+<text x="107.0" y="858" font-size="10.5" font-weight="700" fill="#2a78d6">Foundation</text>
+<text class="t1" x="148.0" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">PyTorch Foundation</text>
+<text class="t2" x="148.0" y="899.0" font-size="10.2" text-anchor="middle">hosts vLLM since 2025</text>
+<rect class="bg" x="232.0" y="836" width="132.0" height="94" rx="9"/>
+<rect x="232.0" y="836" width="132.0" height="94" rx="9" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(239.0,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="263.0" y="858" font-size="10.5" font-weight="700" fill="#2a78d6">Open source</text>
+<text class="t1" x="298.0" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">vLLM Router</text>
+<text class="t2" x="298.0" y="899.0" font-size="10.2" text-anchor="middle">forked from the</text>
+<text class="t2" x="298.0" y="912.0" font-size="10.2" text-anchor="middle">SGLang gateway</text>
+<rect class="bg" x="376.0" y="836" width="168.0" height="94" rx="30"/>
+<rect x="376.0" y="836" width="168.0" height="94" rx="30" fill="#2a78d6" fill-opacity=".14" stroke="#2a78d6" stroke-width="1.6"/>
+<g transform="translate(383.0,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#2a78d6" stroke="#2a78d6"><circle cx="7" cy="7" r="6" fill="none" stroke-width="1.5"/><circle cx="4" cy="7" r="1.6" stroke="none"/><circle cx="10" cy="7" r="1.6" stroke="none"/><circle cx="7" cy="3.8" r="1.6" stroke="none"/></g></g>
+<text x="407.0" y="858" font-size="10.5" font-weight="700" fill="#2a78d6">Foundation</text>
+<text class="t1" x="460.0" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">LightSeek Foundation</text>
+<text class="t2" x="460.0" y="899.0" font-size="10.2" text-anchor="middle">TokenSpeed · SMG</text>
+<text class="t2" x="460.0" y="912.0" font-size="10.2" text-anchor="middle">Yineng Zhang (ex-SGLang)</text>
+<rect class="bg" x="580.8" y="158" width="235.7" height="94" rx="16"/>
+<rect class="bg" x="580.8" y="158" width="235.7" height="94" rx="16" stroke="#eb6834" stroke-width="1.8"/>
+<g transform="translate(587.8,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><circle cx="7" cy="4" r="3.2" stroke="none"/><path d="M1,14 Q1,8 7,8 Q13,8 13,14z" stroke="none"/></g></g>
+<g transform="translate(791.5,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="4.00" width="18" height="4.00" fill="#00966e"/><rect y="8.00" width="18" height="4.00" fill="#d62612"/></g>
+<text x="611.8" y="180" font-size="10.5" font-weight="700" fill="#eb6834">Person · independent</text>
+<text class="t1" x="698.6" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">Georgi Gerganov</text>
+<text class="t2" x="698.6" y="221.0" font-size="10.2" text-anchor="middle">independent developer, Bulgaria</text>
+<text class="t2" x="698.6" y="234.0" font-size="10.2" text-anchor="middle">ggml first, then Whisper port</text>
+<rect class="bg" x="580.8" y="384" width="112.7" height="94" rx="9"/>
+<rect x="580.8" y="384" width="112.7" height="94" rx="9" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(587.8,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="611.8" y="406" font-size="10.5" font-weight="700" fill="#eb6834">Open source</text>
+<text class="t1" x="637.1" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">ggml · llama.cpp</text>
+<text class="t2" x="637.1" y="447.0" font-size="10.2" text-anchor="middle">C tensor lib + runtime</text>
+<text class="t2" x="637.1" y="460.0" font-size="10.2" text-anchor="middle">2022.9 / 2023.3</text>
+<rect class="bg" x="705.0" y="384" width="111.5" height="94" rx="1"/>
+<rect x="705.0" y="384" width="111.5" height="94" rx="1" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(712.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(791.5,393.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="736.0" y="406" font-size="10.5" font-weight="700" fill="#eb6834">Company</text>
+<text class="t1" x="760.7" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">Ollama</text>
+<text class="t2" x="760.7" y="447.0" font-size="10.2" text-anchor="middle">Morgan, Chiang</text>
+<text class="t2" x="760.7" y="460.0" font-size="10.2" text-anchor="middle">(ex-Docker)</text>
+<rect class="bg" x="580.8" y="610" width="112.7" height="94" rx="1"/>
+<rect x="580.8" y="610" width="112.7" height="94" rx="1" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(587.8,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<text x="611.8" y="632" font-size="10.5" font-weight="700" fill="#eb6834">Company</text>
+<text class="t1" x="637.1" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">ggml.ai</text>
+<text class="t2" x="637.1" y="673.0" font-size="10.2" text-anchor="middle">Gerganov's company</text>
+<text class="t2" x="637.1" y="686.0" font-size="10.2" text-anchor="middle">seed from</text>
+<text class="t2" x="637.1" y="699.0" font-size="10.2" text-anchor="middle">Friedman, Gross</text>
+<rect class="bg" x="705.0" y="610" width="111.5" height="94" rx="9"/>
+<rect x="705.0" y="610" width="111.5" height="94" rx="9" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(712.0,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="736.0" y="632" font-size="10.5" font-weight="700" fill="#eb6834">Open source</text>
+<text class="t1" x="760.7" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">Embedded in</text>
+<text class="t2" x="760.7" y="673.0" font-size="10.2" text-anchor="middle">LM Studio, GenieX,</text>
+<text class="t2" x="760.7" y="686.0" font-size="10.2" text-anchor="middle">Windows ML</text>
+<rect class="bg" x="580.8" y="836" width="235.7" height="94" rx="1"/>
+<rect x="580.8" y="836" width="235.7" height="94" rx="1" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(587.8,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(791.5,845.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect width="6.0" height="12" fill="#0055a4"/><rect x="12.0" width="6.0" height="12" fill="#ef4135"/></g>
+<text x="611.8" y="858" font-size="10.5" font-weight="700" fill="#eb6834">Company</text>
+<text class="t1" x="698.6" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">Hugging Face (Feb 2026)</text>
+<text class="t2" x="698.6" y="899.0" font-size="10.2" text-anchor="middle">→ NVIDIA purchase agreed</text>
+<text class="t2" x="698.6" y="912.0" font-size="10.2" text-anchor="middle">(Sept 2026, not closed)</text>
+<rect class="bg" x="846.0" y="158" width="105.6" height="94" rx="3"/>
+<rect class="bg" x="846.0" y="158" width="105.6" height="94" rx="3" stroke="#8a63d2" stroke-width="1.8"/>
+<rect x="846.0" y="158" width="105.6" height="5" fill="#8a63d2"/>
+<g transform="translate(853.0,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#8a63d2" stroke="#8a63d2"><path d="M0,5 L7,0 L14,5z" stroke="none"/><rect x="1.5" y="6" width="2" height="6" stroke="none"/><rect x="6" y="6" width="2" height="6" stroke="none"/><rect x="10.5" y="6" width="2" height="6" stroke="none"/><rect x="0" y="12.5" width="14" height="1.6" stroke="none"/></g></g>
+<g transform="translate(926.6,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="877.0" y="180" font-size="10.5" font-weight="700" fill="#8a63d2"></text>
+<text class="t1" x="898.8" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">Tianqi Chen</text>
+<text class="t2" x="898.8" y="221.0" font-size="10.2" text-anchor="middle">Luis Ceze</text>
+<text class="t2" x="898.8" y="234.0" font-size="10.2" text-anchor="middle">Univ. of Washington</text>
+<rect class="bg" x="960.0" y="158" width="108.0" height="94" rx="16"/>
+<rect class="bg" x="960.0" y="158" width="108.0" height="94" rx="16" stroke="#8a63d2" stroke-width="1.8"/>
+<g transform="translate(967.0,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#8a63d2" stroke="#8a63d2"><circle cx="7" cy="4" r="3.2" stroke="none"/><path d="M1,14 Q1,8 7,8 Q13,8 13,14z" stroke="none"/></g></g>
+<g transform="translate(1043.0,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="991.0" y="180" font-size="10.5" font-weight="700" fill="#8a63d2">Person</text>
+<text class="t1" x="1014.0" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">Chris Lattner</text>
+<text class="t2" x="1014.0" y="221.0" font-size="10.2" text-anchor="middle">LLVM, Swift,</text>
+<text class="t2" x="1014.0" y="234.0" font-size="10.2" text-anchor="middle">MLIR at Google</text>
+<rect class="bg" x="846.0" y="384" width="105.6" height="94" rx="9"/>
+<rect x="846.0" y="384" width="105.6" height="94" rx="9" fill="#8a63d2" fill-opacity=".14" stroke="#8a63d2" stroke-width="1.6"/>
+<g transform="translate(853.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#8a63d2" stroke="#8a63d2"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="877.0" y="406" font-size="10.5" font-weight="700" fill="#8a63d2"></text>
+<text class="t1" x="898.8" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">TVM → MLC-LLM</text>
+<text class="t2" x="898.8" y="447.0" font-size="10.2" text-anchor="middle">XGrammar</text>
+<text class="t2" x="898.8" y="460.0" font-size="10.2" text-anchor="middle">FlashInfer</text>
+<rect class="bg" x="960.0" y="384" width="108.0" height="94" rx="1"/>
+<rect x="960.0" y="384" width="108.0" height="94" rx="1" fill="#8a63d2" fill-opacity=".14" stroke="#8a63d2" stroke-width="1.6"/>
+<g transform="translate(967.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#8a63d2" stroke="#8a63d2"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(1043.0,393.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="991.0" y="406" font-size="10.5" font-weight="700" fill="#8a63d2">Company</text>
+<text class="t1" x="1014.0" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">Modular</text>
+<text class="t2" x="1014.0" y="447.0" font-size="10.2" text-anchor="middle">2022 · MAX, Mojo</text>
+<rect class="bg" x="846.0" y="610" width="105.6" height="94" rx="1"/>
+<rect x="846.0" y="610" width="105.6" height="94" rx="1" fill="#8a63d2" fill-opacity=".14" stroke="#8a63d2" stroke-width="1.6"/>
+<g transform="translate(853.0,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#8a63d2" stroke="#8a63d2"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(926.6,619.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="877.0" y="632" font-size="10.5" font-weight="700" fill="#8a63d2">Company</text>
+<text class="t1" x="898.8" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">OctoAI</text>
+<text class="t2" x="898.8" y="673.0" font-size="10.2" text-anchor="middle">2019 UW spin-out</text>
+<rect class="bg" x="846.0" y="836" width="222.0" height="94" rx="1"/>
+<rect x="846.0" y="836" width="222.0" height="94" rx="1" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(853.0,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<text x="877.0" y="858" font-size="10.5" font-weight="700" fill="#eb6834">Company</text>
+<text class="t1" x="957.0" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">OctoAI → NVIDIA (2024)</text>
+<text class="t2" x="957.0" y="899.0" font-size="10.2" text-anchor="middle">Modular → Qualcomm (Jul 2026)</text>
+<rect class="bg" x="1100.5" y="158" width="126.5" height="94" rx="3"/>
+<rect class="bg" x="1100.5" y="158" width="126.5" height="94" rx="3" stroke="#1baf7a" stroke-width="1.8"/>
+<rect x="1100.5" y="158" width="126.5" height="5" fill="#1baf7a"/>
+<g transform="translate(1107.5,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><path d="M0,5 L7,0 L14,5z" stroke="none"/><rect x="1.5" y="6" width="2" height="6" stroke="none"/><rect x="6" y="6" width="2" height="6" stroke="none"/><rect x="10.5" y="6" width="2" height="6" stroke="none"/><rect x="0" y="12.5" width="14" height="1.6" stroke="none"/></g></g>
+<g transform="translate(1202.0,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><path d="M5.8,6.0 a3.2,3.2 0 0 1 6.4,0z" fill="#cd2e3a"/><path d="M5.8,6.0 a3.2,3.2 0 0 0 6.4,0z" fill="#0047a0"/></g>
+<text x="1131.5" y="180" font-size="10.5" font-weight="700" fill="#1baf7a">University</text>
+<text class="t1" x="1163.8" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">Byung-Gon Chun</text>
+<text class="t2" x="1163.8" y="221.0" font-size="10.2" text-anchor="middle">Seoul National Univ.</text>
+<text class="t2" x="1163.8" y="234.0" font-size="10.2" text-anchor="middle">FriendliAI</text>
+<rect class="bg" x="1238.0" y="158" width="129.8" height="94" rx="1"/>
+<rect x="1238.0" y="158" width="129.8" height="94" rx="1" fill="#1baf7a" fill-opacity=".14" stroke="#1baf7a" stroke-width="1.6"/>
+<g transform="translate(1245.0,166) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(1342.8,167.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="1269.0" y="180" font-size="10.5" font-weight="700" fill="#1baf7a">Company</text>
+<text class="t1" x="1302.9" y="205.0" font-size="12.5" text-anchor="middle" font-weight="700">NVIDIA</text>
+<text class="t2" x="1302.9" y="221.0" font-size="10.2" text-anchor="middle">FasterTransformer</text>
+<text class="t2" x="1302.9" y="234.0" font-size="10.2" text-anchor="middle">TRTIS (2018)</text>
+<rect class="bg" x="1100.5" y="384" width="126.5" height="94" rx="9"/>
+<rect x="1100.5" y="384" width="126.5" height="94" rx="9" fill="#1baf7a" fill-opacity=".14" stroke="#1baf7a" stroke-width="1.6"/>
+<g transform="translate(1107.5,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="1131.5" y="406" font-size="10.5" font-weight="700" fill="#1baf7a">Open source</text>
+<text class="t1" x="1163.8" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">Orca → Friendli</text>
+<text class="t2" x="1163.8" y="447.0" font-size="10.2" text-anchor="middle">OSDI 2022 · origin of</text>
+<text class="t2" x="1163.8" y="460.0" font-size="10.2" text-anchor="middle">continuous batching</text>
+<rect class="bg" x="1238.0" y="384" width="129.8" height="94" rx="9"/>
+<rect x="1238.0" y="384" width="129.8" height="94" rx="9" fill="#1baf7a" fill-opacity=".14" stroke="#1baf7a" stroke-width="1.6"/>
+<g transform="translate(1245.0,392) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="1269.0" y="406" font-size="10.5" font-weight="700" fill="#1baf7a">Open source</text>
+<text class="t1" x="1302.9" y="431.0" font-size="12.5" text-anchor="middle" font-weight="700">TensorRT-LLM</text>
+<text class="t2" x="1302.9" y="447.0" font-size="10.2" text-anchor="middle">2023</text>
+<text class="t2" x="1302.9" y="460.0" font-size="10.2" text-anchor="middle">Triton renamed 2020</text>
+<rect class="bg" x="1100.5" y="610" width="126.5" height="94" rx="1"/>
+<rect x="1100.5" y="610" width="126.5" height="94" rx="1" fill="#1baf7a" fill-opacity=".14" stroke="#1baf7a" stroke-width="1.6"/>
+<g transform="translate(1107.5,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(1202.0,619.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="1131.5" y="632" font-size="10.5" font-weight="700" fill="#1baf7a">Company</text>
+<text class="t1" x="1163.8" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">Neural Magic</text>
+<text class="t2" x="1163.8" y="673.0" font-size="10.2" text-anchor="middle">leading vLLM contributor</text>
+<text class="t2" x="1163.8" y="686.0" font-size="10.2" text-anchor="middle">→ Red Hat (2025)</text>
+<rect class="bg" x="1238.0" y="610" width="129.8" height="94" rx="9"/>
+<rect x="1238.0" y="610" width="129.8" height="94" rx="9" fill="#1baf7a" fill-opacity=".14" stroke="#1baf7a" stroke-width="1.6"/>
+<g transform="translate(1245.0,618) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="1269.0" y="632" font-size="10.5" font-weight="700" fill="#1baf7a">Open source</text>
+<text class="t1" x="1302.9" y="657.0" font-size="12.5" text-anchor="middle" font-weight="700">Dynamo</text>
+<text class="t2" x="1302.9" y="673.0" font-size="10.2" text-anchor="middle">2025 · runs vLLM,</text>
+<text class="t2" x="1302.9" y="686.0" font-size="10.2" text-anchor="middle">SGLang, TRT-LLM</text>
+<rect class="bg" x="1100.5" y="836" width="126.5" height="94" rx="30"/>
+<rect x="1100.5" y="836" width="126.5" height="94" rx="30" fill="#1baf7a" fill-opacity=".14" stroke="#1baf7a" stroke-width="1.6"/>
+<g transform="translate(1107.5,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#1baf7a" stroke="#1baf7a"><circle cx="7" cy="7" r="6" fill="none" stroke-width="1.5"/><circle cx="4" cy="7" r="1.6" stroke="none"/><circle cx="10" cy="7" r="1.6" stroke="none"/><circle cx="7" cy="3.8" r="1.6" stroke="none"/></g></g>
+<text x="1131.5" y="858" font-size="10.5" font-weight="700" fill="#1baf7a">Foundation</text>
+<text class="t1" x="1163.8" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">llm-d</text>
+<text class="t2" x="1163.8" y="899.0" font-size="10.2" text-anchor="middle">Red Hat et al.</text>
+<text class="t2" x="1163.8" y="912.0" font-size="10.2" text-anchor="middle">CNCF 2026</text>
+<rect class="bg" x="1238.0" y="836" width="129.8" height="94" rx="1"/>
+<rect x="1238.0" y="836" width="129.8" height="94" rx="1" fill="#eb6834" fill-opacity=".14" stroke="#eb6834" stroke-width="1.6"/>
+<g transform="translate(1245.0,844) scale(1.45)"><g transform="translate(0.0,0.0)" fill="#eb6834" stroke="#eb6834"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<g transform="translate(1342.8,845.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<text x="1269.0" y="858" font-size="10.5" font-weight="700" fill="#eb6834">Company</text>
+<text class="t1" x="1302.9" y="883.0" font-size="12.5" text-anchor="middle" font-weight="700">Groq licence + team</text>
+<text class="t2" x="1302.9" y="899.0" font-size="10.2" text-anchor="middle">Dec 2025 → LPX</text>
+<text class="t2" x="1302.9" y="912.0" font-size="10.2" text-anchor="middle">via a sidecar</text>
+<path d="M220.0,468 C270.0,508 326.0,508 376.0,468" fill="none" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text class="t3" x="298.0" y="520.0" font-size="10.5" text-anchor="middle">shared authors on both papers</text>
+<rect class="soft" x="60.0" y="970.0" width="1306.0" height="150.0" rx="8"/>
+<text class="t1" x="78.0" y="994.0" font-size="13" text-anchor="start" font-weight="700">How to read it</text>
+<path d="M80,1020 L140,1020" stroke="#6d6c66" stroke-width="1.8" marker-end="url(#ar)"/>
+<text class="t2" x="152.0" y="1024.0" font-size="11.5" text-anchor="start">Solid: created, founded or directly derived (e.g. the Berkeley lab built vLLM)</text>
+<path d="M80,1046 L140,1046" stroke="#9b9a95" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<text class="t2" x="152.0" y="1050.0" font-size="11.5" text-anchor="start">Dashed: indirect links: people moving, forks, embedding, hosting, acquisitions (the small tag says which)</text>
+<rect x="80" y="1062" width="26" height="14" rx="3" fill="#eb6834" fill-opacity=".14" stroke="#eb6834"/>
+<text class="t2" x="114.0" y="1073.0" font-size="11.5" text-anchor="start">Orange box: acquisition or licence</text>
+<g transform="translate(80,1092) scale(1.35)"><g transform="translate(0.0,0.0)" fill="#52514e" stroke="#52514e"><circle cx="7" cy="4" r="3.2" stroke="none"/><path d="M1,14 Q1,8 7,8 Q13,8 13,14z" stroke="none"/></g></g>
+<text class="t2" x="102.0" y="1106.0" font-size="11.5" text-anchor="start">person (round box)</text>
+<g transform="translate(295,1092) scale(1.35)"><g transform="translate(0.0,0.0)" fill="#52514e" stroke="#52514e"><path d="M0,5 L7,0 L14,5z" stroke="none"/><rect x="1.5" y="6" width="2" height="6" stroke="none"/><rect x="6" y="6" width="2" height="6" stroke="none"/><rect x="10.5" y="6" width="2" height="6" stroke="none"/><rect x="0" y="12.5" width="14" height="1.6" stroke="none"/></g></g>
+<text class="t2" x="317.0" y="1106.0" font-size="11.5" text-anchor="start">university or lab (bar on top)</text>
+<g transform="translate(510,1092) scale(1.35)"><g transform="translate(0.0,0.0)" fill="#52514e" stroke="#52514e"><rect x="1" y="2" width="12" height="12" fill="none" stroke-width="1.5"/><rect x="3.5" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="8" y="4.5" width="2.5" height="2.5" stroke="none"/><rect x="3.5" y="9" width="2.5" height="2.5" stroke="none"/><rect x="8" y="9" width="2.5" height="5" stroke="none"/></g></g>
+<text class="t2" x="532.0" y="1106.0" font-size="11.5" text-anchor="start">company (square box)</text>
+<g transform="translate(725,1092) scale(1.35)"><g transform="translate(0.0,0.0)" fill="#52514e" stroke="#52514e"><path d="M5,2 L1,7 L5,12 M9,2 L13,7 L9,12" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text class="t2" x="747.0" y="1106.0" font-size="11.5" text-anchor="start">open-source project</text>
+<g transform="translate(940,1092) scale(1.35)"><g transform="translate(0.0,0.0)" fill="#52514e" stroke="#52514e"><circle cx="7" cy="7" r="6" fill="none" stroke-width="1.5"/><circle cx="4" cy="7" r="1.6" stroke="none"/><circle cx="10" cy="7" r="1.6" stroke="none"/><circle cx="7" cy="3.8" r="1.6" stroke="none"/></g></g>
+<text class="t2" x="962.0" y="1106.0" font-size="11.5" text-anchor="start">foundation (pill box)</text>
+<g transform="translate(1155.0,1096.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="0.00" width="18" height="1.71" fill="#b22234"/><rect y="3.43" width="18" height="1.71" fill="#b22234"/><rect y="6.86" width="18" height="1.71" fill="#b22234"/><rect y="10.29" width="18" height="1.71" fill="#b22234"/><rect width="7.6" height="6.86" fill="#3c3b6e"/></g>
+<g transform="translate(1177.0,1096.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><rect y="4.00" width="18" height="4.00" fill="#00966e"/><rect y="8.00" width="18" height="4.00" fill="#d62612"/></g>
+<g transform="translate(1199.0,1096.0)"><rect width="18" height="12" fill="#fff" stroke="#bbb" stroke-width=".6"/><path d="M5.8,6.0 a3.2,3.2 0 0 1 6.4,0z" fill="#cd2e3a"/><path d="M5.8,6.0 a3.2,3.2 0 0 0 6.4,0z" fill="#0047a0"/></g>
+<text class="t2" x="1225.0" y="1106.0" font-size="11.5" text-anchor="start">country</text>
+<text class="t3" x="24.0" y="1174.0" font-size="11" text-anchor="start">Sources: project papers, company announcements, SEC filings and press (see Sources). People moves with only one secondary source are left out.</text>
+</svg>

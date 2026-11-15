@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" class="s" role="img" aria-label="GPU + 新芯片：统一的是控制平面，不是引擎">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>GPU + 新芯片：统一的是控制平面，不是引擎</title>
+<rect class="bg" width="960" height="570" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">GPU + 新芯片：统一的是控制平面，不是引擎</text>
+<text class="t2" x="24" y="54" font-size="12.5">每一层右侧是今天最接近的公开组件</text>
+<rect class="soft" x="24.0" y="76.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="98.0" font-size="13" text-anchor="start" font-weight="600">前门</text>
+<text class="t2" x="40.0" y="117.0" font-size="11.5" text-anchor="start">API、分词、工具与推理解析，远离加速器的主机循环</text>
+<text class="t2" x="680.0" y="107.0" font-size="12" text-anchor="start">SMG, vLLM Rust front-end</text>
+<rect class="soft" x="24.0" y="136.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="158.0" font-size="13" text-anchor="start" font-weight="600">分类与能力协商</text>
+<text class="t2" x="40.0" y="177.0" font-size="11.5" text-anchor="start">打延迟档位，提前拒绝芯片不支持的功能</text>
+<text class="t2" x="680.0" y="167.0" font-size="12" text-anchor="start">sidecar capability checks</text>
+<rect class="soft" x="24.0" y="196.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="218.0" font-size="13" text-anchor="start" font-weight="600">KV / 会话感知路由</text>
+<text class="t2" x="40.0" y="237.0" font-size="11.5" text-anchor="start">按缓存重叠选 worker，agent 会话保持粘性</text>
+<text class="t2" x="680.0" y="227.0" font-size="12" text-anchor="start">Dynamo Router, llm-d EPP</text>
+<rect class="soft" x="24.0" y="256.0" width="640.0" height="52.0" rx="7"/>
+<text class="t1" x="40.0" y="278.0" font-size="13" text-anchor="start" font-weight="600">规划与编排</text>
+<text class="t2" x="40.0" y="297.0" font-size="11.5" text-anchor="start">按编译器输出的布局清单调度，成对 pod 当一个故障单元</text>
+<text class="t2" x="680.0" y="287.0" font-size="12" text-anchor="start">GBuild manifest + Dynamo operator</text>
+<rect class="b1" x="24.0" y="316.0" width="310.0" height="92.0" rx="7"/>
+<text class="t1" x="40.0" y="340.0" font-size="13.5" text-anchor="start" font-weight="600">GPU 池</text>
+<text class="t2" x="40.0" y="362.0" font-size="12" text-anchor="start">prefill、attention，KV 留在 GPU</text>
+<text class="t3" x="40.0" y="384.0" font-size="11.5" text-anchor="start">vLLM / SGLang worker</text>
+<rect class="b2" x="354.0" y="316.0" width="310.0" height="92.0" rx="7"/>
+<text class="t1" x="370.0" y="340.0" font-size="13.5" text-anchor="start" font-weight="600">新芯片池（例：LPU）</text>
+<text class="t2" x="370.0" y="362.0" font-size="12" text-anchor="start">FFN/MoE、decode 或草稿模型</text>
+<text class="t3" x="370.0" y="384.0" font-size="11.5" text-anchor="start">无请求级 KV，仍要做内存规划</text>
+<path class="ln" d="M334,362 L354,362" marker-end="url(#ar)"/>
+<path class="ln" d="M354,374 L334,374" marker-end="url(#ar)"/>
+<text class="t2" x="680.0" y="354.0" font-size="12" text-anchor="start">vLLM/SGLang workers;</text>
+<text class="t2" x="680.0" y="372.0" font-size="12" text-anchor="start">vendor engine via sidecar</text>
+<rect class="soft" x="24.0" y="420.0" width="640.0" height="44.0" rx="7"/>
+<text class="t1" x="40.0" y="447.0" font-size="12.5" text-anchor="start">数据面：KV 与激活的格式、传输和生命周期；AFD 时逐层交换</text>
+<text class="t2" x="680.0" y="447.0" font-size="12" text-anchor="start">NIXL, Mooncake</text>
+<rect class="soft" x="24.0" y="472.0" width="640.0" height="44.0" rx="7"/>
+<text class="t1" x="40.0" y="499.0" font-size="12.5" text-anchor="start">上下文内存分层：暂停中的 agent 会话的 KV 放在这里（SRAM 放不下）</text>
+<text class="t2" x="680.0" y="499.0" font-size="12" text-anchor="start">引擎自带卸载、HiCache、CMX</text>
+<text class="t3" x="24.0" y="554.0" font-size="11" text-anchor="start">来源：Dynamo v1.6.0 发布说明与 PR、vLLM AFD 插件博客、NVIDIA Vera Rubin 技术博客（见文末）。</text>
+</svg>

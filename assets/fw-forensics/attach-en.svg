@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" class="s" role="img" aria-label="How a new chip might plug in: one plausible path">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>How a new chip might plug in: one plausible path</title>
+<rect class="bg" width="960" height="470" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">How a new chip might plug in: one plausible path</text>
+<text class="t2" x="24" y="54" font-size="12.5">Left: the four patterns in the wild. Right: one plausible shape, similar to how NVIDIA attached Groq chips under Dynamo (not the only answer)</text>
+<rect class="soft" x="24.0" y="80.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="104.0" font-size="13.5" text-anchor="start" font-weight="600">1. vLLM plugin</text>
+<text class="t2" x="40.0" y="125.0" font-size="11.5" text-anchor="start">Ascend · Spyre · Neuron · TPU · ATOM</text>
+<text class="t3" x="40.0" y="144.0" font-size="11.5" text-anchor="start">model coverage; scheduler often replaced</text>
+<rect class="soft" x="24.0" y="172.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="196.0" font-size="13.5" text-anchor="start" font-weight="600">2. Fork</text>
+<text class="t2" x="40.0" y="217.0" font-size="11.5" text-anchor="start">Tenstorrent (tt-vllm)</text>
+<text class="t3" x="40.0" y="236.0" font-size="11.5" text-anchor="start">merge tax on every release</text>
+<rect class="soft" x="24.0" y="264.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="288.0" font-size="13.5" text-anchor="start" font-weight="600">3. Own engine, compatible API</text>
+<text class="t2" x="40.0" y="309.0" font-size="11.5" text-anchor="start">Furiosa · Groq (pre-deal) · Cerebras</text>
+<text class="t3" x="40.0" y="328.0" font-size="11.5" text-anchor="start">model coverage is yours alone</text>
+<rect class="soft" x="24.0" y="356.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="380.0" font-size="13.5" text-anchor="start" font-weight="600">4. Sidecar under a cluster layer</text>
+<text class="t2" x="40.0" y="401.0" font-size="11.5" text-anchor="start">Groq LPX under Dynamo</text>
+<text class="t3" x="40.0" y="420.0" font-size="11.5" text-anchor="start">narrow contract, capabilities negotiated</text>
+<rect class="b1" x="420.0" y="80.0" width="250.0" height="70.0" rx="7"/>
+<text class="t1" x="545.0" y="108.0" font-size="14" text-anchor="middle" font-weight="600">vLLM / SGLang</text>
+<text class="t2" x="545.0" y="130.0" font-size="11.5" text-anchor="middle">models, APIs, tool parsers</text>
+<rect class="b3" x="690.0" y="80.0" width="250.0" height="70.0" rx="7"/>
+<text class="t1" x="815.0" y="108.0" font-size="14" text-anchor="middle" font-weight="600">Dynamo / llm-d</text>
+<text class="t2" x="815.0" y="130.0" font-size="11.5" text-anchor="middle">routing, P/D split, mixed pools</text>
+<text class="t2" x="545.0" y="180.0" font-size="11.5" text-anchor="middle">platform plugin</text>
+<text class="t2" x="815.0" y="180.0" font-size="11.5" text-anchor="middle">worker / sidecar</text>
+<path class="ln" d="M545,232 L545,156" marker-end="url(#ar)"/>
+<path class="ln" d="M815,232 L815,156" marker-end="url(#ar)"/>
+<rect class="b2" x="420.0" y="236.0" width="520.0" height="46.0" rx="7"/>
+<text class="t1" x="680.0" y="256.0" font-size="12" text-anchor="middle" font-weight="600">Narrow, versioned RPC contract: capability negotiation, unsupported features refused up front</text>
+<text class="t2" x="680.0" y="274.0" font-size="11" text-anchor="middle">(e.g. the Dynamo sidecar refuses logprobs, guided decoding, multimodal)</text>
+<rect class="box" x="420.0" y="296.0" width="520.0" height="112.0" rx="7"/>
+<text class="t1" x="436.0" y="320.0" font-size="13" text-anchor="start" font-weight="600">What the chip vendor would likely own</text>
+<text class="t2" x="450.0" y="344.0" font-size="12" text-anchor="start">• Compiler: static schedule, shape buckets, placement manifest</text>
+<text class="t2" x="450.0" y="366.0" font-size="12" text-anchor="start">• Host loop: own it, and pick the language, from measured overhead</text>
+<text class="t2" x="450.0" y="388.0" font-size="12" text-anchor="start">• Risk of forking: a merge tax on top of the static-shape tax</text>
+<text class="t3" x="24.0" y="454.0" font-size="11" text-anchor="start">Sources: vLLM hardware-plugin RFC #11162, Dynamo PRs #16998 and #17389, vendor docs (see Sources).</text>
+</svg>

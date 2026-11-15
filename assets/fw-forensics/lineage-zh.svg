@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" class="s" role="img" aria-label="推理框架时间线：今天的主流大多生在 2023 年前后">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>推理框架时间线：今天的主流大多生在 2023 年前后</title>
+<rect class="bg" width="960" height="620" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">推理框架时间线：今天的主流大多生在 2023 年前后</text>
+<text class="t2" x="24" y="54" font-size="12.5">泳道 = 出身；虚线箭头 = 人员、代码或接口的传承（不表示官方继承关系）</text>
+<rect class="hl" x="466.0" y="104" width="116.0" height="446"/>
+<text class="t2" x="524.0" y="566.0" font-size="11.5" text-anchor="middle" font-weight="600">“推理元年”</text>
+<line class="yr" x1="190.0" x2="190.0" y1="104" y2="546"/>
+<text class="t3" x="190.0" y="98.0" font-size="11" text-anchor="middle">2016</text>
+<line class="yr" x1="236.7" x2="236.7" y1="104" y2="546"/>
+<text class="t3" x="236.7" y="98.0" font-size="11" text-anchor="middle">2018</text>
+<line class="yr" x1="283.3" x2="283.3" y1="104" y2="546"/>
+<text class="t3" x="283.3" y="98.0" font-size="11" text-anchor="middle">2020</text>
+<line class="yr" x1="350.0" x2="350.0" y1="104" y2="546"/>
+<text class="t2" x="408.0" y="98.0" font-size="11.5" text-anchor="middle" font-weight="600">2022</text>
+<line class="yr" x1="466.0" x2="466.0" y1="104" y2="546"/>
+<text class="t2" x="524.0" y="98.0" font-size="11.5" text-anchor="middle" font-weight="600">2023</text>
+<line class="yr" x1="582.0" x2="582.0" y1="104" y2="546"/>
+<text class="t2" x="640.0" y="98.0" font-size="11.5" text-anchor="middle" font-weight="600">2024</text>
+<line class="yr" x1="698.0" x2="698.0" y1="104" y2="546"/>
+<text class="t2" x="756.0" y="98.0" font-size="11.5" text-anchor="middle" font-weight="600">2025</text>
+<line class="yr" x1="814.0" x2="814.0" y1="104" y2="546"/>
+<text class="t2" x="872.0" y="98.0" font-size="11.5" text-anchor="middle" font-weight="600">2026</text>
+<path class="lnd" d="M340.0,104 L340.0,546"/>
+<text class="t3" x="260.0" y="82.0" font-size="10.5" text-anchor="middle">2016–2021（压缩）</text>
+<text class="t3" x="640.0" y="82.0" font-size="10.5" text-anchor="middle">2022–2026（按月展开）</text>
+<line class="yr" x1="190" x2="930" y1="124" y2="124"/>
+<text class="t1" x="178.0" y="128.0" font-size="12" text-anchor="end" font-weight="600">前 LLM 时代的服务器</text>
+<line class="yr" x1="190" x2="930" y1="178" y2="178"/>
+<text class="t1" x="178.0" y="182.0" font-size="12" text-anchor="end" font-weight="600">调度研究</text>
+<line class="yr" x1="190" x2="930" y1="232" y2="232"/>
+<text class="t1" x="178.0" y="236.0" font-size="12" text-anchor="end" font-weight="600">Berkeley / LMSYS</text>
+<line class="yr" x1="190" x2="930" y1="286" y2="286"/>
+<text class="t1" x="178.0" y="290.0" font-size="12" text-anchor="end" font-weight="600">ggml</text>
+<line class="yr" x1="190" x2="930" y1="340" y2="340"/>
+<text class="t1" x="178.0" y="344.0" font-size="12" text-anchor="end" font-weight="600">编译器与平台方</text>
+<line class="yr" x1="190" x2="930" y1="394" y2="394"/>
+<text class="t1" x="178.0" y="398.0" font-size="12" text-anchor="end" font-weight="600">英伟达</text>
+<line class="yr" x1="190" x2="930" y1="448" y2="448"/>
+<text class="t1" x="178.0" y="452.0" font-size="12" text-anchor="end" font-weight="600">集群层（开放）</text>
+<line class="yr" x1="190" x2="930" y1="502" y2="502"/>
+<text class="t1" x="178.0" y="506.0" font-size="12" text-anchor="end" font-weight="600">芯片厂商</text>
+<circle class="m6" cx="192.8" cy="124" r="5"/>
+<text class="t2" x="192.8" y="142.0" font-size="11" text-anchor="middle">TF Serving</text>
+<circle class="m6" cx="235.5" cy="124" r="5"/>
+<text class="t2" x="235.5" y="155.0" font-size="11" text-anchor="middle">NNAPI</text>
+<circle class="m6" cx="253.0" cy="124" r="5"/>
+<text class="t2" x="253.0" y="114.0" font-size="11" text-anchor="middle">TRTIS → Triton</text>
+<circle class="m6" cx="663.2" cy="124" r="5"/>
+<text class="t2" x="663.2" y="142.0" font-size="11" text-anchor="middle">NNAPI 废弃</text>
+<circle class="m5" cx="410.3" cy="178" r="5"/>
+<text class="t2" x="410.3" y="168.0" font-size="11" text-anchor="middle">Orca：迭代级调度</text>
+<circle class="m1" cx="520.5" cy="232" r="5"/>
+<text class="t2" x="520.5" y="222.0" font-size="11" text-anchor="middle">vLLM</text>
+<circle class="m1" cx="576.2" cy="232" r="5"/>
+<text class="t2" x="576.2" y="250.0" font-size="11" text-anchor="middle">SGLang</text>
+<circle class="m1" cx="692.2" cy="232" r="5"/>
+<text class="t2" x="692.2" y="222.0" font-size="11" text-anchor="middle">硬件插件</text>
+<circle class="m1" cx="706.1" cy="232" r="5"/>
+<text class="t2" x="706.1" y="250.0" font-size="11" text-anchor="middle">vLLM V1</text>
+<circle class="m1" cx="854.6" cy="232" r="5"/>
+<text class="t2" x="854.6" y="222.0" font-size="11" text-anchor="middle">TokenSpeed</text>
+<circle class="m2" cx="431.2" cy="286" r="5"/>
+<text class="t2" x="431.2" y="276.0" font-size="11" text-anchor="middle">ggml</text>
+<circle class="m2" cx="488.0" cy="286" r="5"/>
+<text class="t2" x="488.0" y="304.0" font-size="11" text-anchor="middle">llama.cpp</text>
+<circle class="m2" cx="521.7" cy="286" r="5"/>
+<text class="t2" x="521.7" y="276.0" font-size="11" text-anchor="middle">Ollama</text>
+<circle class="m2" cx="740.9" cy="286" r="5"/>
+<text class="t2" x="740.9" y="276.0" font-size="11" text-anchor="middle">Ollama 自建引擎</text>
+<circle class="m2" cx="862.7" cy="286" r="5"/>
+<text class="t2" x="862.7" y="304.0" font-size="11" text-anchor="middle">加入 llama.cpp</text>
+<circle class="m4" cx="228.5" cy="340" r="5"/>
+<text class="t2" x="228.5" y="330.0" font-size="11" text-anchor="middle">TVM</text>
+<circle class="m4" cx="506.6" cy="340" r="5"/>
+<text class="t2" x="506.6" y="330.0" font-size="11" text-anchor="middle">MLC-LLM</text>
+<circle class="m4" cx="572.7" cy="340" r="5"/>
+<text class="t2" x="572.7" y="358.0" font-size="11" text-anchor="middle">MLX</text>
+<circle class="m4" cx="709.6" cy="340" r="5"/>
+<text class="t2" x="709.6" y="330.0" font-size="11" text-anchor="middle">ExecuTorch、LiteRT-LM</text>
+<circle class="m3" cx="558.8" cy="394" r="5"/>
+<text class="t2" x="558.8" y="384.0" font-size="11" text-anchor="middle">TensorRT-LLM</text>
+<circle class="m3" cx="721.2" cy="394" r="5"/>
+<text class="t2" x="721.2" y="412.0" font-size="11" text-anchor="middle">Dynamo</text>
+<circle class="m3" cx="906.8" cy="394" r="5"/>
+<text class="t2" x="912.8" y="384.0" font-size="11" text-anchor="end">LPX 接入 Dynamo</text>
+<circle class="m5" cx="742.1" cy="448" r="5"/>
+<text class="t2" x="742.1" y="438.0" font-size="11" text-anchor="middle">llm-d</text>
+<circle class="m5" cx="839.5" cy="448" r="5"/>
+<text class="t2" x="839.5" y="466.0" font-size="11" text-anchor="middle">CNCF</text>
+<circle class="m6" cx="599.4" cy="502" r="5"/>
+<text class="t2" x="599.4" y="492.0" font-size="11" text-anchor="middle">Groq 自建引擎</text>
+<circle class="m6" cx="727.0" cy="502" r="5"/>
+<text class="t2" x="727.0" y="520.0" font-size="11" text-anchor="middle">Spyre、昇腾等插件</text>
+<path class="lnd" d="M410.3,184 C410.3,232.0 465.4,232.0 511.5,232.0" marker-end="url(#ar)"/>
+<path class="lnd" d="M706.1,238 C706.1,339.5 742.1,339.5 742.1,441" marker-end="url(#ar)"/>
+<path class="lnd" d="M706.1,238 C706.1,312.5 721.2,312.5 721.2,387" marker-end="url(#ar)"/>
+<path class="lnd" d="M599.4,496 C599.4,394.0 753.1,394.0 897.8,394.0" marker-end="url(#ar)"/>
+<text class="t3" x="24.0" y="604.0" font-size="11" text-anchor="start">来源：各项目论文、发布公告与代码仓库（见文末）。时间按月取近似。</text>
+</svg>

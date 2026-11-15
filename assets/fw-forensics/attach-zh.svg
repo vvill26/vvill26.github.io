@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" class="s" role="img" aria-label="新芯片怎么接进生态：一条可能的路">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>新芯片怎么接进生态：一条可能的路</title>
+<rect class="bg" width="960" height="470" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">新芯片怎么接进生态：一条可能的路</text>
+<text class="t2" x="24" y="54" font-size="12.5">左：今天能看到的四种接法；右：一条看起来可行的路，英伟达把 Groq 的芯片接进 Dynamo 时用的就是类似结构（不是唯一答案）</text>
+<rect class="soft" x="24.0" y="80.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="104.0" font-size="13.5" text-anchor="start" font-weight="600">1. vLLM 插件</text>
+<text class="t2" x="40.0" y="125.0" font-size="11.5" text-anchor="start">Ascend · Spyre · Neuron · TPU · ATOM</text>
+<text class="t3" x="40.0" y="144.0" font-size="11.5" text-anchor="start">拿到模型覆盖；调度器常被换掉</text>
+<rect class="soft" x="24.0" y="172.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="196.0" font-size="13.5" text-anchor="start" font-weight="600">2. Fork</text>
+<text class="t2" x="40.0" y="217.0" font-size="11.5" text-anchor="start">Tenstorrent (tt-vllm)</text>
+<text class="t3" x="40.0" y="236.0" font-size="11.5" text-anchor="start">每次升级都要合并</text>
+<rect class="soft" x="24.0" y="264.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="288.0" font-size="13.5" text-anchor="start" font-weight="600">3. 自建引擎，兼容 API</text>
+<text class="t2" x="40.0" y="309.0" font-size="11.5" text-anchor="start">Furiosa · Groq (pre-deal) · Cerebras</text>
+<text class="t3" x="40.0" y="328.0" font-size="11.5" text-anchor="start">模型覆盖靠自己</text>
+<rect class="soft" x="24.0" y="356.0" width="330.0" height="78.0" rx="7"/>
+<text class="t1" x="40.0" y="380.0" font-size="13.5" text-anchor="start" font-weight="600">4. 集群层下的 sidecar</text>
+<text class="t2" x="40.0" y="401.0" font-size="11.5" text-anchor="start">Groq LPX under Dynamo</text>
+<text class="t3" x="40.0" y="420.0" font-size="11.5" text-anchor="start">窄接口，能力先协商</text>
+<rect class="b1" x="420.0" y="80.0" width="250.0" height="70.0" rx="7"/>
+<text class="t1" x="545.0" y="108.0" font-size="14" text-anchor="middle" font-weight="600">vLLM / SGLang</text>
+<text class="t2" x="545.0" y="130.0" font-size="11.5" text-anchor="middle">模型定义、API、工具解析</text>
+<rect class="b3" x="690.0" y="80.0" width="250.0" height="70.0" rx="7"/>
+<text class="t1" x="815.0" y="108.0" font-size="14" text-anchor="middle" font-weight="600">Dynamo / llm-d</text>
+<text class="t2" x="815.0" y="130.0" font-size="11.5" text-anchor="middle">路由、PD 分离、异构池</text>
+<text class="t2" x="545.0" y="180.0" font-size="11.5" text-anchor="middle">平台插件</text>
+<text class="t2" x="815.0" y="180.0" font-size="11.5" text-anchor="middle">worker / sidecar</text>
+<path class="ln" d="M545,232 L545,156" marker-end="url(#ar)"/>
+<path class="ln" d="M815,232 L815,156" marker-end="url(#ar)"/>
+<rect class="b2" x="420.0" y="236.0" width="520.0" height="46.0" rx="7"/>
+<text class="t1" x="680.0" y="256.0" font-size="12" text-anchor="middle" font-weight="600">窄而有版本的 RPC 契约：能力协商，不支持的功能直接拒绝</text>
+<text class="t2" x="680.0" y="274.0" font-size="11" text-anchor="middle">（例：Dynamo sidecar 拒绝 logprobs、guided decoding、多模态）</text>
+<rect class="box" x="420.0" y="296.0" width="520.0" height="112.0" rx="7"/>
+<text class="t1" x="436.0" y="320.0" font-size="13" text-anchor="start" font-weight="600">可能留在芯片厂商手里的部分</text>
+<text class="t2" x="450.0" y="344.0" font-size="12" text-anchor="start">• 编译器：静态调度、按形状分桶、布局清单</text>
+<text class="t2" x="450.0" y="366.0" font-size="12" text-anchor="start">• 主机循环：要不要自己写、用什么语言，看实测开销</text>
+<text class="t2" x="450.0" y="388.0" font-size="12" text-anchor="start">• fork 的风险：在静态形状的税上再加一份合并税</text>
+<text class="t3" x="24.0" y="454.0" font-size="11" text-anchor="start">来源：vLLM 硬件插件 RFC #11162、Dynamo PR #16998/#17389、各厂商文档（见文末）。</text>
+</svg>

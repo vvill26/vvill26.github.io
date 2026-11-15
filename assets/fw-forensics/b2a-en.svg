@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" class="s" role="img" aria-label="The task economy has started: a few signals">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>The task economy has started: a few signals</title>
+<rect class="bg" width="900" height="560" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">The task economy has started: a few signals</text>
+<text class="t2" x="24" y="54" font-size="12.5">Left: share of work agents already do. Right: growth. Bottom: how the Anthropic S-1 measures value</text>
+<text class="t1" x="40.0" y="90.0" font-size="12.5" text-anchor="start" font-weight="700">Share</text>
+<text class="t2" x="40.0" y="112.0" font-size="11" text-anchor="start">GitHub PRs started as agent drafts (Mar 2026)</text>
+<rect x="40" y="118" width="250" height="14" rx="3" class="soft"/>
+<rect x="40" y="118" width="42" height="14" rx="3" fill="#9b9a95"/>
+<text class="t1" x="88.5" y="130.0" font-size="11.5" text-anchor="start" font-weight="700">17%</text>
+<text class="t2" x="40.0" y="158.0" font-size="11" text-anchor="start">GitHub PRs started as agent drafts (Sep 2026)</text>
+<rect x="40" y="164" width="250" height="14" rx="3" class="soft"/>
+<rect x="40" y="164" width="100" height="14" rx="3" fill="#2a78d6"/>
+<text class="t1" x="146.0" y="176.0" font-size="11.5" text-anchor="start" font-weight="700">&gt;40%</text>
+<text class="t2" x="40.0" y="204.0" font-size="11" text-anchor="start">New Supabase databases created by AI tools</text>
+<rect x="40" y="210" width="250" height="14" rx="3" class="soft"/>
+<rect x="40" y="210" width="150" height="14" rx="3" fill="#2a78d6"/>
+<text class="t1" x="196.0" y="222.0" font-size="11.5" text-anchor="start" font-weight="700">&gt;60%</text>
+<text class="t2" x="40.0" y="250.0" font-size="11" text-anchor="start">Stripe docs traffic from agents</text>
+<rect x="40" y="256" width="250" height="14" rx="3" class="soft"/>
+<rect x="40" y="256" width="100" height="14" rx="3" fill="#2a78d6"/>
+<text class="t1" x="146.0" y="268.0" font-size="11.5" text-anchor="start" font-weight="700">~40%</text>
+<text class="t2" x="40.0" y="296.0" font-size="11" text-anchor="start">Stripe CLI API-resource requests from agents</text>
+<rect x="40" y="302" width="250" height="14" rx="3" class="soft"/>
+<rect x="40" y="302" width="175" height="14" rx="3" fill="#2a78d6"/>
+<text class="t1" x="221.0" y="314.0" font-size="11.5" text-anchor="start" font-weight="700">~70%</text>
+<text class="t1" x="480.0" y="90.0" font-size="12.5" text-anchor="start" font-weight="700">Growth</text>
+<text class="t2" x="480.0" y="112.0" font-size="11" text-anchor="start">Vercel: agent-triggered deployments (12 months)</text>
+<rect x="480" y="118" width="360" height="18" rx="3" fill="#eb6834"/>
+<text class="t1" x="846.0" y="132.0" font-size="12" text-anchor="start" font-weight="700">28×</text>
+<text class="t2" x="480.0" y="172.0" font-size="11" text-anchor="start">Shopify: AI-driven store traffic (YoY, Q1 2026)</text>
+<rect x="480" y="178" width="103" height="18" rx="3" fill="#eb6834"/>
+<text class="t1" x="588.9" y="192.0" font-size="12" text-anchor="start" font-weight="700">8×</text>
+<text class="t2" x="480.0" y="232.0" font-size="11" text-anchor="start">Agentic browser traffic (Aug→Oct 2026)</text>
+<rect x="480" y="238" width="103" height="18" rx="3" fill="#eb6834"/>
+<text class="t1" x="588.9" y="252.0" font-size="12" text-anchor="start" font-weight="700">8×</text>
+<rect class="soft" x="40.0" y="360.0" width="820.0" height="140.0" rx="7"/>
+<text class="t1" x="58.0" y="386.0" font-size="13" text-anchor="start" font-weight="700">Anthropic S-1 (26 Oct 2026)</text>
+<text x="58" y="432" font-size="26" font-weight="800" fill="#2a78d6">about −40%</text>
+<text class="t2" x="58.0" y="456.0" font-size="11.5" text-anchor="start">issuer claim: cost per task,</text>
+<text class="t2" x="58.0" y="472.0" font-size="11.5" text-anchor="start">Opus 5.5 vs Opus 5</text>
+<text x="328" y="432" font-size="26" font-weight="800" fill="#2a78d6">80%</text>
+<text class="t2" x="328.0" y="456.0" font-size="11.5" text-anchor="start">of H1 2026 revenue is</text>
+<text class="t2" x="328.0" y="472.0" font-size="11.5" text-anchor="start">consumption billed in tokens</text>
+<text x="598" y="432" font-size="26" font-weight="800" fill="#2a78d6">task</text>
+<text class="t2" x="598.0" y="456.0" font-size="11.5" text-anchor="start">value is measured per task,</text>
+<text class="t2" x="598.0" y="472.0" font-size="11.5" text-anchor="start">the bill is still per token</text>
+<text class="t3" x="24.0" y="530.0" font-size="11" text-anchor="start">Sources: figures quoted in a16z, "Welcome to the B2A Economy" (11 Nov 2026), from GitHub, Supabase, Stripe, Vercel, Shopify and Human Security;</text>
+<text class="t3" x="24.0" y="546.0" font-size="11" text-anchor="start">Anthropic S-1 (SEC EDGAR). Redrawn from those numbers; not the original charts.</text>
+</svg>

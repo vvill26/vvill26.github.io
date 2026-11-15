@@ -5,12 +5,12 @@ date: 2026-11-09 09:00:00 +0800
 permalink: /zh/2026/11/design-an-inference-chip/
 lang: zh
 description: "一个小游戏：选一个设计场景，做六个设计决定，看代价由谁来付、你的设计最像哪颗真实芯片。格子里藏着八个真实设计，每个都配一张基于公开资料的设计卡。"
-series: "推理芯片的形状（2/2）"
+series: "法医威尔系列（1，配套篇）"
 ---
 
 {% include lang-switch.html en="/2026/11/design-an-inference-chip/" zh="/zh/2026/11/design-an-inference-chip/" %}
 
-*系列第二篇，共两篇。[第一篇](/zh/2026/11/inference-chip-shapes/)给 43 颗推理芯片在十个维度上打了分，推敲它们的设计者当初认为什么最稀缺。*
+*法医威尔系列第一篇的配套篇（最初以「推理芯片的形状（2/2）」发布）。[第一篇](/zh/2026/11/inference-chip-shapes/)给 43 颗推理芯片在十个维度上打了分，推敲它们的设计者当初认为什么最稀缺。*
 
 <script>window.CHIPS_LANG="zh";</script>
 <link rel="stylesheet" href="/assets/chip-radar/game.css">

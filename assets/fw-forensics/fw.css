@@ -1,0 +1,33 @@
+/* Shared styles for Forensic Will part 2 figures */
+.fw-fig{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#8a63d2;--s5:#7f8fa6;--s6:#c9c4b5;--ink:#24292f;--mut:#6e7781;--grid:#d8d4c8;--surf:#fbfaf6;--card:#f3f1ea;
+ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--ink);margin:1.5em 0;}
+@media (prefers-color-scheme:dark){.fw-fig{--s1:#3d8ae0;--s2:#e8652e;--s3:#1fa874;--s4:#9d7ae0;--s5:#7b879a;--s6:#4a4f57;--ink:#e6edf3;--mut:#8b949e;--grid:#30363d;--surf:#161b22;--card:#1f252d;}}
+.fw-fig[lang=zh]{font-family:ui-monospace,SFMono-Regular,Menlo,"PingFang SC","Noto Sans CJK SC",monospace}
+.fw-fig button{font:inherit;cursor:pointer}
+.fa-ctl{display:flex;gap:6px;margin-bottom:6px}
+.fa-btn{background:var(--card);border:1px solid var(--grid);border-radius:4px;padding:3px 10px;color:var(--mut)}
+.fa-btn.on{color:var(--surf);background:var(--ink);border-color:var(--ink)}
+.fa-svg{width:100%;height:auto;display:block}
+.fa-grid{stroke:var(--grid);stroke-width:1}
+.fa-tick{fill:var(--mut);font-size:11px}.fa-ax{fill:var(--mut);font-size:11px}
+.fa-val{fill:var(--ink);font-size:11px;font-weight:600;paint-order:stroke;stroke:var(--surf);stroke-width:3px}
+.fa-bar{stroke:var(--surf);stroke-width:.5;outline:none}.fa-bar.part{opacity:.55}
+.g-lmsys{fill:var(--s1);background:var(--s1)}.g-ggml{fill:var(--s2);background:var(--s2)}.g-nvidia{fill:var(--s3);background:var(--s3)}
+.g-compiler{fill:var(--s4);background:var(--s4)}.g-platform{fill:var(--s5);background:var(--s5)}.g-other{fill:var(--s6);background:var(--s6)}
+.fa-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:12px}
+.fa-li{display:inline-flex;align-items:center;gap:5px}
+.fa-sw{width:11px;height:11px;border-radius:2px;display:inline-block}
+.fa-note{color:var(--mut);font-size:11.5px;margin-top:6px}
+.fa-tip{position:fixed;display:none;z-index:99;max-width:300px;background:#24292f;color:#f6f8fa;font:12px/1.45 ui-monospace,Menlo,monospace;padding:7px 9px;border-radius:5px;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.fa-tw{margin-top:4px;color:#d0d7de}
+.fw-svgfig{width:100%;height:auto;display:block;margin:1.2em 0}
+.fw-cap{color:var(--mut,#6e7781);font-size:12px;margin-top:-0.6em;margin-bottom:1.4em}
+/* fourth slot for the radar's by-layer view */
+#chip-radar{--s4:#8a63d2}
+@media (prefers-color-scheme:dark){#chip-radar{--s4:#9d7ae0}}
+#chip-radar .cr-shape.s4{fill:var(--s4);fill-opacity:.14;stroke:var(--s4)}
+#chip-radar .cr-dot.s4{fill:var(--s4)}#chip-radar .cr-sw.s4{background:var(--s4)}
+/* author's aside (series name etc.): visibly outside the main text */
+.fw-note{font-size:.82em;line-height:1.6;color:#6e7781;background:#f3f1ea;border-left:3px solid #d8d4c8;border-radius:0 6px 6px 0;padding:.6em .9em;margin:.8em 0 1.8em;font-style:normal}
+.fw-note b{color:#57606a;font-weight:600}
+@media (prefers-color-scheme:dark){.fw-note{color:#8b949e;background:#1f252d;border-left-color:#30363d}.fw-note b{color:#adbac7}}
