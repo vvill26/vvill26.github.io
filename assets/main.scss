@@ -115,3 +115,7 @@ body { background: #fbfaf6; }
 .term-pd { font-size: 12px; margin-top: 2px; }
 .term-away .ext { color: #8c959f; font-size: 12px; }
 .term-away .lang { font-family: $mono; font-size: 11px; color: #9a6700; border: 1px solid #e3d5a8; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+.term-away a.two .en { display: block; }
+.term-away a.two .zh { display: block; margin-top: 2px; font-family: $sans; font-size: 13.5px; color: #57606a; }
+.term-away a.two:hover .en, .term-away a.two:hover .zh { color: #0969da; }
+@media (prefers-color-scheme: dark) { .term-away a.two .zh { color: #a0a4ab; } }
