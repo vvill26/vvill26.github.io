@@ -134,7 +134,7 @@ GitHub star 的曲线把这个断层画得更直白：
 
 广度的账由两拨人付。芯片厂商付的是插件滞后：AMD ATOM 只在 vLLM 0.17.x 上测过，AFD 插件钉在 0.19.1。用户付的是一点峰值速度：[Baseten 的书](https://www.baseten.co/inference-engineering/book/04-software/4.3-inference-engines.md)里说 vLLM 到不了更窄的引擎那样的顶级性能。
 
-**SGLang（LMSYS，伯克利一脉，今有 RadixArk）：稀缺的是跨调用的重复计算，后来是 CPU。** [SGLang](https://arxiv.org/abs/2312.07104) 从「LLM 程序」出发：一段程序里有多次生成调用、控制流和结构化输出。RadixAttention 在调用之间复用 KV，压缩状态机加速结构化输出，程序运行时 5 分。第二个直觉出现在 [v0.4](https://lmsys.org/blog/2024-12-04-sglang-v0-4)：团队说没优化过的引擎可能有一半时间花在 CPU 开销上，于是做了重叠调度器，在 GPU 算当前 batch 时准备下一个，把 CPU 调度开销藏起来；另外还有一个用 Rust 写的缓存感知路由，那是请求入口，和逐 token 的调度器是两个组件。主机路径 4 分，仅次于 TokenSpeed。
+**SGLang（LMSYS，伯克利一脉，今有 RadixArk）：稀缺的是跨调用的重复计算，后来是 CPU。** [SGLang](https://arxiv.org/abs/2312.07104) 从「LLM 程序」出发：一段程序里有多次生成调用、控制流和结构化输出。RadixAttention 在调用之间复用 KV，压缩状态机加速结构化输出，程序运行时 5 分。第二个直觉出现在 [v0.4](https://lmsys.org/blog/2024-12-04-sglang-v0-4)：团队说没优化过的引擎可能有一半时间花在 CPU 开销上，于是做了重叠调度器，在 GPU 算当前 batch 时准备下一个，把 CPU 调度开销藏起来；另外还有一个用 Rust 写的缓存感知路由，那是请求入口，和逐 token 的调度器是两个组件。主机路径 4 分，和 llama.cpp 并列全表最高。
 
 **TGI、TensorRT-LLM 和 LMDeploy：中间地带。** Hugging Face 的 [TGI](https://huggingface.co/docs/text-generation-inference/index) 押的是从 Hub 一键部署，continuous batching 和分页注意力都是从别处采用的，现在已进入维护模式，文档把用户指向 vLLM、SGLang、llama.cpp 和 MLX。英伟达的 [TensorRT-LLM](https://nvidia.github.io/TensorRT-LLM/latest/legacy/tensorrt-backend-removal.html) 继承了 FasterTransformer 的内核，押的是自家硬件上的峰值速度。后来它删掉了 TensorRT 后端，只剩 PyTorch 执行。两位评分者在编译器这一格差一分：一位看最初的引擎构建，一位看今天的代码；审校后统一按今天的版本打，编译器 2 分。垂直整合 3.75，可移植性 0。上海人工智能实验室（OpenMMLab）的 LMDeploy，核心 TurboMind 是 C++/CUDA 引擎，主机路径 3.5。
 
@@ -160,7 +160,7 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 ![本地与端侧：两种针锋相对的直觉](/assets/fw-forensics/edge-zh.svg)
 
-**llama.cpp（Georgi Gerganov 个人项目，后来的 ggml.ai）：稀缺的是上手门槛。** ggml 是 2022 年下半年写成的 C 张量库，最早跑的是 GPT-2，随后被用来移植 Whisper。Georgi Gerganov 在一期[播客](https://changelog.com/podcast/532)里说，动机是零依赖、零配置，外加一个粗算：4 bit 的 65B 模型能塞进一台 MacBook。代价是每个后端都要手写内核。广度 4.25、主机路径 4、端侧 4，是全表唯一三个维度都在 4 分以上的框架。2026 年 2 月团队加入 Hugging Face，9 月英伟达宣布收购 Hugging Face（尚未交割），llama.cpp 最终归谁还没有定。
+**llama.cpp（Georgi Gerganov 个人项目，后来的 ggml.ai）：稀缺的是上手门槛。** ggml 是 2022 年下半年写成的 C 张量库，最早跑的是 GPT-2，随后被用来移植 Whisper。Georgi Gerganov 在一期[播客](https://changelog.com/podcast/532)里说，动机是零依赖、零配置，外加一个粗算：4 bit 的 65B 模型能塞进一台 MacBook。代价是每个后端都要手写内核。广度 4.25、主机路径 4、端侧 4，是全表唯一三个维度都 ≥4 分的框架。2026 年 2 月团队加入 Hugging Face，9 月英伟达宣布收购 Hugging Face（尚未交割），llama.cpp 最终归谁还没有定。
 
 **MLC-LLM（陈天奇与 TVM 社区）和 ExecuTorch（Meta / PyTorch）：稀缺的是每个后端的工程师时间。** 陈天奇曾经花半年给一个模型手写 CUDA 内核，所以他要用 TVM 编译来代替「每个平台一个团队」（[Latent Space](https://www.latent.space/p/llms-everywhere)）。MLC 的可移植性是全表唯一的 5 分，从 CUDA 一直编到浏览器里的 WebGPU。[ExecuTorch](https://arxiv.org/abs/2605.08195) 的作者批评的也是手写路线：每个后端都要把模型重新实现一遍。它把 `torch.export` 降到不到 300 个核心算子，导出时规划好内存，端侧 5 分、编译器 4.5 分。
 
@@ -172,7 +172,7 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 芯片厂商栈的平均形状是 vLLM 的镜像：编译器 4.6、垂直整合 4.6、可移植性 0。Groq、AWS 的 Neuron（来自 Annapurna Labs）、韩国 FuriosaAI 的 furiosa-llm，三家都是先有编译器，再在上面搭服务。Groq 2026 年在 MLSys 发表的 [SHIP 论文](https://proceedings.mlsys.org/paper_files/paper/2026/file/9c20f16b05f5e5e70fa07e2a4364b80e-Paper-Conference.pdf)第一次比较完整地讲了它第一代 LPU 的服务栈：编译器静态调度所有指令，运行时按请求分配 KV 页、用 BlockTrie 做前缀缓存，调度器默认 decode 优先、prefill 动态分块，主机只负责发起流水线和收结果。vLLM 和 SGLang 在论文里只作为 GPU 基线出现。
 
-编译型后端接入动态服务时，往往要额外承担分桶、补齐和功能适配的成本，这里叫它「静态形状的税」。IBM 研究院的 Spyre 记录最详细：它的插件只为[一个固定的 chunk 大小](https://docs.vllm.ai/projects/spyre/en/latest/user_guide/configuration.html)编译 prefill 程序，直接[替换了 vLLM 的 V1 调度器](https://docs.vllm.ai/projects/spyre/en/latest/contributing/scheduler.html)，decode batch 要补齐成矩形，前缀缓存只在整块命中时才算数。2024 年的 [RFC](https://github.com/vllm-project/vllm/issues/9652) 里 continuous batching 是关掉的，首次支持一年后，到 2025 年三季度它还在路线图的 P0 上。AWS Neuron [按桶编译静态程序](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/_sources/vllm-neuron/docs/guides/features-guide.md)，每个桶都占显存和启动时间，prefill 和 decode 永远不在一个 batch 里。一份昇腾的实地[研究](https://arxiv.org/pdf/2607.08215)在 16 颗 910 上跑两个大负载，打了 12 个源码补丁，作者说主要成本是工程投入，不是硬件。
+编译型后端接入动态服务时，往往要额外承担分桶、补齐和功能适配的成本，这里叫它「静态形状的税」。IBM 研究院的 Spyre 记录最详细：它的插件只为[一个固定的 chunk 大小](https://docs.vllm.ai/projects/spyre/en/latest/user_guide/configuration.html)编译 prefill 程序，直接[替换了 vLLM 的 V1 调度器](https://docs.vllm.ai/projects/spyre/en/latest/contributing/scheduler.html)，decode batch 要补齐成矩形，前缀缓存只在整块命中时才算数（现在前缀缓存已默认开启，prefill 和 decode 交替执行）。2024 年的 [RFC](https://github.com/vllm-project/vllm/issues/9652) 里 continuous batching 是关掉的，首次支持一年后，到 2025 年三季度它还在路线图的 P0 上。AWS Neuron [按桶编译静态程序](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/_sources/vllm-neuron/docs/guides/features-guide.md)，每个桶都占显存和启动时间，prefill 和 decode 永远不在一个 batch 里。一份昇腾的实地[研究](https://arxiv.org/pdf/2607.08215)在 16 颗 910 上跑两个大负载，打了 12 个源码补丁，作者说主要成本是工程投入，不是硬件。
 
 ![静态形状的税，一张图](/assets/fw-forensics/tax-zh.svg)
 
