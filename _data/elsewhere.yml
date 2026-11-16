@@ -1,0 +1,30 @@
+# Posts on aflowx.github.io/blog. Add a line here to list another one.
+posts:
+  - date: 2026-10-16
+    en: { title: "Attention, Illustrated: From Context to Memory", url: "https://aflowx.github.io/blog/en/posts/attention-evolution/" }
+    zh: { title: "图解 Attention 演进史", url: "https://aflowx.github.io/blog/posts/attention-evolution/" }
+  - date: 2026-10-15
+    series: "B300 1/3"
+    en: { title: "Making B300s Faster for Coding Agents: Results and Bottlenecks", url: "https://aflowx.github.io/blog/en/posts/b300-find-the-bottleneck/" }
+    zh: { title: "B300在手，推理就快了吗？（上）——成绩与瓶颈", url: "https://aflowx.github.io/blog/posts/b300-results-bottlenecks/" }
+  - date: 2026-10-15
+    series: "B300 2/3"
+    en: { title: "GLM 5.2: Speeding Up the Whole Decode Loop", url: "https://aflowx.github.io/blog/en/posts/glm-5-2-faster-decode-loop/" }
+    zh: { title: "B300在手，推理就快了吗？（中）——GLM 5.2：缩短生成循环", url: "https://aflowx.github.io/blog/posts/b300-glm-generation-loop/" }
+  - date: 2026-10-15
+    series: "B300 3/3"
+    en: { title: "Kimi K3: Faster Serving with Hybrid Attention", url: "https://aflowx.github.io/blog/en/posts/kimi-k3-state-memory-motion/" }
+    zh: { title: "B300在手，推理就快了吗？（下）——Kimi K3：状态、通信与服务选择", url: "https://aflowx.github.io/blog/posts/b300-kimi-state-serving/" }
+  - date: 2026-09-29
+    series: "Speed 2/2"
+    en: { title: "Every Speedup Lives on a Curve", url: "https://aflowx.github.io/blog/en/posts/every-speedup-lives-on-a-curve/" }
+    zh: { title: "推理的武林大会在哪里？——AIPerf 与 InferenceX 怎样给“快”立规矩", url: "https://aflowx.github.io/blog/posts/inference-benchmark-arena-aiperf-inferencex/" }
+  - date: 2026-09-24
+    series: "Speed 1/2"
+    en: { title: "What does “fast” actually mean? Reading LLM inference speedup claims", url: "https://aflowx.github.io/blog/en/posts/what-does-fast-mean-llm-inference/" }
+    zh: { title: "到底什么叫做快？——拆解推理优化性能数字背后的话术", url: "https://aflowx.github.io/blog/posts/what-does-fast-mean-llm-inference/" }
+  - date: 2026-09-23
+    en: { title: "Quire: rebuilding Jev's decision engine on a frozen 4B model", url: "https://aflowx.github.io/blog/en/posts/build-jev-like-system-one-model/" }
+    zh: { title: "Quire - 手搓一个类Jev的快速决策系统", url: "https://aflowx.github.io/blog/posts/build-jev-like-system-one-model/" }
+  - date: 2026-09-21
+    zh: { title: "被浪费的 if：聊聊最近热门的 Jev 模型", url: "https://aflowx.github.io/blog/posts/jev-system-one-explained/" }

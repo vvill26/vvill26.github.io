@@ -41,4 +41,17 @@ layout: default
     </div>
   {% endfor %}
   </div>
+
+  <div class="term-sec"><span class="pr">$</span> ls ~/elsewhere/ <span class="c"># worth reading</span></div>
+  <div class="term-ls term-away">
+  {% for p in site.data.elsewhere.posts %}
+    <div class="e">
+      <div class="d">{{ p.date | date: "%Y-%m-%d" }}</div>
+      <div>
+        {% if p.en %}<a class="t" href="{{ p.en.url }}" target="_blank" rel="noopener">{% if p.series %}<span class="tag">[{{ p.series }}]</span> {% endif %}{{ p.en.title }} <span class="ext">↗</span></a>{% endif %}
+        {% if p.zh %}<a class="{% if p.en %}zt{% else %}t{% endif %}" href="{{ p.zh.url }}" target="_blank" rel="noopener">{{ p.zh.title }} ↗{% unless p.en %} <span class="lang">中文</span>{% endunless %}</a>{% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  </div>
 </div>
