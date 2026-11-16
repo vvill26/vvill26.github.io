@@ -60,6 +60,6 @@
 <text x="494" y="410" font-size="13" font-weight="700" fill="#cf222e">缺口：会话和任务之间的那份约定</text>
 <text class="t1" x="494.0" y="430.0" font-size="11.5" text-anchor="start">harness 与引擎之间的提示协议和 KV 生命周期约定，还没人写定</text>
 <text class="t2" x="494.0" y="448.0" font-size="10.5" text-anchor="start">（session 与 parent ID、优先级、缓存 TTL，Pin / Retain / Prefetch）</text>
-<text class="t2" x="24.0" y="530.0" font-size="11" text-anchor="start">反证：在已有 KV 感知路由的前提下，程序级（会话以上）调度在 Dynamo 测试里只多出 11–16%。</text>
+<text class="t2" x="24.0" y="530.0" font-size="11" text-anchor="start">反证：Dynamo 两组基线不同的测试里，程序级调度只多出约 12–16%（SWE-bench，对比 KV 感知路由）和 11.0–14.6%（RL rollout）。</text>
 <text class="t3" x="24.0" y="546.0" font-size="10.5" text-anchor="start">来源：Anthropic S-1；a16z《Welcome to the B2A Economy》；vLLM #48168；PyTorch 博客（Dynamo 会话感知）；llm-d 1.0（见文末）。</text>
 </svg>

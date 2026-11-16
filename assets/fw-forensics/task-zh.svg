@@ -36,6 +36,6 @@
 <rect class="soft" x="24.0" y="254.0" width="912.0" height="92.0" rx="7"/>
 <text class="t1" x="40.0" y="280.0" font-size="13" text-anchor="start" font-weight="600">提示与 KV 生命周期协议（可选字段，请求格式不变）</text>
 <text class="t2" x="40.0" y="306.0" font-size="12.5" text-anchor="start">session / parent ID · 优先级 · 预计输出长度 · 缓存 TTL · Pin / Retain / Prefetch</text>
-<text class="t3" x="40.0" y="330.0" font-size="11.5" text-anchor="start">已出现在：vLLM Q3 2026 路线图、Dynamo agent hints、llm-d 1.0、SGLang #27574、vLLM #51428</text>
-<text class="t3" x="24.0" y="384.0" font-size="11" text-anchor="start">来源见文末；在已有 KV 感知路由的前提下，程序级调度只多出 11–16%（Dynamo 测试）。</text>
+<text class="t3" x="40.0" y="330.0" font-size="11.5" text-anchor="start">实现与提议（不是一份已互通的协议）：vLLM 路线图、Dynamo agent hints、llm-d 1.0；提案 SGLang #27574（已关闭）、vLLM #51428（开放中）</text>
+<text class="t3" x="24.0" y="384.0" font-size="11" text-anchor="start">来源见文末；Dynamo 的两组测试基线不同：程序级调度多出约 12–16%（SWE-bench）和 11.0–14.6%（RL rollout，中并发）。</text>
 </svg>

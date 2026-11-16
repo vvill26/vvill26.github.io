@@ -15,7 +15,7 @@
 <title>Timeline: most of today's mainstream starts around 2023</title>
 <rect class="bg" width="960" height="620" rx="8"/>
 <text class="t1" x="24" y="32" font-size="18" font-weight="600">Timeline: most of today's mainstream starts around 2023</text>
-<text class="t2" x="24" y="54" font-size="12.5">Lanes = origin; dashed arrows = people, code or interfaces carried over (not formal succession)</text>
+<text class="t2" x="24" y="54" font-size="12.5">Lanes = origin; dashed arrows = people, code or interfaces carried over (not formal succession); dots are paper, repo or release dates</text>
 <rect class="hl" x="466.0" y="104" width="116.0" height="446"/>
 <text class="t2" x="524.0" y="566.0" font-size="11.5" text-anchor="middle" font-weight="600">"Inference Year One"</text>
 <line class="yr" x1="190.0" x2="190.0" y1="104" y2="546"/>
@@ -66,7 +66,7 @@
 <circle class="m1" cx="520.5" cy="232" r="5"/>
 <text class="t2" x="520.5" y="222.0" font-size="11" text-anchor="middle">vLLM</text>
 <circle class="m1" cx="576.2" cy="232" r="5"/>
-<text class="t2" x="576.2" y="250.0" font-size="11" text-anchor="middle">SGLang</text>
+<text class="t2" x="576.2" y="250.0" font-size="11" text-anchor="middle">SGLang paper</text>
 <circle class="m1" cx="692.2" cy="232" r="5"/>
 <text class="t2" x="692.2" y="222.0" font-size="11" text-anchor="middle">hardware plugins</text>
 <circle class="m1" cx="706.1" cy="232" r="5"/>
@@ -90,7 +90,7 @@
 <circle class="m4" cx="572.7" cy="340" r="5"/>
 <text class="t2" x="572.7" y="358.0" font-size="11" text-anchor="middle">MLX</text>
 <circle class="m4" cx="709.6" cy="340" r="5"/>
-<text class="t2" x="709.6" y="330.0" font-size="11" text-anchor="middle">ExecuTorch, LiteRT-LM</text>
+<text class="t2" x="709.6" y="330.0" font-size="11" text-anchor="middle">ExecuTorch, LiteRT-LM releases</text>
 <circle class="m3" cx="558.8" cy="394" r="5"/>
 <text class="t2" x="558.8" y="384.0" font-size="11" text-anchor="middle">TensorRT-LLM</text>
 <circle class="m3" cx="721.2" cy="394" r="5"/>

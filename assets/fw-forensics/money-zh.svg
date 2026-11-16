@@ -60,7 +60,7 @@
 <rect x="716" y="160" width="38" height="4" rx="1" fill="#eb6834"/>
 <text class="t2" x="774.0" y="142.0" font-size="18" text-anchor="start">…</text>
 <text class="t2" x="40.0" y="188.0" font-size="11" text-anchor="start">灰块：读进的上下文（大多命中缓存）  橙条：写出的 token  浅灰：工具调用的等待（中位 3.84 秒，约 1/10 超过 1 分钟）</text>
-<text x="40" y="208" font-size="11.5" font-weight="700" fill="#cf222e">红块：工具等待时缓存断掉，前缀按缓存写重新计费，约等于 20–40 次缓存读的钱</text>
+<text x="40" y="208" font-size="11.5" font-weight="700" fill="#cf222e">红块：工具等待时缓存断掉，前缀按缓存写重新计费，约等于 25–40 次缓存读的钱</text>
 <text class="t1" x="40.0" y="258.0" font-size="12" text-anchor="start" font-weight="700">五个选定的 SWE-bench Verified 任务（Kimi K3，按标价，低思考强度）</text>
 <text class="t1" x="40.0" y="316.0" font-size="13" text-anchor="start" font-weight="700">token 占比</text>
 <rect x="170.0" y="286" width="44.9" height="46" fill="#7f8fa6" fill-opacity=".85"/>
@@ -87,5 +87,5 @@
 <text class="t1" x="58.0" y="514.0" font-size="12.5" text-anchor="start" font-weight="600">所以账单很大程度上取决于缓存能不能在工具等待期间活下来，而不只是每秒多少 token。</text>
 <text class="t2" x="58.0" y="550.0" font-size="11.5" text-anchor="start">同一篇论文：每次运行的中位成本 0.11–1.16 美元；缓存命中率 96.3%。</text>
 <text class="t3" x="24.0" y="610.0" font-size="10.5" text-anchor="start">来源：SemiAnalysis AgentX（会话中位数）；Smékal，arXiv 2608.25399，表 E1（token 与美元占比）；CONCUR，arXiv 2601.22705（重算占延迟）。</text>
-<text class="t3" x="24.0" y="626.0" font-size="10.5" text-anchor="start">「20–40 次缓存读」按缓存读 5%、写 125–200% 的输入价粗算，是本文的估算；比例依赖价格和缓存条件。上方会话条为示意。</text>
+<text class="t3" x="24.0" y="626.0" font-size="10.5" text-anchor="start">「25–40 次缓存读」按缓存读 5%、写 125–200% 的输入价粗算（5 分钟缓存写 25 倍，1 小时 40 倍），是本文的估算；比例依赖价格和缓存条件。上方会话条为示意。</text>
 </svg>

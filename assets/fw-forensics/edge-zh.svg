@@ -35,7 +35,7 @@
 <text class="t1" x="229.1" y="148.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="229.1" y="159.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="256.3" y="185.8" font-size="10" font-weight="700" text-anchor="start" style="fill:#eb6834">广度 4.25</text>
-<text class="t3" x="256.3" y="196.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="256.3" y="196.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="256.3" y="232.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="256.3" y="243.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="229.1" y="282.7" font-size="10" font-weight="700" text-anchor="start">可移植性</text>
@@ -72,7 +72,7 @@
 <text class="t1" x="559.1" y="148.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="559.1" y="159.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="586.3" y="185.8" font-size="10" font-weight="700" text-anchor="start" style="fill:#eb6834">广度 3.75</text>
-<text class="t3" x="586.3" y="196.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="586.3" y="196.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="586.3" y="232.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="586.3" y="243.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="559.1" y="282.7" font-size="10" font-weight="700" text-anchor="start">可移植性</text>
@@ -109,7 +109,7 @@
 <text class="t1" x="889.1" y="148.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="889.1" y="159.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="916.3" y="185.8" font-size="10" font-weight="700" text-anchor="start">广度</text>
-<text class="t3" x="916.3" y="196.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="916.3" y="196.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="916.3" y="232.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="916.3" y="243.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="889.1" y="282.7" font-size="10" font-weight="700" text-anchor="start" style="fill:#eb6834">可移植性 5</text>
@@ -146,7 +146,7 @@
 <text class="t1" x="229.1" y="466.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="229.1" y="477.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="256.3" y="503.8" font-size="10" font-weight="700" text-anchor="start">广度</text>
-<text class="t3" x="256.3" y="514.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="256.3" y="514.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="256.3" y="550.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="256.3" y="561.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="229.1" y="600.7" font-size="10" font-weight="700" text-anchor="start">可移植性</text>
@@ -183,7 +183,7 @@
 <text class="t1" x="559.1" y="466.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="559.1" y="477.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="586.3" y="503.8" font-size="10" font-weight="700" text-anchor="start">广度</text>
-<text class="t3" x="586.3" y="514.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="586.3" y="514.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="586.3" y="550.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="586.3" y="561.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="559.1" y="600.7" font-size="10" font-weight="700" text-anchor="start">可移植性</text>
@@ -220,7 +220,7 @@
 <text class="t1" x="889.1" y="466.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="889.1" y="477.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="916.3" y="503.8" font-size="10" font-weight="700" text-anchor="start">广度</text>
-<text class="t3" x="916.3" y="514.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="916.3" y="514.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="916.3" y="550.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="916.3" y="561.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="889.1" y="600.7" font-size="10" font-weight="700" text-anchor="start">可移植性</text>
@@ -257,7 +257,7 @@
 <text class="t1" x="229.1" y="784.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="229.1" y="795.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="256.3" y="821.8" font-size="10" font-weight="700" text-anchor="start">广度</text>
-<text class="t3" x="256.3" y="832.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="256.3" y="832.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="256.3" y="868.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="256.3" y="879.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="229.1" y="918.7" font-size="10" font-weight="700" text-anchor="start" style="fill:#eb6834">可移植性 3.75</text>
@@ -294,7 +294,7 @@
 <text class="t1" x="559.1" y="784.3" font-size="10" font-weight="700" text-anchor="start">程序运行时</text>
 <text class="t3" x="559.1" y="795.3" font-size="8.6" text-anchor="start">跨调用复用</text>
 <text class="t1" x="586.3" y="821.8" font-size="10" font-weight="700" text-anchor="start">广度</text>
-<text class="t3" x="586.3" y="832.8" font-size="8.6" text-anchor="start">模型与硬件覆盖</text>
+<text class="t3" x="586.3" y="832.8" font-size="8.6" text-anchor="start">模型与任务覆盖</text>
 <text class="t1" x="586.3" y="868.2" font-size="10" font-weight="700" text-anchor="start">主机路径</text>
 <text class="t3" x="586.3" y="879.2" font-size="8.6" text-anchor="start">CPU 退出 token 循环</text>
 <text class="t1" x="559.1" y="918.7" font-size="10" font-weight="700" text-anchor="start">可移植性</text>

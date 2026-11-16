@@ -36,6 +36,6 @@
 <rect class="soft" x="24.0" y="254.0" width="912.0" height="92.0" rx="7"/>
 <text class="t1" x="40.0" y="280.0" font-size="13" text-anchor="start" font-weight="600">Hint and KV-lifecycle protocol (optional fields over an unchanged request)</text>
 <text class="t2" x="40.0" y="306.0" font-size="12.5" text-anchor="start">session / parent ID · priority · expected output length · cache TTL · Pin / Retain / Prefetch</text>
-<text class="t3" x="40.0" y="330.0" font-size="11.5" text-anchor="start">Seen in: vLLM Q3 2026 roadmap, Dynamo agent hints, llm-d 1.0, SGLang #27574, vLLM #51428</text>
-<text class="t3" x="24.0" y="384.0" font-size="11" text-anchor="start">Sources at the end. With KV-aware routing in place, program-level scheduling added 11–16% in Dynamo tests.</text>
+<text class="t3" x="40.0" y="330.0" font-size="11.5" text-anchor="start">Implementations and proposals, not one interoperable protocol: vLLM roadmap, Dynamo hints, llm-d 1.0; SGLang #27574 (closed), vLLM #51428 (open)</text>
+<text class="t3" x="24.0" y="384.0" font-size="11" text-anchor="start">Sources at the end. Dynamo's two tests use different baselines: program-level scheduling added ~12–16% (SWE-bench) and 11.0–14.6% (RL rollout, medium concurrency).</text>
 </svg>

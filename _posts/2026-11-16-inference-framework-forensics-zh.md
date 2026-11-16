@@ -76,7 +76,7 @@ GitHub star 的曲线把这个断层画得更直白：
 
 1. **star 衡量的是开发者注意力，不是生产份额。** 本地工具天然被高估。
 2. **层与层会重叠。** Ollama 跑在 llama.cpp 上，Dynamo 和 llm-d 跑在 vLLM 上，份额不能跨层相加。
-3. **没有任何调查给出过生产环境的引擎份额。** 能找到的最接近的数字，是一份[自托管者调查](https://datatalks.club/surveys/2025-2026/ai-engineering)里 18% 用 vLLM，样本口径还不清楚。
+3. **本文没找到口径可比的生产流量份额。** 公开的从业者调查问法和样本都不统一，拿不出可比的生产份额。
 4. **GitHub 看不到最大的那批私有系统。** 谷歌 2026 年 5 月自报其各产品每月处理超过 3.2 千万亿个 token，跑在自研栈上。这个数没有可比的分母，但足以说明开源仓库只是图景的一部分。
 
 血统不只是 star 的分组。把背后的人、实验室和公司画出来，就是一张真正的族谱。图里有四个家族，从上到下是四代；实线表示「创建或创立」，虚线表示人员流动、fork、被嵌入、被托管、授权或收购这类间接关系，线上的小标签写明是哪一种。连线只说明来历，不代表今天的所有权或项目治理：
@@ -88,20 +88,20 @@ GitHub star 的曲线把这个断层画得更直白：
 
 - **一篇伯克利论文，两家公司。** 2023 年 vLLM 论文的九位作者里，就有后来 SGLang 的两位带头人 Lianmin Zheng 和 Ying Sheng（[vLLM 论文](https://arxiv.org/abs/2309.06180)、[SGLang 论文](https://arxiv.org/abs/2312.07104)）。两个项目都出自 Ion Stoica 在伯克利的实验室圈子，也就是做出 Spark 和 Ray 的那条线。2026 年两个引擎背后各自有了一家公司（公司不等于项目治理，vLLM 仍由 PyTorch 基金会托管）：vLLM 一侧是 [Inferact](https://siliconangle.com/2026/01/22/inferact-launches-150m-funding-commercialize-vllm/)，Stoica 和 vLLM 第一作者 Woosuk Kwon 都在创始团队里，种子轮 1.5 亿美元；SGLang 一侧是 [RadixArk](https://pulse2.com/radixark-launches-with-100-million-in-seed-funding-to-democratize-frontier-ai-infrastructure/)，CEO 是 Ying Sheng（此前在 xAI），种子轮 1 亿美元。
 - **LMSYS 是个孵化器。** [LMSYS](https://lmsys.org/about/) 是伯克利起家的学生与教授组织，2024 年起成为非营利机构，联合创始人之一是现在 UCSD 的 Hao Zhang。它先后做了 Vicuna、Chatbot Arena 和 SGLang。Chatbot Arena 2025 年[独立成公司](https://en.wikipedia.org/wiki/LMArena)，2026 年改名 Arena。
-- **人在流动，代码也在流动。** 蚂蚁集团[统计](https://developer.ant-ling.com/en/blogs/llm-landscape-vllm-sgl/)有 194 位开发者同时给 vLLM 和 SGLang 提交过代码。vLLM 的路由器[fork 自 SGLang 的网关](https://vllm.ai/blog/2025-12-13-vllm-router-release)。前 SGLang 核心维护者 Yineng Zhang 后来据[其个人资料](https://latent.space/wiki/yineng-zhang/)到了 Together AI，又在非营利的 [LightSeek 基金会](https://lightseek.org/blog/lightseek-tokenspeed.html)下参与创建了 TokenSpeed。两个引擎共用的 attention 内核库 [FlashInfer](https://arxiv.org/abs/2501.01005) 出自华盛顿大学的 Zihao Ye，作者里也有陈天奇和 Yineng Zhang。
+- **人在流动，代码也在流动。** 蚂蚁集团的一份[统计](https://developer.ant-ling.com/en/blogs/llm-landscape-vllm-sgl/)说，有 194 位开发者同时给 vLLM 和 SGLang 提交过代码（统计窗口和去重口径以原文为准）。vLLM 的路由器[fork 自 SGLang 的网关](https://vllm.ai/blog/2025-12-13-vllm-router-release)。前 SGLang 核心维护者 Yineng Zhang（据 [Latent Space 的人物页](https://latent.space/wiki/yineng-zhang/)，后来在 Together AI）又在非营利的 [LightSeek 基金会](https://lightseek.org/blog/lightseek-tokenspeed.html)下参与创建了 TokenSpeed。两个引擎共用的 attention 内核库 [FlashInfer](https://arxiv.org/abs/2501.01005) 出自华盛顿大学的 Zihao Ye，作者里也有陈天奇和 Yineng Zhang。
 - **ggml 一家从一个人开始。** ggml 是保加利亚开发者 Georgi Gerganov 写的一个 C 语言张量库，可以理解为一个极简的「PyTorch 底层」；llama.cpp 是建在它上面的推理程序。他先写了 ggml 和一个 GPT-2 的实现，再用这套代码移植了 Whisper，然后是 llama.cpp，2023 年成立 ggml.ai，种子钱来自 Nat Friedman 和 Daniel Gross（[量子位](https://www.qbitai.com/2023/06/63720.html)）。Ollama 的两位创始人 Jeffrey Morgan 和 Michael Chiang 此前做过 Kitematic，后来进了 Docker（[TechCrunch](https://techcrunch.com/2026/07/09/popular-open-source-ai-developer-tool-ollama-raises-65m-grows-to-nearly-9m-users/)）。Ollama 拉模型、跑模型的命令行用起来很像 Docker，我猜这不是巧合。
 - **编译器一家，最后都被芯片公司买走了。** 陈天奇和 Luis Ceze 在华盛顿大学做了 TVM，2019 年分拆出 OctoML（后来叫 OctoAI），[2024 年被英伟达收购](https://www.geekwire.com/2024/chip-giant-nvidia-acquires-octoai-a-seattle-startup-that-helps-companies-run-ai-models/)。Chris Lattner 从 LLVM、Swift 一路做到谷歌的 MLIR，2022 年创立 Modular，[2026 年 7 月被高通收购](https://www.nasdaq.com/press-release/qualcomm-completes-acquisition-modular-2026-07-29)。
-- **归宿：基金会和大买家。** vLLM 2025 年进了 [PyTorch 基金会](https://pytorch.org/blog/pytorch-foundation-welcomes-vllm/)，SGLang 加入的是 PyTorch 生态（不是托管项目）。vLLM 的主力贡献者 Neural Magic 被 [Red Hat 收购](https://redhat.com/en/about/press-releases/red-hat-completes-acquisition-neural-magic-fuel-optimized-generative-ai-innovation-across-hybrid-cloud)，Red Hat 随后发起了 llm-d。llama.cpp 团队 2026 年 2 月[加入 Hugging Face](https://simonwillison.net/2026/Feb/20/ggmlai-joins-hugging-face/)，9 月英伟达与 Hugging Face [签了收购协议](https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000078/nvda-20260902.htm)（约 119 亿美元，预计 2027 年上半年交割）。再加上 OctoAI、Groq 的技术授权和团队，英伟达和这张族谱里的好几家都连上了线。
+- **归宿：基金会和大买家。** vLLM 2025 年进了 [PyTorch 基金会](https://pytorch.org/blog/pytorch-foundation-welcomes-vllm/)，SGLang 加入的是 PyTorch 生态（不是托管项目）。vLLM 的主力贡献者 Neural Magic 被 [Red Hat 收购](https://redhat.com/en/about/press-releases/red-hat-completes-acquisition-neural-magic-fuel-optimized-generative-ai-innovation-across-hybrid-cloud)，Red Hat 随后发起了 llm-d。llama.cpp 团队 2026 年 2 月[加入 Hugging Face](https://simonwillison.net/2026/Feb/20/ggmlai-joins-hugging-face/)，9 月 2 日英伟达与 Hugging Face [签了收购协议](https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000078/nvda-20260902.htm)（约 119 亿美元，预计 2027 年上半年交割，仍有交割条件；这不说明 ggml 等开源项目今后的治理）。再加上 OctoAI，以及和 Groq 的非独家技术授权（部分人员加入英伟达），英伟达和这张族谱里的好几家都连上了线。
 
 本地那边，Ollama、[LM Studio](https://lmstudio.ai/blog/0.4.0)、高通 [GenieX](https://geniex.aihub.qualcomm.com/llms-full.txt) 都把 llama.cpp 嵌在里面。
 
-部署层也指向同一个结论。AWS SageMaker 的[大模型推理容器](https://aws.amazon.com/blogs/machine-learning/supercharge-your-llm-performance-with-amazon-sagemaker-large-model-inference-container-v15/)跑在 vLLM 上，llm-d 直接建在 vLLM 上，Dynamo 的后端是 vLLM、SGLang 和 TensorRT-LLM。PyPI 最近 30 天的下载量里，vLLM、SGLang、llama-cpp-python 三者大约是 62%、24%、14%（[pypistats](https://pypistats.org/packages/vllm)；SGLang 这一项按 pypistats 的数，它在别的数据源里被机器流量放大过，只能粗看）。
+部署层也有类似的信号。AWS SageMaker 的[大模型推理容器](https://aws.amazon.com/blogs/machine-learning/supercharge-your-llm-performance-with-amazon-sagemaker-large-model-inference-container-v15/) v15 默认用的是 vLLM（这是一家产品的选择），llm-d 直接建在 vLLM 上，Dynamo 的后端是 vLLM、SGLang 和 TensorRT-LLM。截至 11 月 15 日的 PyPI 最近 30 天下载量里，只在 vLLM、SGLang、llama-cpp-python 这三个包之间归一化，三者大约是 62%、24%、14%（[pypistats](https://pypistats.org/packages/vllm)）。下载量包含 CI 和镜像，不等于安装数；SGLang 在别的数据源里读数波动很大，只能粗看。
 
 数据和方法见[附录 A](#method)。我没找到任何已发表的推理引擎份额随时间变化的图，所以这张图是原创的，输入数据随文公开。
 
 ## 3. 十个维度，以及它们为什么这样排 {#axes}
 
-每个维度 0 到 5 分，问的都是：**这种出身的直觉，在多大程度上决定了框架的关键设计？** 锚点固定，保证每个维度上的「3 分」是同一个意思。
+每个维度 0 到 5 分，问的都是：**这种出身的直觉，在多大程度上决定了框架的关键设计？** 每个维度在 0、1、3、5 分处都有写明的文字锚点。
 
 | 维度 · 直觉 | 0 分 | 5 分 |
 |---|---|---|
@@ -112,7 +112,7 @@ GitHub star 的曲线把这个断层画得更直白：
 | **可移植性 · 多后端** | 只支持一家的硬件 | 可移植是创立目标：CPU、多家 GPU、NPU、浏览器 |
 | **集群 · 整个集群当一台机器** | 单进程单设备 | KV 感知路由、规划器、KV 传输、故障处理 |
 | **垂直整合 · 厂商掌握整套栈** | 基金会式中立治理 | 一家厂商从芯片管到服务 |
-| **广度 · 模型与硬件覆盖** | 一个模型家族 | 生态默认选项，新模型首日支持 |
+| **广度 · 模型与任务覆盖** | 一个模型家族 | 生态默认选项，新模型首日支持 |
 | **主机路径 · CPU 退出 token 循环** | 每步一个 Python 控制循环 | 原生主机循环是创立目标 |
 | **端侧 · 体积与能耗** | 只在数据中心，依赖很重 | 为设备而设计：KB 级运行时、NPU、每 token 能耗 |
 
@@ -120,17 +120,17 @@ GitHub star 的曲线把这个断层画得更直白：
 
 ![十个维度排成一张地图](/assets/fw-forensics/axismap-zh.svg)
 
-两组负相关最有意思。**可移植性和垂直整合是 −0.77**：芯片厂商的栈几乎都是编译器和垂直整合 4 分以上、可移植性 0 分，vLLM 正好反过来。**端侧和集群是 −0.68**：没有一个框架同时在乎一台手机和一万张卡。这只是我们自己的打分里的相关，维度是自己定义的，相关性有一部分来自提问的方式。
+两组负相关最有意思。**可移植性和垂直整合是 −0.77**：芯片厂商的栈几乎都是编译器和垂直整合 ≥4 分、可移植性 0 分；vLLM 则是可移植性 3.5、编译器 1.5、垂直整合 0。**端侧和集群是 −0.68**：没有一个框架同时在乎一台手机和一万张卡。这只是我们自己的打分里的相关，维度是自己定义的，相关性有一部分来自提问的方式，也受样本构成影响：去掉三家芯片厂商的栈，第一组相关就降到约 −0.60。
 
 ## 4. 数据中心引擎：批处理槽位、KV 显存、重复计算 {#dc}
 
-数据中心引擎这一组，平均最高的是调度器（3.7）、主机路径（3.2）和内存（3.1），编译器只有 1.4。每个引擎最尖的那个角，往往对应它早期明确要解决的瓶颈。
+数据中心引擎这一组，平均最高的是调度器（3.7）、内存（3.1）和主机路径（3.0），编译器只有 1.4。每个引擎最尖的那个角，往往对应它早期明确要解决的瓶颈。
 
 ![数据中心引擎：每个引擎最尖的那个角](/assets/fw-forensics/dc-zh.svg)
 
-**Orca（首尔大学 Byung-Gon Chun 团队与 FriendliAI）：稀缺的是批处理槽位。** 2022 年 OSDI 的 [Orca](https://www.usenix.org/conference/osdi22/presentation/yu) 观察到，请求级批处理会让已经结束的请求干等，新请求也进不来。它的答案是每个迭代重新组一次 batch，在 GPT-3 175B 上报告了 36.9 倍吞吐。这里打分的是论文里的系统：调度器 5 分，其他维度证据都薄；商用的 Friendli 引擎闭源，不计入。vLLM 论文把 Orca 列为[参考文献并当作基线重新实现](https://arxiv.org/pdf/2309.06180)；TGI 叫它 continuous batching，TensorRT-LLM 叫它 [in-flight batching](https://developer.nvidia.com/blog/nvidia-tensorrt-llm-supercharges-large-language-model-inference-on-nvidia-h100-gpus/)，指的都是同一件事。
+**Orca（首尔大学 Byung-Gon Chun 团队与 FriendliAI）：稀缺的是批处理槽位。** 2022 年 OSDI 的 [Orca](https://www.usenix.org/conference/osdi22/presentation/yu) 观察到，请求级批处理会让已经结束的请求干等，新请求也进不来。它的答案是每个迭代重新组一次 batch（另外还有 selective batching），在 GPT-3 175B 上、同等延迟下，报告了相对当年 FasterTransformer 36.9 倍的吞吐。这里打分的是论文里的系统：调度器 5 分，其他维度证据都薄；商用的 Friendli 引擎闭源，不计入。vLLM 论文把 Orca 列为[参考文献并当作基线重新实现](https://arxiv.org/pdf/2309.06180)；TGI 叫它 continuous batching，TensorRT-LLM 叫它 [in-flight batching](https://developer.nvidia.com/blog/nvidia-tensorrt-llm-supercharges-large-language-model-inference-on-nvidia-h100-gpus/)，指的都是同一件事。
 
-**vLLM（伯克利 Sky Computing Lab，今属 PyTorch 基金会）：稀缺的是 KV 显存，后来是广度。** 2023 年 6 月伯克利的 [vLLM](https://vllm.ai/blog/2023-06-20-vllm) 把问题定在显存：KV cache 又大又不定长，管不好就限制了 batch 大小。PagedAttention 借用了操作系统的虚拟内存：固定大小的块、块表、写时复制，浪费只发生在最后一个块，不到 4%（[论文](https://arxiv.org/abs/2309.06180)）。它最早服务的负载是 Chatbot Arena。第二个直觉是广度：[V1](https://vllm.ai/blog/2025-01-27-v1-alpha-release) 把引擎循环隔离出来，硬件插件 RFC 让 vLLM 成了昇腾、Spyre、Neuron、TPU 和 AMD ATOM 的默认接入点。内存和广度都是 5 分，垂直整合 0 分。
+**vLLM（伯克利 Sky Computing Lab，今属 PyTorch 基金会）：稀缺的是 KV 显存，后来是广度。** 2023 年 6 月伯克利的 [vLLM](https://vllm.ai/blog/2023-06-20-vllm) 把问题定在显存：KV cache 又大又不定长，管不好就限制了 batch 大小。PagedAttention 借用了操作系统的虚拟内存：固定大小的块、块表、写时复制，块内没用上的 KV 槽位只出现在最后一个块，论文评测里不到 4%（[论文](https://arxiv.org/abs/2309.06180)；这是块内碎片，不是系统的全部显存开销）。发布时它服务的是 Vicuna 和 Chatbot Arena。第二个直觉是广度：[V1](https://vllm.ai/blog/2025-01-27-v1-alpha-release) 把引擎循环隔离出来，硬件插件 RFC 让昇腾、Spyre、Neuron、TPU 和 AMD ATOM 都选择了接入 vLLM，各个插件由不同的团队维护。内存和广度都是 5 分，垂直整合 0 分。
 
 广度的账由两拨人付。芯片厂商付的是插件滞后：AMD ATOM 只在 vLLM 0.17.x 上测过，AFD 插件钉在 0.19.1。用户付的是一点峰值速度：[Baseten 的书](https://www.baseten.co/inference-engineering/book/04-software/4.3-inference-engines.md)里说 vLLM 到不了更窄的引擎那样的顶级性能。
 
@@ -138,7 +138,7 @@ GitHub star 的曲线把这个断层画得更直白：
 
 **TGI、TensorRT-LLM 和 LMDeploy：中间地带。** Hugging Face 的 [TGI](https://huggingface.co/docs/text-generation-inference/index) 押的是从 Hub 一键部署，continuous batching 和分页注意力都是从别处采用的，现在已进入维护模式，文档把用户指向 vLLM、SGLang、llama.cpp 和 MLX。英伟达的 [TensorRT-LLM](https://nvidia.github.io/TensorRT-LLM/latest/legacy/tensorrt-backend-removal.html) 继承了 FasterTransformer 的内核，押的是自家硬件上的峰值速度。后来它删掉了 TensorRT 后端，只剩 PyTorch 执行。两位评分者在编译器这一格差一分：一位看最初的引擎构建，一位看今天的代码；审校后统一按今天的版本打，编译器 2 分。垂直整合 3.75，可移植性 0。上海人工智能实验室（OpenMMLab）的 LMDeploy，核心 TurboMind 是 C++/CUDA 引擎，主机路径 3.5。
 
-**TokenSpeed（非营利的 LightSeek 基金会，前 SGLang 维护者参与创建）：2026 年唯一的新面孔。** [TokenSpeed](https://docs.nvidia.com/dynamo/digest/tokenspeed-day-0) 3 月中开始开发，5 月 6 日发布性能预览。调度器是原生 C++，运行时和集成层仍是 Python；首发即支持 Dynamo。发布测试用的是 B200 上的 Kimi K2.5、没有做 PD 分离：batch 为 1 时比 TensorRT-LLM 快约 9%，每用户约 100 tok/s 处吞吐高约 11%。主机路径 4.25，是全表最高。它也说明了今天的新引擎是怎么做出来的：复用现成的 Rust 网关（SMG）、厂商的内核团队和 Dynamo。5 月时模型覆盖和 PD 分离还列在待办里；10 月 [Dynamo 1.6.0](https://docs.nvidia.com/dynamo/reference/releases/v1-6-0) 已经为它加上了基于 Mooncake 的 PD 分离和 KV 事件。
+**TokenSpeed（非营利的 LightSeek 基金会，前 SGLang 维护者参与创建）：2026 年唯一的新面孔。** [TokenSpeed](https://docs.nvidia.com/dynamo/digest/tokenspeed-day-0) 3 月中开始开发，5 月 6 日发布性能预览。调度器是原生 C++，运行时和集成层仍是 Python；首发即支持 Dynamo。发布测试用的是 B200 上的 Kimi K2.5、没有做 PD 分离：batch 为 1 时比 TensorRT-LLM 快约 9%，每用户约 100 tok/s 处吞吐高约 11%。它的原生调度器很突出；但运行时仍是 Python，没有证据说明解释器已经离开逐 token 的路径，所以主机路径按审校后打 3 分。它也说明了今天的新引擎是怎么做出来的：复用现成的 Rust 网关（SMG）、厂商的内核团队和 Dynamo。5 月时模型覆盖和 PD 分离还列在待办里；10 月 [Dynamo 1.6.0](https://docs.nvidia.com/dynamo/reference/releases/v1-6-0) 已经为它加上了基于 Mooncake 的 PD 分离和 KV 事件。
 
 **一个跨时代的观察：主机开销又被重视起来了。** 前 LLM 时代的三个基线在别的维度都很低，主机路径却有 3 到 3.25 分：TF Serving 和 Triton 本来就是 C++ 服务器，NNAPI 是 Android 上的原生 C API（它不是服务器，也没有逐 token 的循环）。2023 年的 vLLM 和 SGLang 为了迭代速度，用 Python 写调度循环（TGI 的路由器一开始就是 Rust；TensorRT-LLM 旧后端的批管理是 C++，今天的 PyTorch 后端则由 Python 驱动每一步、调用 C++ 的调度和 KV 绑定）。2024 到 2026 年，这两家用了好几种办法来降低和隐藏主机开销：SGLang 的重叠调度、vLLM V1 把引擎核心拆进单独的进程、Rust 写的路由和 vLLM 的 [Rust 前端 RFC](https://github.com/vllm-project/vllm/issues/40846)（预处理密集的负载上，一个 Rust 进程 837 req/s，对比 32 个 Python API 进程 786 req/s）。要分清楚的是：路由和前端管的是请求入口，逐 token 的调度器在两家都还是 Python。[vLLM 0.6 的博客](https://vllm.ai/blog/2024-09-05-perf-update)给过一组数：Llama 3 8B 在一张 H100 上，HTTP 服务占 33% 时间，调度和输入准备占 29%，GPU 执行只占 38%。
 
@@ -150,7 +150,7 @@ GitHub star 的曲线把这个断层画得更直白：
 
 英伟达的 [Dynamo](https://docs.nvidia.com/dynamo/knowledge-base/overview) 2025 年 3 月发布，它点名的问题是 prefill 和 decode 不平衡、路由不看缓存重叠导致 KV 重算、显存外的容量压力。机制是 KV 感知路由、规划器和 NIXL 传输库，热路径用 Rust，后端是 vLLM、SGLang、TensorRT-LLM 和 TokenSpeed。它原先自带的 KV 块管理器 KVBM 已在 1.5.0 [弃用](https://docs.nvidia.com/dynamo/reference/releases/deprecations)（计划 1.7.0 移除），主机和磁盘分层改用各引擎自己的卸载。[llm-d](https://www.cncf.io/blog/2026/03/24/welcome-llm-d-to-the-cncf-evolving-kubernetes-into-sota-ai-infrastructure/) 是 Kubernetes 那边的回答：Red Hat、谷歌、IBM、CoreWeave 和英伟达在 2025 年 5 月发起，2026 年 3 月进入 CNCF 沙箱，10 月发布 [1.0](https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2)。它最初以 vLLM 为核心，1.0 已同时支持 vLLM 和 SGLang。
 
-两者的头条收益都来自共享前缀。Dynamo 报告 TTFT 快 3 倍，llm-d 报告从 35 秒降到 120 毫秒，都是共享前缀的负载，换成各不相同的提示词就不成立（[Red Hat](https://developers.redhat.com/articles/2026/06/11/intelligent-inference-scheduling-llm-d-red-hat-ai)）。它们的调度器分数反而不高（1.75），因为路由是按请求做的，迭代级的批处理仍然在下面的引擎里。
+两者的头条收益都来自共享前缀。Dynamo 报告 TTFT 快 3 倍，llm-d 报告从 35 秒降到 120 毫秒，这是两个独立的实验，各有自己的负载和对照，共同点是负载里有大量共享前缀（llm-d 的结果见 [Red Hat](https://developers.redhat.com/articles/2026/06/11/intelligent-inference-scheduling-llm-d-red-hat-ai)）。提示词互不重叠时，前缀复用带来的这部分收益会变小。它们的调度器分数反而不高（1.75），因为路由是按请求做的，迭代级的批处理仍然在下面的引擎里。
 
 Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-Triton](https://developer.nvidia.com/dynamo-triton)，LLM 的批处理交给 TensorRT-LLM 或 vLLM 后端去做。
 
@@ -176,18 +176,18 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 ![静态形状的税，一张图](/assets/fw-forensics/tax-zh.svg)
 
-端侧 NPU 从 2017 年起就在交同一份税：KV 大小在编译时固定，上下文满了要么报错、要么滑窗、要么下载更大的包。在骁龙手机上，一篇论文测到 NPU decode 只有 23.0 tok/s，反而输给 CPU 上的 llama.cpp（55.7 tok/s），尽管 NPU 的 prefill 快得多。
+端侧 NPU 跑 LLM 也在交类似的税：KV 大小在编译时固定，上下文满了要么报错、要么滑窗、要么换更大的包。[一篇论文](https://arxiv.org/html/2607.05475)在一加 15 上跑 4-bit 的 Qwen2.5-1.5B，GENIE NPU 路径的 decode 是 23.0 tok/s，CPU 上的 llama.cpp 是 55.7 tok/s，尽管 NPU 的 prefill 快得多。这是两套实现的端到端比较，不只是芯片的差别。
 
 归纳下来，静态形状的税有六项。Spyre 和 Neuron 各自至少交了三项；例子来自接进 vLLM 的芯片，不完全是雷达图里打分的那三家：
 
 | 税项 | 表现 | 例子 |
 |---|---|---|
-| 形状分桶 | 补齐浪费算力和显存 | Neuron 的桶、Spyre 的固定 chunk |
-| prefill 与 decode 不能同批 | 调度只能二选一 | Neuron、Spyre |
-| 前缀缓存粒度变粗 | 只有整块命中才算 | Spyre |
+| 形状分桶 | 补齐浪费算力和显存 | Neuron 的桶；Spyre 的 prefill 按一个固定 chunk 编译 |
+| prefill 与 decode 不能混在一批 | 只能交替跑 | Neuron；Spyre 现在用固定 chunk 的 prefill 和 decode 交替来模拟 chunked prefill |
+| 前缀缓存 | 早期缺失或粒度变粗 | Spyre 2024 年 RFC 阶段缺失；现在[默认开启](https://docs.vllm.ai/projects/spyre/en/latest/user_guide/configuration.html)，以 64 token 的块为单位 |
 | 调度器要重写 | 上游的改进接不上 | Spyre 替换 V1 调度器 |
 | 图外功能要绕路 | logprobs、结构化输出、投机解码、LoRA 要回退到另一条执行路径，或在某些集成里直接拒绝 | Neuron 默认回退到旧版 model runner，Dynamo sidecar 直接拒绝 |
-| 插件落后上游 | 每次升级都要重新验证 | ATOM 停在 0.17.x，昇腾研究里的 12 个补丁 |
+| 插件落后上游 | 每次升级都要重新验证 | ATOM 当时验证到 0.17.x；昇腾研究里的 12 个补丁（含上游缺失、正确性、适配和性能几类） |
 
 ## 8. 新芯片：自建框架，还是接进去？ {#newchip}
 
@@ -195,11 +195,11 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 这个问题没有标准答案。这里的「新芯片」可以是编译型芯片，可以是别的架构，也可以是几种芯片拼起来的系统，各家的约束也不一样。下面能做的，是把两边的证据摆出来，再说说哪条路**看起来**更可能走通。要先说明：下面的证据多来自静态编译、追求低延迟 decode 的芯片，别的部署形态未必适用。
 
-**自建的理由是真的。** 编译型芯片往往先有编译器、再有芯片（Groq 就是这样），所有数据流都静态调度。动态引擎的调度器用不上这一点，只能整个换掉，Spyre 就是这样做的。在 GPU 上，[TileRT](https://newsletter.semianalysis.com/p/ultra-high-interactivity-on-nvidia) 把整个 decode 图编进一个常驻内核，8 卡 B200 上单用户 340 tok/s，对比常规最好成绩 181.4 tok/s（batch size 为 1，总吞吐会低一些）。自己掌握循环，还可以明确不做芯片不擅长的功能。
+**自建的理由是真的。** 编译型芯片往往先有编译器、再有芯片（Groq 就是这样），所有数据流都静态调度。动态引擎的调度器用不上这一点，只能整个换掉，Spyre 就是这样做的。在 GPU 上，[TileRT](https://newsletter.semianalysis.com/p/ultra-high-interactivity-on-nvidia) 把整个 decode 图编进一个常驻内核，在 8 卡 B200 的一个低延迟工作点上单用户 340 tok/s，同一报道里常规方案的最好成绩是 181.4 tok/s；差值不能全算在原生循环头上。自己掌握循环，还可以明确不做芯片不擅长的功能。
 
-**反对的理由也很重。** 模型覆盖是一笔持续的成本：Ollama 自建了 Go 引擎，后来仍加入 llama.cpp 来扩大 GGUF 覆盖。SemiAnalysis 报告说多数实验室不想在生产里跑 AMD 的 ATOM，建议 AMD 回到 vLLM 上游。AWS 从 Trainium 总结的[经验](https://hosted-files.sched.co/pytorchconferenceeu2026/40/Pluggable%20PyTorch%20LLM%20-%20pytorch%2026.pdf)是：分桶该放进调度器，厂商应该扩展 vLLM，而不是 fork。集群层现在默认下面就是 vLLM 或 SGLang。
+**反对的理由也很重。** 模型覆盖是一笔持续的成本：Ollama 自建了 Go 引擎，后来仍加入 llama.cpp 来扩大 GGUF 覆盖。SemiAnalysis 报告说多数实验室不想在生产里跑 AMD 的 ATOM，建议 AMD 回到 vLLM 上游。AWS 从 Trainium 总结的[经验](https://hosted-files.sched.co/pytorchconferenceeu2026/40/Pluggable%20PyTorch%20LLM%20-%20pytorch%2026.pdf)是：分桶该放进调度器，厂商应该扩展 vLLM，而不是 fork。集群层现在默认下面就是 vLLM 或 SGLang。反过来，小组件的 fork 有时是可行的：vLLM 的路由器就是从 SGLang 的网关 fork 出来的，成本取决于边界和维护策略。
 
-**一个已经走过这条路的例子。** 英伟达拿到 Groq 的技术授权之后，要把一颗编译型芯片接进自己的 Dynamo。它在 [PR #16998](https://github.com/ai-dynamo/dynamo/pull/16998) 里写的是一个 `dynamo-sidecar`：把 Dynamo worker 接到芯片自己的引擎上，走 OpenEngine gRPC；logprobs、guided decoding 和多模态请求直接拒绝；可以作为 vLLM prefill worker 后面的 decode worker，KV 通过 NIXL 拉过来。另外两个 PR（[#17389](https://github.com/ai-dynamo/dynamo/pull/17389)，草稿；[#18362](https://github.com/ai-dynamo/dynamo/pull/18362)）让 Dynamo 的 operator 直接读编译器输出的部署清单，而不是自己推导布局。英伟达保留了芯片自己的引擎，没有把它移植进 vLLM，也没有 fork vLLM，只是放在一个窄接口后面。这只是一家的选择，但它是目前公开得最细的一例。
+**一个已经走过这条路的例子。** 英伟达拿到 Groq 的技术授权之后，要把一颗编译型芯片接进自己的 Dynamo。它在 [PR #16998](https://github.com/ai-dynamo/dynamo/pull/16998) 里写的是一个 `dynamo-sidecar`：把 Dynamo worker 接到芯片自己的引擎上，走 OpenEngine gRPC；logprobs、guided decoding 和多模态请求直接拒绝；可以作为 vLLM prefill worker 后面的 decode worker，KV 通过 NIXL 拉过来。这个 PR 10 月 27 日合并，PR 里说聚合和 PD 分离两条路径在预量产 LPX 硬件上和 greedy 参考输出一致。[#17389](https://github.com/ai-dynamo/dynamo/pull/17389) 是没合并就关掉的验证草稿；[#18362](https://github.com/ai-dynamo/dynamo/pull/18362) 11 月 11 日合并，让 Dynamo 的 operator 直接读编译器输出的布局，而不是自己推导。合并、硬件验证、可下载的版本和公开的生产部署是四件事，目前公开的只到前两件。英伟达保留了芯片自己的引擎，没有把它移植进 vLLM，也没有 fork vLLM，只是放在一个窄接口后面。这个案例验证了经 Dynamo 接入的一条路径，并没有比较同一颗芯片做成 vLLM 或 SGLang 插件的成本。
 
 把这些放在一起，一条**可能**走得通的路大致是这样（不是唯一的路）：
 
@@ -219,21 +219,21 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 第一篇讲过公开资料里最完整的一个例子：英伟达 Vera Rubin + Groq 3 LPX 的三种分工。从软件看，三种切法对框架的要求差别很大：
 
-- **按阶段拆**（一种芯片 prefill，另一种 decode，传 KV）在控制上主要靠集群层，但两边的 KV 格式、量化、位置编码、传输和生命周期必须对齐，这是一份数据面的约定，不只是路由策略。AWS Trainium + Cerebras、AMD + Cerebras、SambaNova 都描述了这种切法，但没有一家说明调度器和 KV 传输机制，性能数字也都是投影。
-- **草稿与验证**需要一个调草稿长度和接受率的闭环。
-- **按层拆（AFD，attention 和 FFN 分离）**耦合最紧。字节的 [MegaScale-Infer](https://arxiv.org/abs/2504.02263v4) 2025 年提出了这种做法；vLLM 的 [AFD 插件](https://vllm.ai/blog/2026-07-23-vllm-afd-plugin)把调度、KV 和采样留在 attention 一侧，FFN 一侧不保存请求级的 KV，异构加速器混搭还在「未来工作」里。也有反证：一项 128 张 B200 的模拟发现 AFD 只在最严格的交互延迟目标下占优，[百度](https://arxiv.org/abs/2602.09721)报告了标准集群上的 AFD「死区」。它更像低延迟档的产品，不是默认方案。
+- **按阶段拆**（一种芯片 prefill，另一种 decode，传 KV）在控制上主要靠集群层，但两边的 KV 格式、量化、位置编码、传输和生命周期必须对齐，这是一份数据面的约定，不只是路由策略。AWS Trainium + Cerebras、AMD + Cerebras、SambaNova 都描述了这种切法；在我查到的公告里，没有一家说明调度器和 KV 传输机制，性能数字也都是投影。
+- **草稿与验证**需要一个调草稿长度和接受率的闭环，两边的 tokenizer 和采样语义要兼容，验证后还要回滚或提交两份状态。
+- **按层拆（AFD，attention 和 FFN 分离）**耦合最紧。字节的 [MegaScale-Infer](https://arxiv.org/abs/2504.02263v4) 2025 年提出了这种做法；vLLM 的 [AFD 插件](https://vllm.ai/blog/2026-07-23-vllm-afd-plugin)把调度、KV 和采样留在 attention 一侧，FFN 一侧不保存请求级的 KV。首发时已经有 NVIDIA GPU 和昇腾 NPU 等后端各自的验证路径，同一个请求跨不同类型的加速器分工才在「未来工作」里。也有反证：一项 128 张 B200 的[模拟](https://arxiv.org/abs/2605.28302)发现 AFD 只在最严格的交互延迟目标下占优，[百度](https://arxiv.org/abs/2602.09721)报告了在它的互联和模型条件下的 AFD「死区」。在这些条件下，它更像低延迟档的选项，不是默认方案。
 
 把这些公开设计拼起来，一个 GPU + 新芯片的系统大致需要上图这七层，而每一层今天都已经有一个最接近的开源组件。所以要统一的，看起来是控制平面（路由、规划、能力协商、故障语义），而不是把所有芯片塞进同一个引擎；KV 和激活的格式、传输和生命周期，还需要一份单独的数据面约定。
 
 一个细节很关键：**在英伟达的按层拆设计里，KV cache 留在 GPU 上。** 这时新芯片一侧不需要请求级的 KV 管理器，但权重、激活和工作区仍要做内存规划，可以是一份静态分区计划，加一个确定性的 RPC。如果新芯片单独跑整条 decode，情况就不同了，Groq 的 SHIP 论文描述的就是芯片自己管理分页 KV。相关 PR 也写着部分路径还没在硬件上跑过，这是早期代码。
 
-每个 token 在两种芯片之间传什么、多大、多快，目前没有公开。[NVIDIA 的博客](https://developer.nvidia.com/blog/how-the-nvidia-vera-rubin-platform-is-solving-agentic-ais-scale-up-problem/)只说激活每个 token 交换一次；[Hot Chips 的报道](https://tomshardware.com/tech-industry/semiconductors/nvidia-presents-groq-3-lpx-architecture-and-unveils-its-first-third-party-inference-benchmark)补充说中间有一块 FPGA 把同步域和 GPU 接起来。在这些数字公开之前，按层拆的软件设计只能做到一半。
+每个 token 在两种芯片之间传什么、多大、多快，目前没有公开。[NVIDIA 的博客](https://developer.nvidia.com/blog/how-the-nvidia-vera-rubin-platform-is-solving-agentic-ais-scale-up-problem/)只说激活每个 token 交换一次；[Hot Chips 的报道](https://tomshardware.com/tech-industry/semiconductors/nvidia-presents-groq-3-lpx-architecture-and-unveils-its-first-third-party-inference-benchmark)补充说中间有一块 FPGA 把同步域和 GPU 接起来。在这些数字公开之前，外部读者没法独立核算这条分离路径的延迟预算。
 
 ## 10. 从 token 推理系统到任务推理系统 {#task}
 
-**B2A 经济。** a16z 11 月的一篇文章把正在发生的事叫做 [B2A 经济](https://www.a16z.news/p/welcome-to-the-b2a-economy)（business-to-agent）：agent 正在从回答问题走向完成任务，替用户挑产品、开数据库、做部署。文中引用的数字很直白：9 月 GitHub 上超过 40% 的 PR 起于 agent 写的草稿，半年前是 17%；Supabase 超过 60% 的新数据库由 AI 工具创建；Vercel 上由 agent 触发的部署一年涨了 28 倍。
+**B2A 经济。** a16z 11 月的一篇文章把正在发生的事叫做 [B2A 经济](https://www.a16z.news/p/welcome-to-the-b2a-economy)（business-to-agent）：agent 正在从回答问题走向完成任务，替用户挑产品、开数据库、做部署。文中引用的数字很直白：9 月 GitHub 上超过 40% 的 PR 起于 agent 写的草稿，半年前是 17%；Supabase 超过 60% 的新数据库由 AI 工具创建；Vercel 上由 agent 触发的部署一年涨了 28 倍。这三个数分母各不相同，说明的是 agent 在做的操作，不涉及结果质量、付费方式或推理成本。
 
-**S-1 的口径。** 同一时间，Anthropic 10 月 26 日提交的 [S-1](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm) 用每任务成本衡量客户价值。按公司自己的说法，Opus 5.5 让客户的每任务成本比 Opus 5 降了大约 40%，这里面混着定价、模型效率和质量，不是推理引擎的指标。但计费仍然按 token，消费型收入占 2026 年上半年收入的 80%。价值口径变了，定价口径还没变。
+**S-1 的口径。** 同一时间，Anthropic 10 月 26 日提交的 [S-1](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm) 用每任务成本衡量客户价值。按公司自己的说法，Opus 5.5 让客户的每任务成本比 Opus 5 降了大约 40%，这里面混着定价、模型效率和质量，不是推理引擎的指标。但在按 token 计量的 API 场景里，计费仍然按 token；按用量计费的收入占 2026 年上半年收入的 80%，其余主要是订阅。价值口径变了，API 的定价口径还没变。
 
 ![任务经济的几个信号：a16z 引用的数据与 Anthropic S-1](/assets/fw-forensics/b2a-zh.svg)
 *图按 a16z 文中引用的数字重画；a16z 自己做的原图更好看，值得去[原文](https://www.a16z.news/p/welcome-to-the-b2a-economy)看一眼。*
@@ -242,23 +242,23 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 ![价值单位在上移：引擎走到了会话，还没到任务](/assets/fw-forensics/ladder-zh.svg)
 
-**一个 agent 任务的钱花在哪。** SemiAnalysis 的 [AgentX](https://newsletter.semianalysis.com/p/agentx-inferencexv3-does-cuda-moat) 公开基准是 393 个经过筛选和重建的 Claude Code 会话，来自一个约 8,300 个会话的采集库。在这个处理后的子集里，单次请求输入中位数 142K token，输出只有 444，轮次之间的间隔中位数 3.84 秒（含工具和人的等待）。一篇斯坦福的[论文](https://arxiv.org/pdf/2608.25399)用 Kimi K3 按标价算了五个选定的 SWE-bench Verified 任务：每次运行的中位成本 0.11 到 1.16 美元；缓存命中率 96.3%；输出只占 2.7% 的 token，却占 51% 的钱。作者也提醒，这些比例依赖当时的价格和缓存条件，不能直接搬到别的栈。缓存一旦被挤掉，账就变了：一项高并发 agent 批推理的研究里，工具调用暂停期间被淘汰的前缀要重算，占到端到端延迟的 [49.1%](https://arxiv.org/pdf/2601.22705)。按缓存读 5%、写 125–200% 输入价粗算，一个前缀断掉一次、要按缓存写重新计费的话，大约等于二十到四十次缓存读的钱；引擎内部的 KV 淘汰也不一定变成客户账单上的未命中。目前能找到的按结果定价的例子，都在结果容易验证的场景，比如 [Intercom Fin](https://www.intercom.com/learning-center/ai-customer-service-agent-pricing-comparison) 每解决一个工单 0.99 美元。
+**一个 agent 任务的钱花在哪。** SemiAnalysis 的 [AgentX](https://newsletter.semianalysis.com/p/agentx-inferencexv3-does-cuda-moat) 公开基准是 393 个经过筛选和重建的 Claude Code 会话，来自一个约 8,300 个会话的采集库。在这个处理后的子集里，单次请求输入中位数 142K token，输出只有 444，轮次之间的间隔中位数 3.84 秒（含工具和人的等待）。一篇斯坦福的[论文](https://arxiv.org/pdf/2608.25399)用 Kimi K3 按标价算了五个选定的 SWE-bench Verified 任务：每次运行的中位成本 0.11 到 1.16 美元；缓存命中率 96.3%；输出只占 2.7% 的 token，却占 51% 的钱。作者也提醒，这些比例依赖当时的价格和缓存条件，不能直接搬到别的栈。缓存一旦被挤掉，账就变了：一项高并发 agent 批推理的研究里，工具调用暂停期间被淘汰的前缀要重算，占到端到端延迟的 [49.1%](https://arxiv.org/pdf/2601.22705)。按缓存读 5%、写 125–200% 输入价粗算，一个前缀断掉一次、要按缓存写重新计费的话，大约等于 25 到 40 次缓存读的钱（5 分钟缓存写是 25 倍，1 小时是 40 倍）；引擎内部的 KV 淘汰也不一定变成客户账单上的未命中。目前能找到的按结果定价的例子，比如 [Intercom Fin](https://www.intercom.com/learning-center/ai-customer-service-agent-pricing-comparison) 每解决一个工单 0.99 美元，「解决」的定义里也包括客户离开后没有继续求助这种推定。
 
 ![一个 agent 任务的钱花在哪：token 和美元是两本账](/assets/fw-forensics/money-zh.svg)
 
-**两边已经在靠近，交汇点是会话。** Claude Code 团队说他们[整个 harness 都围绕前缀缓存设计](https://claude.com/blog/lessons-from-building-claude-code-prompt-caching-is-everything)，命中率掉了就按事故处理；[Codex](https://openai.com/index/unrolling-the-codex-agent-loop) 也写了同样的前缀纪律。引擎这边，vLLM 2026 年三季度的路线图交付了 session ID 和多级 KV 卸载，Dynamo 映射了 Claude Code、Codex、OpenCode 的会话头并移植了程序级调度器，llm-d 1.0 加了会话感知路由。按各自写明的设计原则，这些都只是**可选提示**，请求格式不变。
+**两边已经在靠近，交汇点是会话。** Claude Code 团队说他们[整个 harness 都围绕前缀缓存设计](https://claude.com/blog/lessons-from-building-claude-code-prompt-caching-is-everything)，命中率掉了就按事故处理；[Codex](https://openai.com/index/unrolling-the-codex-agent-loop) 也写了同样的前缀纪律。引擎这边，vLLM 2026 年三季度的路线图列了 session ID 和多级 KV 卸载，Dynamo 映射了 Claude Code、Codex、OpenCode 的会话头并移植了程序级调度器，llm-d 1.0 加了会话感知路由。按各自写明的设计原则，这些都是**可选提示**：老客户端照样能用，但会新增可选字段。多租户的场景下，会话租期、缓存配额和跨租户隔离仍然要由服务端说了算。
 
-**反证限制了整合能走多远。** 实验室论文报告程序级调度有 4–15 倍收益，但比较对象是没有会话感知的引擎。在 KV 感知路由和卸载已经到位的前提下，Dynamo 的测试里程序感知只多出 11–16%，低并发时没有收益。一项研究里，agent 感知的淘汰策略比朴素 LRU 还差 7–23%。我没找到直接优化「每个完成的任务花多少钱」的论文。
+**反证限制了整合能走多远。** 实验室论文报告程序级调度有 4–15 倍收益，但比较对象是没有会话感知的引擎。Dynamo 的[两组测试](https://pytorch.org/blog/session-aware-agentic-inference-with-nvidia-dynamo/)基线不同：SWE-bench 在单节点 8×H100 上，程序级调度相对只有 KV 感知路由多出约 12–16% 吞吐；agent RL rollout 在另一套配置上，以 VERL 的全局负载均衡为基线，中等并发时多 11.0–14.6%，低并发时大致持平。一项只看 GPU 内的研究里，agent 感知的淘汰策略比朴素 LRU 还差 7–23%。我没找到直接优化「每个完成的任务花多少钱」的论文。
 
-**AI 写代码能不能让重写变便宜？** 有现成「裁判」的重写确实便宜了：据 Bun 作者自报，[Bun](https://bun.com/blog/bun-in-rust) 把 53.5 万行 Zig 移植成 Rust，11 天后合入主分支，合入前的 API 标价约 16.5 万美元，靠的是每个平台大约 6 万个测试（合入后还有安全审查、fuzzing 和回归修复）；Anthropic 的研究型 C 编译器两周、不到 2 万美元，用 GCC 当裁判。这些都不是完整的工程成本。推理引擎的正确性和性能都可以测，也已经有 [FlashInfer-Bench](https://arxiv.org/abs/2601.00227) 这样的评测，难的是跨硬件的代表性、可比性和覆盖面，昇腾那份研究里的成本恰恰就在这里。在我检索的范围内，没找到主要由 agent 写成的生产推理引擎。维护者说的瓶颈是代码审查：vLLM [禁止纯 agent 提交的 PR](https://docs.vllm.ai/en/stable/contributing/)，vllm-ascend 积压了约 3,200 个 PR。
+**AI 写代码能不能让重写变便宜？** 有现成「裁判」的重写确实便宜了：据 Bun 作者自报，[Bun](https://bun.com/blog/bun-in-rust) 把 53.5 万行 Zig 移植成 Rust，11 天后合入主分支，合入前的 API 标价约 16.5 万美元，靠的是每个平台大约 6 万个测试（合入后还有安全审查、fuzzing 和回归修复）；Anthropic 的研究型 C 编译器两周、不到 2 万美元，用 GCC 当裁判。这些都不是完整的工程成本。推理引擎的正确性和性能都可以测，也已经有 [FlashInfer-Bench](https://arxiv.org/abs/2601.00227) 这样的评测，难的是跨硬件的代表性、可比性和覆盖面，昇腾那份研究里的成本恰恰就在这里。在我检索的范围内，没找到主要由 agent 写成的生产推理引擎。维护者这边，vLLM 的[贡献指南](https://docs.vllm.ai/en/stable/contributing/)要求人工审查，不接受纯 agent 提交的 PR。另一个更贴题的数据点是 11 月的 [ServerBench](https://arxiv.org/abs/2611.06841)：agent 在给定负载、状态重放和独立验证器下生成专用推理服务，有通过的也有没通过的。它说明有评价器时可以比较，但只适用于那些任务，不等于通用生产引擎已经能由 agent 重写。
 
-**合理的「整合层」可能长什么样。** 一个可能的切法是按访问模式：需要逐 token 访问的（语法掩码、KV 驻留、采样）留在引擎；I/O 型的（工具、历史、解析、MCP 编排）放到旁边的网关，像 SMG 那样。两边之间是一份提示协议和 KV 生命周期接口：session 和 parent ID、优先级、预计输出长度、缓存 TTL，以及 Pin、Retain、Prefetch 这样的动词（SGLang #27574、vLLM #51428 都有提案）。这不一定需要重写引擎。多租户的引擎也不能盲信 harness 的提示，所以有提案加了信用机制。
+**合理的「整合层」可能长什么样。** 一个可能的切法是按访问模式：需要逐 token 访问的（语法掩码、KV 驻留、采样）留在引擎；I/O 型的（工具、历史、解析、MCP 编排）放到旁边的网关，像 SMG 那样。两边之间是一份提示协议和 KV 生命周期接口：session 和 parent ID、优先级、预计输出长度、缓存 TTL，以及 Pin、Retain、Prefetch 这样的动词（[SGLang #27574](https://github.com/sgl-project/sglang/issues/27574) 是已关闭的议题，[vLLM #51428](https://github.com/vllm-project/vllm/issues/51428) 是仍开放的 RFC，都还不是已交付的互通协议）。这不一定需要重写引擎。多租户的引擎也不能盲信 harness 的提示，所以有提案加了信用机制。
 
 ![从 harness 到引擎：按访问模式切分，中间是一份提示协议](/assets/fw-forensics/task-zh.svg)
 
-**谁会来做。** 垂直整合的 harness 方已经在自己的栈里动服务层了：OpenAI 在目标速度到 1,000 tok/s 之后，发现 API 开销占了 agent 延迟的一大块，于是做了[按连接的 WebSocket 缓存](https://openai.com/index/speeding-up-agentic-workflows-with-websockets)；Cognition 把模型、harness 和 Cerebras 推理[一起设计](https://cognition.com/blog/swe-1-5)，还重写了 lint 和命令执行，每步省下最多 2 秒。网关和集群这一层在往上长：LightSeek 同时做 SMG 和 TokenSpeed，英伟达给 Dynamo 加了 agent 提示。两家引擎创业公司 Inferact（vLLM）和 RadixArk（SGLang）都还没公开 harness 方面的路线。
+**谁会来做。** 垂直整合的 harness 方已经在自己的栈里动服务层了：OpenAI 在目标速度到 1,000 tok/s 之后，发现 API 开销占了 agent 延迟的一大块，于是做了[按连接的 WebSocket 缓存](https://openai.com/index/speeding-up-agentic-workflows-with-websockets)；Cognition 把模型、harness 和 Cerebras 推理[一起设计](https://cognition.com/blog/swe-1-5)，还重写了 lint 和命令执行，据其报告每步省下最多 2 秒。网关和集群这一层在往上长：LightSeek 同时做 SMG 和 TokenSpeed，英伟达给 Dynamo 加了 agent 提示。两家引擎创业公司 Inferact（vLLM）和 RadixArk（SGLang）都还没公开 harness 方面的路线。
 
-对做快速 decode 芯片的人，有一点要注意：如果 harness、工具和 API 的延迟不跟着降，decode 再快，单个任务的收益也很快到顶；暂停会话的 KV 也得放在片上内存以外的地方。按每任务成本讲一颗 decode 芯片，可能要讲的是 KV 分层和工具等待，而不只是每秒多少 token。
+对做快速 decode 芯片的人，有一点要注意：如果 harness、工具和 API 的延迟不跟着降，decode 再快，单个任务的收益也很快到顶；暂停会话的 KV 也得放在片上内存以外的地方。评估更快的 decode 能省多少任务时间，要同时量 API、工具执行和缓存等待，而不只是每秒多少 token；暂停时 KV 放在哪里，取决于容量、恢复代价和重算成本。
 
 ## 11. 结语：五个要点 {#close}
 
@@ -280,9 +280,11 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 **star 与族谱。** star 数据来自公开的、每天提交 star 数的 git 仓库（[EvanLi/Github-Ranking](https://github.com/EvanLi/Github-Ranking)、[yuxiaopeng/Github-Ranking-AI](https://github.com/yuxiaopeng/Github-Ranking-AI) 等），缺失值按 0 计；SGLang 2026 年的 PyPI 月度数据被机器流量放大，没有用于时间序列。族谱图里每条边都有公开来源，只有单一二手来源的人员去向没有画进图里。
 
+**更新记录（2026-11-16）。** 发布后第二位同事的独立审校带来一批修正：Spyre 的现状（前缀缓存默认开启、prefill 与 decode 交替）、缓存写的倍数（25–40 次缓存读）、Dynamo 的两组实验分开写、删掉无法访问的调查数字、补全几处基准的实验条件、LPX 相关 PR 的状态、Groq 是非独家授权、AFD 的验证范围，以及 TokenSpeed 的主机路径（4.25 → 3）和程序（2.5 → 2）两格分数。
+
 **审校后的修正。** 一位同事做了独立审校，逐格复算了合并和统计，抽查了 30 格和全部分歧格。根据审校，我按 2026 年 11 月的当前版本更正了一批理由，并改了 10 格分数（TensorRT-LLM 的程序、集群、编译器，Dynamo 的内存，TokenSpeed 的程序，Neuron 的程序和主机路径，ONNX Runtime GenAI 的可移植性，llm-d 的程序和广度），数据文件里每格都写着新的理由和来源。上面的分歧统计按两轮原始打分计算，不受这些修正影响。
 
-**范围。** 22 个框架不是全量普查：我选的是 2016 年以来有代表性的服务引擎、集群层、端侧运行时和三家芯片厂商的栈。每个框架按 2026 年 11 月的当前版本打分，Orca 按论文里的系统打分。几个维度有重叠：主机路径同时涉及语言、计算重叠和路由；内存和程序运行时、可移植性和垂直整合都相关；不同层的框架在有些维度上本来就不适用，0 分有时是「不适用」。
+**范围。** 22 个框架不是全量普查：我选的是 2016 年以来有代表性的服务引擎、集群层、端侧运行时和三家芯片厂商的栈。每个框架按 2026 年 11 月的当前版本打分，Orca 按论文里的系统打分。几个维度有重叠（广度只算模型与任务覆盖，硬件覆盖算在可移植性里）：主机路径同时涉及语言、计算重叠和路由；内存和程序运行时、可移植性和垂直整合都相关；不同层的框架在有些维度上本来就不适用，0 分有时是「不适用」。
 
 **局限。** 分数是判断，不是测量；Orca 的商用引擎、Groq 的服务栈、TokenSpeed 的细节偏少，标为低置信度；框架在变，分数截至 2026 年 11 月 15 日；轴序和出身分组是排版选择；异构和每任务成本两节里的很多机制来自厂商博客和 PR 里的早期代码。
 
@@ -290,7 +292,7 @@ Triton 走到今天也成了这一层的前门：产品页现在叫它 [Dynamo-T
 
 ## 附录 B：参考来源 {#sources}
 
-完整来源列表见[英文版](/2026/11/inference-framework-forensics/#sources)，每个分数对应的来源都在数据文件里。主要来源：
+中英文两版的来源列表相同，每个分数对应的来源都在数据文件里。主要来源：
 
 - 族谱与人物：[LMSYS](https://lmsys.org/about/)；[Inferact 融资](https://siliconangle.com/2026/01/22/inferact-launches-150m-funding-commercialize-vllm/)；[a16z 投资 Inferact](https://a16z.com/announcement/investing-in-inferact/)；[RadixArk 融资](https://pulse2.com/radixark-launches-with-100-million-in-seed-funding-to-democratize-frontier-ai-infrastructure/)；[LMArena](https://en.wikipedia.org/wiki/LMArena)；[vLLM Router](https://vllm.ai/blog/2025-12-13-vllm-router-release)；[LightSeek 与 TokenSpeed](https://lightseek.org/blog/lightseek-tokenspeed.html)；[FlashInfer](https://arxiv.org/abs/2501.01005)；[ggml.ai（量子位）](https://www.qbitai.com/2023/06/63720.html)；[ggml.ai 加入 Hugging Face](https://simonwillison.net/2026/Feb/20/ggmlai-joins-hugging-face/)；[英伟达收购 Hugging Face 的 8-K](https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000078/nvda-20260902.htm)；[英伟达收购 OctoAI](https://www.geekwire.com/2024/chip-giant-nvidia-acquires-octoai-a-seattle-startup-that-helps-companies-run-ai-models/)；[高通完成收购 Modular](https://www.nasdaq.com/press-release/qualcomm-completes-acquisition-modular-2026-07-29)；[Red Hat 收购 Neural Magic](https://redhat.com/en/about/press-releases/red-hat-completes-acquisition-neural-magic-fuel-optimized-generative-ai-innovation-across-hybrid-cloud)；[PyTorch 基金会接纳 vLLM](https://pytorch.org/blog/pytorch-foundation-welcomes-vllm/)
 - 前 LLM 时代：[TensorFlow Serving 开源](https://opensource.googleblog.com/2016/02/running-your-models-in-production-with.html)；[TF Serving 设计论文](https://arxiv.org/abs/1712.06139)；[TensorRT Inference Server 发布](https://www.edge-ai-vision.com/?p=4341)；[Triton 改名](https://docs.nvidia.com/deeplearning/triton-inference-server/release-notes/rel_20-03.html)；[Dynamo-Triton](https://developer.nvidia.com/dynamo-triton)；[NNAPI 迁移指南](https://developer.android.com/ndk/guides/neuralnetworks/migration-guide)

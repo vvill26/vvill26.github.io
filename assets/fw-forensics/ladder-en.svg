@@ -60,6 +60,6 @@
 <text x="494" y="410" font-size="13" font-weight="700" fill="#cf222e">The gap: the contract between session and task</text>
 <text class="t1" x="494.0" y="430.0" font-size="11.5" text-anchor="start">a hint protocol and KV-lifetime contract between harness and engine</text>
 <text class="t2" x="494.0" y="448.0" font-size="10.5" text-anchor="start">(session and parent IDs, priority, cache TTL, Pin / Retain / Prefetch)</text>
-<text class="t2" x="24.0" y="530.0" font-size="11" text-anchor="start">Counter-evidence: with KV-aware routing in place, program-level scheduling added only 11–16% in Dynamo tests.</text>
+<text class="t2" x="24.0" y="530.0" font-size="11" text-anchor="start">Counter-evidence: in two Dynamo tests with different baselines, program-level scheduling added only ~12–16% (SWE-bench, vs KV-aware routing) and 11.0–14.6% (RL rollout).</text>
 <text class="t3" x="24.0" y="546.0" font-size="10.5" text-anchor="start">Sources: Anthropic S-1; a16z, "Welcome to the B2A Economy"; vLLM #48168; PyTorch blog (Dynamo session awareness); llm-d 1.0 (see Sources).</text>
 </svg>
