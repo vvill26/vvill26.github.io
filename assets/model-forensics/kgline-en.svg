@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 510" class="s" role="img" aria-label="Same lab, version after version: which way the shape grows">
+<style>
+.s{font-family:-apple-system,"Segoe UI","PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.t3{fill:#8a8984}.w{fill:#ffffff}
+.ln{stroke:#9b9a95;stroke-width:1.3;fill:none}.lnd{stroke:#9b9a95;stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+.box{fill:#fcfcfb;stroke:#9b9a95;stroke-width:1.2}.soft{fill:#f3f2ef}.lane{fill:#f3f2ef}
+.m1{fill:#2a78d6}.m2{fill:#eb6834}.m3{fill:#1baf7a}.m4{fill:#8a63d2}.m5{fill:#7f8fa6}.m6{fill:#b5b0a2}
+.b1{fill:#2a78d6;fill-opacity:.12;stroke:#2a78d6;stroke-width:1.3}.b2{fill:#eb6834;fill-opacity:.12;stroke:#eb6834;stroke-width:1.3}
+.b3{fill:#1baf7a;fill-opacity:.12;stroke:#1baf7a;stroke-width:1.3}.b5{fill:#7f8fa6;fill-opacity:.12;stroke:#7f8fa6;stroke-width:1.3}
+.ah{fill:#9b9a95}.yr{stroke:#e3e1da;stroke-width:1}.hl{fill:#eb6834;fill-opacity:.07}
+@media (prefers-color-scheme:dark){.bg,.box{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.t3{fill:#8f8e88}.soft,.lane{fill:#242422}
+.ln,.lnd,.box{stroke:#6d6c66}.ah{fill:#6d6c66}.yr{stroke:#2e2e2b}.m1{fill:#3987e5}.m2{fill:#d95926}.hl{fill:#d95926;fill-opacity:.10}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<title>Same lab, version after version: which way the shape grows</title>
+<rect class="bg" width="1080" height="510" rx="8"/>
+<text class="t1" x="24" y="32" font-size="18" font-weight="600">Same lab, version after version: which way the shape grows</text>
+<text class="t2" x="24" y="54" font-size="12.5">Older versions grey, newer in colour; original two-pass scores plus dated audit corrections</text>
+<text class="t1" x="180.0" y="92.0" font-size="15" text-anchor="middle" font-weight="700">DeepSeek</text>
+<polygon class="ln" stroke-width=".7" points="180.0,243.6 188.5,246.4 193.7,253.6 193.7,262.4 188.5,269.6 180.0,272.4 171.5,269.6 166.3,262.4 166.3,253.6 171.5,246.4"/>
+<polygon class="ln" stroke-width=".7" points="180.0,214.8 205.4,223.1 221.1,244.7 221.1,271.3 205.4,292.9 180.0,301.2 154.6,292.9 138.9,271.3 138.9,244.7 154.6,223.1"/>
+<polygon class="ln" stroke-width=".7" points="180.0,186.0 222.3,199.8 248.5,235.8 248.5,280.2 222.3,316.2 180.0,330.0 137.7,316.2 111.5,280.2 111.5,235.8 137.7,199.8"/>
+<line class="yr" x1="180" y1="258" x2="180.0" y2="186.0"/>
+<text class="t1" x="180.0" y="165.0" font-size="9.4" text-anchor="middle" font-weight="600">KV / state</text>
+<text class="t3" x="180.0" y="175.0" font-size="7.6" text-anchor="middle">BF16 main KB/token</text>
+<line class="yr" x1="180" y1="258" x2="222.3" y2="199.8"/>
+<text class="t1" x="227.6" y="180.5" font-size="9.4" text-anchor="start" font-weight="600">Active ratio</text>
+<text class="t3" x="227.6" y="190.5" font-size="7.6" text-anchor="start">active / total params</text>
+<line class="yr" x1="180" y1="258" x2="248.5" y2="235.8"/>
+<text class="t1" x="257.0" y="231.0" font-size="9.4" text-anchor="start" font-weight="600">Byte budget</text>
+<text class="t3" x="257.0" y="241.0" font-size="7.6" text-anchor="start">32K reference budget</text>
+<line class="yr" x1="180" y1="258" x2="248.5" y2="280.2"/>
+<text class="t1" x="257.0" y="281.0" font-size="9.4" text-anchor="start" font-weight="600">Expert traffic</text>
+<text class="t3" x="257.0" y="291.0" font-size="7.6" text-anchor="start">nominal dispatch bytes</text>
+<line class="yr" x1="180" y1="258" x2="222.3" y2="316.2"/>
+<text class="t1" x="227.6" y="331.5" font-size="9.4" text-anchor="start" font-weight="600">New ops</text>
+<text class="t3" x="227.6" y="341.5" font-size="7.6" text-anchor="start">kernel adaptation</text>
+<line class="yr" x1="180" y1="258" x2="180.0" y2="330.0"/>
+<text class="t1" x="180.0" y="347.0" font-size="9.4" text-anchor="middle" font-weight="600">Interface</text>
+<text class="t3" x="180.0" y="357.0" font-size="7.6" text-anchor="middle">template / tools</text>
+<line class="yr" x1="180" y1="258" x2="137.7" y2="316.2"/>
+<text class="t1" x="132.4" y="331.5" font-size="9.4" text-anchor="end" font-weight="600">Owns the chain</text>
+<text class="t3" x="132.4" y="341.5" font-size="7.6" text-anchor="end">model-specific control</text>
+<line class="yr" x1="180" y1="258" x2="111.5" y2="280.2"/>
+<text class="t1" x="103.0" y="281.0" font-size="9.4" text-anchor="end" font-weight="600">Numerics</text>
+<text class="t3" x="103.0" y="291.0" font-size="7.6" text-anchor="end">shipped low-bit</text>
+<line class="yr" x1="180" y1="258" x2="111.5" y2="235.8"/>
+<text class="t1" x="103.0" y="231.0" font-size="9.4" text-anchor="end" font-weight="600">Openness</text>
+<text class="t3" x="103.0" y="241.0" font-size="7.6" text-anchor="end">weights / docs / licence</text>
+<line class="yr" x1="180" y1="258" x2="137.7" y2="199.8"/>
+<text class="t1" x="132.4" y="180.5" font-size="9.4" text-anchor="end" font-weight="600">Launch reach</text>
+<text class="t3" x="132.4" y="190.5" font-size="7.6" text-anchor="end">third-party frameworks / chips</text>
+<polygon points="180.0,200.4 213.9,211.4 193.7,253.6 193.7,262.4 213.9,304.6 180.0,301.2 163.1,281.3 125.2,275.8 125.2,240.2 141.9,205.6" fill="#9b9a95" fill-opacity="0.06" stroke="#9b9a95" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<rect x="110" y="418" width="10" height="10" rx="2" fill="#9b9a95"/>
+<text class="t1" x="126.0" y="427.0" font-size="11" text-anchor="start">DeepSeek V3 (2024-12)</text>
+<polygon points="180.0,200.4 213.9,211.4 207.4,249.1 193.7,262.4 222.3,316.2 180.0,312.0 161.0,284.2 125.2,275.8 114.9,236.9 154.6,223.1" fill="#2a78d6" fill-opacity="0.16" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/>
+<rect x="110" y="436" width="10" height="10" rx="2" fill="#2a78d6"/>
+<text class="t1" x="126.0" y="445.0" font-size="11" text-anchor="start">DeepSeek V3.2 (2025-12)</text>
+<polygon points="180.0,186.0 222.3,199.8 207.4,249.1 207.4,266.9 203.3,290.0 180.0,301.2 158.8,287.1 111.5,280.2 114.9,236.9 137.7,199.8" fill="#eb6834" fill-opacity="0.16" stroke="#eb6834" stroke-width="2" stroke-linejoin="round"/>
+<rect x="110" y="454" width="10" height="10" rx="2" fill="#eb6834"/>
+<text class="t1" x="126.0" y="463.0" font-size="11" text-anchor="start">DeepSeek V4-Pro (2026-04)</text>
+<text class="t1" x="540.0" y="92.0" font-size="15" text-anchor="middle" font-weight="700">Kimi</text>
+<polygon class="ln" stroke-width=".7" points="540.0,243.6 548.5,246.4 553.7,253.6 553.7,262.4 548.5,269.6 540.0,272.4 531.5,269.6 526.3,262.4 526.3,253.6 531.5,246.4"/>
+<polygon class="ln" stroke-width=".7" points="540.0,214.8 565.4,223.1 581.1,244.7 581.1,271.3 565.4,292.9 540.0,301.2 514.6,292.9 498.9,271.3 498.9,244.7 514.6,223.1"/>
+<polygon class="ln" stroke-width=".7" points="540.0,186.0 582.3,199.8 608.5,235.8 608.5,280.2 582.3,316.2 540.0,330.0 497.7,316.2 471.5,280.2 471.5,235.8 497.7,199.8"/>
+<line class="yr" x1="540" y1="258" x2="540.0" y2="186.0"/>
+<text class="t1" x="540.0" y="165.0" font-size="9.4" text-anchor="middle" font-weight="600">KV / state</text>
+<text class="t3" x="540.0" y="175.0" font-size="7.6" text-anchor="middle">BF16 main KB/token</text>
+<line class="yr" x1="540" y1="258" x2="582.3" y2="199.8"/>
+<text class="t1" x="587.6" y="180.5" font-size="9.4" text-anchor="start" font-weight="600">Active ratio</text>
+<text class="t3" x="587.6" y="190.5" font-size="7.6" text-anchor="start">active / total params</text>
+<line class="yr" x1="540" y1="258" x2="608.5" y2="235.8"/>
+<text class="t1" x="617.0" y="231.0" font-size="9.4" text-anchor="start" font-weight="600">Byte budget</text>
+<text class="t3" x="617.0" y="241.0" font-size="7.6" text-anchor="start">32K reference budget</text>
+<line class="yr" x1="540" y1="258" x2="608.5" y2="280.2"/>
+<text class="t1" x="617.0" y="281.0" font-size="9.4" text-anchor="start" font-weight="600">Expert traffic</text>
+<text class="t3" x="617.0" y="291.0" font-size="7.6" text-anchor="start">nominal dispatch bytes</text>
+<line class="yr" x1="540" y1="258" x2="582.3" y2="316.2"/>
+<text class="t1" x="587.6" y="331.5" font-size="9.4" text-anchor="start" font-weight="600">New ops</text>
+<text class="t3" x="587.6" y="341.5" font-size="7.6" text-anchor="start">kernel adaptation</text>
+<line class="yr" x1="540" y1="258" x2="540.0" y2="330.0"/>
+<text class="t1" x="540.0" y="347.0" font-size="9.4" text-anchor="middle" font-weight="600">Interface</text>
+<text class="t3" x="540.0" y="357.0" font-size="7.6" text-anchor="middle">template / tools</text>
+<line class="yr" x1="540" y1="258" x2="497.7" y2="316.2"/>
+<text class="t1" x="492.4" y="331.5" font-size="9.4" text-anchor="end" font-weight="600">Owns the chain</text>
+<text class="t3" x="492.4" y="341.5" font-size="7.6" text-anchor="end">model-specific control</text>
+<line class="yr" x1="540" y1="258" x2="471.5" y2="280.2"/>
+<text class="t1" x="463.0" y="281.0" font-size="9.4" text-anchor="end" font-weight="600">Numerics</text>
+<text class="t3" x="463.0" y="291.0" font-size="7.6" text-anchor="end">shipped low-bit</text>
+<line class="yr" x1="540" y1="258" x2="471.5" y2="235.8"/>
+<text class="t1" x="463.0" y="231.0" font-size="9.4" text-anchor="end" font-weight="600">Openness</text>
+<text class="t3" x="463.0" y="241.0" font-size="7.6" text-anchor="end">weights / docs / licence</text>
+<line class="yr" x1="540" y1="258" x2="497.7" y2="199.8"/>
+<text class="t1" x="492.4" y="180.5" font-size="9.4" text-anchor="end" font-weight="600">Launch reach</text>
+<text class="t3" x="492.4" y="190.5" font-size="7.6" text-anchor="end">third-party frameworks / chips</text>
+<polygon points="540.0,200.4 582.3,199.8 567.4,249.1 553.7,262.4 582.3,316.2 540.0,286.8 523.1,281.3 474.9,279.1 488.6,241.3 506.1,211.4" fill="#9b9a95" fill-opacity="0.06" stroke="#9b9a95" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<rect x="470" y="418" width="10" height="10" rx="2" fill="#9b9a95"/>
+<text class="t1" x="486.0" y="427.0" font-size="11" text-anchor="start">Kimi K2 Thinking (2025-11)</text>
+<polygon points="540.0,186.0 582.3,199.8 553.7,253.6 553.7,262.4 569.6,298.8 540.0,304.8 523.1,281.3 471.5,280.2 498.9,244.7 506.1,211.4" fill="#eb6834" fill-opacity="0.16" stroke="#eb6834" stroke-width="2" stroke-linejoin="round"/>
+<rect x="470" y="436" width="10" height="10" rx="2" fill="#eb6834"/>
+<text class="t1" x="486.0" y="445.0" font-size="11" text-anchor="start">Kimi K3 (2026-07)</text>
+<text class="t1" x="900.0" y="92.0" font-size="15" text-anchor="middle" font-weight="700">GLM</text>
+<polygon class="ln" stroke-width=".7" points="900.0,243.6 908.5,246.4 913.7,253.6 913.7,262.4 908.5,269.6 900.0,272.4 891.5,269.6 886.3,262.4 886.3,253.6 891.5,246.4"/>
+<polygon class="ln" stroke-width=".7" points="900.0,214.8 925.4,223.1 941.1,244.7 941.1,271.3 925.4,292.9 900.0,301.2 874.6,292.9 858.9,271.3 858.9,244.7 874.6,223.1"/>
+<polygon class="ln" stroke-width=".7" points="900.0,186.0 942.3,199.8 968.5,235.8 968.5,280.2 942.3,316.2 900.0,330.0 857.7,316.2 831.5,280.2 831.5,235.8 857.7,199.8"/>
+<line class="yr" x1="900" y1="258" x2="900.0" y2="186.0"/>
+<text class="t1" x="900.0" y="165.0" font-size="9.4" text-anchor="middle" font-weight="600">KV / state</text>
+<text class="t3" x="900.0" y="175.0" font-size="7.6" text-anchor="middle">BF16 main KB/token</text>
+<line class="yr" x1="900" y1="258" x2="942.3" y2="199.8"/>
+<text class="t1" x="947.6" y="180.5" font-size="9.4" text-anchor="start" font-weight="600">Active ratio</text>
+<text class="t3" x="947.6" y="190.5" font-size="7.6" text-anchor="start">active / total params</text>
+<line class="yr" x1="900" y1="258" x2="968.5" y2="235.8"/>
+<text class="t1" x="977.0" y="231.0" font-size="9.4" text-anchor="start" font-weight="600">Byte budget</text>
+<text class="t3" x="977.0" y="241.0" font-size="7.6" text-anchor="start">32K reference budget</text>
+<line class="yr" x1="900" y1="258" x2="968.5" y2="280.2"/>
+<text class="t1" x="977.0" y="281.0" font-size="9.4" text-anchor="start" font-weight="600">Expert traffic</text>
+<text class="t3" x="977.0" y="291.0" font-size="7.6" text-anchor="start">nominal dispatch bytes</text>
+<line class="yr" x1="900" y1="258" x2="942.3" y2="316.2"/>
+<text class="t1" x="947.6" y="331.5" font-size="9.4" text-anchor="start" font-weight="600">New ops</text>
+<text class="t3" x="947.6" y="341.5" font-size="7.6" text-anchor="start">kernel adaptation</text>
+<line class="yr" x1="900" y1="258" x2="900.0" y2="330.0"/>
+<text class="t1" x="900.0" y="347.0" font-size="9.4" text-anchor="middle" font-weight="600">Interface</text>
+<text class="t3" x="900.0" y="357.0" font-size="7.6" text-anchor="middle">template / tools</text>
+<line class="yr" x1="900" y1="258" x2="857.7" y2="316.2"/>
+<text class="t1" x="852.4" y="331.5" font-size="9.4" text-anchor="end" font-weight="600">Owns the chain</text>
+<text class="t3" x="852.4" y="341.5" font-size="7.6" text-anchor="end">model-specific control</text>
+<line class="yr" x1="900" y1="258" x2="831.5" y2="280.2"/>
+<text class="t1" x="823.0" y="281.0" font-size="9.4" text-anchor="end" font-weight="600">Numerics</text>
+<text class="t3" x="823.0" y="291.0" font-size="7.6" text-anchor="end">shipped low-bit</text>
+<line class="yr" x1="900" y1="258" x2="831.5" y2="235.8"/>
+<text class="t1" x="823.0" y="231.0" font-size="9.4" text-anchor="end" font-weight="600">Openness</text>
+<text class="t3" x="823.0" y="241.0" font-size="7.6" text-anchor="end">weights / docs / licence</text>
+<line class="yr" x1="900" y1="258" x2="857.7" y2="199.8"/>
+<text class="t1" x="852.4" y="180.5" font-size="9.4" text-anchor="end" font-weight="600">Launch reach</text>
+<text class="t3" x="852.4" y="190.5" font-size="7.6" text-anchor="end">third-party frameworks / chips</text>
+<polygon points="900.0,243.6 925.4,223.1 913.7,253.6 913.7,262.4 942.3,316.2 900.0,315.6 891.5,269.6 858.9,271.3 845.2,240.2 866.1,211.4" fill="#9b9a95" fill-opacity="0.06" stroke="#9b9a95" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<rect x="830" y="418" width="10" height="10" rx="2" fill="#9b9a95"/>
+<text class="t1" x="846.0" y="427.0" font-size="11" text-anchor="start">GLM-4.5 (2025-07)</text>
+<polygon points="900.0,214.8 933.9,211.4 913.7,253.6 913.7,262.4 931.7,301.7 900.0,315.6 883.1,281.3 858.9,271.3 841.8,239.1 859.8,202.7" fill="#eb6834" fill-opacity="0.16" stroke="#eb6834" stroke-width="2" stroke-linejoin="round"/>
+<rect x="830" y="436" width="10" height="10" rx="2" fill="#eb6834"/>
+<text class="t1" x="846.0" y="445.0" font-size="11" text-anchor="start">GLM-5.2 (2026-06)</text>
+<text class="t3" x="24.0" y="496.0" font-size="10.5" text-anchor="start">5 = easier for a third-party chip or framework to run well; &quot;Owns the chain&quot; is descriptive. Gaps are pending; all scores are in the radar's data table.</text>
+</svg>
